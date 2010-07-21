@@ -126,7 +126,7 @@ and should be where all the main loading logic for your program should go. Now,
 open `lib/index.js` so that we can add some javascript to populate that list.
 
     function render_item(item) {
-        var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
+        var template = [ "li", [ "a", { "href": "{{'{{'}}url}}" }, "{{'{{'}}title}}" ],
                          ["div", { "class": "bar" } ] ];
         var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
                               template));
@@ -184,7 +184,7 @@ Now, let's make the app reflect that an added torrent actually started
 downloading. Replace the render item function in `lib/index.js` with:
 
     function render_item(item) {
-        var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
+        var template = [ "li", [ "a", { "href": "{{'{{'}}url}}" }, "{{'{{'}}title}}" ],
                          ["div", { "class": "bar" } ] ];
         var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
                               template));
@@ -276,7 +276,7 @@ the list is getting duplicated by the `$.getJSON` call completing. Let's modify
         item.torrents[0].url = item.torrents[0].url.replace(/ /g, '');
         if ($(sprintf("li a[href=%s]", item.torrents[0].url)).length > 0)
             return
-        var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
+        var template = [ "li", [ "a", { "href": "{{'{{'}}url}}" }, "{{'{{'}}title}}" ],
                          ["div", { "class": "bar" } ] ];
         var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
                               template));

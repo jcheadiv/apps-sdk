@@ -64,8 +64,8 @@ which will dynamically display information about each torrent. Replace your
 
 Add the following JUP template variables to your `lib/index.js`:
 
-    var li_template = [ "li", "{{label}}", "{{property}}" ];
-    var opt_template = [ "option", { "value": "{{hash}}" }, "{{name}}" ];
+    var li_template = [ "li", "{{'{{'}}label}}", "{{'{{'}}property}}" ];
+    var opt_template = [ "option", { "value": "{{'{{'}}hash}}" }, "{{'{{'}}name}}" ];
 
 Add a list of torrent properties and appropriate labels in the follwing way:
 

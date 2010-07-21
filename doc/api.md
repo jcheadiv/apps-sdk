@@ -157,7 +157,7 @@ something like:
       "download_url": "http://example.com/test.torrent" }
     >> my_torrent.properties.keys() // The names of all the available properties
     [ "progress", "download_url" ]
-    >> my_torrent.properties.set("trackers", [ "tracker1", "tracker2" ])
+    >> my_torrent.properties.set("name", "foobar")
     >> my_torrent.properties.get("progress") // Percentage progress in 0-1000
     1000
     >> my_torrent.properties.get("download_url") // URL the torrent was fetched from

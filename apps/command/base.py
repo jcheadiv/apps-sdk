@@ -105,7 +105,7 @@ class Command(object):
             print 'The file at <%s> is missing.' % (url,)
             sys.exit(1)
         ext = os.path.splitext(urlparse.urlsplit(url).path)[-1]
-        name = handlers[ext](fname, ext)
+        name = handlers[ext](fname, os.path.split(url)[-1])
         os.remove(fname)
         if update:
             self.update_libs(name, url)

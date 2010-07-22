@@ -7,6 +7,7 @@ import logging
 import mako.template
 import os
 import pkg_resources
+import urlparse
 
 import apps.command.base
 
@@ -52,9 +53,10 @@ class generate(apps.command.base.Command):
                      }
         scripts = []
         for lib in metadata.get('bt:libs', []):
+            ext = os.path.splitext(urlparse.urlsplit(lib['url']).path)[-1]
             scripts += self.filter(scripts,
                 [x.replace('/', os.path.sep) for x in
-                 handlers[os.path.splitext(lib['url'])[-1]](lib)])
+                 handlers[ext](lib)])
         if metadata == self.project.metadata:
             scripts += self.filter(scripts,
                 [os.path.join('lib', x) for x in

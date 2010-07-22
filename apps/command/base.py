@@ -10,6 +10,7 @@ import re
 import shutil
 import tempfile
 import urllib2
+import urlparse
 import zipfile
 import sys
 
@@ -103,8 +104,8 @@ class Command(object):
         except urllib2.HTTPError:
             print 'The file at <%s> is missing.' % (url,)
             sys.exit(1)
-        name = handlers[os.path.splitext(url)[-1]](fname,
-                                                   os.path.split(url)[-1])
+        ext = os.path.splitext(urlparse.urlsplit(url).path)[-1]
+        name = handlers[ext](fname, ext)
         os.remove(fname)
         if update:
             self.update_libs(name, url)

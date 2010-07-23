@@ -228,7 +228,7 @@ objects associated with a specific torrent object, you can:
     >> my_torrent.peer.keys() // List of all the peers connected to this torrent
     [ "ABCDEFG" ]
     >> my_torrent.peer.get("ABCDEFG") // Get a specific peer object
-    { "id": "ABCDEFG", "torrent": my_torrent }
+    { "properties": {}, "keys":[], "torrent": my_torrent }
 
 Once you've gotten a peer object from `my_torrent.peer`, there are some
 properties and methods that allow you to interact with this peer in a sane
@@ -239,7 +239,7 @@ fashion.
     >> my_peer.id // ID of this specific peer
     "ABCDEFG"
     >> my_peer.torrent // The parent torrent
-    { "name": "my_torrent" }
+    { "properties": {}, "keys":[], "hash": "1234567" }
 
 Just like with the torrent object, there are some more properties that you can
 access via. the `my_peer.properties` methods.
@@ -249,7 +249,7 @@ access via. the `my_peer.properties` methods.
     >> my_peer.properties.all() // Dictionary of property/value pairs
     { }
     >> my_peer.properties.keys() // Names of all the available properties
-    [ ]
+    [ "location", "ip", "client", "connection_type"]
     >> my_peer.properties.get() // Get a peer's property
     >> my_peer.properties.set() // Set a specific property for this peer.
 

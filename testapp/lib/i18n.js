@@ -8,13 +8,14 @@ test('gt_init', function(){
 	expect(2);
 	
 	$('head').append("<link rel='gettext' href='lang/test/test.po' lang='test'>");
-	$('head').append("<link rel='gettext' href='lang/missing/missing.po' lang='missing'>");
+	$('head').append("<link rel='gettext' href='http://staging.apps.bittorrent.com/featured/lang/test/test.po' lang='test'>");
 	$('head').append("<link href='lang/ignore/ignore.po' lang='en'>");
 	var l = 'test';
 	gt = new bt.Gettext(l);
 	gt.debug = true;
 	equals(gt.lang, l, "Language set properly");
 	equals(gt.links.length, 4, "Found two gettext links");
+	console.log(gt);
 });
 test('gt_gettext', function(){
 	//Existing translation
@@ -22,7 +23,9 @@ test('gt_gettext', function(){
 	//Proper number of arguments
 	//Improper number of arguments
 	//Improper argument type
-	expect(5);
+	//Externally hosted PO file
+	//Multiple PO files, same language
+	expect(6);
 	
 	equals(gt.gettext("translate this"), "TRANSLATE THIS", "Found translation message");
 	equals(gt.gettext("don't translate this"), "don't translate this", "Returned original string for nonexistent translation");
@@ -40,5 +43,7 @@ test('gt_gettext', function(){
 	
 	var bad_arg_msg = gt.gettext("string (%s), character(%c), signed int(%d)", char_arg, bad_char_arg, str_arg);
 	equals(bad_arg_msg, "STRING (97), CHARACTER(), SIGNED INT()", "Handled bad argument types without dying");
+	
+	equals(gt.gettext("replace this"), "this was replaced", "Translation file loaded second overwrites duplicate messages.");
 
 });

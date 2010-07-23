@@ -67,7 +67,8 @@ class generate(apps.command.base.Command):
         return scripts
 
     def _list_lib(self, lib):
-        return [os.path.join('packages', os.path.split(lib['url'])[-1])]
+        name = os.path.split(urlparse.urlsplit(lib['url']).path)[-1]
+        return [os.path.join('packages', name)]
 
     def _list_pkg(self, pkg):
         pkg_scripts = self._scripts_list(

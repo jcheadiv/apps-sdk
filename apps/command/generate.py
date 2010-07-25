@@ -31,6 +31,7 @@ class generate(apps.command.base.Command):
         index.write(template.render(scripts=self._scripts_list(
                     self.project.metadata),
                                     styles=self._styles_list(),
+                                    title=self.project.metadata['name'],
                                     debug=self.vanguard.options.debug))
         index.close()
 

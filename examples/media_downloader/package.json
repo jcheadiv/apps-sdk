@@ -1,7 +1,5 @@
 {
     "description": "The example media downloader project.", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
-    "bt:publisher": "BitTorrent, Inc.", 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
@@ -14,8 +12,10 @@
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/jup.js", 
             "name": "jup"
-        } 
+        }
     ], 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "site": "http://apps-sdk.bittorrent.com", 
     "bt:update_url": "http://localhost/media_downloader.btapp", 
     "version": "0.1", 

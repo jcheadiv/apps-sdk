@@ -5,24 +5,28 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gettext Unit Tests\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-07-12 15:20-0700\n"
-"PO-Revision-Date: 2010-07-12 15:23-0800\n"
+"POT-Creation-Date: 2010-07-20 15:34-0700\n"
+"PO-Revision-Date: 2010-07-20 15:37-0800\n"
 "Last-Translator: Skye Riley <skye@bittorrent.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: i18n.js:25
+#: i18n.js:29
 msgid "translate this"
 msgstr "TRANSLATE THIS"
 
-#: i18n.js:33
-#: i18n.js:35
 #: i18n.js:37
+#: i18n.js:40
+#: i18n.js:43
 #, python-format
 msgid "string (%s), character(%c), signed int(%d)"
 msgstr "STRING (%s), CHARACTER(%c), SIGNED INT(%d)"
+
+#: i18n.js:46
+msgid "replace this"
+msgstr "this was not replaced!"
 

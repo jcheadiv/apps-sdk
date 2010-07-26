@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<!DOCTYPE html>
+<html>
   <head>
+    <meta charset="utf-8">
+    <title>${title}</title>
   % if debug:
     <script src="packages/firebug.js"></script>
     <script type="text/javascript">
@@ -11,10 +10,10 @@
     </script>
   % endif
   % for src in scripts:
-    <script src="${src}"></script>
+    <script type="text/javascript" src="${src}"></script>
   % endfor
   % for href in styles:
-    <link rel="stylesheet" href="${href}">
+    <link rel="stylesheet" type="text/css" href="${href}">
   % endfor
   </head>
   <body>

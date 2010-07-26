@@ -53,12 +53,12 @@ be referring to our gettext object as b_gt, so enclose strings in
 
 - Before
 
-    $("<button class='play'>Play</button>").appendTo(container).click(
+    $("&lt;button class='play'>Play</button>").appendTo(container).click(
         function() {
 
 - After
 
-    $("<button class='play'>"+b_gt.gettext("Play")+"</button>").appendTo(
+    $("&lt;button class='play'>"+b_gt.gettext("Play")+"</button>").appendTo(
         container).click(function() {
 
 There are only three translatable strings in index.js right now; two
@@ -98,7 +98,7 @@ function render_languagebar(){
 		if(i==b_gt.lang){
 			var langstr = b_gt.gettext(item);
 			$("#current").html(b_gt.gettext("Current language: %s", langstr));
-		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+b_gt.gettext(item)+"</a> ");
+		}else $("#other").append(" &lt;a class=\"lang\" href=# name=\""+i+"\">"+b_gt.gettext(item)+"</a> ");
 	});
 	$("#notification").text(b_gt.gettext($("#notification").text()));
 }

@@ -124,6 +124,7 @@ class Vanguard(object):
             return getattr(module, name)
         except ImportError, UnboundLocalError:
             logging.error('The command "%s" does not exist.' % (name,))
+            self.print_commands()
             sys.exit(1)
 
     def _parse_command_opts(self, parser, args):

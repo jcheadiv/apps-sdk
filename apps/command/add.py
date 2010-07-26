@@ -4,6 +4,7 @@
 
 import apps.command.base
 import logging
+import sys
 
 class add(apps.command.base.Command):
 
@@ -17,3 +18,4 @@ class add(apps.command.base.Command):
         else:
           logging.error('ERROR: Nothing to add. '
             'Specify a file to add using the --file flag.')
+          sys.exit(1)

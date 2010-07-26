@@ -15,4 +15,5 @@ class add(apps.command.base.Command):
         if self.options.has_key('file'):
           self.add(self.options['file'])
         else:
-          logging.error('ERROR: Specify a file to add using the --file flag.')
+          logging.error('ERROR: Nothing to add. '
+            'Specify a file to add using the --file flag.')

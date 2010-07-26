@@ -95,8 +95,8 @@ something like:
 If the torrent can be added successfully, your registered callback will be
 called with an object that looks like:
 
-    { "status": 404, // HTTP error code
-      "message": "error",
+    { "status": 200, // HTTP response code
+      "message": "success",
       "url": "http://example.com/test.torrent",
       "hash": "" }
 

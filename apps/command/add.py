@@ -3,6 +3,7 @@
 #
 
 import apps.command.base
+import logging
 
 class add(apps.command.base.Command):
 
@@ -11,4 +12,7 @@ class add(apps.command.base.Command):
     help = 'Add an external dependency to the project.'
 
     def run(self):
-        self.add(self.options['file'])
+        if self.options.has_key('file'):
+          self.add(self.options['file'])
+        else:
+          logging.error('ERROR: Specify a file to add using the --file flag.')

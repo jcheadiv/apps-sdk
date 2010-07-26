@@ -131,7 +131,7 @@ class Vanguard(object):
         try:
             command = self.get_command(command_name)
         except AttributeError:
-            logging.error('%s is not a valid command.')
+            logging.error('%s is not a valid command.' % (command_name,))
             self.print_commands()
             return
         self.commands.append(command)

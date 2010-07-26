@@ -106,6 +106,9 @@ class Command(object):
             print 'The file at <%s> is missing.' % (url,)
             sys.exit(1)
         ext = os.path.splitext(urlparse.urlsplit(url).path)[-1]
+        if not(handlers.has_key(ext)):
+          logging.error('ERROR: Unsupported file type: %s' % (ext,))
+          sys.exit(1)
         name = handlers[ext](fname,
                              os.path.split(urlparse.urlsplit(url).path)[-1])
         os.remove(fname)

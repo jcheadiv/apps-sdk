@@ -6,6 +6,7 @@ import fnmatch
 import json
 import logging
 import os
+import pkg_resources
 import re
 import shutil
 import tempfile
@@ -37,6 +38,10 @@ class Command(object):
         self.project = apps.project.Project(self.options.get('name', '.'))
 
     def file_list(self):
+        if not os.path.exists(os.path.join(self.project.path,
+                                           '.ignore')):
+            shutil.copy(pkg_resources.resource_filename('apps.data', '.ignore'),
+                        os.path.join(self.project.path, '.ignore'))
         ignore = [os.path.join(self.project.path, x) for x in
                   open(os.path.join(self.project.path,
                                     '.ignore')).read().split('\n')]

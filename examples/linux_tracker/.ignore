@@ -1,11 +1,12 @@
 *.btapp
 .ignore
-.svn/*
+*.svn/*
 .git/*
 .hg/*
 *.egg-info
-griffin/*
+apps/*
 test/*
 doc/*
 examples/*
 client/*
+dist/*

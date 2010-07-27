@@ -69,6 +69,9 @@ class Command(object):
         json.dump(self.project.metadata,
                   open(os.path.join(self.project.path, 'package.json'), 'wb'),
                   indent=4)
+        # Don't bother with btapp/index.html for packages
+        if self.project.metadata.get('bt:description', False):
+            return
         keys = [ 'name', 'version' ] + filter(
             lambda x: x[:3] == 'bt:' and not x[3:] in self.btapp_excludes,
             self.project.metadata.keys())

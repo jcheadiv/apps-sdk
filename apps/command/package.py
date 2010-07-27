@@ -23,8 +23,10 @@ class package(apps.command.base.Command):
             os.makedirs(path)
         except:
             pass
-        btapp = zipfile.ZipFile(open(os.path.join(path, '%s.btapp' % (
-                    self.project.metadata['name'],)), 'wb'), 'w')
+        extension = 'pkg' if self.project.metadata.get(
+            'bt:package', False) else 'btapp'
+        btapp = zipfile.ZipFile(open(os.path.join(path, '%s.%s' % (
+                    self.project.metadata['name'], extension)), 'wb'), 'w')
         for f in self.file_list():
             # Files in the build/ directory are auto-created for users,
             # they mirror the normal path and are only in the build

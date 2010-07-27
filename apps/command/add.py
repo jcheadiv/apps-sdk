@@ -13,9 +13,8 @@ class add(apps.command.base.Command):
     help = 'Add an external dependency to the project.'
 
     def run(self):
-        if self.options.has_key('file'):
-          self.add(self.options['file'])
-        else:
+        if not(self.options.has_key('file')):
           logging.error('ERROR: Nothing to add. '
             'Specify a file to add using the --file flag.')
           sys.exit(1)
+        self.add(self.options['file'])

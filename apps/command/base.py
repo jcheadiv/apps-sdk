@@ -60,8 +60,9 @@ class Command(object):
         if not name in [x['name'] for x in
                         self.project.metadata.get('bt:libs', [])]:
             self.project.metadata['bt:libs'].append({ "name": name, "url": url})
-        if self.project.metadata != json.load(open('package.json')):
-          self.write_metadata()
+        if not os.path.exists('package.json') or \
+                self.project.metadata != json.load(open('package.json')):
+            self.write_metadata()
 
     def write_metadata(self):
         logging.info('\tupdating project metadata')

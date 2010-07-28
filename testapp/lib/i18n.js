@@ -12,7 +12,7 @@ test('gt_init', function(){
     var l = 'test';
     gt = new bt.Gettext(l);
     gt.debug = true;
-    console.log(gt);
+    
     equals(gt.lang, l, "Language set properly");
     equals(gt.links.length, 4, "Found two gettext links");
     ok(gt.LCmessages[l], "Loaded test language");
@@ -56,8 +56,16 @@ test('gt_gettext', function(){
 
 });
 test('gt_extfile', function(){
+    expect(1);
     //get external file
     //parse string input
     //test behavior on duplicate message with different translation
-    ok(true);
+    stop();
+    $.get('http://staging.apps.bittorrent.com/featured/lang/test/test.po', function(resp){
+        gt.include_raw(resp);
+    });
+    setTimeout(function(){
+      start();
+      equals(gt.gettext("new message"), "NEW MESSAGE", "External PO was successfully loaded from text");
+    }, 2000);
 });

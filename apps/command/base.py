@@ -6,6 +6,7 @@ import fnmatch
 import json
 import logging
 import os
+import pkg_resources
 import re
 import shutil
 import tempfile
@@ -37,6 +38,10 @@ class Command(object):
         self.project = apps.project.Project(self.options.get('name', '.'))
 
     def file_list(self):
+        if not os.path.exists(os.path.join(self.project.path,
+                                           '.ignore')):
+            shutil.copy(pkg_resources.resource_filename('apps.data', '.ignore'),
+                        os.path.join(self.project.path, '.ignore'))
         ignore = [os.path.join(self.project.path, x) for x in
                   open(os.path.join(self.project.path,
                                     '.ignore')).read().split('\n')]
@@ -100,11 +105,15 @@ class Command(object):
         handlers = { '.js': self._add_javascript,
                      '.pkg': self._add_pkg
                      }
+        url_handlers = { 'file': self._get_file,
+                         }
         fobj = tempfile.NamedTemporaryFile('wb', delete=False)
         fname = fobj.name
         try:
             logging.info('\tfetching %s ...' % (url,))
-            fobj.write(urllib2.urlopen(url).read())
+            protocol = url.split('://', 1)[0]
+            handler = url_handlers.get(protocol, self._get_url)
+            fobj.write(handler(url))
             fobj.close()
         except urllib2.HTTPError:
             print 'The file at <%s> is missing.' % (url,)
@@ -118,6 +127,13 @@ class Command(object):
         os.remove(fname)
         if update:
             self.update_libs(name, url)
+
+    def _get_file(self, url):
+        url = url.split('://', 1)[1]
+        return open(os.path.realpath(url), 'rb').read()
+
+    def _get_url(self, url):
+        return urllib2.urlopen(url).read()
 
     def _add_javascript(self, source, fname):
         shutil.copy(source, os.path.join(self.project.path, 'packages', fname))

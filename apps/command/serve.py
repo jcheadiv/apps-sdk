@@ -179,8 +179,13 @@ class serve(apps.command.base.Command):
     pre_commands = [ 'generate' ]
 
     def run(self):
-        logging.info('\tstarting server, access it at http://localhost:%s' % (
-                self.options['port'],))
+        logging.info('\tStarting server. Access it at http://localhost:%s/' %
+                (self.options['port'],))
         httpd = BaseHTTPServer.HTTPServer(
             ('', int(self.options['port'])), GriffinRequests)
-        httpd.serve_forever()
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            pass
+        httpd.server_close()
+

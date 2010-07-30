@@ -118,6 +118,9 @@ class Command(object):
         except urllib2.HTTPError:
             print 'The file at <%s> is missing.' % (url,)
             sys.exit(1)
+        except urllib2.URLError, e:
+            logging.error(e.reason)
+            sys.exit(1)
         ext = os.path.splitext(urlparse.urlsplit(url).path)[-1]
         if not(handlers.has_key(ext)):
           logging.error('ERROR: Unsupported file type: %s' % (ext,))

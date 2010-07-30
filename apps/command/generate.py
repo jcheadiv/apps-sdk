@@ -77,9 +77,9 @@ class generate(apps.command.base.Command):
             json.load(open(os.path.join(self.project.path,
                                         'packages', pkg['name'],
                                         'package.json'))))
-        pkg_scripts += [
+        pkg_scripts += sorted([
             os.path.join('packages', pkg['name'], x) for x in
             filter(lambda x: x != 'package.json', os.listdir(os.path.join(
                         self.project.path, 'packages',
-                        pkg['name'])))]
+                        pkg['name'])))])
         return pkg_scripts

@@ -3,6 +3,7 @@
 #
 
 import BaseHTTPServer
+import copy
 import httplib
 import httplib2
 import logging
@@ -10,6 +11,7 @@ import os
 import re
 import SimpleHTTPServer
 import socket
+import time
 import urllib
 
 import apps.command.base
@@ -110,33 +112,54 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         method()
 
     def proxy_request(self):
-        remove = [ 'transfer-encoding' ]
-        http = httplib2.Http()
+        remove = [ 'transfer-encoding', 'status', '-content-encoding' ]
         body = ''
         self.requestline = '%s %s' % (self.command,
                                       self.headers.get('x-location'))
         # The host header appears to make google.com redirect infinitely
         self.headers.dict.pop('host')
-        print self.get_cookies()
         self.headers.dict['cookie'] = self.get_cookies()
         if self.headers.has_key('Content-Length'):
             body = self.rfile.read(int(self.headers['Content-Length']))
-        resp, content = http.request(
-            self.headers.get('x-location'), self.command,
-            headers=self.headers.dict, body=body)
+        try:
+            resp, content = self.make_request(
+                self.headers.get('x-location'), self.command, body=body)
+        except httplib2.ServerNotFoundError:
+            self.send_response(404)
+            return
         self.send_response(resp.status, headers=False)
-        resp.pop('status')
-        resp.pop('-content-encoding')
         for k, v in resp.iteritems():
             if k == 'content-location':
                 continue
             if k in remove:
                 continue
             self.send_header(k, v)
-            if k == 'set-cookie':
-                self.save_cookie(v)
         self.end_headers()
         self.wfile.write(content)
+
+    def make_request(self, url, method, body=''):
+        now = time.time()
+        self.log_message('"%s %s"', method, url)
+        http = httplib2.Http()
+        http.follow_redirects = False
+        headers = copy.deepcopy(self.headers.dict)
+        if headers.has_key('host'):
+            headers.pop('host')
+        headers['cookie'] = self.get_cookies()
+        if body:
+            headers['content-type'] = 'application/x-www-form-urlencoded'
+        print headers
+        resp, content = http.request(url, method, headers=headers, body=body)
+        self.log_message('"%s %s" - %s - %s', method, url,
+                         time.time() - now, resp.status)
+        if resp.has_key('set-cookie'):
+            self.save_cookie(resp['set-cookie'])
+        if resp.status in [ 300, 301, 302, 303, 307 ] and \
+                resp.has_key('location'):
+            if self.headers.dict.has_key('content-length'):
+                self.headers.dict.pop('content-length')
+            resp, content = self.make_request(resp['location'], 'GET')
+        return (resp, content)
 
     def save_cookie(self, cookie):
         excludes = [ 'expires', 'domain', 'path' ]

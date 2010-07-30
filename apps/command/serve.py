@@ -7,11 +7,15 @@ import httplib
 import httplib2
 import logging
 import os
+import re
 import SimpleHTTPServer
 import socket
 import urllib
 
 import apps.command.base
+
+# XXX - This is bad and makes me cranky
+cookies = {}
 
 class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
@@ -106,7 +110,6 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         method()
 
     def proxy_request(self):
-        #multiline = [ 'set-cookie' ]
         remove = [ 'transfer-encoding' ]
         http = httplib2.Http()
         body = ''
@@ -114,25 +117,43 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
                                       self.headers.get('x-location'))
         # The host header appears to make google.com redirect infinitely
         self.headers.dict.pop('host')
+        print self.get_cookies()
+        self.headers.dict['cookie'] = self.get_cookies()
         if self.headers.has_key('Content-Length'):
             body = self.rfile.read(int(self.headers['Content-Length']))
         resp, content = http.request(
             self.headers.get('x-location'), self.command,
             headers=self.headers.dict, body=body)
-        self.send_response(resp.status, False)
+        self.send_response(resp.status, headers=False)
         resp.pop('status')
+        resp.pop('-content-encoding')
         for k, v in resp.iteritems():
             if k == 'content-location':
                 continue
             if k in remove:
                 continue
-            if not k in multiline:
-                self.send_header(k, v)
-                continue
-            for line in v.split(', '):
-                self.send_header(k.capitalize(), line)
+            self.send_header(k, v)
+            if k == 'set-cookie':
+                self.save_cookie(v)
         self.end_headers()
         self.wfile.write(content)
+
+    def save_cookie(self, cookie):
+        excludes = [ 'expires', 'domain', 'path' ]
+        for ck in re.split('[;,] ', cookie):
+            found = False
+            for i in excludes:
+                if ck.find(i) == 0:
+                    found = True
+                    continue
+            if '=' not in ck or found:
+                continue
+            k, v = ck.split('=', 1)
+            cookies[k] = v
+
+    def get_cookies(self):
+        return '; '.join([ '%s=%s' % (k, v) for k,v in
+                           cookies.iteritems()])
 
     def send_response(self, code, message=None, headers=True):
         self.log_request(code)

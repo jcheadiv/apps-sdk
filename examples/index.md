@@ -41,4 +41,9 @@ Check out some of the example apps that are available:
   look if you'd like to see how to do some more advanced things once you've
   finished the media downloader tutorial.
 
+- [Search](https://github.com/bittorrent/apps-sdk/tree/master/examples/search/)
 
+  This example is a search UI app for ClearBits torrents. It parses XML results
+  against an HTML view template. The [tutorial](../doc/tutorials/search.html)
+  covers creating a DOM-based view template, property-based progress bars,
+  cross-origin resource sharing, and more.

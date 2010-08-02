@@ -22,6 +22,11 @@ places to start:
   Lots of &micro;Torrent users use languages other than english. This tutorial
   shows you how to make your app localizable.
 
+- [Search](search.html)
+
+  This tutorial covers the implementation of a torrent search interface in the
+  &micro;Torrent client applying XML results to an HTML view template.
+
 All tutorials also come with completed example applications. If you'd like to
 take a look at any of these, check out the [Examples
 Directory](../../examples/).

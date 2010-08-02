@@ -1,0 +1,55 @@
+<!--[if lt IE 8]>
+<script type="text/javascript" src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
+<![endif]-->
+
+<div id="container">
+
+<ul id="navigation">
+<li><a href="http://www.clearbits.net/about">About</a></li>
+<li><a href="http://www.clearbits.net/about/faq">FAQ</a></li>
+<li><a href="http://www.clearbits.net/feedback">Contact</a></li>
+<li><a href="http://www.clearbits.net/forums">Forums</a></li>
+<li><a href="http://www.clearbits.net/about/partners">Partners</a></li>
+<li><a href="http://www.clearbits.net/about/member_benefits">Plans and Pricing</a></li>
+<li><a href="http://www.clearbits.net/contribute">Membership</a></li>
+</ul>
+
+<div id="header">
+  <h1><a href="http://www.clearbits.net/">ClearBits&trade;</a></h1>
+  <h2>Open Licensed Digital Media</h2>
+</div><!-- header -->
+
+<form id="search" action="http://www.clearbits.net/home/search/index.xml" method="get">
+  <div>
+    <label for="query">Search Content</label>
+    <input class="field" id="query" name="query" size="30" type="text" />
+    <input type="image" src="http://www.clearbits.net/images/btn/search.png" class="submit" />
+    <span class="summary"><!--populated--></span>
+  </div>
+</form>
+
+<!-- Define the list template here. Variables map to expected values from the
+ClearBits response XML. Note that non-alphanumerics become underscores. -->
+<ul id="items" class="template">
+  <li>
+      <h3><a href="==location==">==title==</a></h3>
+      <ul class="inline">
+        <li><a href="==torrent_url==">Torrent</a></li>
+        <li><a href="==location==">More Info</a></li>
+        <li><a href="==license_url==" class="license"><!--populated--></a></li>
+      </ul>
+      <table>
+        <tr><th>Seed:Leech</th><td>==seeds==:==leechers==</td></tr>
+        <tr><th>Size</th><td>==mb_size==MB</td></tr>
+        <tr><th>Created</th><td><time datetime="==created_at=="></time></td></tr>
+        <tr><th>Hash</th><td>==hashstr==</td></tr>
+      </table>
+  </li>
+</ul>
+
+<div id="footer">
+  Content is provided under various licenses described in the
+  <a href="http://www.clearbits.net/about/content_license_policy">ClearBits Content License Policy</a>.
+</div> <!-- footer -->
+
+</div> <!-- container -->

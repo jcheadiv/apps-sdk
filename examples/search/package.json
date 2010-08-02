@@ -1,0 +1,29 @@
+{
+    "description": "Search Example", 
+    "bt:libs": [
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
+            "name": "apps-sdk"
+        }, 
+        {
+            "url": "http://github.com/malsup/form/raw/master/jquery.form.js?v2.43", 
+            "name": "jquery.form"
+        },
+        {
+            "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js",
+            "name": "jquery-ui"
+        }
+    ], 
+    "bt:publisher": "BitTorrent, Inc.",
+    "author": "Bryan Kaplan <bkaplan@bittorrent.com>",
+    "site": "http://apps.bittorrent.com", 
+    "bt:update_url": "http://localhost/example", 
+    "version": "0.1", 
+    "bt:description": "This is the search example app.", 
+    "keywords": [
+        "search", 
+        "ClearBits"
+    ], 
+    "bt:release_date": "07/26/2010", 
+    "name": "search_example"
+}

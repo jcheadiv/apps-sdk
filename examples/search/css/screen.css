@@ -1,0 +1,133 @@
+@import url(http://www.clearbits.net/stylesheets/application.css);
+
+/******************************************
+ * Fixed positioning for major app elements
+ */
+
+  body {
+    margin: 220px 0 3em;
+    background-attachment: fixed;
+  }
+
+  ul#navigation,
+  div#header,
+  form#search {
+    position: fixed;
+    top: 0;
+  }
+
+  ul#navigation {
+    background: #282496;
+    padding-bottom: 1px;
+  }
+
+  div#header {
+    top: 30px;
+    background: url(http://www.clearbits.net/images/bg/site.png) repeat-x;
+    background-position: 0 -30px;
+  }
+
+/**********
+ * Template
+ */
+
+  .template {
+    display: none;
+  }
+
+/*************
+ * Search Form
+ */
+
+  form#search {
+    width: 100%;
+    top: 110px;
+    color: #666;
+    background: #FFF;
+    padding-top: 30px
+  }
+
+  form#search label {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+  }
+
+  form#search .summary {
+    margin-left: 5px;
+  }
+
+/*****************
+ * Header Elements
+ */
+
+  h3 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 1em;
+  }
+
+/*******
+ * Lists
+ */
+
+  ul.inline li {
+    display: inline;
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: 1px solid #888;
+  }
+
+  ul.inline li:first-child {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+/********
+ * Tables
+ */
+
+  table {
+    border-collapse: collapse;
+    margin: 0.75em 0 1em;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  th,
+  td {
+    border: 1px solid #599ADF;
+    padding: 0.25em;
+  }
+
+/********
+ * Footer
+ */
+
+  div#footer {
+    position: fixed;
+    bottom: 0;
+    background: #FFF;
+    padding-top: 0.25em;
+  }
+
+/**************
+ * Progress Bar
+ */
+
+  td.progress {
+    padding: 0;
+  }
+
+  .ui-progressbar {
+    height: 0.6em;
+  }
+
+  .ui-progressbar-value {
+    height: 100%;
+    background: #00A;
+  }

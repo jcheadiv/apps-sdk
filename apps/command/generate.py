@@ -18,8 +18,7 @@ class generate(apps.command.base.Command):
                  os.path.join('lib', 'index.js') ]
 
     def run(self):
-        if self.project.metadata != json.load(open('package.json')):
-          self.write_metadata()
+        self.write_metadata()
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]

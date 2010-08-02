@@ -4,11 +4,22 @@ test('gt_init', function(){
     //Checks that links loaded correctly
     //Load link when bt.resource exists
     //Load link when bt.resource doesn't exist
-    expect(4);
+    expect(5);
     
     $('head').append("<link rel='gettext' href='lang/test/test.po' lang='test'>");
     $('head').append("<link rel='gettext' href='lang/missing/missing.po' lang='missing'>");
     $('head').append("<link href='lang/ignore/ignore.po' lang='en'>");
+    
+    gt = new bt.Gettext();
+    var btlang = btapp.language.all()
+    console.log(btlang);
+    if(btlang.name == "default"){
+        equals(gt.lang, "en", "Language setting defaults to client language");
+    }else{
+        equals(gt.lang, gt.lcodes[btlang.name], "Language setting defaults to client language");
+    }
+    
+    
     var l = 'test';
     gt = new bt.Gettext(l);
     gt.debug = true;
@@ -56,16 +67,20 @@ test('gt_gettext', function(){
 
 });
 test('gt_extfile', function(){
-    expect(1);
+    expect(8);
     //get external file
     //parse string input
     //test behavior on duplicate message with different translation
     stop();
     $.get('http://staging.apps.bittorrent.com/featured/lang/test/test.po', function(resp){
-        gt.include_raw(resp);
+        gt.include_raw(resp);      
+        start();
+        equals(gt.gettext("new message"), "NEW MESSAGE", "External PO was successfully loaded from text");
+        equals(gt.gettext("translate this"), "TRANSLATE THIS", "For duplicate messages, default to the first one loaded");
+        
+        gt.fifo = false;
+        equals(gt.gettext("translate this"), "TRANSLATE THIS DIFFERENTLY", "Can switch behavior to search from end of array instead");
+        
+        $.each(gt.LCmessages.test.msgid, function(i, msg){ok(gt.LCmessages.test.msgstr[i], gt.LCmessages.test.msgid[i]+": "+gt.LCmessages.test.msgstr[i]);} );
     });
-    setTimeout(function(){
-      start();
-      equals(gt.gettext("new message"), "NEW MESSAGE", "External PO was successfully loaded from text");
-    }, 2000);
 });

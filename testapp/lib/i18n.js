@@ -66,6 +66,7 @@ test('gt_gettext', function(){
            "Handled bad argument types without dying");
 
 });
+
 test('gt_extfile', function(){
     expect(1);
     //get external file

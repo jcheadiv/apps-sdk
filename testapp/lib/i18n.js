@@ -9,10 +9,11 @@ test('gt_init', function(){
     $('head').append("<link rel='gettext' href='lang/test/test.po' lang='test'>");
     $('head').append("<link rel='gettext' href='lang/missing/missing.po' lang='missing'>");
     $('head').append("<link href='lang/ignore/ignore.po' lang='en'>");
+    var btlang = bt.language.all()
+    console.log(btlang);
     
     gt = new bt.Gettext();
-    var btlang = btapp.language.all()
-    console.log(btlang);
+
     if(btlang.name == "default"){
         equals(gt.lang, "en", "Language setting defaults to client language");
     }else{

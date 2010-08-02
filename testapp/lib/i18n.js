@@ -1,4 +1,15 @@
+/*
+ * Copyright(c) 2010 BitTorrent Inc.
+ *
+ * Date: %date%
+ * Version: %version%
+ *
+ */
+
+module('i18n');
+
 var gt;
+
 test('gt_init', function(){
     //Checks that language defined correctly
     //Checks that links loaded correctly
@@ -19,7 +30,6 @@ test('gt_init', function(){
     }else{
         equals(gt.lang, gt.lcodes[btlang.name], "Language setting defaults to client language");
     }
-    
     
     var l = 'test';
     gt = new bt.Gettext(l);
@@ -67,6 +77,7 @@ test('gt_gettext', function(){
            "Handled bad argument types without dying");
 
 });
+
 test('gt_extfile', function(){
     expect(8);
     //get external file

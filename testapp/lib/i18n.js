@@ -1,4 +1,15 @@
+/*
+ * Copyright(c) 2010 BitTorrent Inc.
+ *
+ * Date: %date%
+ * Version: %version%
+ *
+ */
+
+module('i18n');
+
 var gt;
+
 test('gt_init', function(){
     //Checks that language defined correctly
     //Checks that links loaded correctly

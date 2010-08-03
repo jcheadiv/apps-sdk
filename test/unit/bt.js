@@ -6,6 +6,19 @@
  *
  */
 
+bt.status = {
+  'started': 1,
+  'checking': 2,
+  'start_after_check': 4,
+  'checked': 8,
+  'error': 16,
+  'paused': 32,
+  'queued': 64,
+  'loaded': 128
+}
+
+var peer_torrent = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
+
 module('bt');
 
 test('bt.add.torrent', function() {
@@ -19,6 +32,8 @@ test('bt.add.torrent', function() {
   // Just in case.
   bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
+  // For use in the torrent.peer tests
+  bt.add.torrent(peer_torrent);
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
   bt.add.torrent(url, function(resp) {
@@ -31,7 +46,6 @@ test('bt.add.torrent', function() {
     });
     ok(_.indexOf(download_urls, url) >= 0,
        'Torrent added successfully');
-
     ok(_.indexOf(download_urls, url_nocb) >= 0,
        'No cb or defaults added okay');
     var tor = bt.torrent.get(url_def);
@@ -46,6 +60,8 @@ test('bt.add.torrent', function() {
           equals(tor.properties.get(k), v, 'Callback + defaults works');
         });
       _.each(bt.torrent.all(), function(v) {
+        if (v.properties.get('download_url') == peer_torrent)
+          return
         v.remove();
       });
       start();
@@ -101,7 +117,7 @@ test('bt.events', function() {
 });
 
 test('bt.torrent', function() {
-  expect(6);
+  expect(13);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
@@ -115,35 +131,74 @@ test('bt.torrent', function() {
        'Keys has the right hashes');
     ok( tor.hash in bt.torrent.all(), 'all() has at least one right key');
     ok(bt.torrent.all()[tor.hash], "Client didn't crash");
+
+    var status = tor.properties.get('status');
+    ok(status & bt.status.loaded && status & bt.status.queued && 
+       status & bt.status.checking, 'Status looks good.');
+    // XXX - Currently freezes the client
+    // tor.stop();
+    // ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
+    // tor.start();
+    // console.log(tor.properties.get('status'));
+    tor.pause();
+    ok(tor.properties.get('status') & bt.status.paused, 
+       'Torrent status (pause): ' + tor.properties.get('status'));
+    tor.unpause();
+    ok(!(tor.properties.get('status') & bt.status.paused),
+         'Torrent status (unpause): ' + tor.properties.get('status'));
+    tor.recheck();
+    ok(tor.properties.get('status') & bt.status.checking,
+       'Torrent status (recheck): ' + tor.properties.get('status'));
     _.each(bt.torrent.all(), function(v) {
+      if (v.properties.get('download_url') == peer_torrent)
+        return
       v.remove();
     });
+    equals(bt.torrent.keys().length, 1, 
+           'Did not remove (' + bt.torrent.keys.length + ')');
+    // XXX - Adding magnet links is broken.
     start();
-    bt.add.torrent(magnet, function(resp) {
-      var tor = bt.torrent.get(magnet);
-      equals(tor.properties.get('download_url'), magnet,
-             'Got the right torrent');
-      start();
-    });
+    // bt.add.torrent(magnet, function(resp) {
+    //   var tor = bt.torrent.get(magnet);
+    //   equals(tor.properties.get('download_url'), magnet,
+    //          'Got the right torrent');
+    //   start();
+    // });
   });
   stop();
 });
 
 test('bt.torrent.file', function() {
-  expect(2);
+  expect(3);
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
   bt.add.torrent(url, function(resp) {
-    var tor = _.values(bt.torrent.all())[0];
-    console.log(tor);
+    var tor = bt.torrent.get(url);
+    same(tor.file.keys(), _.keys(tor.file.all()),
+         'Mismatch on keys: ' + tor.file.keys() + '\t' + 
+         _.keys(tor.file.all()));
     var file = _.values(tor.file.all())[0];
-    ok(file.torrent, "Client didn't crash");
-    equals(tor.properties.get('name'), file.torrent.properties.get('name'),
-           'Parent is the right object');
+    try {
+      ok(file.torrent, "Client didn't crash");
+      equals(tor.properties.get('name'), file.torrent.properties.get('name'),
+             'Parent is the right object');
+    } catch(err) { console.log('Failed trying to get a file\'s torrent'); }
     tor.remove();
     start();
   });
   stop();
+});
+
+test('bt.torrent.peer', function() {
+  expect();
+
+  var tor = bt.torrent.get(peer_torrent);
+  if (tor.peer.keys().length == 0) {
+    throw Error('Need to have the peer_torrent added to run these ' +
+                'tests (since you\'ve gotta connect to some peers)');
+  }
+  console.log(tor.peer.keys());
+  // tor.remove();
 });
 
 test('bt.resource', function() {

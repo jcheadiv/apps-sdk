@@ -23,6 +23,7 @@
 
   div#header {
     top: 30px;
+    width: 100%;
     background: url(http://www.clearbits.net/images/bg/site.png) repeat-x;
     background-position: 0 -30px;
   }

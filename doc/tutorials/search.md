@@ -130,23 +130,35 @@ The following javaScript does this work:
       return function(xml) {
         // Populate the list.
         $(xml).find("torrent").each(function() {
-          $(this.children).each(function() {
-            values[this.nodeName.replace(/\W/, "_")] =
-              this.innerText || this.textContent;
+          $(this.childNodes).each(function() {
+            var value = this.innerText || this.textContent;
+            // Account for IE's nested node values.
+            if (1 === this.nodeType && this.childNodes.length) {
+              value = this.childNodes[0].nodeValue;
+            }
+            values[this.nodeName.replace(/\W/, "_")] = value;
           });
           $("ul#items").append(template(values));
         });
 
         // Display relative datetimes for when created.
         $("ul#items time").each(function() {
-          $(this).html(new Date($(this).attr("datetime")).howLongAgo());
+          var d = new Date($(this).attr("datetime"));
+          if (isNaN(d))
+            d = d.fromW3cDtf($(this).attr("datetime"));
+          $(this).parent().html(d.howLongAgo());
         });
 
-Note that in order to display a relative date of how long ago the torrent was
-added, the `Date` prototype has been given a `howLongAgo` method. It is provided
-at the end of this tutorial. Continuing with `parseXml()`, let's identify the
-Creative Commons license based on its URL, and add a summary of the search
-results to the search form's `span.summary` if we have any results.
+Note that we have extended the `Date` prototype with two methods: `fromW3cDtf()`
+and `howLongAgo()`. The first allows us to parse [W3C DTF][w3cdtf]-formatted
+dates (a subset of ISO 8601), and the second allows us to display a relative
+date of how long ago a given torrent was added. The details of these methods are
+not discussed in this tutorial, but you can view both of them in the search
+example's [date.js][datejs].
+
+Continuing with `parseXml()`, let's identify the Creative Commons license based
+on its URL, and add a summary of the search results to the search form's
+`span.summary` if we have any results.
 
         // Display the license name
         $("ul#items .license").each(function() {
@@ -231,36 +243,13 @@ to allow CORS for search results requested from any localhost as follows:
     }
 
 
-Relative Dates
-==============
-
-Above we noted that the `Date` prototype needs a `howLongAgo` method in order to
-display relative dates for how long ago a given torrent was added. This method
-has been adapted from John Resig's [prettyDate()][prettydate].
-
-    Date.prototype.howLongAgo = function() {
-      var diff = (((new Date()).getTime() - this.getTime()) / 1000),
-        day_diff = Math.floor(diff / 86400);
-
-      return day_diff === 0 && (
-          diff <    60 && "just now" ||
-          diff <   120 && "1 minute ago" ||
-          diff <  3600 && Math.floor( diff / 60 ) + " minutes ago" ||
-          diff <  7200 && "1 hour ago" ||
-          diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
-        day_diff === 1 && "Yesterday" ||
-        day_diff <  12 && day_diff + " days ago" ||
-        day_diff <  57 && Math.round( day_diff / 7 ) + " weeks ago" ||
-        day_diff < 548 && Math.round( day_diff / 30.436875 ) + " months ago" ||
-        Math.round( day_diff / 365.2425 ) + " years ago";
-    }
-
-
 [cbxml]:      http://www.clearbits.net/home/search/index.xml?query=lessig
 [cors]:       http://www.w3.org/TR/access-control/
+[datejs]:     http://github.com/bittorrent/apps-sdk/tree/master/examples/search/lib/date.js
 [jqform]:     http://jquery.malsup.com/form/
 [jqui]:       http://jqueryui.com/
 [jsonp]:      http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/
 [prettydate]: http://ejohn.org/files/pretty.js
 [underscore]: http://documentcloud.github.com/underscore/
 [searchex]:   http://github.com/bittorrent/apps-sdk/tree/master/examples/search/
+[w3cdtf]:     http://www.w3.org/TR/NOTE-datetime

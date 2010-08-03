@@ -8,7 +8,7 @@
 // Version: %version%
 //
 
-//----------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 // Define template delimiters that allow a DOM-based view template.
   _.templateSettings = {
     start       : '==',
@@ -17,7 +17,7 @@
   };
 
 $(document).ready(function() {
-  //--------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   // Submit the search form via XHR.
     $('form#search').ajaxForm({
       type: 'GET',
@@ -30,20 +30,27 @@ $(document).ready(function() {
       }
     });
 
-  //--------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   // Remove any previous results
     var removeResults = function() {
       $("ul#items").empty();
       $("#search .summary").empty();
     }
 
-  //--------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   // Parse the ClearBits search XML using the HTML view template.
     var parseXml = (function() {
       var node, values = {};
 
+      // Account for ieframe's presumptuous treatment of template URLs.
+      var templateSource = $("ul#items").html();
+      console.log( document.location.protocol );
+      if ("btresource:" === document.location.protocol) {
+        templateSource = templateSource.replace(/btresource:\/\/btapp\//g, "");
+      }
+
       // Compile the view template.
-      var template = _.template($("ul#items").html());
+      var template = _.template(templateSource);
       $("ul#items").empty().toggleClass("template");
 
       return function(xml) {
@@ -85,7 +92,7 @@ $(document).ready(function() {
           sprintf('%d results found for "%s"',
           $(xml).find("torrent").length, keywords) : "");
 
-      //----------------------------------------------------------------------
+      //------------------------------------------------------------------------
       // Add a progress bar for each added torrent.
         $("a[href$='torrent']").click(function() {
           var elem = $(this).closest("ul").next().prepend(
@@ -113,7 +120,7 @@ $(document).ready(function() {
       }
     })();
 
-  //--------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   // Update the progress bar periodically.
     setInterval(function progressReport() {
       _.each(bt.torrent.all(), function(tor, k) {

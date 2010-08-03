@@ -148,7 +148,6 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         headers['cookie'] = self.get_cookies()
         if body:
             headers['content-type'] = 'application/x-www-form-urlencoded'
-        print headers
         resp, content = http.request(url, method, headers=headers, body=body)
         self.log_message('"%s %s" - %s - %s', method, url,
                          time.time() - now, resp.status)
@@ -188,7 +187,6 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if self.request_version != 'HTTP/0.9':
             self.wfile.write("%s %d %s\r\n" %
                              (self.protocol_version, code, message))
-            # print (self.protocol_version, code, message)
         # Don't send headers for proxy connections
         if headers:
             self.send_header('Server', self.version_string())

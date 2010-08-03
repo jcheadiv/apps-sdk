@@ -36,6 +36,9 @@ class Command(object):
             if not self.options.get(k, None):
                 self.options[k] = v
         self.project = apps.project.Project(self.options.get('name', '.'))
+        # Keeps track of which dependencies have been added, if one has already
+        # been added (via name), don't add it again.
+        self.added = []
 
     def file_list(self):
         if not os.path.exists(os.path.join(self.project.path,
@@ -100,9 +103,12 @@ class Command(object):
             pass
         os.makedirs(pkg_dir)
         for pkg in self.project.metadata.get('bt:libs', []):
-            self.add(pkg['url'])
+            self.add(pkg['name'], pkg['url'])
 
-    def add(self, url, update=True):
+    def add(self, name, url, update=True):
+        if name in self.added:
+            return
+        self.added.append(name)
         handlers = { '.js': self._add_javascript,
                      '.pkg': self._add_pkg
                      }
@@ -162,5 +168,5 @@ class Command(object):
         # Handle the dependencies specifically
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest.get('bt:libs', []):
-            self.add(pkg['url'], False)
+            self.add(pkg['name'], pkg['url'], False)
         return pkg_manifest['name']

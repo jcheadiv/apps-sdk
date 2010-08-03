@@ -99,7 +99,7 @@ $(document).ready(function() {
             "<div></div></td></tr>");
           $(elem).find("tr").first().effect("highlight", {}, 1000);
           bt.add.torrent(this.href, function(response) {
-            if ("success" === response.message) {
+            if (1 === response.state) { // Torrent added successfully
               bt.torrent.get(response.hash).properties.set(
                 "progressBar", $("div", elem).progressbar());
               _.extend(bt.torrent.get(response.hash), {

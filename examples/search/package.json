@@ -17,7 +17,7 @@
     "bt:publisher": "BitTorrent, Inc.",
     "author": "Bryan Kaplan <bkaplan@bittorrent.com>",
     "site": "http://apps.bittorrent.com", 
-    "bt:update_url": "http://localhost/example", 
+    "bt:update_url": "http://apps.bittorrent.com/search/search.btapp", 
     "version": "0.1", 
     "bt:description": "This is the search example app.", 
     "keywords": [

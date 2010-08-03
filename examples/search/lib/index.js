@@ -44,7 +44,6 @@ $(document).ready(function() {
 
       // Account for ieframe's presumptuous treatment of template URLs.
       var templateSource = $("ul#items").html();
-      console.log( document.location.protocol );
       if ("btresource:" === document.location.protocol) {
         templateSource = templateSource.replace(/btresource:\/\/btapp\//g, "");
       }

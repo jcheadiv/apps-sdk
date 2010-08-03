@@ -9,27 +9,6 @@
 //
 
 //----------------------------------------------------------------------------
-// Add a method to the Date object to find out how long ago it represents.
-// Adapted from John Resig's prettyDate() <http://ejohn.org/files/pretty.js>
-// This method is derived from MIT licensed code.
-  Date.prototype.howLongAgo = function() {
-    var diff = (((new Date()).getTime() - this.getTime()) / 1000),
-      day_diff = Math.floor(diff / 86400);
-
-    return day_diff === 0 && (
-        diff <    60 && "just now" ||
-        diff <   120 && "1 minute ago" ||
-        diff <  3600 && Math.floor( diff / 60 ) + " minutes ago" ||
-        diff <  7200 && "1 hour ago" ||
-        diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
-      day_diff === 1 && "Yesterday" ||
-      day_diff <  12 && day_diff + " days ago" ||
-      day_diff <  57 && Math.round( day_diff / 7 ) + " weeks ago" ||
-      day_diff < 548 && Math.round( day_diff / 30.436875 ) + " months ago" ||
-      Math.round( day_diff / 365.2425 ) + " years ago";
-  }
-
-//----------------------------------------------------------------------------
 // Define template delimiters that allow a DOM-based view template.
   _.templateSettings = {
     start       : '==',
@@ -70,16 +49,23 @@ $(document).ready(function() {
       return function(xml) {
         // Populate the list.
         $(xml).find("torrent").each(function() {
-          $(this.children).each(function() {
-            values[this.nodeName.replace(/\W/, "_")] =
-              this.innerText || this.textContent;
+          $(this.childNodes).each(function() {
+            var value = this.innerText || this.textContent;
+            // Account for IE's nested node values.
+            if (1 === this.nodeType && this.childNodes.length) {
+              value = this.childNodes[0].nodeValue;
+            }
+            values[this.nodeName.replace(/\W/, "_")] = value;
           });
           $("ul#items").append(template(values));
         });
 
         // Display relative datetimes for when created.
         $("ul#items time").each(function() {
-          $(this).html(new Date($(this).attr("datetime")).howLongAgo());
+          var d = new Date($(this).attr("datetime"));
+          if (isNaN(d))
+            d = d.fromW3cDtf($(this).attr("datetime"));
+          $(this).parent().html(d.howLongAgo());
         });
 
         // Display the license name

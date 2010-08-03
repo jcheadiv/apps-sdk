@@ -123,8 +123,14 @@ The following javaScript does this work:
     var parseXml = (function() {
       var node, values = {};
 
+      // Account for ieframe's presumptuous treatment of template URLs.
+      var templateSource = $("ul#items").html();
+      if ("btresource:" === document.location.protocol) {
+        templateSource = templateSource.replace(/btresource:\/\/btapp\//g, "");
+      }
+
       // Compile the view template.
-      var template = _.template($("ul#items").html());
+      var template = _.template(templateSource);
       $("ul#items").empty().toggleClass("template");
 
       return function(xml) {

@@ -8,6 +8,10 @@
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/qunit.js", 
             "name": "qunit"
+        },
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/social.pkg", 
+            "name": "social"
         }
     ], 
     "bt:publisher": "BitTorrent Inc.", 

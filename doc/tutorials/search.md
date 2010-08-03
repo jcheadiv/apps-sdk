@@ -1,0 +1,266 @@
+---
+layout: default
+title:  Search Tutorial
+---
+
+This tutorial covers the implementation of a torrent search interface in the
+&micro;Torrent client using XML output and a view template.
+
+If you haven't covered the [Media Downloader example](media_downloader.html)
+yet, you should start there to cover some basic concepts that are used here.
+
+This tutorial covers all of the important parts of a functional search, but
+omits some of the HTML and CSS used to polish the provided [search
+example][searchex].
+
+First, let's create a new project and add the dependencies we'll use:
+
+    % apps setup --name='search_example'
+    % apps add --file='http://github.com/malsup/form/raw/master/jquery.form.js?v2.43'
+    % apps add --file='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js'
+    % apps update
+
+The Search for Torrents
+=======================
+
+We're going to build a frontend for a torrent search. The basic HTML form is
+simple. It goes in html/main.html:
+
+    <form id="search" action="http://www.clearbits.net/home/search/index.xml" method="get">
+      <div>
+        <label for="query">Search Content</label>
+        <input class="field" id="query" name="query" size="30" type="text" />
+        <input type="image" src="http://www.clearbits.net/images/btn/search.png" class="submit" />
+        <span class="summary"><!--populated--></span>
+      </div>
+    </form>
+
+We'll use the [jquery form plugin][jqform] to submit the search form via XHR.
+The following goes in lib/index.js, inside your `$(document).ready` function:
+
+    $('form#search').ajaxForm({
+      type: 'GET',
+      dataType: 'xml',
+      beforeSubmit: function() {
+        removeResults();
+      },
+      success: function(data) {
+        parseXml(data);
+      }
+    });
+
+It's followed by definitions of `removeResults()` and `parseXml()`. Before
+presenting those, let's examine the template that they utilize.
+
+
+The View Template
+=================
+
+Let's create a DOM-based view template to keep our code separate from our
+markup. The [underscore.js][underscore] library provides a simple and effective
+template engine. In order to define our template in our HTML source, we need to
+define variable delimiters that play friendly with the parser. Enter the
+following in lib/index.js:
+
+    // Define template delimiters that allow a DOM-based view template.
+    _.templateSettings = {
+      start       : '==',
+      end         : '==',
+      interpolate : /==(.+?)==/g
+    };
+
+We can then define our template in html/main.html as follows. This makes use of
+the values provided by the [ClearBits search results XML][cbxml].
+
+    <ul id="items" class="template">
+      <li>
+          <h3><a href="==location==">==title==</a></h3>
+          <ul class="inline">
+            <li><a href="==torrent_url==">Torrent</a></li>
+            <li><a href="==location==">More Info</a></li>
+            <li><a href="==license_url==" class="license"><!--populated--></a></li>
+          </ul>
+          <table>
+            <tr><th>Seed:Leech</th><td>==seeds==:==leechers==</td></tr>
+            <tr><th>Size</th><td>==mb_size==MB</td></tr>
+            <tr><th>Created</th><td><time datetime="==created_at=="></time></td></tr>
+            <tr><th>Hash</th><td>==hashstr==</td></tr>
+          </table>
+      </li>
+    </ul>
+
+Note that this template is qualified via the classname of its parent. Elements
+having the `template` class are hidden via the css in css/screen.css. When the
+view template is parsed below, this class will be removed and the DOM element
+emptied and reused for template-formatted markup.
+
+    .template {
+      display: none;
+    }
+
+
+Parsing the XML Result Set
+==========================
+
+Let's return to the functions used by the [jquery form plugin][jqform].
+`removeResults()` allows multiple searches to be performed without preserving
+the results of previous searches.
+
+    var removeResults = function() {
+      $("ul#items").empty();
+      $("#search .summary").empty();
+    }
+
+`parseXml()` the meat of this app. It is responsible for receiving the search
+results in XML form, and creating a UI to access them. It does a few things:
+
+1. It compiles the view template that we defined above. This only happens once.
+2. It populates the torrent list with formatted data received in the XML.
+3. It enhances the populated list with formatted metadata received in the XML.
+
+The following javaScript does this work:
+
+    var parseXml = (function() {
+      var node, values = {};
+
+      // Compile the view template.
+      var template = _.template($("ul#items").html());
+      $("ul#items").empty().toggleClass("template");
+
+      return function(xml) {
+        // Populate the list.
+        $(xml).find("torrent").each(function() {
+          $(this.children).each(function() {
+            values[this.nodeName.replace(/\W/, "_")] =
+              this.innerText || this.textContent;
+          });
+          $("ul#items").append(template(values));
+        });
+
+        // Display relative datetimes for when created.
+        $("ul#items time").each(function() {
+          $(this).html(new Date($(this).attr("datetime")).howLongAgo());
+        });
+
+Note that in order to display a relative date of how long ago the torrent was
+added, the `Date` prototype has been given a `howLongAgo` method. It is provided
+at the end of this tutorial. Continuing with `parseXml()`, let's identify the
+Creative Commons license based on its URL, and add a summary of the search
+results to the search form's `span.summary` if we have any results.
+
+        // Display the license name
+        $("ul#items .license").each(function() {
+          var licenses = $(this).attr("href").match(/by-\w+/);
+          if (null !== licenses) {
+            $(this).text(licenses[0].toUpperCase() + " License");
+          }
+          else { // Unknown license; remove the node.
+            $(this).parent().remove();
+          }
+        });
+
+        // Summarize the results.
+        var keywords = $("#search input[name=query]")[0].value;
+        $("#search .summary").text(keywords ?
+          sprintf('%d results found for "%s"',
+          $(xml).find("torrent").length, keywords) : "");
+
+The remainder of `parseXml()` appears in the following code block. Here we'll
+use [jquery ui][jqui] to add a progress bar to each added torrent.
+
+        $("a[href$='torrent']").click(function() {
+          var elem = $(this).closest("ul").next().prepend(
+            "<tr><th>Progress</th><td class='progress'>" +
+            "<div></div></td></tr>");
+          $(elem).find("tr").first().effect("highlight", {}, 1000);
+          bt.add.torrent(this.href, function(response) {
+            if ("success" === response.message) {
+              bt.torrent.get(response.hash).properties.set(
+                "progressBar", $("div", elem).progressbar());
+              _.extend(bt.torrent.get(response.hash), {
+                updateProgressBar: function() {
+                  this.properties.get('progressBar').progressbar({
+                    value: this.properties.get('progress') / 10
+                  });
+                }
+              });
+            }
+          });
+          // Unhyperlink the clicked text.
+          $(this).replaceWith($(this).text());
+          return false;
+        });
+      }
+    })();
+
+Each torrent's progressbar was created as a property of the torrent itself. To
+update the progress bar periodically we follow up with this:
+
+    setInterval(function progressReport() {
+      _.each(bt.torrent.all(), function(tor, k) {
+        try {
+          tor.updateProgressBar();
+        }
+        catch(err) {
+          if (window.debug) {
+            console.log('bt.add.torrent() may have failed.', tor, err.message);
+          }
+        }
+      })
+    }, 250);
+
+
+Cross-Origin Resource Sharing
+=============================
+
+Since apps are built and tested from a local server, your browser's
+Single-Origin Policy will require one of several measures in order to access
+data from any other server. While most widely supported solution is
+[jsonp][jsonp],
+[Cross-Origin Resource Sharing][cors] (aka HTTP
+Access Control) provides a more nuanced apparatus for obtaining data in
+arbitrary formats, where it is supported. Both of these measures require
+server-side cooperation. In the case of this example, nginx has been configured
+to allow CORS for search results requested from any localhost as follows:
+
+    # Implement HTTP Access Control for search XML.
+    location /home/search/index.xml {
+     if ($http_origin ~* "(127\.0\.0\.1|localhost):?\d*") {
+      add_header Access-Control-Allow-Origin $http_origin;
+     }
+    }
+
+
+Relative Dates
+==============
+
+Above we noted that the `Date` prototype needs a `howLongAgo` method in order to
+display relative dates for how long ago a given torrent was added. This method
+has been adapted from John Resig's [prettyDate()][prettydate].
+
+    Date.prototype.howLongAgo = function() {
+      var diff = (((new Date()).getTime() - this.getTime()) / 1000),
+        day_diff = Math.floor(diff / 86400);
+
+      return day_diff === 0 && (
+          diff <    60 && "just now" ||
+          diff <   120 && "1 minute ago" ||
+          diff <  3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+          diff <  7200 && "1 hour ago" ||
+          diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+        day_diff === 1 && "Yesterday" ||
+        day_diff <  12 && day_diff + " days ago" ||
+        day_diff <  57 && Math.round( day_diff / 7 ) + " weeks ago" ||
+        day_diff < 548 && Math.round( day_diff / 30.436875 ) + " months ago" ||
+        Math.round( day_diff / 365.2425 ) + " years ago";
+    }
+
+
+[cbxml]:      http://www.clearbits.net/home/search/index.xml?query=lessig
+[cors]:       http://www.w3.org/TR/access-control/
+[jqform]:     http://jquery.malsup.com/form/
+[jqui]:       http://jqueryui.com/
+[jsonp]:      http://bob.pythonmac.org/archives/2005/12/05/remote-json-jsonp/
+[prettydate]: http://ejohn.org/files/pretty.js
+[underscore]: http://documentcloud.github.com/underscore/
+[searchex]:   http://github.com/bittorrent/apps-sdk/tree/master/examples/search/

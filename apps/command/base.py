@@ -71,9 +71,10 @@ class Command(object):
 
     def write_metadata(self):
         logging.info('\tupdating project metadata')
-        json.dump(self.project.metadata,
-                  open(os.path.join(self.project.path, 'package.json'), 'wb'),
-                  indent=4)
+        if self.project.metadata != json.load(open('package.json')):
+          json.dump(self.project.metadata,
+                    open(os.path.join(self.project.path, 'package.json'), 'wb'),
+                    indent=4)
         # Don't bother with btapp/index.html for packages
         if self.project.metadata.get('bt:description', False):
             return

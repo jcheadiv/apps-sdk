@@ -13,6 +13,7 @@ import SimpleHTTPServer
 import socket
 import time
 import urllib
+import urlparse
 
 import apps.command.base
 
@@ -55,6 +56,17 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             else:
                 return self.list_directory(path)
         ctype = self.guess_type(path)
+        if re.match('/dist/\S+\.btapp', self.path):
+            qs = urlparse.parse_qs(urlparse.urlparse(self.path).query)
+            # XXX - This is an ugly hack
+            import apps.vanguard
+            handler = apps.vanguard.Vanguard()
+            handler.parse_config_files()
+            handler.parse_command_line()
+            if 'debug' in qs:
+                handler.options.debug = True
+            handler.ran = []
+            handler.run_command('package')
         try:
             # Always read in binary mode. Opening files in text mode may cause
             # newline translations, making the actual size of the content

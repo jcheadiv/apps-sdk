@@ -113,6 +113,7 @@ $(document).ready(function() {
       }
     })();
 
+  //----------------------------------------------------------------------------
   // Give the bt object a progress manager to handle progress bars.
     bt.progressManager = (function() {
       var bars = {};

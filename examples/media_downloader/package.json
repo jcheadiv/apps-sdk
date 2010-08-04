@@ -17,7 +17,7 @@
     "bt:publisher": "BitTorrent, Inc.",
     "author": "Thomas Rampelberg <thomas@bittorrent.com>",
     "site": "http://apps-sdk.bittorrent.com",
-    "bt:update_url": "http://localhost/media_downloader.btapp",
+    "bt:update_url": "http://localhost:8080/dist/media_downloader.btapp",
     "version": "0.1",
     "bt:description": "This is an example media downloader.",
     "keywords": [

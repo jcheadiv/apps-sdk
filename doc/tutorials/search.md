@@ -184,7 +184,8 @@ on its URL, and add a summary of the search results to the search form's
           $(xml).find("torrent").length, keywords) : "");
 
 The remainder of `parseXml()` appears in the following code block. Here we'll
-use [jquery ui][jqui] to add a progress bar to each added torrent.
+use bt.progressManager (described below) to add a progress bar to each added
+torrent.
 
         $("a[href$='torrent']").click(function() {
           var elem = $(this).closest("ul").next().prepend(
@@ -192,15 +193,10 @@ use [jquery ui][jqui] to add a progress bar to each added torrent.
             "<div></div></td></tr>");
           $(elem).find("tr").first().effect("highlight", {}, 1000);
           bt.add.torrent(this.href, function(response) {
-            if ("success" === response.message) {
-              bt.torrent.get(response.hash).properties.set(
-                "progressBar", $("div", elem).progressbar());
-              _.extend(bt.torrent.get(response.hash), {
-                updateProgressBar: function() {
-                  this.properties.get('progressBar').progressbar({
-                    value: this.properties.get('progress') / 10
-                  });
-                }
+            if (1 === response.state) { // Torrent added successfully
+              var pb = bt.progressManager.createBar({
+                id: response.url,
+                elem: $("div", elem)
               });
             }
           });
@@ -211,21 +207,43 @@ use [jquery ui][jqui] to add a progress bar to each added torrent.
       }
     })();
 
-Each torrent's progressbar was created as a property of the torrent itself. To
-update the progress bar periodically we follow up with this:
+Progress Manager
+================
 
-    setInterval(function progressReport() {
-      _.each(bt.torrent.all(), function(tor, k) {
-        try {
-          tor.updateProgressBar();
-        }
-        catch(err) {
-          if (window.debug) {
-            console.log('bt.add.torrent() may have failed.', tor, err.message);
+In order to manage each torrent's progress bars, let's give the bt object
+a progress manager to handle progress bars. We'll use [jquery ui][jqui] to
+handle the bars themselves, while he progressManager will keep them synchronized
+with the torrent download progress.
+
+    bt.progressManager = (function() {
+      var bars = {};
+      return {
+        // createBar takes as its argument an object with id defined as torrent
+        // identifier (hash or URL), elem as jQuery element for a progress bar.
+        createBar: function(settings) {
+          var bar;
+          if (settings && settings.id) {
+            bar = bars[settings.id] = settings.elem.progressbar();
+            bt.progressManager.keepBarUpdated(settings.id);
           }
+          return bar;
+        },
+        // updateBar takes argument of torrent identifier (hash or URL).
+        updateBar: function(id) {
+          bars[id].progressbar({
+            value: bt.torrent.get(id).properties.get("progress") / 10
+          });
+        },
+        keepBarUpdated: function(id) {
+          if (1000 > bt.torrent.get(id).properties.get("progress")) {
+            setTimeout(function() {
+              bt.progressManager.keepBarUpdated(id);
+            }, 250);
+          }
+          bt.progressManager.updateBar(id);
         }
-      })
-    }, 250);
+      };
+    })();
 
 
 Cross-Origin Resource Sharing

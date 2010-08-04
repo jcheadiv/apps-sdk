@@ -124,16 +124,17 @@ test('bt.torrent', function() {
   bt.add.torrent(url, function(resp) {
     var magnet = 'magnet:?xt=urn:btih:07a9de9750158471c3302e4e95edb1107f980fa6&dn=Pioneer.One.S01E01.720p.x264-VODO&tr=http%3a%2F%2Ftracker.vodo.net%3A6970%2Fannounce';
     var tor = bt.torrent.get(url);
-    equals(tor.properties.get('download_url'), url, 'Got the right torrent');
+    equals(tor.properties.get('download_url'), url, 'Url: ' +
+           tor.properties.get('download_url'));
     equals(bt.torrent.get(tor.hash).properties.get('hash'), tor.hash,
-           'Can get by hash too');
+           'Hash: ' + tor.hash);
     ok(_.indexOf(bt.torrent.keys(), tor.hash) >= 0,
        'Keys has the right hashes');
     ok( tor.hash in bt.torrent.all(), 'all() has at least one right key');
     ok(bt.torrent.all()[tor.hash], "Client didn't crash");
 
     var status = tor.properties.get('status');
-    ok(status & bt.status.loaded && status & bt.status.queued && 
+    ok(status & bt.status.loaded && status & bt.status.queued &&
        status & bt.status.checking, 'Status looks good.');
     // XXX - Currently freezes the client
     // tor.stop();
@@ -141,7 +142,7 @@ test('bt.torrent', function() {
     // tor.start();
     // console.log(tor.properties.get('status'));
     tor.pause();
-    ok(tor.properties.get('status') & bt.status.paused, 
+    ok(tor.properties.get('status') & bt.status.paused,
        'Torrent status (pause): ' + tor.properties.get('status'));
     tor.unpause();
     ok(!(tor.properties.get('status') & bt.status.paused),
@@ -154,7 +155,7 @@ test('bt.torrent', function() {
         return
       v.remove();
     });
-    equals(bt.torrent.keys().length, 1, 
+    equals(bt.torrent.keys().length, 1,
            'Did not remove (' + bt.torrent.keys.length + ')');
     // XXX - Adding magnet links is broken.
     start();
@@ -175,7 +176,7 @@ test('bt.torrent.file', function() {
   bt.add.torrent(url, function(resp) {
     var tor = bt.torrent.get(url);
     same(tor.file.keys(), _.keys(tor.file.all()),
-         'Mismatch on keys: ' + tor.file.keys() + '\t' + 
+         'Mismatch on keys: ' + tor.file.keys() + '\t' +
          _.keys(tor.file.all()));
     var file = _.values(tor.file.all())[0];
     try {

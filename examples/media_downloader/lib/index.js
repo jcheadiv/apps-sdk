@@ -11,7 +11,7 @@ function render_item(item) {
     $("#notification").text(
       'Adding a torrent, please be patient...').slideDown();
     bt.add.torrent(item.torrents[0].url, function(resp) {
-      if (resp.message == 'success') {
+      if (resp.state == bt._tor.added) {
         $("#notification").slideUp();
         $(".bar", elem).progressbar();
       } else {

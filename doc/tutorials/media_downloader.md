@@ -191,7 +191,7 @@ downloading. Replace the render item function in `lib/index.js` with:
         $("#items").append(elem);
         $("a", elem).click(function() {
             bt.add.torrent(item.torrents[0].url, function(resp) {
-                if (resp.message == 'success') {
+                if (resp.state == bt._tor.added) {
                     $(".bar", elem).progressbar();
                 }
             });
@@ -283,7 +283,7 @@ the list is getting duplicated by the `$.getJSON` call completing. Let's modify
         $("#items").append(elem);
         $("a", elem).click(function() {
             bt.add.torrent(item.torrents[0].url, function(resp) {
-                if (resp.message == 'success') {
+                if (resp.state == bt._tor.added) {
                     $(".bar", elem).progressbar();
                 }
             });
@@ -325,7 +325,7 @@ following:
         $("#notification").text(
             'Adding a torrent, please be patient...').slideDown();
         bt.add.torrent(item.torrents[0].url, function(resp) {
-            if (resp.message == 'success') {
+            if (resp.state == bt._tor.added) {
                 $("#notification").slideUp();
                 $(".bar", elem).progressbar();
             } else {

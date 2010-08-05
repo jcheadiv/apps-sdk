@@ -70,15 +70,70 @@ test('bt.add.torrent', function() {
 });
 
 test('bt.add.rss_feed', function() {
-  expect();
-
-  // XXX - Fill out the unit tests
+  // Do we want to expand the functionality to include 
+  // a callback and default property setting?
+  expect(3);
+  var rss_bt = 'http://vodo.net/feeds/public';
+  var rss_btapp = 'http://www.clearbits.net/rss.xml';
+  
+  // Looks like the way we add in the bt object is broken.
+  // bt.js:46 btapp.add.rss_feed is null or not an object
+  try{
+    ok(bt.add.rss_feed(rss_bt), "Didn't explode while trying to add");
+  }catch(err){
+    ok(false, "bt.add.rss_feed error:" + err.message);
+  }
+  
+  btapp.add.rss_feed(rss_btapp);
+  btapp.add.rss_feed(rss_btapp);
+  stop();
+  
+  setTimeout(function(){
+    start();
+    var rss_urls = _.map(bt.rss_feed.all(), function(v) {
+      return v.properties.get('url');
+    });
+    ok(_.indexOf(rss_urls, rss_btapp) >= 0,
+      'RSS feed added successfully');
+    
+    //A duplicate filter object isn't created, but the keys are duplicated
+    equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length, 
+      "Number of keys and objects is consistent; good duplicate behavior")
+  }, 2000);
+       
 });
 
 test('bt.add.rss_filter', function() {
-  expect();
+  // Do we want to expand the functionality to include 
+  // a callback and default property setting?
+  expect(3);
+  var filter_bt = "BTFilterName";
+  var filter_btapp = "BTAppFilterName";
 
-  // XXX - Fill out the unit tests
+  // Looks like the way we add in the bt object is broken.
+  // bt.js:49 btapp.add.rss_feed is null or not an object
+  try{
+    ok(bt.add.rss_filter(filter_bt), "Didn't explode while trying to add");
+  }catch(err){
+    ok(false, "bt.add.rss_filter error:" + err.message);
+  }
+  
+  btapp.add.rss_filter(filter_btapp);
+  btapp.add.rss_filter(filter_btapp);
+  stop();
+  
+  setTimeout(function(){
+    start();
+    var filter_names = _.map(bt.rss_filter.all(), function(v) {
+      return v.properties.get('name');
+    });
+    ok(_.indexOf(filter_names, filter_btapp) >= 0,
+      'RSS filter added successfully');
+      
+    //A duplicate filter object isn't created, but the keys are duplicated
+    equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length, 
+      "Number of keys and objects is consistent; good duplicate behavior")
+  }, 2000);
 });
 
 test('bt.stash', function() {

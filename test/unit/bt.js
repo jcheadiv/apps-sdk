@@ -210,16 +210,14 @@ test('bt.resource', function() {
 });
 
 test('bt.settings', function() {
-  var originalSettings = bt.settings.all();
-  var originalSettingsKeys = _.keys(originalSettings);
   var setBlacklist = ['gui.show_btapps']; // Do not set-test evil untestables.
   var testValue, messages = { set: undefined, reset: undefined };
 
-  expect(4 * originalSettingsKeys.length - 2 * setBlacklist.length + 2);
+  expect(4 * bt.settings.keys().length - 2 * setBlacklist.length + 2);
 
   ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
 
-  same(_.keys(originalSettings), bt.settings.keys(),
+  same(_.keys(bt.settings.all()), bt.settings.keys(),
     'keys() matches keys in all().');
 
   _.each(bt.settings.all(), function(value, key) {

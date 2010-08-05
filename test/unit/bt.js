@@ -210,9 +210,71 @@ test('bt.resource', function() {
 });
 
 test('bt.settings', function() {
-  expect();
+  var originalSettings = bt.settings.all();
+  var originalSettingsKeys = _.keys(originalSettings);
+  var setBlacklist = ['gui.show_btapps']; // Do not set-test evil untestables.
+  var testValue, messages = { set: undefined, reset: undefined };
 
-  // XXX - Fill out the unit tests
+  expect(4 * originalSettingsKeys.length - 2 * setBlacklist.length + 2);
+
+  ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
+
+  same(_.keys(originalSettings), bt.settings.keys(),
+    'keys() matches keys in all().');
+
+  _.each(bt.settings.all(), function(value, key) {
+
+    equals(bt.settings.get(key), value, sprintf('bt.settings.get() correctly ' +
+      'matches value provided by bt.settings.all() for %s.', key));
+
+    ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
+      sprintf('setting %s is an expected datatype.', key))
+
+    if (-1 === _.indexOf(setBlacklist, key)) {
+
+      // Set testvalue and assert messages according to datatype.
+      switch(typeof(value)) {
+
+        case 'boolean':
+          testValue = !value;
+          messages.set =
+            sprintf('set() can set %s to %s.', key, (testValue).toString());
+          messages.reset =
+            sprintf('set() can set %s back to %s.', key, (value).toString());
+          break;
+
+        case 'number':
+          testValue = 1 === value ? 0 : 1;
+          messages.set = sprintf('set() can set %s to %d.', key, testValue);
+          messages.reset = sprintf('set() can set %s back to %f.', key, value);
+          break;
+
+        case 'string':
+          testValue = "x";
+          messages.set = sprintf('set() can set %s to %s.', key, testValue);
+          messages.reset = sprintf('set() can set %s back to %s.', key, value);
+          break;
+      }
+
+      // set testValue
+      try {
+        bt.settings.set(key, testValue);
+        equals(bt.settings.get(key), testValue, messages.set);
+      }
+      catch(error) {
+        ok(false, sprintf('%s %s', messages.set, error.message));
+      }
+
+      // reset value
+      try {
+        bt.settings.set(key, value);
+        equals(bt.settings.get(key), value, messages.reset);
+      }
+      catch(error) {
+        ok(false, sprintf('%s %s', messages.reset, error.message));
+      }
+    }
+  });
 });
 
 test('bt.log', function() {

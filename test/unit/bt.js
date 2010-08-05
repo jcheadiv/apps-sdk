@@ -141,15 +141,15 @@ test('bt.torrent', function() {
     // ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
     // tor.start();
     // console.log(tor.properties.get('status'));
-    tor.pause();
-    ok(tor.properties.get('status') & bt.status.paused,
-       'Torrent status (pause): ' + tor.properties.get('status'));
-    tor.unpause();
-    ok(!(tor.properties.get('status') & bt.status.paused),
-         'Torrent status (unpause): ' + tor.properties.get('status'));
-    tor.recheck();
-    ok(tor.properties.get('status') & bt.status.checking,
-       'Torrent status (recheck): ' + tor.properties.get('status'));
+    // tor.pause();
+    // ok(tor.properties.get('status') & bt.status.paused,
+    //    'Torrent status (pause): ' + tor.properties.get('status'));
+    // tor.unpause();
+    // ok(!(tor.properties.get('status') & bt.status.paused),
+    //      'Torrent status (unpause): ' + tor.properties.get('status'));
+    // tor.recheck();
+    // ok(tor.properties.get('status') & bt.status.checking,
+    //    'Torrent status (recheck): ' + tor.properties.get('status'));
     _.each(bt.torrent.all(), function(v) {
       if (v.properties.get('download_url') == peer_torrent)
         return

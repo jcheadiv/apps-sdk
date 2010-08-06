@@ -31,6 +31,7 @@
             <File Id="win32evtlog.pyd" Name="win32evtlog.pyd" Source="../dist/win32evtlog.pyd"/>
             <File Id="win32pipe.pyd" Name="win32pipe.pyd" Source="../dist/win32pipe.pyd"/>
             <File Id="win32wnet.pyd" Name="win32wnet.pyd" Source="../dist/win32wnet.pyd"/>
+            <File Id="msvcr90.dll" Name="msvcr90.dll" Source="../dist/msvcr90.dll"/>
           </Component>
         </Directory>
 			</Directory>

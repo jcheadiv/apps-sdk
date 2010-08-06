@@ -24,7 +24,6 @@
   <ItemGroup>
     <Compile Include="beaker.wxs" />
     <Compile Include="boto.wxs" />
-    <Compile Include="exe.wxs" />
     <Compile Include="mako.wxs" />
     <Compile Include="Product.wxs" />
     <Compile Include="Product.Generated.wxs">

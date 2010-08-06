@@ -2,11 +2,12 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   
 	<Product Id="beccd8a0-7636-4251-a79e-07180eb05b48" Name="Apps SDK Tools" Language="1033" Version="1.0.0.0" Manufacturer="BitTorrent, Inc." UpgradeCode="8b3a360e-36bb-4722-aa08-ad82a8b73028">
-		<Package InstallerVersion="200" Compressed="yes" />
+		<Package InstallerVersion="300" Compressed="yes" />
 
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Merge Id="CRT" Language="0" SourceFile="c:\Program Files\Common Files\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1"/>
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLLOCATION" Name="apps-sdk">
           <Component Id="BtAppLoaderComponent" Guid="{2195B83F-85D9-427a-BF1A-5C4480152111}">
@@ -31,7 +32,6 @@
             <File Id="win32evtlog.pyd" Name="win32evtlog.pyd" Source="../dist/win32evtlog.pyd"/>
             <File Id="win32pipe.pyd" Name="win32pipe.pyd" Source="../dist/win32pipe.pyd"/>
             <File Id="win32wnet.pyd" Name="win32wnet.pyd" Source="../dist/win32wnet.pyd"/>
-            <File Id="msvcr90.dll" Name="msvcr90.dll" Source="../dist/msvcr90.dll"/>
           </Component>
         </Directory>
 			</Directory>
@@ -45,6 +45,7 @@
       <ComponentGroupRef Id="Mako033"/>
       <ComponentGroupRef Id="Pydns234"/>
       <ComponentGroupRef Id="Httplib2060"/>
+      <MergeRef Id="CRT"/>
 
 			<!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
 			<ComponentGroupRef Id="Product.Generated" />

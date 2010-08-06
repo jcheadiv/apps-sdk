@@ -402,8 +402,12 @@ test('bt.resource', function() {
 });
 
 test('bt.settings', function() {
-  var setBlacklist = ['gui.show_btapps']; // Do not set-test evil untestables.
   var testValue, messages = { set: undefined, reset: undefined };
+
+  // Do not test set() on blacklisted properties.
+  // * Setting gui.show_btapps to false destroys the test environment.
+  // * Property avwindow is a read-only window handle used by Bitdefender.
+  var setBlacklist = ['gui.show_btapps', 'avwindow'];
 
   expect(4 * bt.settings.keys().length - 2 * setBlacklist.length + 2);
 
@@ -446,7 +450,7 @@ test('bt.settings', function() {
           break;
       }
 
-      // set testValue
+      // Set testValue.
       try {
         bt.settings.set(key, testValue);
         equals(bt.settings.get(key), testValue, messages.set);
@@ -455,7 +459,7 @@ test('bt.settings', function() {
         ok(false, sprintf('%s %s', messages.set, error.message));
       }
 
-      // reset value
+      // Reset value.
       try {
         bt.settings.set(key, value);
         equals(bt.settings.get(key), value, messages.reset);

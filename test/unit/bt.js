@@ -261,9 +261,9 @@ test('bt.torrent.peer', function() {
     console.log(err);
   }
   ok(peer.torrent, "Peer has torrent association");
-  equals(peer.torrent.properties.get("name"), tor.properties.get("name"), 
+  equals(peer.torrent.properties.get("name"), tor.properties.get("name"),
     "Parent torrent is correct");
-    
+
   _.each(peer.properties.all(), function(value, key) {
 
     equals(peer.properties.get(key), value, sprintf('peer.properties.get() ' +
@@ -271,10 +271,10 @@ test('bt.torrent.peer', function() {
 
     ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
       sprintf('property %s is an expected datatype.', key))
-      
-      /* XXX - It appears that attempting to set read-only peer properties 
+
+      /* XXX - It appears that attempting to set read-only peer properties
          crashes the client.
-      
+
       // Set testvalue and assert messages according to datatype.
       switch(typeof(value)) {
 
@@ -327,12 +327,12 @@ test('bt.rss_filter', function() {
   // XXX Setting 'name' property throws an Error with empty message and no description
   var setBlacklist = ['name'];
   btapp.add.rss_filter(filtername);
-  
+
   filterByName = btapp.rss_filter.get(filtername);
   ftkeys = btapp.rss_filter.keys();
   filterByKey = btapp.rss_filter.get(ftkeys[ftkeys.length-1]);
-  equals( filterByName.properties.get("name"), 
-          filterByKey.properties.get("name"), 
+  equals( filterByName.properties.get("name"),
+          filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
 
   ok(filterByName.id, "Filter has an ID property");
@@ -341,14 +341,14 @@ test('bt.rss_filter', function() {
 
     equals(filterByName.properties.get(key), value, sprintf('filter.properties.get() ' +
       'matches value provided by filter.properties.all() for %s.', key));
-    
-    
+
+
     ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
       sprintf('property %s is an expected datatype.', key))
-    if (-1 === _.indexOf(setBlacklist, key)) {  
-      // XXX - It appears that attempting to set read-only peer properties 
+    if (-1 === _.indexOf(setBlacklist, key)) {
+      // XXX - It appears that attempting to set read-only peer properties
       // crashes the client.
-      
+
       // Set testvalue and assert messages according to datatype.
       switch(typeof(value)) {
 

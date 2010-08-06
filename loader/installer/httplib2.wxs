@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLLOCATION">
+            <Directory Id="dir010385527DE87332840D28FE6A9F1F04" Name="httplib2-0.6.0-py2.6.egg">
+                <Directory Id="dir1E14AA092816AD64BE27CCD7FDA10DBC" Name="EGG-INFO">
+                    <Component Id="cmp75CF73A72E5F337C11EDB1E15A20780F" Guid="{A2F8E659-9003-4D33-A22D-BFB39BBED339}">
+                        <File Id="filE501DF1552A456F2927894E9F5799AFC" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\dependency_links.txt" />
+                    </Component>
+                    <Component Id="cmp7081320ED7AD50A97A2475C36CB1CE37" Guid="{2BCDB0DE-1CC2-4E11-98F7-1842781AA139}">
+                        <File Id="fil6915F7FDB0E5A68312300499A65A0DC6" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\PKG-INFO" />
+                    </Component>
+                    <Component Id="cmp00426B723012C0FCCA738FDD384B3336" Guid="{BE908746-77BE-4509-869C-9D8FF2992B8F}">
+                        <File Id="fil8950DFD30769C439789AF0F5C9290DE0" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\SOURCES.txt" />
+                    </Component>
+                    <Component Id="cmpADADD3D49CFFC5E14FC408BE9E263622" Guid="{E81F0607-A505-42FB-B65F-E0CF99E9FF7A}">
+                        <File Id="fil64DFA57B4A374FAC769BC5F85513489C" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\top_level.txt" />
+                    </Component>
+                    <Component Id="cmpA9C015C077406E0DC1CBDB5B76763C1F" Guid="{BF8D0C88-A753-4CDE-B115-1D1C39C400C1}">
+                        <File Id="fil7403C8E530BE86338DC9AC08F5EC20D9" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\zip-safe" />
+                    </Component>
+                </Directory>
+                <Directory Id="dirCF49B77E1F61D6EF5B45291B8A189C9B" Name="httplib2">
+                    <Component Id="cmp48CD0F35D174A57CAB46FF74EE31D52C" Guid="{3BF509F0-CF65-4B59-8598-57B514865887}">
+                        <File Id="fil4B506D3437389754F72093BBF4CD91A2" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\iri2uri.py" />
+                    </Component>
+                    <Component Id="cmpDB92B0F1C2E657F17486AD5B5ED7CC2F" Guid="{8E69B886-4A47-4205-A9A4-1A4DCA5F58C7}">
+                        <File Id="fil0119CCA40CBE87C7DF9AACC85590F65B" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\iri2uri.pyc" />
+                    </Component>
+                    <Component Id="cmp39F58053C0E8A44901E74403B99E7D35" Guid="{F24FD5D3-CEB4-462C-85D1-4BE62BDF9E0F}">
+                        <File Id="filD2F06298C9467DC2869716DD80C67704" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\__init__.py" />
+                    </Component>
+                    <Component Id="cmpF05A3770B77673984DA4B4CFF8BADC98" Guid="{FADFD017-9C15-424A-8281-0D952059C116}">
+                        <File Id="fil2F175F45CA49E7E862D5D6E91EDE7B33" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\__init__.pyc" />
+                    </Component>
+                </Directory>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="Httplib2060">
+            <ComponentRef Id="cmp75CF73A72E5F337C11EDB1E15A20780F" />
+            <ComponentRef Id="cmp7081320ED7AD50A97A2475C36CB1CE37" />
+            <ComponentRef Id="cmp00426B723012C0FCCA738FDD384B3336" />
+            <ComponentRef Id="cmpADADD3D49CFFC5E14FC408BE9E263622" />
+            <ComponentRef Id="cmpA9C015C077406E0DC1CBDB5B76763C1F" />
+            <ComponentRef Id="cmp48CD0F35D174A57CAB46FF74EE31D52C" />
+            <ComponentRef Id="cmpDB92B0F1C2E657F17486AD5B5ED7CC2F" />
+            <ComponentRef Id="cmp39F58053C0E8A44901E74403B99E7D35" />
+            <ComponentRef Id="cmpF05A3770B77673984DA4B4CFF8BADC98" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

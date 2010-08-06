@@ -4,102 +4,102 @@
         <DirectoryRef Id="INSTALLLOCATION">
             <Directory Id="dir3CC5D92EE645ED5BA90AC24C09ECD5EA" Name="pydns-2.3.4-py2.6.egg">
                 <Directory Id="dir858445B28B81D0159EE244B4E2C70526" Name="DNS">
-                    <Component Id="cmpA88581EBB45BE4780B57F59116FB7FA5" Guid="{5064C7C3-77C8-4A84-B387-D91B19DAA10E}">
+                    <Component Id="cmpA88581EBB45BE4780B57F59116FB7FA5" Guid="{16C7B2F7-EA9F-42C0-8246-7AD531B6AABF}">
                         <File Id="fil36DCD8876A3CE14ACC9875750F34A05D" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Base.py" />
                     </Component>
-                    <Component Id="cmp75F00FAB9ABCCF358EEFE50277F8958E" Guid="{08D48B75-D20E-4435-93C2-9B17C6EB62D6}">
+                    <Component Id="cmp75F00FAB9ABCCF358EEFE50277F8958E" Guid="{3305233B-9CAB-41C9-A175-A825B87E22E7}">
                         <File Id="filB959848B3A9D20E746A969943FA359C5" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Base.pyc" />
                     </Component>
-                    <Component Id="cmpDD34F9E3C372D87DFDCF8630E0ACBD5E" Guid="{F722103B-56BE-46CB-A0AF-329A8BCAA31D}">
+                    <Component Id="cmpDD34F9E3C372D87DFDCF8630E0ACBD5E" Guid="{47062C0F-465E-4167-81CA-28F83427193F}">
                         <File Id="fil82EA13429009DD6E921F9AC78BDE6599" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Base.pyo" />
                     </Component>
-                    <Component Id="cmp726D5A1450D04BB49D08B735B4324C70" Guid="{DE8C9F08-0B5C-483B-AD64-5050C5438000}">
+                    <Component Id="cmp726D5A1450D04BB49D08B735B4324C70" Guid="{A9651775-8366-4AAD-A81D-46B2A20E8FDC}">
                         <File Id="filE4612BE623F3B3DE07BDFC3B52F95382" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Class.py" />
                     </Component>
-                    <Component Id="cmp4DC2B459E735F306F1EC5092D5F4A9AD" Guid="{575EFB81-9806-4BEC-84E1-5DFB9AF1BDCA}">
+                    <Component Id="cmp4DC2B459E735F306F1EC5092D5F4A9AD" Guid="{9E76C44C-78D0-4B9B-9C6C-093C36EC7680}">
                         <File Id="filECE9CF1D28C3BF3848791FDA2C2B0508" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Class.pyc" />
                     </Component>
-                    <Component Id="cmpF1BFF21D9EA196F125D0B269D275B14B" Guid="{9B845E31-3BCC-4B62-AB4A-D62CE45BA333}">
+                    <Component Id="cmpF1BFF21D9EA196F125D0B269D275B14B" Guid="{0A6D1F0B-16CB-4266-BF0D-809C5906443F}">
                         <File Id="fil2794D86071BDE64F449B2EB341AC40B4" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Class.pyo" />
                     </Component>
-                    <Component Id="cmp286CF96B7DD488E2AE1A4BCB99AC917F" Guid="{A9F32C93-5AD2-4E5B-976D-6D52C4823B21}">
+                    <Component Id="cmp286CF96B7DD488E2AE1A4BCB99AC917F" Guid="{8B5A2C15-EBA2-4B5F-9CBE-3D1C9CD07B36}">
                         <File Id="filA46BDA761DEC42398B594B4F33117109" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\lazy.py" />
                     </Component>
-                    <Component Id="cmpB32FF78BA245C6895468A0ADCEAF7A08" Guid="{DC692148-E46F-4B38-8AB2-85F5E91E71C9}">
+                    <Component Id="cmpB32FF78BA245C6895468A0ADCEAF7A08" Guid="{5B3934DA-A53E-47B8-8BAF-DF87ADE5F869}">
                         <File Id="filCC7F118E5C6500FD9EA1B72CD1E3BFD3" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\lazy.pyc" />
                     </Component>
-                    <Component Id="cmpA0355B930B40A88A81C8EAAEFC8D5D5B" Guid="{36557918-37AE-4178-8EC8-8DDF906342A1}">
+                    <Component Id="cmpA0355B930B40A88A81C8EAAEFC8D5D5B" Guid="{E12A034A-AFEF-4EF7-BCBE-9F8AC0FB86AF}">
                         <File Id="fil7DFD27FB3F2F5A3681B24A41EDA920C6" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\lazy.pyo" />
                     </Component>
-                    <Component Id="cmp1D643F2F2C93392E0C8BE553D3A42B38" Guid="{9486CD90-7A29-47B8-AFE8-6AF6D8C6C5A3}">
+                    <Component Id="cmp1D643F2F2C93392E0C8BE553D3A42B38" Guid="{163CA822-DB5F-4304-B6CC-388021B30759}">
                         <File Id="fil654502DDD6C061434BC2412FF090C1AF" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Lib.py" />
                     </Component>
-                    <Component Id="cmpB75D3A9639372E57C11E2B465E657495" Guid="{87F1A775-2BC6-458C-B555-FE45AC1387C5}">
+                    <Component Id="cmpB75D3A9639372E57C11E2B465E657495" Guid="{CA186A31-0816-4091-871A-3E8C1F5D50C8}">
                         <File Id="filC4F0B72986369D29742AA5DA67E7A857" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Lib.pyc" />
                     </Component>
-                    <Component Id="cmp695B23FABC5ED5AB96CE02A2191AC882" Guid="{8B7437E0-EFE6-42F2-81DD-CF4399FD10E9}">
+                    <Component Id="cmp695B23FABC5ED5AB96CE02A2191AC882" Guid="{976762A0-B0D2-4142-BB07-50F20029AAE0}">
                         <File Id="filA43F8C224EDBA779208C421F6393EDA0" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Lib.pyo" />
                     </Component>
-                    <Component Id="cmp57824AC7286593F9FD4C797BA7D0DB04" Guid="{B71D66D6-248C-42D2-806D-8F59A89DB094}">
+                    <Component Id="cmp57824AC7286593F9FD4C797BA7D0DB04" Guid="{4F57B03C-7E80-42A4-B094-D803A172274B}">
                         <File Id="filAA185DF809EF01B44A39CA95B5046416" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Opcode.py" />
                     </Component>
-                    <Component Id="cmp5057140007D954DA9619D3C333701330" Guid="{89B87083-0E00-4D00-BEEF-E1C5338EE86D}">
+                    <Component Id="cmp5057140007D954DA9619D3C333701330" Guid="{1AAE0D08-0678-4803-901A-E95A48B818E0}">
                         <File Id="fil8F3FC64003889A037E8C88C98E88437C" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Opcode.pyc" />
                     </Component>
-                    <Component Id="cmpA09E8FEE79F1AD49C371C9A886E0392C" Guid="{4BD552C5-DF83-4E8D-BF72-319DCFA30285}">
+                    <Component Id="cmpA09E8FEE79F1AD49C371C9A886E0392C" Guid="{6D63B1E1-E686-4ED6-AC4A-1521C5600688}">
                         <File Id="filAD2F67BA1982F3D9DFA1601DCD4CE4B2" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Opcode.pyo" />
                     </Component>
-                    <Component Id="cmp0D5171C32EE766AD30B96C74B3F92245" Guid="{4890807B-21BB-4F52-BFD3-10734A9CA9A3}">
+                    <Component Id="cmp0D5171C32EE766AD30B96C74B3F92245" Guid="{BB70176D-CA5C-4440-B6FD-3ED8B267CD0A}">
                         <File Id="fil810A26A4B5EB293A63D250641B93E047" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Status.py" />
                     </Component>
-                    <Component Id="cmpAF13C02F9B65238CC844992B49E3B041" Guid="{EEC5A49C-B71C-4EF0-A189-FB74690B8892}">
+                    <Component Id="cmpAF13C02F9B65238CC844992B49E3B041" Guid="{0BC570DF-2873-43EA-81EF-5B7CFEB91340}">
                         <File Id="fil490CE2C8C4F3864E380AD679E3D2FC82" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Status.pyc" />
                     </Component>
-                    <Component Id="cmpB5440A4430D179335AFF279D91A9FA0A" Guid="{E9C17CFF-B0F2-4700-864B-63C143596C89}">
+                    <Component Id="cmpB5440A4430D179335AFF279D91A9FA0A" Guid="{AF7FDCFB-DB68-438F-AE5B-04FC14DFC8E1}">
                         <File Id="filC7B675CA194A44CC6CDED74375684F8B" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Status.pyo" />
                     </Component>
-                    <Component Id="cmpFE717C2A573652B418E303F02417B958" Guid="{EFBC2A32-787A-4B16-934F-4754D54AEE80}">
+                    <Component Id="cmpFE717C2A573652B418E303F02417B958" Guid="{357B91F5-E5AA-4584-A2E7-03576815E74D}">
                         <File Id="fil422915CB5A5E201D944C0CE00BD0AB47" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Type.py" />
                     </Component>
-                    <Component Id="cmpE59787CBCE337AB21C8276E26D1D9F98" Guid="{FD6F8639-4291-499A-93C1-1BF544FB4F0C}">
+                    <Component Id="cmpE59787CBCE337AB21C8276E26D1D9F98" Guid="{F395095E-3D19-4EC1-AA88-B23153B04032}">
                         <File Id="fil6438E6E7C27575B816CF08D577D030BE" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Type.pyc" />
                     </Component>
-                    <Component Id="cmpA4DDC51A7C5D5DA5D0F673781199D9F7" Guid="{55D77B5B-F059-412C-B00F-C837C2768F8B}">
+                    <Component Id="cmpA4DDC51A7C5D5DA5D0F673781199D9F7" Guid="{5BB8F3EF-B285-4125-BA96-6A2DF9E33EF0}">
                         <File Id="fil1487B7C119FFD74E67A35B7975A0CB72" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\Type.pyo" />
                     </Component>
-                    <Component Id="cmp6F0F48713C4C2049964AD79DA4222B24" Guid="{3DB6BD0C-8037-40FA-807C-2217A2518A06}">
+                    <Component Id="cmp6F0F48713C4C2049964AD79DA4222B24" Guid="{A64674F0-B9F2-4C7C-9842-C81BB9811DF7}">
                         <File Id="fil84A0BADDAD1392C9580DEE2D9B08C363" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\win32dns.py" />
                     </Component>
-                    <Component Id="cmp4738155CC1A5EEB9B5097E1B4BCC1D87" Guid="{EAFE181F-307C-46FE-9A38-6B4DA1ED0D27}">
+                    <Component Id="cmp4738155CC1A5EEB9B5097E1B4BCC1D87" Guid="{10E95614-E4A4-4606-B45A-E7CA68417AFE}">
                         <File Id="fil1AFE8213230A604F36044BB015AEE553" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\win32dns.pyc" />
                     </Component>
-                    <Component Id="cmp41DF4170AFE541BF9E813DFDA6C1D195" Guid="{2EE64612-1293-4D87-9006-119545FAF696}">
+                    <Component Id="cmp41DF4170AFE541BF9E813DFDA6C1D195" Guid="{69092FC7-C257-4A23-A5EA-CAF9E39BB9D4}">
                         <File Id="fil8A23285E6539715061527DA0D4D7CFBE" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\win32dns.pyo" />
                     </Component>
-                    <Component Id="cmp8709342A7701E7D076AA92269F0DD628" Guid="{0D35D926-7A1A-47A6-AA16-BA8B7FA5F45C}">
+                    <Component Id="cmp8709342A7701E7D076AA92269F0DD628" Guid="{EB8CEAC2-9ABF-4878-A6E2-546921B0058C}">
                         <File Id="filAE75DAB3FEFD7EC745A759743CCF600C" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\__init__.py" />
                     </Component>
-                    <Component Id="cmpE579492B08AD10E236DC4D473021C570" Guid="{4C87A9CA-4336-41FD-B424-BC361F73A58F}">
+                    <Component Id="cmpE579492B08AD10E236DC4D473021C570" Guid="{F5D7EFAD-D173-4082-89B6-72D622C8CA06}">
                         <File Id="fil9AF35B0E3052F206FA461EEC23F4F2BD" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\__init__.pyc" />
                     </Component>
-                    <Component Id="cmp1685CDCFC059A038CBB9723B0003D1F0" Guid="{8F291DEA-3DE6-4F03-8E37-9071BDC4CF7B}">
+                    <Component Id="cmp1685CDCFC059A038CBB9723B0003D1F0" Guid="{F475F68D-2062-4EAD-BB0B-29CE3FFFDFEA}">
                         <File Id="fil96C2A7E483F95B922EDA2828B30D8236" KeyPath="yes" Source="$(var.PyDnsDir)\DNS\__init__.pyo" />
                     </Component>
                 </Directory>
                 <Directory Id="dir62638FB465370A52D84DA12C5BC2FB4C" Name="EGG-INFO">
-                    <Component Id="cmp6AE6BD684F037B2C8FD61F942F34B642" Guid="{86501AE5-420B-487A-A5AC-77B38401D84E}">
+                    <Component Id="cmp6AE6BD684F037B2C8FD61F942F34B642" Guid="{CE29D7F8-6608-45AE-8233-9E1D1EA23A09}">
                         <File Id="fil1F8883058FF48BFF2889CF47799A51F3" KeyPath="yes" Source="$(var.PyDnsDir)\EGG-INFO\dependency_links.txt" />
                     </Component>
-                    <Component Id="cmpA57E68F6D6A60AA4B1C796F5A38D968D" Guid="{680BC88C-5DFF-4E63-BC10-54647900C702}">
+                    <Component Id="cmpA57E68F6D6A60AA4B1C796F5A38D968D" Guid="{D97AD58B-888B-461E-9EE3-54CE4E89CEC4}">
                         <File Id="fil8237372D081174C70FCA983E8696CA08" KeyPath="yes" Source="$(var.PyDnsDir)\EGG-INFO\PKG-INFO" />
                     </Component>
-                    <Component Id="cmpC837D1B40F49AD3961811ABF9D4603EC" Guid="{B24D0694-082C-42C0-B833-8D5A1B2D2115}">
+                    <Component Id="cmpC837D1B40F49AD3961811ABF9D4603EC" Guid="{887383D6-3CC3-4108-8EB7-FBB7DBE066DA}">
                         <File Id="fil3BF511B1EA4020CB0DC163C07DE6C9AA" KeyPath="yes" Source="$(var.PyDnsDir)\EGG-INFO\SOURCES.txt" />
                     </Component>
-                    <Component Id="cmp10B38740C6C6A368CBB99EB1B8D1B780" Guid="{AFDE9C78-6671-4855-8C6A-8036C15BA277}">
+                    <Component Id="cmp10B38740C6C6A368CBB99EB1B8D1B780" Guid="{8CA5AC36-9DAA-4611-8E42-DF40A5BD741C}">
                         <File Id="fil81B86B0894A39C5D9F6FEF0F6AA064D8" KeyPath="yes" Source="$(var.PyDnsDir)\EGG-INFO\top_level.txt" />
                     </Component>
-                    <Component Id="cmpDC9CFC52082960D2DA7829939C5315AA" Guid="{F7984319-0FFA-4C80-9DE2-04286E28217C}">
+                    <Component Id="cmpDC9CFC52082960D2DA7829939C5315AA" Guid="{5A3A4400-7C6F-4CEE-B492-CAEAA907CEE0}">
                         <File Id="filFC199B2F8B5F1201B5924803F22F4871" KeyPath="yes" Source="$(var.PyDnsDir)\EGG-INFO\zip-safe" />
                     </Component>
                 </Directory>

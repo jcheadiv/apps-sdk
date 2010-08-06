@@ -4,955 +4,955 @@
         <DirectoryRef Id="INSTALLLOCATION">
             <Directory Id="dir7EF8514B11770C8CE72617B5899719AE" Name="boto-1.9b-py2.6.egg">
                 <Directory Id="dirFBBFD1B1EDB0602697D6CBACE9EC7542" Name="boto">
-                    <Component Id="cmp0EEF6A079548E4CD3FBE383658237B71" Guid="{7FB7060A-F744-453A-B941-0E61F0CF74FA}">
+                    <Component Id="cmp0EEF6A079548E4CD3FBE383658237B71" Guid="{7EE0D74F-0B7F-42A3-9C03-7D5C870B4A5F}">
                         <File Id="filF7B706F11D6480C99E4A51B52751AEFB" KeyPath="yes" Source="$(var.BotoDir)\boto\connection.py" />
                     </Component>
-                    <Component Id="cmp6BE53B18F2F2FDFED307D0E7F1015629" Guid="{6AD249C9-0672-4CBD-B1FA-AE0F28BEB614}">
+                    <Component Id="cmp6BE53B18F2F2FDFED307D0E7F1015629" Guid="{5AE972DA-3D57-4257-B0DC-DC39D43773C6}">
                         <File Id="fil6E7CF000EB1BFB73A6C4FF7B66B6490D" KeyPath="yes" Source="$(var.BotoDir)\boto\connection.pyc" />
                     </Component>
-                    <Component Id="cmp4329D8D67424777825F4DEADC41DA307" Guid="{87AC2BC9-8C12-4207-8F2E-2AB13A1FEE2B}">
+                    <Component Id="cmp4329D8D67424777825F4DEADC41DA307" Guid="{2701726C-1535-491B-9762-543550C3A822}">
                         <File Id="fil1EC4B9044DADEDB2427D71DBD9E08DF9" KeyPath="yes" Source="$(var.BotoDir)\boto\exception.py" />
                     </Component>
-                    <Component Id="cmp6CCDC6FDDE436324B305424110FEA4CB" Guid="{CB4CDC71-34C2-442F-8682-CD6258805F52}">
+                    <Component Id="cmp6CCDC6FDDE436324B305424110FEA4CB" Guid="{71043C7E-0FD5-448D-9127-A65789C75E5D}">
                         <File Id="fil20152CDC8224D8ADB7518CDBC7035D0D" KeyPath="yes" Source="$(var.BotoDir)\boto\exception.pyc" />
                     </Component>
-                    <Component Id="cmp5DEA40FC059A59717515F9956352BBF6" Guid="{B1E64614-B2F6-4CF5-9BCB-8BF4B455E4C4}">
+                    <Component Id="cmp5DEA40FC059A59717515F9956352BBF6" Guid="{D3276233-9D24-4981-ACEF-C8B75FD635EE}">
                         <File Id="filABC894785A97D6A7128CD1220A52F7AF" KeyPath="yes" Source="$(var.BotoDir)\boto\handler.py" />
                     </Component>
-                    <Component Id="cmpAEC08FEF5F5044A9C16D920770638B53" Guid="{C150A64B-627D-4CAF-8020-A18E23400D32}">
+                    <Component Id="cmpAEC08FEF5F5044A9C16D920770638B53" Guid="{61479044-8485-4241-A703-3B07BB859421}">
                         <File Id="filBAB69C36A43B77675B831AA84B52E5BB" KeyPath="yes" Source="$(var.BotoDir)\boto\handler.pyc" />
                     </Component>
-                    <Component Id="cmp4C80550124358273E79687FBD9206303" Guid="{957BF264-30A9-4001-B6DB-97E56F9F3713}">
+                    <Component Id="cmp4C80550124358273E79687FBD9206303" Guid="{A033CCD4-E9C8-4A9D-84D9-D9BA01A1A72A}">
                         <File Id="filAEE7A8C575BA1898113AA17F3BCEB564" KeyPath="yes" Source="$(var.BotoDir)\boto\resultset.py" />
                     </Component>
-                    <Component Id="cmp50DFD48D6222753AD1098012AE64792C" Guid="{32C74560-7426-4B30-852D-68F744A8C065}">
+                    <Component Id="cmp50DFD48D6222753AD1098012AE64792C" Guid="{91BE6A87-A12E-4998-AC4A-BEBC385A3A8D}">
                         <File Id="fil6AF7E55A98F992E95841BDFC914DF68C" KeyPath="yes" Source="$(var.BotoDir)\boto\resultset.pyc" />
                     </Component>
-                    <Component Id="cmp4549891FD85DF420CBCBB2BB4A45787D" Guid="{BC6CFAD9-1EE7-4D59-B55B-623854E31A3E}">
+                    <Component Id="cmp4549891FD85DF420CBCBB2BB4A45787D" Guid="{2D327EDD-F845-40A8-AD8D-45677B253FF6}">
                         <File Id="fil5ACF953ECFD87735C0623C01B064C3C0" KeyPath="yes" Source="$(var.BotoDir)\boto\utils.py" />
                     </Component>
-                    <Component Id="cmp072BADA484A369F5C421914BED905DBC" Guid="{DE9DE25F-D839-4680-B96E-AE0B86AA96CD}">
+                    <Component Id="cmp072BADA484A369F5C421914BED905DBC" Guid="{A903EC66-5F16-4F9A-B823-BDB4E87E6DB4}">
                         <File Id="fil33872212BDD582431F82E6A7508ACBA6" KeyPath="yes" Source="$(var.BotoDir)\boto\utils.pyc" />
                     </Component>
-                    <Component Id="cmpE73F6DCC7392DB3E74DB7AF612EB7E5A" Guid="{58903764-9E1E-40F7-A696-69342460D0AD}">
+                    <Component Id="cmpE73F6DCC7392DB3E74DB7AF612EB7E5A" Guid="{88829F78-D3E6-45A2-80A4-DE62C17350D2}">
                         <File Id="fil48B8C662DA3F5AF6A88E6A213B30BF98" KeyPath="yes" Source="$(var.BotoDir)\boto\__init__.py" />
                     </Component>
-                    <Component Id="cmp70B448FCAB9239472A126558B3FF97EF" Guid="{9B9E3353-8990-4F5E-AAF9-A671AE26CE79}">
+                    <Component Id="cmp70B448FCAB9239472A126558B3FF97EF" Guid="{7BAE59F4-4B74-4D4B-9CB0-5344A5E6F61C}">
                         <File Id="fil14C57B058EE5A492320F4B8894B75A87" KeyPath="yes" Source="$(var.BotoDir)\boto\__init__.pyc" />
                     </Component>
                     <Directory Id="dirD5B2188BD9317F33879071A724E0E501" Name="cloudfront">
-                        <Component Id="cmp6524C8659B583B41E6CBAF36ED179D70" Guid="{1516359B-2E12-4C3A-B6F0-4F42CC13286F}">
+                        <Component Id="cmp6524C8659B583B41E6CBAF36ED179D70" Guid="{59C6A8AE-4C66-4479-8FB3-02794A0FCCBA}">
                             <File Id="fil7C70905F681E797FAE1254A2E1CDFD30" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\distribution.py" />
                         </Component>
-                        <Component Id="cmpFADD2C605D7A7EF03E46368C5C8279FD" Guid="{632AD40E-B859-4966-8273-E90AE2AB021A}">
+                        <Component Id="cmpFADD2C605D7A7EF03E46368C5C8279FD" Guid="{F7686300-5C54-4306-A0F5-40AE82411C02}">
                             <File Id="fil16AC3F546B1D3333644D770660ACC8D4" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\distribution.pyc" />
                         </Component>
-                        <Component Id="cmpEFC0846CE564FE84713F8356261C18B4" Guid="{72BBE132-016C-4DDA-8FF0-82C716499D3A}">
+                        <Component Id="cmpEFC0846CE564FE84713F8356261C18B4" Guid="{EEEEB07E-5AB2-497E-B58F-28FACB2E9C9A}">
                             <File Id="filCE2DEFC4EB6E991DC8AD500454CC5702" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\exception.py" />
                         </Component>
-                        <Component Id="cmp74C6674C83D01F5C0CE4FCB56E0AFAE0" Guid="{46203FAB-FBEC-4A82-A6AE-CA8CA80B0B4D}">
+                        <Component Id="cmp74C6674C83D01F5C0CE4FCB56E0AFAE0" Guid="{D0C3EAEC-801B-449D-866C-C31678E3CBD9}">
                             <File Id="filA5D8F04C9A1A8C2E4D18C59FB62ECD66" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\exception.pyc" />
                         </Component>
-                        <Component Id="cmpBCFCB09BAB9B4F403F59A29E5324AA55" Guid="{08DCFFE7-422D-4BA2-9A22-1D00B2D39339}">
+                        <Component Id="cmpBCFCB09BAB9B4F403F59A29E5324AA55" Guid="{FA65B910-261E-47FC-8E3D-A57AD75937EC}">
                             <File Id="filC44E528C2397189AF591CE0DD18B4C1C" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\identity.py" />
                         </Component>
-                        <Component Id="cmp6BB76DE816A9E6067ADB52DCBF417897" Guid="{DD7893BB-C53C-4FAC-9837-39F68B0F94A1}">
+                        <Component Id="cmp6BB76DE816A9E6067ADB52DCBF417897" Guid="{98822411-C464-4BA7-8483-A5EAD4F71F37}">
                             <File Id="fil2DD809E39BF8A0AB2B8AFC3FE9967383" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\identity.pyc" />
                         </Component>
-                        <Component Id="cmp0E2266F2DFB8123F1EC5B3CBF713A6D9" Guid="{101F4E38-53F1-4944-A87E-85E793E5550B}">
+                        <Component Id="cmp0E2266F2DFB8123F1EC5B3CBF713A6D9" Guid="{1AD013AA-4014-43A3-9AEA-CFD8BEBA0D05}">
                             <File Id="fil2F74B8F016568AB36DEC63288ECC3032" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\logging.py" />
                         </Component>
-                        <Component Id="cmp437E1CB93F8AB55921A67E7E57353E07" Guid="{287917E6-70E7-428B-A54C-A192C6F99F45}">
+                        <Component Id="cmp437E1CB93F8AB55921A67E7E57353E07" Guid="{89BA7457-FC59-4A3D-B39E-5C0F8D00C9E3}">
                             <File Id="filBB5193C813D39D83C1EC785D78B4645D" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\logging.pyc" />
                         </Component>
-                        <Component Id="cmp81B9DFF7FB147431C0F751CB41D9D840" Guid="{0E96E2C7-FC57-426F-AB74-3CBBB262BD37}">
+                        <Component Id="cmp81B9DFF7FB147431C0F751CB41D9D840" Guid="{C8110A21-82E1-4D00-8224-26994371C855}">
                             <File Id="filBBA4947AA3CCA42202DAD1CB4EA003CF" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\object.py" />
                         </Component>
-                        <Component Id="cmp0583BFB994B7060AC0540A851EF6B8A6" Guid="{762744E9-C376-4713-BA76-F4648FEA6226}">
+                        <Component Id="cmp0583BFB994B7060AC0540A851EF6B8A6" Guid="{C06FA034-6FD2-4D8A-BBDF-7A1D2D151456}">
                             <File Id="fil0F0E8E71A8E0920DB3F5A9B9B2E77646" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\object.pyc" />
                         </Component>
-                        <Component Id="cmp19D1A1652CBA388614D57E397AD9EFC3" Guid="{3ED4BB2A-7284-4807-84F2-59F45AE78BE0}">
+                        <Component Id="cmp19D1A1652CBA388614D57E397AD9EFC3" Guid="{349888FD-FE24-4255-9FAB-3CB150D41E72}">
                             <File Id="fil73CA05625BAFF480AF22C7B3CFF079A6" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\signers.py" />
                         </Component>
-                        <Component Id="cmp720F28687D082366C1C4609D25AD75C2" Guid="{DEEDDCFB-FB94-48FF-AFCC-8B7844E34807}">
+                        <Component Id="cmp720F28687D082366C1C4609D25AD75C2" Guid="{E33052C1-997F-4CAB-90E1-72AD3B622A1D}">
                             <File Id="filDFE61C575C6AA204617C0F23F520A134" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\signers.pyc" />
                         </Component>
-                        <Component Id="cmp0CE6C49BC28CA639399BA1F865ADE06C" Guid="{A760DA41-99A0-4E37-8084-B30AA758C175}">
+                        <Component Id="cmp0CE6C49BC28CA639399BA1F865ADE06C" Guid="{71277200-F436-43B7-A608-D077A54CE310}">
                             <File Id="filB92CBB6E4F9AFB5CEF4213D59B38132A" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\__init__.py" />
                         </Component>
-                        <Component Id="cmpD71112B0C18DB245F7544784F131A22A" Guid="{1D08E97A-6389-4715-ABBC-1F339F6A423F}">
+                        <Component Id="cmpD71112B0C18DB245F7544784F131A22A" Guid="{9DB7AD2D-9641-4D0B-8CF3-D21A8FF0F236}">
                             <File Id="fil89F93A8B387CFF2FD48E16AAA4AC9765" KeyPath="yes" Source="$(var.BotoDir)\boto\cloudfront\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir8B97AAC2A4E04C2137D66C58C7113DE9" Name="contrib">
-                        <Component Id="cmp9D79BA096E4B1A7FF083019390E0FC52" Guid="{E967CC9C-21BB-481A-AFD8-13483E02BE66}">
+                        <Component Id="cmp9D79BA096E4B1A7FF083019390E0FC52" Guid="{6536DFD1-C5B2-4403-83E9-A3ED272CA362}">
                             <File Id="filC493A6C4AAA73021A08FFF63E865AD40" KeyPath="yes" Source="$(var.BotoDir)\boto\contrib\m2helpers.py" />
                         </Component>
-                        <Component Id="cmpE86DC2E0EDECFAC176C0176D6EC3DD33" Guid="{E5C0FAF4-1A1E-49D7-9A87-3EC3C924A580}">
+                        <Component Id="cmpE86DC2E0EDECFAC176C0176D6EC3DD33" Guid="{BA73EEF1-F301-44C9-A8EB-1306D8927EEB}">
                             <File Id="filECA0BA4E566DFC3719F71B47C22CD2D7" KeyPath="yes" Source="$(var.BotoDir)\boto\contrib\m2helpers.pyc" />
                         </Component>
-                        <Component Id="cmpDAC79DC935521383FD86815FD47D0764" Guid="{DA9ABD21-974D-49D7-8DEC-88B3DFDF09EA}">
+                        <Component Id="cmpDAC79DC935521383FD86815FD47D0764" Guid="{A7675161-1BEA-4D82-87EA-6C6E3F0C6D8D}">
                             <File Id="filD4FF4DD15DEBD897C0FD1F47C16CFA6A" KeyPath="yes" Source="$(var.BotoDir)\boto\contrib\ymlmessage.py" />
                         </Component>
-                        <Component Id="cmp9037A152E966C459986A3653DB246EC1" Guid="{0EFE03A0-D1CB-42AD-A89B-580F0630D642}">
+                        <Component Id="cmp9037A152E966C459986A3653DB246EC1" Guid="{9371A7E4-91EA-4317-B766-2E27BA53133E}">
                             <File Id="filE49F21BDD2124FB74963B6589E1D3CBE" KeyPath="yes" Source="$(var.BotoDir)\boto\contrib\ymlmessage.pyc" />
                         </Component>
-                        <Component Id="cmpAAC1898CAC21B5F49BB21937B58C2BDD" Guid="{8F995B56-CD8F-4743-BEED-9C2AF0B4A603}">
+                        <Component Id="cmpAAC1898CAC21B5F49BB21937B58C2BDD" Guid="{0272C178-5676-4126-810A-15D4AB513D31}">
                             <File Id="filC19C64D7300891B3F31D93D466A9C3C5" KeyPath="yes" Source="$(var.BotoDir)\boto\contrib\__init__.py" />
                         </Component>
-                        <Component Id="cmp70EFC53818F348982F2D1CA178A52517" Guid="{A4E5ADC9-B23E-4A8F-A6AF-50727FC8B1EE}">
+                        <Component Id="cmp70EFC53818F348982F2D1CA178A52517" Guid="{E4B4C885-AE17-4F10-8B97-81B91C5FF769}">
                             <File Id="filDBD6654FA22667A6BFF9E5629C28CD60" KeyPath="yes" Source="$(var.BotoDir)\boto\contrib\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dirAD156762CD7D296D3B8373BCAA3865B4" Name="ec2">
-                        <Component Id="cmp56EDE984F724C7E5D9B60FBD8DF7B865" Guid="{FCFC85A4-6E86-42A1-BE22-5C4D219F2785}">
+                        <Component Id="cmp56EDE984F724C7E5D9B60FBD8DF7B865" Guid="{54114FE0-1693-4E4A-AB37-7FCA60FF3C82}">
                             <File Id="fil79F5862B0DB52B239899841DC56B41A2" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\address.py" />
                         </Component>
-                        <Component Id="cmp09830AFEB4B665667184E2793757176B" Guid="{C88DAD10-3456-46EA-B736-A297D4C75AAE}">
+                        <Component Id="cmp09830AFEB4B665667184E2793757176B" Guid="{ACFC0AC1-82D2-4D12-A6C8-A1A9582C616B}">
                             <File Id="fil38B210DD80631863F2454EF128736594" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\address.pyc" />
                         </Component>
-                        <Component Id="cmpEC7713BC13961C0D8E26887B1A8F3B22" Guid="{83424E98-9E2C-49E9-9D54-EF2BBE2DA73E}">
+                        <Component Id="cmpEC7713BC13961C0D8E26887B1A8F3B22" Guid="{BA869A1C-DD1F-434A-8E81-967612748D85}">
                             <File Id="filDE37F3C9733117E0059182DACFD3218B" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\blockdevicemapping.py" />
                         </Component>
-                        <Component Id="cmpEF3C45682BB47E6250931625AA9309C1" Guid="{5D977374-6F1A-4EF1-9D5C-B68B2B61AE8F}">
+                        <Component Id="cmpEF3C45682BB47E6250931625AA9309C1" Guid="{BDD6F813-4FB6-449B-8F0D-A3E796C85547}">
                             <File Id="filE951DD60E76F36E9797E181878AE7DF7" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\blockdevicemapping.pyc" />
                         </Component>
-                        <Component Id="cmp3986CC1993B80238224838BCF2D6CBB4" Guid="{B8EAF8AB-D0A8-4843-8366-670D7AFB51EE}">
+                        <Component Id="cmp3986CC1993B80238224838BCF2D6CBB4" Guid="{3200D82F-B8E9-4028-978B-DFD7A8394239}">
                             <File Id="filF44E90AC26B66F28BDD01519C8C1BA53" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\buyreservation.py" />
                         </Component>
-                        <Component Id="cmp2B23A1DA8D64C2248E3607180F1488CF" Guid="{59736AE7-7D93-4A2E-9096-ADDB2C286644}">
+                        <Component Id="cmp2B23A1DA8D64C2248E3607180F1488CF" Guid="{5B66F8F1-3B9B-498B-B842-4DC8354F2069}">
                             <File Id="filFA18E5090169AFF4AA2481171061DDA0" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\buyreservation.pyc" />
                         </Component>
-                        <Component Id="cmpC10A99A20BC23549F701AC101706C844" Guid="{8258BD9D-330D-4757-A531-B1C934BD6570}">
+                        <Component Id="cmpC10A99A20BC23549F701AC101706C844" Guid="{728388F3-A5D4-45AB-89B2-E6DD052CEBE3}">
                             <File Id="fil7F15611B91581773E2ECEC6354F6A62D" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\connection.py" />
                         </Component>
-                        <Component Id="cmp67A2D22483A141B0E881E7A4D07D95EA" Guid="{06C7D08D-B6CD-4866-A463-465A68FCFBB1}">
+                        <Component Id="cmp67A2D22483A141B0E881E7A4D07D95EA" Guid="{F5A8F410-E990-4251-8F49-A2021DC40F27}">
                             <File Id="fil887E6A665F3DB669F897282E685B7AC7" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\connection.pyc" />
                         </Component>
-                        <Component Id="cmpF1BC38265575B7424E83736676A3EFB3" Guid="{AD69D30B-38F6-4CBF-A843-BEB33007F7FD}">
+                        <Component Id="cmpF1BC38265575B7424E83736676A3EFB3" Guid="{837B83BB-AEF9-4D1A-AD49-96038C494305}">
                             <File Id="fil2E286751DF0225FA37B6AD55F0BB6068" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\ec2object.py" />
                         </Component>
-                        <Component Id="cmpE35DD41D4729BCFE6F2A1AC6CB069D3F" Guid="{E8CF9B86-32E7-4E6B-A8F3-9E90A399E3AB}">
+                        <Component Id="cmpE35DD41D4729BCFE6F2A1AC6CB069D3F" Guid="{D1EF62E1-65C2-43FF-BDED-4E3AE7177C62}">
                             <File Id="fil52F823A849119A7744C365DFCBC4F2A8" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\ec2object.pyc" />
                         </Component>
-                        <Component Id="cmp86DB47C1C8E491629CD54437293008B3" Guid="{0E8921E2-9106-47C3-9B2E-6434E565FA28}">
+                        <Component Id="cmp86DB47C1C8E491629CD54437293008B3" Guid="{F10A4AA0-40CE-4058-942E-A77CA8B30E2E}">
                             <File Id="filB5F7FDE2A96B3DA41F2EA9167D19313F" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\image.py" />
                         </Component>
-                        <Component Id="cmp4A4B27BC30E012E5CDAA6EE56C17C7B0" Guid="{EEF1D9F8-227F-4551-985F-FAF3E93251DD}">
+                        <Component Id="cmp4A4B27BC30E012E5CDAA6EE56C17C7B0" Guid="{739FFB9C-0B19-4CC6-B710-5A0395879247}">
                             <File Id="fil0BEE36541FFE200E4FC146BCCFFBD9F5" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\image.pyc" />
                         </Component>
-                        <Component Id="cmpAE7643E445936BF9537728DCDBE83505" Guid="{E5889CF0-7186-410B-BE90-46964D6F9A07}">
+                        <Component Id="cmpAE7643E445936BF9537728DCDBE83505" Guid="{C6A15BBC-D27D-4BC9-A688-920AE1EECFE1}">
                             <File Id="fil9FD13B4B5EB26FA3BB1C4E23F63520DE" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\instance.py" />
                         </Component>
-                        <Component Id="cmp293D6C756857BED3CCAC2901957C2A39" Guid="{EFD598F9-3E94-4BF1-8905-8843EA57AE6D}">
+                        <Component Id="cmp293D6C756857BED3CCAC2901957C2A39" Guid="{6E695DE3-D28D-4F8F-AFEE-F8D817DCEF0D}">
                             <File Id="fil6D8585D6E49579676D6AA8FAE80FB6BA" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\instance.pyc" />
                         </Component>
-                        <Component Id="cmp436E99696131C3B1E5F407DC07226764" Guid="{BDF9D2AC-708D-48F2-AC0E-5FA7A2C2B183}">
+                        <Component Id="cmp436E99696131C3B1E5F407DC07226764" Guid="{744EC8B3-11BA-4624-9784-4E5287EA3818}">
                             <File Id="fil01FF109064A04592FF5F0D662B1DB4D9" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\instanceinfo.py" />
                         </Component>
-                        <Component Id="cmp0A5530D257AD152995E0D497618020A7" Guid="{A592D713-297C-4163-8D55-91D409F165F3}">
+                        <Component Id="cmp0A5530D257AD152995E0D497618020A7" Guid="{E4632E75-AC60-4774-A88F-F46DF2CACBFA}">
                             <File Id="filDF7F3C5C226EB0FB0DA39038BD7357FF" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\instanceinfo.pyc" />
                         </Component>
-                        <Component Id="cmp8C13037F1205DC35B77425F53BDE1B73" Guid="{2302539C-B744-427C-AE73-AFB9B7E02BDA}">
+                        <Component Id="cmp8C13037F1205DC35B77425F53BDE1B73" Guid="{6C9C5851-CAFF-4995-8106-71FFE20A5840}">
                             <File Id="fil494D3762AE156F1ABF5677621313C729" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\keypair.py" />
                         </Component>
-                        <Component Id="cmp626253A639DEF5D0DAE00BFBBC46FAF4" Guid="{F2DFA9BE-9DDA-4451-BC67-13692A40A500}">
+                        <Component Id="cmp626253A639DEF5D0DAE00BFBBC46FAF4" Guid="{4BE0FA44-236E-4756-A7F0-5A426FF6D0A4}">
                             <File Id="filF7DBAA92A92C787B24F8E1264F5986A7" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\keypair.pyc" />
                         </Component>
-                        <Component Id="cmp81B74A739692202BD2FF1C7456783194" Guid="{845ECC5A-C788-4051-BBB1-9250C2DC1E4F}">
+                        <Component Id="cmp81B74A739692202BD2FF1C7456783194" Guid="{126A35CB-7780-4738-90BD-7E8548A378F3}">
                             <File Id="filE99AB13E5DA8F2AA92FFB4661C31A170" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\launchspecification.py" />
                         </Component>
-                        <Component Id="cmpCA825E3B12ADC90AC73442CA368002FE" Guid="{0FCE925F-B90A-4602-8858-4CC254D99AD7}">
+                        <Component Id="cmpCA825E3B12ADC90AC73442CA368002FE" Guid="{92D7C488-F6B0-479C-9C61-3FE67CA49AE8}">
                             <File Id="filCF080CCFE1E9B352B668650F2DD2D74F" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\launchspecification.pyc" />
                         </Component>
-                        <Component Id="cmp47F62D34C8147A6B36609807955D8408" Guid="{433EBD69-FD6C-4702-9429-E8ECD35B8B31}">
+                        <Component Id="cmp47F62D34C8147A6B36609807955D8408" Guid="{5BCCBA90-D199-4620-9A12-9606395D4E7C}">
                             <File Id="filFE7FE6C72F800D03026C77BA8FDD15C1" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\regioninfo.py" />
                         </Component>
-                        <Component Id="cmpBF91BC158C98BCAFBBE404A939C1EC5A" Guid="{173827B7-441F-4BEC-82B4-1CA66F1739C0}">
+                        <Component Id="cmpBF91BC158C98BCAFBBE404A939C1EC5A" Guid="{D4809233-696F-4153-9E17-FCC3C3897DF0}">
                             <File Id="fil141B6F729CBEE82BB8033204A267BB5A" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\regioninfo.pyc" />
                         </Component>
-                        <Component Id="cmp2808E28BD7CE231E89E4C1AAD2AB1E63" Guid="{FF87A8AF-0C6C-4110-B67A-926C041EA546}">
+                        <Component Id="cmp2808E28BD7CE231E89E4C1AAD2AB1E63" Guid="{31A16463-A63B-4F0F-93ED-27F131EE3C1E}">
                             <File Id="fil1E634CDE8D5DF1EDABDEAF1A8A0F85F4" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\reservedinstance.py" />
                         </Component>
-                        <Component Id="cmp8A4A665399643649F74432E54A8541D4" Guid="{508C47D1-0A6E-4884-A338-A22BE3D3F4BA}">
+                        <Component Id="cmp8A4A665399643649F74432E54A8541D4" Guid="{E7B6D6CF-7192-4F4E-91A5-5391EA426565}">
                             <File Id="filDBA77B3926A60DA27754188FA9CCB53D" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\reservedinstance.pyc" />
                         </Component>
-                        <Component Id="cmp7D3D27F84C23ED9FBFC008C5772892CB" Guid="{DF2E4B50-8ADF-4A91-9581-667E621DB302}">
+                        <Component Id="cmp7D3D27F84C23ED9FBFC008C5772892CB" Guid="{92767A59-9BB4-44B2-AFE1-E5490F47FB02}">
                             <File Id="filDCA36C9992BF39FA87835C61A7D3577A" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\securitygroup.py" />
                         </Component>
-                        <Component Id="cmpD82E090C56C54597DAF4A0D575442480" Guid="{05CED1A5-774E-4901-9477-4E20CFAE961D}">
+                        <Component Id="cmpD82E090C56C54597DAF4A0D575442480" Guid="{8784A3E8-9BE4-42CE-BC4B-CED71942DB33}">
                             <File Id="fil1A0E043A4FA4190C6189D823E44523F7" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\securitygroup.pyc" />
                         </Component>
-                        <Component Id="cmpAD2E7F58C5564D5297F9A9E707C4016B" Guid="{FE1B4131-43E4-4B68-9291-26034924D5E5}">
+                        <Component Id="cmpAD2E7F58C5564D5297F9A9E707C4016B" Guid="{F3C73912-2D2B-46F8-9DD2-CE8D9CB58C04}">
                             <File Id="filD1515B00C037E49E8DD9082A2D0CF6D2" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\snapshot.py" />
                         </Component>
-                        <Component Id="cmpE0253919C50AE39882DD7B5338A72138" Guid="{28304FB5-78D3-4E29-80F5-DE3BBC52599A}">
+                        <Component Id="cmpE0253919C50AE39882DD7B5338A72138" Guid="{33B6B488-A7F9-409C-B1F0-8FDC20F784D9}">
                             <File Id="filC62646209D4E2DB5D9F33A0F0BF9FDB5" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\snapshot.pyc" />
                         </Component>
-                        <Component Id="cmp389495F680A62C93E6942E995B07E9EE" Guid="{EF242236-6565-496A-A020-9B13BFC4F32F}">
+                        <Component Id="cmp389495F680A62C93E6942E995B07E9EE" Guid="{365C3B82-70C1-441D-BEB3-E767958EA0A3}">
                             <File Id="fil12FB88E3F5A066530C3CC873CE1F5BBB" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\spotdatafeedsubscription.py" />
                         </Component>
-                        <Component Id="cmpECD2138C6293BC74347D76AC09E8DE9C" Guid="{8C9A4040-BFDF-4184-A57D-5D1F19EE2171}">
+                        <Component Id="cmpECD2138C6293BC74347D76AC09E8DE9C" Guid="{54109CF4-DC2F-45E0-AFA8-C103EE3253EF}">
                             <File Id="fil243453EAD4FDEF8924D23C908896EB61" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\spotdatafeedsubscription.pyc" />
                         </Component>
-                        <Component Id="cmpC80E0E8562A7718D0682856F7DFB26EB" Guid="{6258C218-18E9-4512-86A9-F7A29F9E5861}">
+                        <Component Id="cmpC80E0E8562A7718D0682856F7DFB26EB" Guid="{E3C46EC0-7A11-4DA8-886E-F61CDBE8E62B}">
                             <File Id="fil06527A91A8D44E52E3ECD5A76FAB364F" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\spotinstancerequest.py" />
                         </Component>
-                        <Component Id="cmp3AB8185EB5BC1A03027528778CBE9404" Guid="{3A970659-4DED-414A-B1A7-CA7948A91F27}">
+                        <Component Id="cmp3AB8185EB5BC1A03027528778CBE9404" Guid="{A2C69DA7-D5E0-486C-950F-5A9289CE5ACD}">
                             <File Id="fil9038F50408732E28CBAE0FE3D9E4A5CB" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\spotinstancerequest.pyc" />
                         </Component>
-                        <Component Id="cmpDD3B47F052BE725409D32E7DB3442C6A" Guid="{1B27ABFC-80B5-410A-8F46-D19879069562}">
+                        <Component Id="cmpDD3B47F052BE725409D32E7DB3442C6A" Guid="{D15A8A4E-A4D6-4BD8-AD58-978B4FB2F28E}">
                             <File Id="fil832F75DAE6614ECAF8AA0741C4DEE4ED" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\spotpricehistory.py" />
                         </Component>
-                        <Component Id="cmp023D91E5CC323B0FF8A87E8DEB6470C6" Guid="{A7437BE7-722E-44CE-B404-5B6C5C5DECD3}">
+                        <Component Id="cmp023D91E5CC323B0FF8A87E8DEB6470C6" Guid="{1E372E49-6F52-4C5E-8B42-7024EC1226F5}">
                             <File Id="fil50C262B5D93E19AC4F622BB56246BA26" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\spotpricehistory.pyc" />
                         </Component>
-                        <Component Id="cmpF3FBCA67D4B5C58BDEFEB5FB06C1ED14" Guid="{56EC2FF3-45C8-418D-AF03-EEC8D2544077}">
+                        <Component Id="cmpF3FBCA67D4B5C58BDEFEB5FB06C1ED14" Guid="{D4343EA3-5580-4866-A5F0-822857D27FD0}">
                             <File Id="fil2AC4903E3BC8ADC1E11283C3188DD464" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\volume.py" />
                         </Component>
-                        <Component Id="cmp818BA8F6929EBCB4038B7F09D243A29B" Guid="{E99F4D89-D43E-4CA1-B4CA-C3A13F683AE2}">
+                        <Component Id="cmp818BA8F6929EBCB4038B7F09D243A29B" Guid="{650FC22D-892A-45EA-8610-EFC51C2034E5}">
                             <File Id="fil89EB9F528EFFCABDDC7FB33F09AF0F30" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\volume.pyc" />
                         </Component>
-                        <Component Id="cmpE3362712DC3602B49718269BFEB1F511" Guid="{F900C6C9-5699-498D-B3F5-4075946F1664}">
+                        <Component Id="cmpE3362712DC3602B49718269BFEB1F511" Guid="{767A3D08-2218-458C-A36B-87A78F7FC0ED}">
                             <File Id="filBCF64EE54F3D7D91FDBD6F6A4E8073BE" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\zone.py" />
                         </Component>
-                        <Component Id="cmp982A1A32E9D06BDAC3C1E9509F1DCD62" Guid="{5F0285FC-0E6A-4626-8225-7200184BDB87}">
+                        <Component Id="cmp982A1A32E9D06BDAC3C1E9509F1DCD62" Guid="{E41F7697-57B1-4C84-B76D-8088FA7ADF64}">
                             <File Id="filE4A79C91CA136F3667BA0497ED683647" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\zone.pyc" />
                         </Component>
-                        <Component Id="cmp48A479D13BF465FEC489D9F08B9BE0D3" Guid="{AAC0B377-8996-4522-8C0D-3A475309823D}">
+                        <Component Id="cmp48A479D13BF465FEC489D9F08B9BE0D3" Guid="{528B7CCB-EDDB-4E01-BDD7-D235836A4593}">
                             <File Id="fil872180143055803244C97015A16E6E3D" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\__init__.py" />
                         </Component>
-                        <Component Id="cmpB9503DCF6D0980C768CE54289D5FDA3A" Guid="{2CCAE780-0177-415B-9EB4-7EA741DE86DC}">
+                        <Component Id="cmpB9503DCF6D0980C768CE54289D5FDA3A" Guid="{63454E10-85F9-4C13-B2AF-D52C69ECF1B4}">
                             <File Id="fil2E900B8654789291754A22371C1AB11A" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\__init__.pyc" />
                         </Component>
                         <Directory Id="dirA9072DD07288EFCFFC491AD105B9D122" Name="autoscale">
-                            <Component Id="cmpF79360B7FBBE3DD1952328E94B3DAF59" Guid="{8988CCEA-D434-457D-92C7-8925CFB838E8}">
+                            <Component Id="cmpF79360B7FBBE3DD1952328E94B3DAF59" Guid="{A8E7D1C5-70E4-43C5-8FB9-60BA8A6324CF}">
                                 <File Id="filE92BA5FB8BCCFEC7E5B344A741B8FCB9" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\activity.py" />
                             </Component>
-                            <Component Id="cmp3E0F5AF1CC951D9B5E015E5F00BEB913" Guid="{1F4DAA47-B2AF-4DC0-A872-3224C3DEABEE}">
+                            <Component Id="cmp3E0F5AF1CC951D9B5E015E5F00BEB913" Guid="{47EA927F-48D1-4AC0-A6A5-311D5DF0CC2D}">
                                 <File Id="fil5B1F08BB0FFE8C1D82A92D1ACE89256A" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\activity.pyc" />
                             </Component>
-                            <Component Id="cmp9419A94E050B04302987EA8834D05535" Guid="{5247179C-A61A-4E32-8A62-AA1C004C8CE8}">
+                            <Component Id="cmp9419A94E050B04302987EA8834D05535" Guid="{E69F39D8-2664-414A-BF8D-06541FE6E32F}">
                                 <File Id="fil8D9C3866A2146BB0BBADD1A8403811E0" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\group.py" />
                             </Component>
-                            <Component Id="cmp1CCB9CF8946690CD69BD3EDED9217BFF" Guid="{82B2D873-CE8C-4870-9810-94BC08F8F81D}">
+                            <Component Id="cmp1CCB9CF8946690CD69BD3EDED9217BFF" Guid="{75DBBE47-3D9E-4B3E-9B64-3AC0C9F78FA4}">
                                 <File Id="filD5B6EC5F2C9D23B1AA38665491760CEC" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\group.pyc" />
                             </Component>
-                            <Component Id="cmpE4640BA48E90D218FB970AA04408D6AE" Guid="{02AEB5C2-433D-421B-8E5C-6A0F1038465E}">
+                            <Component Id="cmpE4640BA48E90D218FB970AA04408D6AE" Guid="{1CF69F9B-EFEC-4551-8EEF-58B5C520D309}">
                                 <File Id="fil557DE0F85E63D2694ED4E8D051CEEF64" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\instance.py" />
                             </Component>
-                            <Component Id="cmp130BC43CA61623F792A14966CF867C05" Guid="{798439E1-5A2C-4B13-AF50-F1B6FF3E0FCE}">
+                            <Component Id="cmp130BC43CA61623F792A14966CF867C05" Guid="{8FC50EF1-1A69-4A10-B917-5F1D50884199}">
                                 <File Id="fil13C683381B35E4B303449D2D4D5FF93E" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\instance.pyc" />
                             </Component>
-                            <Component Id="cmpF72FAC0C045D6229FB0A4CAB35859F42" Guid="{D275DD14-DC9F-44B8-8237-8B87A5203BDD}">
+                            <Component Id="cmpF72FAC0C045D6229FB0A4CAB35859F42" Guid="{32306AD9-072C-4A35-B413-AD07B98B2FC6}">
                                 <File Id="filB7B0B1C8D955DD053E58B3F1360D783F" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\launchconfig.py" />
                             </Component>
-                            <Component Id="cmpF716BC45C3CA32D1A6F094002B886FB8" Guid="{FBBE998E-E768-49EB-952E-F98A9F60F4AB}">
+                            <Component Id="cmpF716BC45C3CA32D1A6F094002B886FB8" Guid="{458A75E7-B6A9-4694-9B1D-C30D332002C5}">
                                 <File Id="fil9B483658371E1FBB9DFB9CDFFCCB499F" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\launchconfig.pyc" />
                             </Component>
-                            <Component Id="cmp83DDF933B8264886C1A3B8CCC66BFD1A" Guid="{64BAC687-CBD5-4A20-9817-E32EADD91613}">
+                            <Component Id="cmp83DDF933B8264886C1A3B8CCC66BFD1A" Guid="{297D691B-A84C-4DFB-8628-B3F43AF5E0DA}">
                                 <File Id="fil96B5EED3BD4B1670EAA8890D1CF514A6" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\request.py" />
                             </Component>
-                            <Component Id="cmpD04A02595AB1B71D9429380E93A03C97" Guid="{1660315D-0B26-46C3-82CB-F3BECC8E3BB0}">
+                            <Component Id="cmpD04A02595AB1B71D9429380E93A03C97" Guid="{AC28C60A-4017-4F22-AA4A-A8FA213D62A7}">
                                 <File Id="fil3F2E20C21C31D1D5FD173BD5D059C57D" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\request.pyc" />
                             </Component>
-                            <Component Id="cmp43CFC1B9E17012716DB90D273B238852" Guid="{570230B2-E1B8-4A84-A2C2-052B9C0FC82D}">
+                            <Component Id="cmp43CFC1B9E17012716DB90D273B238852" Guid="{AA6F4244-8768-43EC-8067-7B16EDF77F6A}">
                                 <File Id="fil5CA3918A075D5E9D64B04AAEA853C992" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\trigger.py" />
                             </Component>
-                            <Component Id="cmp85599A343412CAD01DA3DE23D3654900" Guid="{1DB688ED-FBCE-4940-AD2F-F29A276F4799}">
+                            <Component Id="cmp85599A343412CAD01DA3DE23D3654900" Guid="{18FDBFBB-AC75-4412-85B3-32984C539B5E}">
                                 <File Id="fil18DDDFDE84468C7B163CF663992F3CB6" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\trigger.pyc" />
                             </Component>
-                            <Component Id="cmpCA1DCAC10519664BDDB5C9A81C035884" Guid="{A0972835-640D-4990-8C10-9F48DAC77156}">
+                            <Component Id="cmpCA1DCAC10519664BDDB5C9A81C035884" Guid="{A3CCEA14-1807-4AE4-A0DF-739437BFE89E}">
                                 <File Id="fil0A49D147B16152915DECD05005D083AE" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\__init__.py" />
                             </Component>
-                            <Component Id="cmp7E90BDEC647F31F4305B115BF0E13E36" Guid="{04C14D47-3502-4954-A68F-137C6F6346AC}">
+                            <Component Id="cmp7E90BDEC647F31F4305B115BF0E13E36" Guid="{5229EC93-49A7-400F-9316-A8BA724CF18F}">
                                 <File Id="fil355F202F224521BEC672DFB85D07BCE9" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\autoscale\__init__.pyc" />
                             </Component>
                         </Directory>
                         <Directory Id="dirF720510F498211E84D325A2BD4F8AACF" Name="cloudwatch">
-                            <Component Id="cmpD079EF5FEBCAC49A4B71E3E9791ED45E" Guid="{F0FB10AB-6D79-41B2-8F65-F25AA4FCD34E}">
+                            <Component Id="cmpD079EF5FEBCAC49A4B71E3E9791ED45E" Guid="{86DCDF41-4176-4C7E-B2D8-D7661CE29D51}">
                                 <File Id="filBB39BCB1E7A913767BF125363FE4D457" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\cloudwatch\datapoint.py" />
                             </Component>
-                            <Component Id="cmp2D78E507D73E8D36372EA199BF97BC10" Guid="{D132844E-56AC-4429-A5CA-0F0DC426EB4C}">
+                            <Component Id="cmp2D78E507D73E8D36372EA199BF97BC10" Guid="{984A92BF-FA4D-44B2-A3B7-9E44884AF7FE}">
                                 <File Id="filA30203C945A1060291973F3EEDD45D2E" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\cloudwatch\datapoint.pyc" />
                             </Component>
-                            <Component Id="cmp565FFC198A7E29C261DE4385D2C16B9D" Guid="{2BF8B569-A757-487B-8DA5-192687F8AB64}">
+                            <Component Id="cmp565FFC198A7E29C261DE4385D2C16B9D" Guid="{2F98D6C0-F3A8-4948-B0B1-635F0EEEF8AF}">
                                 <File Id="fil0CEADEC29EA0DA5490D7995F053AEA96" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\cloudwatch\metric.py" />
                             </Component>
-                            <Component Id="cmp16798ACDB35ADED91AC4E559961BC199" Guid="{C99C1703-66C2-4876-886D-3D9B90B216E9}">
+                            <Component Id="cmp16798ACDB35ADED91AC4E559961BC199" Guid="{85B25631-F765-491B-B55E-96ABA70B4F26}">
                                 <File Id="fil9AB6CD01416B2865C7DD1D292C3F1664" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\cloudwatch\metric.pyc" />
                             </Component>
-                            <Component Id="cmp543E0F10077B5B3F435641E2F7AC9FD1" Guid="{5FC19573-A6FF-4B16-8A0E-291AACECEDEC}">
+                            <Component Id="cmp543E0F10077B5B3F435641E2F7AC9FD1" Guid="{83CCC21D-85F2-4370-BA8D-9D0C064DAF71}">
                                 <File Id="fil1CD4C1384365E0E409E68471781FB548" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\cloudwatch\__init__.py" />
                             </Component>
-                            <Component Id="cmpC9A53F89C42BFA289F4BD04B8C9B76B7" Guid="{F86D0E0A-51AA-46EF-A316-C45AB6C40166}">
+                            <Component Id="cmpC9A53F89C42BFA289F4BD04B8C9B76B7" Guid="{990442A5-76A7-4DB9-B426-8828A8C7BED8}">
                                 <File Id="filED9D910836A4F75F23F93FCE37A2EE11" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\cloudwatch\__init__.pyc" />
                             </Component>
                         </Directory>
                         <Directory Id="dir9C9705196F3F385295E21A173CCAF039" Name="elb">
-                            <Component Id="cmp0659F93A94A0967E141D10F4DCF281C6" Guid="{71D06092-139C-4166-91A1-A80804D55B11}">
+                            <Component Id="cmp0659F93A94A0967E141D10F4DCF281C6" Guid="{3A7BB753-DFF6-4AA5-9F76-3206BB65848C}">
                                 <File Id="fil0174B13B953D322E3CA4421D1A620365" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\healthcheck.py" />
                             </Component>
-                            <Component Id="cmp43439883A1BE0F3774E4BE2B047DB2D3" Guid="{560F2CD0-770F-45D1-8F4B-F0CCF4DA9DE3}">
+                            <Component Id="cmp43439883A1BE0F3774E4BE2B047DB2D3" Guid="{181FE81C-E538-4B9D-A696-395E2BE97D62}">
                                 <File Id="filA289E3CC05E0C694A4304279AA4A8312" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\healthcheck.pyc" />
                             </Component>
-                            <Component Id="cmpCF8ED48A3A0458DDB15D859719F353D5" Guid="{B72715C7-9D6E-42C0-BC39-808A5B67C7CC}">
+                            <Component Id="cmpCF8ED48A3A0458DDB15D859719F353D5" Guid="{8C49DAF0-8381-4576-8EDF-E32B7F8E1F73}">
                                 <File Id="filB49AACE72FAC41D6C90A637D9209D447" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\instancestate.py" />
                             </Component>
-                            <Component Id="cmp83029358663D1AFBBF6655BDECFBF11E" Guid="{F44177FF-4E42-42AE-8BC5-40D53906BD25}">
+                            <Component Id="cmp83029358663D1AFBBF6655BDECFBF11E" Guid="{6800EC17-C22A-4F4E-98A6-C36A0D8BF7E1}">
                                 <File Id="fil4CBAAB441AB82570B146B9F3F0B2D693" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\instancestate.pyc" />
                             </Component>
-                            <Component Id="cmp0ADD8D79E3455AFDA89C9552BF2596BA" Guid="{0BE15397-AD51-4BC4-87C8-9247C53762DB}">
+                            <Component Id="cmp0ADD8D79E3455AFDA89C9552BF2596BA" Guid="{E4EBEF9E-EECB-4A1C-B0A2-3055DB5E80E0}">
                                 <File Id="filD387E50478298BF1CC78B223EA8FB87A" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\listelement.py" />
                             </Component>
-                            <Component Id="cmp82224919AD80853B8F5494E050C82870" Guid="{F28EB2AB-4EF0-413C-9F08-7A9C29C1071C}">
+                            <Component Id="cmp82224919AD80853B8F5494E050C82870" Guid="{26F35553-16DB-41DA-8BA3-A8228888BA41}">
                                 <File Id="filF500BCD24DD2425ABD276AFAC558B24F" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\listelement.pyc" />
                             </Component>
-                            <Component Id="cmpFC52B85B9C842082D315BE2DDB50CBA4" Guid="{3E30290C-5B1B-4CCE-8592-E269138DA26D}">
+                            <Component Id="cmpFC52B85B9C842082D315BE2DDB50CBA4" Guid="{29EE680C-69A6-4F83-B695-BC789E53EACE}">
                                 <File Id="fil729E05A00F1A8AB3EA55C7643A64B840" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\listener.py" />
                             </Component>
-                            <Component Id="cmp262C6A7CE98B1F57011CD65ECE02C930" Guid="{AFF293F0-4F1B-4387-BE01-0D5097FC6577}">
+                            <Component Id="cmp262C6A7CE98B1F57011CD65ECE02C930" Guid="{470C9205-F5F3-4AB2-9694-9A477A3DAB7F}">
                                 <File Id="fil923326886681682B9B5E6E353D5F1018" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\listener.pyc" />
                             </Component>
-                            <Component Id="cmpF4ED005619E18DA27192FBFB19CE59EA" Guid="{BF2F5B73-0CB1-4FDC-B9C1-3322030F8695}">
+                            <Component Id="cmpF4ED005619E18DA27192FBFB19CE59EA" Guid="{2A411379-6734-4C91-BD13-C94CC406AFF4}">
                                 <File Id="fil53674728A97816CDFBF131A9298AC26E" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\loadbalancer.py" />
                             </Component>
-                            <Component Id="cmp0621F32EF8848ED724D72832C90CC612" Guid="{5D0AA86D-8BC5-4F77-941E-65CF1BD23922}">
+                            <Component Id="cmp0621F32EF8848ED724D72832C90CC612" Guid="{C00E9752-C31E-4AC2-B9B3-DBD28F8B9A37}">
                                 <File Id="fil50A25F8A25021F83A1F78CD0FFA66CFB" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\loadbalancer.pyc" />
                             </Component>
-                            <Component Id="cmpE5031A0CC8B9BD15269B9080D2A77CDE" Guid="{906F71AF-4BD8-43F5-8B13-5A2F664A44C6}">
+                            <Component Id="cmpE5031A0CC8B9BD15269B9080D2A77CDE" Guid="{6E948A98-4B77-436C-80FE-DDE51DA1E489}">
                                 <File Id="fil143C27FD91B9D13A8249B3C4D6F6D55C" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\__init__.py" />
                             </Component>
-                            <Component Id="cmpECB0A45260E6E2C91D7E1F8C016E7622" Guid="{32A2EF9E-BDA7-4DB7-93E4-2B2CEFE3C768}">
+                            <Component Id="cmpECB0A45260E6E2C91D7E1F8C016E7622" Guid="{6EC32FC6-0B35-449F-9963-409F60D84D66}">
                                 <File Id="fil7801AB44663873EF7933364F04923BDB" KeyPath="yes" Source="$(var.BotoDir)\boto\ec2\elb\__init__.pyc" />
                             </Component>
                         </Directory>
                     </Directory>
                     <Directory Id="dir39B79B4642D6E430885E3A60EA7C058E" Name="fps">
-                        <Component Id="cmp39B487B5D7E641031FE94C7361985555" Guid="{18D887F2-093E-4676-8919-33BB4AFF3710}">
+                        <Component Id="cmp39B487B5D7E641031FE94C7361985555" Guid="{8920ED15-813F-4E0A-AC42-2EE61EC10697}">
                             <File Id="fil1254AFE2D742847B82E943F3CDCA6AA2" KeyPath="yes" Source="$(var.BotoDir)\boto\fps\connection.py" />
                         </Component>
-                        <Component Id="cmpAD1651EEAA687B08D5739D34019E1A55" Guid="{2B8C018A-B612-4B6B-AB20-0828046CDEC3}">
+                        <Component Id="cmpAD1651EEAA687B08D5739D34019E1A55" Guid="{0C95C5BD-45C2-41E3-A3E7-EED3B4981E5F}">
                             <File Id="filC719846D0CA0F9FF20F098BCC0EA27B6" KeyPath="yes" Source="$(var.BotoDir)\boto\fps\connection.pyc" />
                         </Component>
-                        <Component Id="cmpD5FBE6B538E27F6AFD9A513F5413C272" Guid="{D3AFC459-F3F2-4E55-B3A8-38E5F6B2C2EE}">
+                        <Component Id="cmpD5FBE6B538E27F6AFD9A513F5413C272" Guid="{5E56BD38-87DA-419F-9E5D-D11BB8111C29}">
                             <File Id="filFD16FC1AE49780FD9EF238737D84B006" KeyPath="yes" Source="$(var.BotoDir)\boto\fps\__init__.py" />
                         </Component>
-                        <Component Id="cmp28580EB2D4880A87AEFFBA76B1EE2245" Guid="{2EC5A6CD-7F7D-4CC0-8576-272ECB2F2A28}">
+                        <Component Id="cmp28580EB2D4880A87AEFFBA76B1EE2245" Guid="{AEA5B082-CD52-4073-BC9E-94CFC6BBE354}">
                             <File Id="fil80F74B2529360A374C545F43B96DBB71" KeyPath="yes" Source="$(var.BotoDir)\boto\fps\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir8A501C53C2F8D7B35558F4E0FE002760" Name="manage">
-                        <Component Id="cmp5A5115E37D199502207BB9D4CF7E5C81" Guid="{D3AE9460-90B4-4E57-B194-88C13C95B49D}">
+                        <Component Id="cmp5A5115E37D199502207BB9D4CF7E5C81" Guid="{2064A552-4999-4A56-9961-344CC2F39BF7}">
                             <File Id="fil6106EB4C15D42FF2A089CA7DA189ED30" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\cmdshell.py" />
                         </Component>
-                        <Component Id="cmp836A5F3D15264E028EC01C745BDAE491" Guid="{90BD40D9-0A09-49B9-B02C-1E7D5D11A0C4}">
+                        <Component Id="cmp836A5F3D15264E028EC01C745BDAE491" Guid="{2AEA2B37-CF35-47D9-9FC4-C3017D110E8B}">
                             <File Id="filF202A0095682D87B4B6B52CD49673233" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\cmdshell.pyc" />
                         </Component>
-                        <Component Id="cmp4CDD8EE05E1DD65FB8B5142E96055ADB" Guid="{FEE004C5-A3C8-450E-8382-3C7EA718E81C}">
+                        <Component Id="cmp4CDD8EE05E1DD65FB8B5142E96055ADB" Guid="{8E2A7575-B525-4A77-8790-715D1D15A1D8}">
                             <File Id="fil5679013595EC33DD44114666AA312CD7" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\propget.py" />
                         </Component>
-                        <Component Id="cmp4D5D435C56E1E67C1FD9D751B1EC1152" Guid="{1AF44DD1-61CC-4118-9A95-FFD6DBEDD081}">
+                        <Component Id="cmp4D5D435C56E1E67C1FD9D751B1EC1152" Guid="{1B72A902-9DDB-4D56-957A-6F740E39F500}">
                             <File Id="fil76DD3049D20ABFEAF2282F7D2C8C3F14" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\propget.pyc" />
                         </Component>
-                        <Component Id="cmp24C6CC6B293611FF031C17B259ABCDC8" Guid="{F81B2572-4A51-448A-BEE4-37F9C44E60E4}">
+                        <Component Id="cmp24C6CC6B293611FF031C17B259ABCDC8" Guid="{FD24CBBE-A886-433A-823A-E834B83A7D82}">
                             <File Id="fil69C6F35DC522E2D667DDF6963E843926" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\server.py" />
                         </Component>
-                        <Component Id="cmp7F2F44C1E491D2DFE1B820F6F69D20D9" Guid="{637BFB14-4494-4385-96C2-E5495A45627B}">
+                        <Component Id="cmp7F2F44C1E491D2DFE1B820F6F69D20D9" Guid="{1134B543-11FE-42E4-A605-8543BB93B481}">
                             <File Id="fil8F345A1D2ED06A5EB322434D23BFB634" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\server.pyc" />
                         </Component>
-                        <Component Id="cmp96E3A1D73615FCEB9B46A1B22D858D0F" Guid="{5ABB0554-B255-4694-BAC1-BC168313E2E7}">
+                        <Component Id="cmp96E3A1D73615FCEB9B46A1B22D858D0F" Guid="{17C1CF69-6410-4D39-846A-039713526580}">
                             <File Id="fil227574305109C56EE5EE97A1685638A1" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\task.py" />
                         </Component>
-                        <Component Id="cmpB768DEDD687DACA8261C89F3E2263557" Guid="{E8E428B6-9C1D-45BB-988A-3DAC64648A41}">
+                        <Component Id="cmpB768DEDD687DACA8261C89F3E2263557" Guid="{255A368B-8243-4003-B0D0-8FEDE9DB60E1}">
                             <File Id="filC5DF6D6C0CE4FA927FB157C8E76F974F" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\task.pyc" />
                         </Component>
-                        <Component Id="cmpB350E482BEA280F51F0930CA49FE08D2" Guid="{3A670F67-AD91-4EFC-B75E-37B086CB5208}">
+                        <Component Id="cmpB350E482BEA280F51F0930CA49FE08D2" Guid="{79730939-E85C-428D-BFA1-34039FF125C6}">
                             <File Id="filF71DAF6AF489AE49CDE721B90110E543" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\test_manage.py" />
                         </Component>
-                        <Component Id="cmp7E67BF1A04E6259E13D8BF57027E713E" Guid="{AF3C0B41-B69F-4811-90DA-FCCE9ADE3B5A}">
+                        <Component Id="cmp7E67BF1A04E6259E13D8BF57027E713E" Guid="{2A3DCBE5-DADB-4639-A9F7-3526DF8352B3}">
                             <File Id="filC1AA798C1195EDA09898520D02E22940" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\test_manage.pyc" />
                         </Component>
-                        <Component Id="cmp90AA6DF03E76457EAEF143190D7D63D2" Guid="{D558967C-3783-472D-85D3-5B6A4FBD76B5}">
+                        <Component Id="cmp90AA6DF03E76457EAEF143190D7D63D2" Guid="{8A454BE7-20D8-4DA6-B9F6-8F2B1F30F553}">
                             <File Id="filF33E45301521EF08DE148E7FBD831517" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\volume.py" />
                         </Component>
-                        <Component Id="cmpD0D8F3E8CD91A90266B82EA2DDC083BB" Guid="{9BD347B9-6679-455A-A32A-6AA39255E648}">
+                        <Component Id="cmpD0D8F3E8CD91A90266B82EA2DDC083BB" Guid="{18B65579-3A83-476D-9890-745569999CC0}">
                             <File Id="fil6EC105352582CF025CD745A30CD8E968" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\volume.pyc" />
                         </Component>
-                        <Component Id="cmpBDB9517FAD72C315643E8CC49F8EA7DE" Guid="{068AF915-D8B9-4626-B7B4-53BC41B9803E}">
+                        <Component Id="cmpBDB9517FAD72C315643E8CC49F8EA7DE" Guid="{13923723-3F7E-4EE6-8450-ED54E73FC0F1}">
                             <File Id="fil2199F54AA66BE23C8909FA4BA16555E5" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\__init__.py" />
                         </Component>
-                        <Component Id="cmpB42DAED4D036A4079533AD6AD52EAB7A" Guid="{9D822306-4475-4427-9094-16FF33232DCF}">
+                        <Component Id="cmpB42DAED4D036A4079533AD6AD52EAB7A" Guid="{305D0C12-5474-425D-BFEE-B837126D723B}">
                             <File Id="fil29DE970956DAB86257F30838AC0E15D3" KeyPath="yes" Source="$(var.BotoDir)\boto\manage\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dirE536348E03F75B2CB9932DCD76A5D295" Name="mashups">
-                        <Component Id="cmpE4815FDF78351BAFE21A9CC52B4BF8D6" Guid="{D45DE8C6-01F6-4511-BE42-D96F18BC16E3}">
+                        <Component Id="cmpE4815FDF78351BAFE21A9CC52B4BF8D6" Guid="{F42DB581-0078-45DB-B44D-7C9E86F3C293}">
                             <File Id="fil4079274FE7E8CF2D51F1AAB9C88BE9E5" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\interactive.py" />
                         </Component>
-                        <Component Id="cmp5D3EF55D90EE65220183C99851B88F5B" Guid="{3E393946-BD37-4C11-A7B7-FE6046526CEB}">
+                        <Component Id="cmp5D3EF55D90EE65220183C99851B88F5B" Guid="{B4D89692-6350-4C4F-B690-79F2CD070E54}">
                             <File Id="fil28595B491620764A4358BDCBB4FDC3EB" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\interactive.pyc" />
                         </Component>
-                        <Component Id="cmp2B34DDA2850D16934E4C24E565261526" Guid="{67A173F4-AAF2-4A4F-8D11-EBB3F74F2695}">
+                        <Component Id="cmp2B34DDA2850D16934E4C24E565261526" Guid="{3B41ABFC-EB11-4177-B39C-19F4893D01DF}">
                             <File Id="filA643CAF9CADFE33BD0FA82AABF70E2A2" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\iobject.py" />
                         </Component>
-                        <Component Id="cmp8C601D2BCAB134CAB0ADBFB77E7A646A" Guid="{E069AA5F-24C5-4DA3-8B97-BA07CF82CBCA}">
+                        <Component Id="cmp8C601D2BCAB134CAB0ADBFB77E7A646A" Guid="{5F40075A-BBAF-41CC-BCAA-81502E0E88D6}">
                             <File Id="filCE1715C28558CDD8A0EB3CECDD39C445" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\iobject.pyc" />
                         </Component>
-                        <Component Id="cmp7957E14EC3ED4E40D4594D118AE1C913" Guid="{59EDF4B5-00CF-4B9E-9427-9F07B45DB3E2}">
+                        <Component Id="cmp7957E14EC3ED4E40D4594D118AE1C913" Guid="{E1305CEE-3C15-4E6E-87C2-2CB6B701793D}">
                             <File Id="fil9B8854F9C2B79EAAA83C39EA1FFEE99B" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\order.py" />
                         </Component>
-                        <Component Id="cmp25E5403EFF2820B0035552D99B166CAC" Guid="{1176C4DB-0D61-4D51-9AA8-29CA90C49AFB}">
+                        <Component Id="cmp25E5403EFF2820B0035552D99B166CAC" Guid="{CDCC658C-0357-4E25-BC81-947DD2470837}">
                             <File Id="fil8F4A6CCF80FE5E0DE78831A7B08B93A2" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\order.pyc" />
                         </Component>
-                        <Component Id="cmpB877205CE2AA7BC9BE15BDA3A8325090" Guid="{3CA56AFD-9022-4CD3-AEDB-A9B923F69111}">
+                        <Component Id="cmpB877205CE2AA7BC9BE15BDA3A8325090" Guid="{1F00A9DF-86F2-4000-B385-6BB972579ABD}">
                             <File Id="fil8C97B9CBF8CA227FE7E7730CC16DC0B3" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\server.py" />
                         </Component>
-                        <Component Id="cmp043C6DE6A53A9C6A48A51C7423DDC6D8" Guid="{51BA7A96-B229-46F3-91EF-54043D27FB58}">
+                        <Component Id="cmp043C6DE6A53A9C6A48A51C7423DDC6D8" Guid="{4CD82080-DE1A-4690-A2D7-EFDAACDBE3E7}">
                             <File Id="fil1941F161BD180413890239346371CB80" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\server.pyc" />
                         </Component>
-                        <Component Id="cmp0E183F955E27CE608989D14AB16F9176" Guid="{E5540194-32FC-4485-AAE1-F2622D7BE652}">
+                        <Component Id="cmp0E183F955E27CE608989D14AB16F9176" Guid="{C726945F-9D8E-4D15-A7C8-45FEC102B4DF}">
                             <File Id="filFB8BD3AF4A5BAA9C7FD87E94C5D3ABBD" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\__init__.py" />
                         </Component>
-                        <Component Id="cmp6B05E73770A8BFD5A4F1039A8A265823" Guid="{824FFA90-E720-48E0-8AF0-B463EA6A5117}">
+                        <Component Id="cmp6B05E73770A8BFD5A4F1039A8A265823" Guid="{4B1E8DB0-79EB-405A-8CE4-24E8B2ACBDA2}">
                             <File Id="filC8529C6EA1C58F74D85D3C8CB0EFA563" KeyPath="yes" Source="$(var.BotoDir)\boto\mashups\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir41A34ECA93FBEE158EC26413BAE5C2C7" Name="mturk">
-                        <Component Id="cmp00E434A158AF9AD7029BEFB04710659C" Guid="{57B95FBB-3986-430B-B394-06F152AA8DE6}">
+                        <Component Id="cmp00E434A158AF9AD7029BEFB04710659C" Guid="{FA74FA2F-4065-42E9-B2C7-C13A674EF613}">
                             <File Id="fil79E5BD0A14DC5C2D79A7AF519FBB9ECC" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\connection.py" />
                         </Component>
-                        <Component Id="cmp4B4A3AB590F52BFF3B70EDC75B121091" Guid="{40AA1BF0-A743-4675-980B-86ECB3C0CADF}">
+                        <Component Id="cmp4B4A3AB590F52BFF3B70EDC75B121091" Guid="{5C606143-4C9F-4D28-A743-6F0FA9275B79}">
                             <File Id="fil0F8DD9A698425DC5266883D2EAB4FAFD" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\connection.pyc" />
                         </Component>
-                        <Component Id="cmp66971D9085C6205D5B4CEC713275E2AA" Guid="{DD6BBBD2-CAE8-4313-992B-A032CE5D08E6}">
+                        <Component Id="cmp66971D9085C6205D5B4CEC713275E2AA" Guid="{44F6E39D-622D-4879-99AC-5633A4A68222}">
                             <File Id="fil466832A1F4D25A053DFD0CA34F997E7B" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\notification.py" />
                         </Component>
-                        <Component Id="cmp15316DE6903CF424A3BCBDC52B8A4019" Guid="{A5207C51-1168-448E-A503-8D69F17EBC82}">
+                        <Component Id="cmp15316DE6903CF424A3BCBDC52B8A4019" Guid="{0E840415-D55C-4299-BD79-620A063CE798}">
                             <File Id="filCD6D69BDC1A83B99D973CCDA768D682D" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\notification.pyc" />
                         </Component>
-                        <Component Id="cmp759370005521D3B6171DF6E070CF4743" Guid="{AF4A5639-F09A-4DC8-8EAA-7CB3574B5DD4}">
+                        <Component Id="cmp759370005521D3B6171DF6E070CF4743" Guid="{2377B8D8-3DDE-4BE4-95F3-E9192BB579C3}">
                             <File Id="fil8DB1AF57767E8543A704F5B9D8C97D1E" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\price.py" />
                         </Component>
-                        <Component Id="cmp223E7FBBDA432A12FDC2F3CB2C951ABA" Guid="{F6A774AB-DF38-4B31-9F21-5027A1F4F4FA}">
+                        <Component Id="cmp223E7FBBDA432A12FDC2F3CB2C951ABA" Guid="{5308C450-35FB-4631-A3E5-CF6E768415A2}">
                             <File Id="filBB11CB48F9CE014FA482ED1E6FFEA2F4" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\price.pyc" />
                         </Component>
-                        <Component Id="cmp098F36C42F5393F5D3CE0B5BEE09723B" Guid="{688098CD-E239-47CA-A633-6E644C0511AB}">
+                        <Component Id="cmp098F36C42F5393F5D3CE0B5BEE09723B" Guid="{02A5824E-8B5C-4ADF-BD0A-0463ADCF47B0}">
                             <File Id="filBCE027587A073C6FC7A938A3942D4BD1" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\qualification.py" />
                         </Component>
-                        <Component Id="cmp1520E9E3C574334781608D4366BB7CA9" Guid="{F3881502-992C-4039-B9F8-A85CDDC69502}">
+                        <Component Id="cmp1520E9E3C574334781608D4366BB7CA9" Guid="{BA1726A5-02DC-42AF-A33B-BD6ED7937963}">
                             <File Id="filB06E9AA3EC6FEF6E055E41837D9500C8" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\qualification.pyc" />
                         </Component>
-                        <Component Id="cmp2B369CC50F548CA3AED78A2CB915E600" Guid="{51CD58D9-420C-4727-BC3B-B4E240477ABB}">
+                        <Component Id="cmp2B369CC50F548CA3AED78A2CB915E600" Guid="{1B9F6B83-8D92-4109-8973-6900345D04DF}">
                             <File Id="filF20D6A613AFAC9C9B14CBD8B2CFB6C3D" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\question.py" />
                         </Component>
-                        <Component Id="cmp4B411233CE81ED5BD50E76D775B4265B" Guid="{75F71138-7605-40A3-8B35-73593C150C5F}">
+                        <Component Id="cmp4B411233CE81ED5BD50E76D775B4265B" Guid="{8528E672-CEB2-4975-A0BA-9DB3180F026D}">
                             <File Id="filA52EC81281696E8CA22D154938930D7F" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\question.pyc" />
                         </Component>
-                        <Component Id="cmp6DDCDA01077CBFFE9FE2DCFDD3B0B5C7" Guid="{ED926E89-2CE7-413B-A871-A1AD0E3A3DEF}">
+                        <Component Id="cmp6DDCDA01077CBFFE9FE2DCFDD3B0B5C7" Guid="{38B4D28D-AF42-48E5-B113-699FE4C53406}">
                             <File Id="fil55ACBAE1B8F7461A80984F25D9C679B0" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\__init__.py" />
                         </Component>
-                        <Component Id="cmp510AE0D3293136718186D9ADB1D791FE" Guid="{7A75B61C-71D0-405E-B17E-1B98746F2A77}">
+                        <Component Id="cmp510AE0D3293136718186D9ADB1D791FE" Guid="{0382DC92-361A-4624-9953-7F78E6B02B36}">
                             <File Id="fil9A156CD809574E6EEFC70CEDDB3B8819" KeyPath="yes" Source="$(var.BotoDir)\boto\mturk\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dirC6C2752F2F809597C22F62B65B3D30F6" Name="pyami">
-                        <Component Id="cmp9880E8A5D1F84A2E8AA410A148390068" Guid="{FD75DF06-CA0E-4AF9-A931-6691065CA022}">
+                        <Component Id="cmp9880E8A5D1F84A2E8AA410A148390068" Guid="{7E42AFE9-30A0-4EE0-8BAC-7CA586B9EC01}">
                             <File Id="fil95A28D18D5BC9CF65F6C20D4624B5B0D" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\bootstrap.py" />
                         </Component>
-                        <Component Id="cmp87DD618B7467E5059C9B5A0A979A35A6" Guid="{6908CBC6-0402-4A45-AAF9-3FA06E6E7BD1}">
+                        <Component Id="cmp87DD618B7467E5059C9B5A0A979A35A6" Guid="{0370F175-0434-4C08-804C-2007149243B6}">
                             <File Id="fil64C8FBA728B16B6503E953CC37B211F6" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\bootstrap.pyc" />
                         </Component>
-                        <Component Id="cmp85CECDE13F3D6730090B190DF875E6B5" Guid="{69309781-8117-4294-9F1A-E9D2C0AD74D3}">
+                        <Component Id="cmp85CECDE13F3D6730090B190DF875E6B5" Guid="{CAC5E3D2-107C-469D-8906-862A650CE77B}">
                             <File Id="filAD3194974D0AA0F1B5ECA55B93AD6FD3" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\config.py" />
                         </Component>
-                        <Component Id="cmpC5012C5A9DC75766F594DABDF7D07E67" Guid="{32B79077-257C-4AE7-97FE-94EF275DA4EE}">
+                        <Component Id="cmpC5012C5A9DC75766F594DABDF7D07E67" Guid="{19A20C75-F54C-4556-872F-2005883D15BF}">
                             <File Id="filABF0BD1363465BAAC19F8E9B60FE22B6" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\config.pyc" />
                         </Component>
-                        <Component Id="cmp5626CAF2FC9232EBBCFB88FA148FD6E5" Guid="{9DE388F4-F105-4386-B534-6D8F698C3A34}">
+                        <Component Id="cmp5626CAF2FC9232EBBCFB88FA148FD6E5" Guid="{400370CF-47E0-4F63-B782-EF3D5522160E}">
                             <File Id="fil1637B8952FEAD7B5BD27BC26CD046AD5" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\copybot.py" />
                         </Component>
-                        <Component Id="cmp032391041823C47D7A777E216AF87DBE" Guid="{728A5B74-4C77-4B5C-A111-5D27875BC921}">
+                        <Component Id="cmp032391041823C47D7A777E216AF87DBE" Guid="{7D642DEA-5815-4C83-891F-EDCB33F20223}">
                             <File Id="filD2190BB5F0313CCB52F67CC64CB7EFE4" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\copybot.pyc" />
                         </Component>
-                        <Component Id="cmpED644F9EFA4CE1BC1B7878C94C27C4B1" Guid="{AC485149-76A9-429B-B002-1CADA12F586F}">
+                        <Component Id="cmpED644F9EFA4CE1BC1B7878C94C27C4B1" Guid="{1F430595-D131-4782-90F5-7A38D49BBD2F}">
                             <File Id="filBC5F91F8C11965BF1E67A1591A9B10B0" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\helloworld.py" />
                         </Component>
-                        <Component Id="cmpDF0D3D3E65FF439A9842AA723A2B9A11" Guid="{129B1DDB-E5C2-4C84-908C-6D77B58054BD}">
+                        <Component Id="cmpDF0D3D3E65FF439A9842AA723A2B9A11" Guid="{C00ABE32-D67E-41A3-B49F-68827AB9E99C}">
                             <File Id="filB825B69110BCE889018B9578FF032ABA" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\helloworld.pyc" />
                         </Component>
-                        <Component Id="cmp799154E236C2C84ACF09026C61B1A0ED" Guid="{1BB9D4B0-B15D-411B-BFF4-EAF6B806474D}">
+                        <Component Id="cmp799154E236C2C84ACF09026C61B1A0ED" Guid="{3D0CC3BA-557E-421C-BAA3-B2E5B3A36B15}">
                             <File Id="fil3142ECFBDE763C5703D020138715DE66" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\launch_ami.py" />
                         </Component>
-                        <Component Id="cmp5CD6FCA85D6C999748007425A17B8E0E" Guid="{5C1374EC-7C51-43BC-A03F-662439D8102C}">
+                        <Component Id="cmp5CD6FCA85D6C999748007425A17B8E0E" Guid="{722FD4A0-CD50-4480-9D13-8741A74D55FD}">
                             <File Id="filC019E394829B59101370284D1C9C450F" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\launch_ami.pyc" />
                         </Component>
-                        <Component Id="cmp247C2C0FB73E8B46F84D8C567EC82F77" Guid="{BB6D464C-2F6E-4929-8D60-C70719707439}">
+                        <Component Id="cmp247C2C0FB73E8B46F84D8C567EC82F77" Guid="{8528985A-230B-4B1F-BFA7-E3C08CF6DB90}">
                             <File Id="fil516D6468A50C30035029253027DC8B91" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\scriptbase.py" />
                         </Component>
-                        <Component Id="cmp746475D47CE0DC1875BBD9585EB80C54" Guid="{CDD69BA7-EBB9-45DC-AB6E-6D8BAB40FD01}">
+                        <Component Id="cmp746475D47CE0DC1875BBD9585EB80C54" Guid="{73DBE7A3-6D6E-45AB-8DD7-33691C4156F5}">
                             <File Id="fil8312954DB889178154DFC53FA4B34CF4" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\scriptbase.pyc" />
                         </Component>
-                        <Component Id="cmpBEB60E4D3FC7DF87142FCCE67187F34D" Guid="{342B5801-A582-4F2E-825B-A34E789E9DB7}">
+                        <Component Id="cmpBEB60E4D3FC7DF87142FCCE67187F34D" Guid="{380C3729-9DCB-41AB-BB99-C5E18BD70180}">
                             <File Id="fil55FB2A22F1C5F47752AE2E4A1AFCF0BA" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\startup.py" />
                         </Component>
-                        <Component Id="cmp8920D650D8BB0D1481144D1DDF88817E" Guid="{EBDD9891-5946-4E3E-8FCF-F12769F22D8E}">
+                        <Component Id="cmp8920D650D8BB0D1481144D1DDF88817E" Guid="{A9C5A671-555E-4DDF-9A62-35275A8FA4D6}">
                             <File Id="fil4469CD7AD7482BC9980B3D92196B8C5C" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\startup.pyc" />
                         </Component>
-                        <Component Id="cmp3756D92D42C5B1C22D8DAC156FF4D81E" Guid="{EFB13441-E395-47C2-B841-4800F9F51A96}">
+                        <Component Id="cmp3756D92D42C5B1C22D8DAC156FF4D81E" Guid="{4071883B-BEEF-4582-A67C-D3144421A0DD}">
                             <File Id="fil2C9321C721595BFB8EA6413D400CADD6" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\__init__.py" />
                         </Component>
-                        <Component Id="cmpF74E9037F316748B51BFF274D84E4E08" Guid="{EB9D385D-9BF8-47AA-921B-524DE17A6FEB}">
+                        <Component Id="cmpF74E9037F316748B51BFF274D84E4E08" Guid="{2B0332DA-C83A-4C39-8FB7-D790620FE0AD}">
                             <File Id="fil5644C841FC541D205CCFB710B0C9E074" KeyPath="yes" Source="$(var.BotoDir)\boto\pyami\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dirE37FCAE7F8E3D4D559FD0537A5B62011" Name="rds">
-                        <Component Id="cmp498E314048E9CC2F3C34F4D72A5FBBDD" Guid="{0F73368C-5A9F-44BC-B240-CC616EDFBC44}">
+                        <Component Id="cmp498E314048E9CC2F3C34F4D72A5FBBDD" Guid="{C5E2FF59-0AF8-43F7-B29A-A30C2A4BE1D9}">
                             <File Id="fil2ECDEABA9B012798331AE750AB2BCEDD" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\dbinstance.py" />
                         </Component>
-                        <Component Id="cmp79A139DC838645D7857268F69078AD8F" Guid="{891487B6-2121-4297-96EF-7EEC3EE93DF6}">
+                        <Component Id="cmp79A139DC838645D7857268F69078AD8F" Guid="{4C47DC9F-5188-42B3-9C6D-E7187631E6DA}">
                             <File Id="filD18E55B28F5B339BB963636F4821C60D" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\dbinstance.pyc" />
                         </Component>
-                        <Component Id="cmpC72A19500BBBDE5114450124BBC86FFE" Guid="{EDF50469-2565-44EE-A3AB-F57F5D78D56F}">
+                        <Component Id="cmpC72A19500BBBDE5114450124BBC86FFE" Guid="{E55E90EF-9719-4941-BB32-DEB15268E65B}">
                             <File Id="fil8FBDB711F204FEC838BFEB461A1951FD" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\dbsecuritygroup.py" />
                         </Component>
-                        <Component Id="cmp58C6204C97FCBB01C64F188E91A81E71" Guid="{8156310F-CE0F-4EC3-9C7A-C297D7FF96B0}">
+                        <Component Id="cmp58C6204C97FCBB01C64F188E91A81E71" Guid="{711EF388-1C81-454A-B506-5BCBE4FF64FE}">
                             <File Id="filF20FF3D99C39870596EFE0B9D287A639" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\dbsecuritygroup.pyc" />
                         </Component>
-                        <Component Id="cmpDD3847C3B81DCCF9A5CDA05E8ACBE5BA" Guid="{EF4A0967-DA6E-4726-9484-2B5637E1A7FC}">
+                        <Component Id="cmpDD3847C3B81DCCF9A5CDA05E8ACBE5BA" Guid="{F17FAD29-B268-4770-9694-530DC4793CAA}">
                             <File Id="fil2A4607F3B0DDA474D2E823D2BCFBC61D" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\dbsnapshot.py" />
                         </Component>
-                        <Component Id="cmp5A3DF282796E474DFE8F3036C9A9D425" Guid="{FDC60905-1F35-4C03-9896-47DA41DB2389}">
+                        <Component Id="cmp5A3DF282796E474DFE8F3036C9A9D425" Guid="{E5086056-3A75-4D72-8A87-2467EA4811C6}">
                             <File Id="fil7B0B3154CD91549FDDE716F262B0689D" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\dbsnapshot.pyc" />
                         </Component>
-                        <Component Id="cmp5BF759D22477D6F2D98A4F2606C7898F" Guid="{35A400BC-9111-4F2B-8B5B-63C6D9A80C37}">
+                        <Component Id="cmp5BF759D22477D6F2D98A4F2606C7898F" Guid="{FB026BF0-4371-4174-BA17-31412374A990}">
                             <File Id="fil561E23E532AF0857E227C30188835FA6" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\event.py" />
                         </Component>
-                        <Component Id="cmp6F997B55C3F07695DB9033C27A5412E6" Guid="{A515E122-DC77-4437-8FCA-6854EDD55930}">
+                        <Component Id="cmp6F997B55C3F07695DB9033C27A5412E6" Guid="{23D43D75-6502-4FB5-BF63-7255353097AC}">
                             <File Id="filD52DB36FDE023FAE8307E2CED5089B0C" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\event.pyc" />
                         </Component>
-                        <Component Id="cmp00D60A2755B03B2A8399C7CF811FDCA3" Guid="{E190E356-0C4F-4F16-96F7-BBA2491F800F}">
+                        <Component Id="cmp00D60A2755B03B2A8399C7CF811FDCA3" Guid="{21023C6D-DDD3-4403-867C-828A75F30639}">
                             <File Id="fil83094E54080DF378262F4211581EC367" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\parametergroup.py" />
                         </Component>
-                        <Component Id="cmp4EBB7B12D2154A5AA4EEEBF080798CA3" Guid="{F489CEB2-7400-4EAA-9C03-9053AFDE257A}">
+                        <Component Id="cmp4EBB7B12D2154A5AA4EEEBF080798CA3" Guid="{7AAA27ED-373B-4349-8F53-EC759E2332D0}">
                             <File Id="fil9280CCC0A3813006047A559725A1E296" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\parametergroup.pyc" />
                         </Component>
-                        <Component Id="cmp34B181A0C29DFEC42F90104141B4777E" Guid="{165CFDA1-99EC-477B-81F3-A6EDEC3C801E}">
+                        <Component Id="cmp34B181A0C29DFEC42F90104141B4777E" Guid="{2305CAEE-63FE-418D-96D7-72697C838B92}">
                             <File Id="filF4EDDADB1FF4EFB5C04D139315213F6E" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\__init__.py" />
                         </Component>
-                        <Component Id="cmp6049E6C945F784C006636FBCC55966D7" Guid="{F697574F-D6F6-4F9A-B701-EFC6EF44F42A}">
+                        <Component Id="cmp6049E6C945F784C006636FBCC55966D7" Guid="{C998ECAE-19F5-4C95-B24C-E2CB6507D05B}">
                             <File Id="fil5F41D59CA1278592740053C255017DAC" KeyPath="yes" Source="$(var.BotoDir)\boto\rds\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dirA7F4186FE82D02C58F991B62190A0AF3" Name="s3">
-                        <Component Id="cmp95579EE1CE9C24CED11D7A8641BF99AB" Guid="{FE81D9E7-8A41-47C5-BBEB-113C6EAB8DF4}">
+                        <Component Id="cmp95579EE1CE9C24CED11D7A8641BF99AB" Guid="{FB8E68A1-C668-4D87-B24D-BBB7D6683D57}">
                             <File Id="filDEFCFE22CCF032AA6B03C659853AE43B" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\acl.py" />
                         </Component>
-                        <Component Id="cmp8AEE1547798AF343BC78B62C20430409" Guid="{C5DB87F9-9E0B-4306-B5FD-81768DB24405}">
+                        <Component Id="cmp8AEE1547798AF343BC78B62C20430409" Guid="{41754E95-14D0-4D90-B71A-30833AAAA955}">
                             <File Id="fil33225D5C3366B700F012C381B532783C" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\acl.pyc" />
                         </Component>
-                        <Component Id="cmp96F5FB2FBC392FBF8260470E2F5B0F98" Guid="{ADAB7C22-50B5-43DB-B33C-9B10942B51C8}">
+                        <Component Id="cmp96F5FB2FBC392FBF8260470E2F5B0F98" Guid="{1BD39977-621E-4231-8D70-33B7D380DCFF}">
                             <File Id="fil64591AFC7905A16802101CF60AB41809" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\bucket.py" />
                         </Component>
-                        <Component Id="cmpD89219BE6F6223469FC7FEC9655EFD53" Guid="{912E788C-BD3D-4B42-9D67-A018E289C756}">
+                        <Component Id="cmpD89219BE6F6223469FC7FEC9655EFD53" Guid="{AD3754CB-B849-4D79-9599-328E7AA91E1F}">
                             <File Id="filDDDFAC3B1E8885D0CE193107A433B24B" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\bucket.pyc" />
                         </Component>
-                        <Component Id="cmp3456488B8299A017DF2BE1CF46882ABC" Guid="{54752321-94CA-407D-8D07-6D26985D4362}">
+                        <Component Id="cmp3456488B8299A017DF2BE1CF46882ABC" Guid="{FB90384F-8DA0-4F7F-AE48-DD4018577CEE}">
                             <File Id="fil2490999478B0098B66089CD41B5D9CFF" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\bucketlistresultset.py" />
                         </Component>
-                        <Component Id="cmpFADCE0156B1FCA08CC792EC2186426B1" Guid="{288D0045-B98A-465B-B7BE-07A45F61D823}">
+                        <Component Id="cmpFADCE0156B1FCA08CC792EC2186426B1" Guid="{92C2BC92-EACC-4EF3-8E59-711ED5264E19}">
                             <File Id="fil151E2C1074DB7137E7F80A03D9BBD469" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\bucketlistresultset.pyc" />
                         </Component>
-                        <Component Id="cmp5105D3C0740B5FB4115582ED2C293336" Guid="{FB78C45C-820D-4FDD-BA69-510E29784D78}">
+                        <Component Id="cmp5105D3C0740B5FB4115582ED2C293336" Guid="{02331BBF-CEB1-461E-A36E-B9097F0C06ED}">
                             <File Id="fil37D90CEDBDB33766B2334E0DDA0B9539" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\connection.py" />
                         </Component>
-                        <Component Id="cmp4C6ACA6F565C8189C3D9564C9C32A2CE" Guid="{25D9826E-5B5C-44F3-8784-0A7DA8D43811}">
+                        <Component Id="cmp4C6ACA6F565C8189C3D9564C9C32A2CE" Guid="{C56DF538-BC3F-4418-A9DF-FF25CAEC9B8A}">
                             <File Id="fil3BEA99F31E3D4A8E96975815754A0B64" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\connection.pyc" />
                         </Component>
-                        <Component Id="cmpD31290F40D9758287EE1561FE367F02B" Guid="{38716FA1-D1ED-4CA5-A8E2-3844FB077FCA}">
+                        <Component Id="cmpD31290F40D9758287EE1561FE367F02B" Guid="{82BE6C6E-7913-45B5-9790-EE5AC1003728}">
                             <File Id="fil22F177AFF14C8B65A7B9C026163DC561" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\key.py" />
                         </Component>
-                        <Component Id="cmp91C1BF8AE6A5C1E453FED98F2E44DBC7" Guid="{8334E675-5346-4710-9401-EC7F01D18B5B}">
+                        <Component Id="cmp91C1BF8AE6A5C1E453FED98F2E44DBC7" Guid="{5EE83BA3-12EC-4258-AEAE-E9CA15208AC3}">
                             <File Id="fil260D21B02FB84C5F1FEACFBAFB2364F3" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\key.pyc" />
                         </Component>
-                        <Component Id="cmpC4792DB2B73E9C46C9F1ECC56FB806F0" Guid="{D6A336D2-A1F4-494D-82F3-A3E223D9C476}">
+                        <Component Id="cmpC4792DB2B73E9C46C9F1ECC56FB806F0" Guid="{8CDFF545-E041-4A12-99CA-1A8CE65077AD}">
                             <File Id="fil3636B388ACA8E70C874CA8AE8A404D44" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\prefix.py" />
                         </Component>
-                        <Component Id="cmpAAE19211FCDC18B04CD941344D826470" Guid="{25D0D858-9596-4ED1-ADAE-7A6DF18872C4}">
+                        <Component Id="cmpAAE19211FCDC18B04CD941344D826470" Guid="{92ECD435-BF90-49E1-B0AF-0C3A463CE55A}">
                             <File Id="fil5AE7B85E99D68998CBE247EE4E198EBE" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\prefix.pyc" />
                         </Component>
-                        <Component Id="cmp55031B1C73095A362E775460908823FC" Guid="{42AEAE9E-B489-44E7-9B4C-892D09AD2398}">
+                        <Component Id="cmp55031B1C73095A362E775460908823FC" Guid="{77926805-B386-4D7B-985B-027D061FE261}">
                             <File Id="filAD35500088C0C631187E140DDE7D7953" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\user.py" />
                         </Component>
-                        <Component Id="cmp1C8488269BFC9FD86B013B2D2B61606B" Guid="{FE27F6F2-54FE-4A2E-815A-BED5E975DB02}">
+                        <Component Id="cmp1C8488269BFC9FD86B013B2D2B61606B" Guid="{AC915E92-F664-4B50-92B3-DD3CB9A129AD}">
                             <File Id="fil249BFB8A5D3D6CD6A28C342F5123AD82" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\user.pyc" />
                         </Component>
-                        <Component Id="cmpBDDE7629999E548C3C7E6C22CE8A6629" Guid="{7D34DABF-6860-4E01-9E68-FDAD031B8784}">
+                        <Component Id="cmpBDDE7629999E548C3C7E6C22CE8A6629" Guid="{9E540EC2-1DB4-4F26-9341-7EFADA59A7F4}">
                             <File Id="fil74A0A538680F465D2932EAED3EE5CFE8" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\__init__.py" />
                         </Component>
-                        <Component Id="cmpFB85FD85D679359F07B3E8F83710770D" Guid="{B12077B5-AB47-40CB-A46A-BFEDC9D9CF2B}">
+                        <Component Id="cmpFB85FD85D679359F07B3E8F83710770D" Guid="{D35AB266-4DF3-4234-8636-4BE90B8B37DD}">
                             <File Id="filDCC4D7C1DBA7069F79B5834E29998CD3" KeyPath="yes" Source="$(var.BotoDir)\boto\s3\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir72349D4334C4D347163F033F7FC23895" Name="sdb">
-                        <Component Id="cmp62529BCDA2D94BD1C9C4A6A537497321" Guid="{725C4EED-AD60-40EA-AA8B-95E7D75D4B0F}">
+                        <Component Id="cmp62529BCDA2D94BD1C9C4A6A537497321" Guid="{D4FBA496-2488-4C69-A953-1B64E5DE5169}">
                             <File Id="fil0733350DAAF757DCC933E45989EA0DE1" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\connection.py" />
                         </Component>
-                        <Component Id="cmp46AA00DE41BD4ECA173C82681754CCEE" Guid="{0008614C-7950-4623-BFE5-0BA7880C2C05}">
+                        <Component Id="cmp46AA00DE41BD4ECA173C82681754CCEE" Guid="{7D7668AC-61F4-4A7F-ACA6-67AEA16A7DC7}">
                             <File Id="fil3050145429E86DD0EA6670196A58A877" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\connection.pyc" />
                         </Component>
-                        <Component Id="cmp20080FDAE54B70CD4501B7D3A9E36F80" Guid="{24F2A6A4-1F36-4161-9F12-AA30CB133606}">
+                        <Component Id="cmp20080FDAE54B70CD4501B7D3A9E36F80" Guid="{9902337D-FF3B-4BA9-A602-85B0DC8A0F08}">
                             <File Id="fil3E781486DCCE8AE6A2F568F2478ABD53" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\domain.py" />
                         </Component>
-                        <Component Id="cmpF73F64F3106C98C88D6F4DE937A32E6D" Guid="{F125CE45-3213-4187-B729-256E4FC6FE47}">
+                        <Component Id="cmpF73F64F3106C98C88D6F4DE937A32E6D" Guid="{7E6C7DE6-078D-46DA-B627-24B3F00905DD}">
                             <File Id="fil93D09D875DF7EF6BCEF269202390D7EF" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\domain.pyc" />
                         </Component>
-                        <Component Id="cmpD67BAFEDCE35B0FCB5E5751C55F894A0" Guid="{3BC993E9-F7B0-4276-832B-B281F84DF563}">
+                        <Component Id="cmpD67BAFEDCE35B0FCB5E5751C55F894A0" Guid="{B5BCE336-DDB0-4BAD-AAF4-E60F2C53D9F2}">
                             <File Id="filC7B57C2CC87CE6E1202E55C3068E8738" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\item.py" />
                         </Component>
-                        <Component Id="cmpEA7D545657772F629791F6646CE2BA45" Guid="{FE2BB65B-DE78-4E1C-9F85-1138971FA86F}">
+                        <Component Id="cmpEA7D545657772F629791F6646CE2BA45" Guid="{10174149-27D2-461B-A820-2E8DB18A8378}">
                             <File Id="fil15B0D106E49742225D45307A562ACC4B" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\item.pyc" />
                         </Component>
-                        <Component Id="cmpAA2C430882AE578F96241F8EFA402097" Guid="{AF8C8DC2-7264-4398-9963-4AAAE5D845C4}">
+                        <Component Id="cmpAA2C430882AE578F96241F8EFA402097" Guid="{B363706C-2F4F-4A03-961C-5AAEFA9757D9}">
                             <File Id="fil03DE5566979905918EB778DB9EC596C7" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\queryresultset.py" />
                         </Component>
-                        <Component Id="cmp5B5AB035162268786FBEF94781A46272" Guid="{8086626F-FF93-492E-B105-C3611DEE31FA}">
+                        <Component Id="cmp5B5AB035162268786FBEF94781A46272" Guid="{E8BF8865-FE6D-468D-B862-90A5FBDFB755}">
                             <File Id="fil902A209074FEC4403D2AFA89C627C5E2" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\queryresultset.pyc" />
                         </Component>
-                        <Component Id="cmp3A3CAF54827DD3D849F24E4DE4A77D7B" Guid="{E78BDF6C-4A11-48B7-8C6B-9F4D3DD0AAA1}">
+                        <Component Id="cmp3A3CAF54827DD3D849F24E4DE4A77D7B" Guid="{62397FE2-DE02-4478-BE08-22ECB78572B0}">
                             <File Id="filC453F273C17E6146021B91603793300F" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\regioninfo.py" />
                         </Component>
-                        <Component Id="cmp6395BECBBD8C930328956C078B8DA749" Guid="{EE77B024-1651-4038-AADA-68BD6D90F9ED}">
+                        <Component Id="cmp6395BECBBD8C930328956C078B8DA749" Guid="{DE8B0017-310D-4F8A-8B97-C41B812B241C}">
                             <File Id="filBC3EDE39EBEBF332D03A8284F299F27E" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\regioninfo.pyc" />
                         </Component>
-                        <Component Id="cmp7626D98E8C5EA9153C23DF48EC0275D4" Guid="{508F93E6-7070-499B-872D-7987D12CA111}">
+                        <Component Id="cmp7626D98E8C5EA9153C23DF48EC0275D4" Guid="{EAB4D21E-753D-4302-93F5-F0B472E2FAF2}">
                             <File Id="filECC0319C64DF491049D10A2CE9943984" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\__init__.py" />
                         </Component>
-                        <Component Id="cmp1DBAC5DF2E41CE3E9FCFEE0CFF1592FA" Guid="{BCA5237B-D1F9-40C3-9880-F1F3387A1CBE}">
+                        <Component Id="cmp1DBAC5DF2E41CE3E9FCFEE0CFF1592FA" Guid="{C3FB6E74-C7CE-4F4E-91EC-E103457D86DB}">
                             <File Id="fil546D0E629E273AC47BE4A736BCC1917F" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\__init__.pyc" />
                         </Component>
                         <Directory Id="dir7913C3F394228C6060CC6E59A06B7AA7" Name="db">
-                            <Component Id="cmp2302971CC13698D900782788391C4D01" Guid="{E97C9D8D-DFB1-46DA-8CFE-978E908C93EC}">
+                            <Component Id="cmp2302971CC13698D900782788391C4D01" Guid="{B75A3CA9-ED2A-4AF5-A6CF-8E23D17638F4}">
                                 <File Id="fil58BBABCDEA8F6A60D062C84603986466" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\blob.py" />
                             </Component>
-                            <Component Id="cmpACB82ED546662728A268F3E2E85F020C" Guid="{A3241D5A-6119-4B37-9CE3-2B51AB2C0EF6}">
+                            <Component Id="cmpACB82ED546662728A268F3E2E85F020C" Guid="{3028E052-D8A0-4088-AC94-DBB319D1D582}">
                                 <File Id="filABAC2D67FFF690A74FBED169071D4252" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\blob.pyc" />
                             </Component>
-                            <Component Id="cmp6EB41521FBDC93E221E748EB8DD2B19D" Guid="{5C83E112-DEEF-404F-858D-3428213033B9}">
+                            <Component Id="cmp6EB41521FBDC93E221E748EB8DD2B19D" Guid="{3C7926D7-E725-4DB4-AD90-815C8520D061}">
                                 <File Id="fil943B57AB7C3060C5BC486A62B327297F" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\key.py" />
                             </Component>
-                            <Component Id="cmpDA17761168E21897D94F05B684FC6EC2" Guid="{0A12E0D9-9AFB-4C21-B3EA-E223AE906208}">
+                            <Component Id="cmpDA17761168E21897D94F05B684FC6EC2" Guid="{7C1CA41F-D8C0-418A-B246-0F3EF1C607F4}">
                                 <File Id="fil6109B572A67A3406705224C7A62C3D2B" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\key.pyc" />
                             </Component>
-                            <Component Id="cmp316B75C04F21E0D99FC32A75738B5A51" Guid="{6FBBF619-1AF5-41C4-A1E1-8680187B1D77}">
+                            <Component Id="cmp316B75C04F21E0D99FC32A75738B5A51" Guid="{5BD9B563-00A5-4644-84C1-AF82E22DEB32}">
                                 <File Id="fil04EDA4A019EA57345A17E400F6A76735" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\model.py" />
                             </Component>
-                            <Component Id="cmp7957E1F144026E7C724179A8BF8C31B8" Guid="{80787FFE-51E4-4B07-9042-A191A378C2A5}">
+                            <Component Id="cmp7957E1F144026E7C724179A8BF8C31B8" Guid="{F5643ABE-D0DA-46AC-9403-067614ECDFD0}">
                                 <File Id="fil35C20382F22EE8AA5FDE64E06620A8E3" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\model.pyc" />
                             </Component>
-                            <Component Id="cmpBAA63D61E1C660EFA896A3F8FFC6AF36" Guid="{963164AC-8548-4D9F-B0E3-EEB1BD54985C}">
+                            <Component Id="cmpBAA63D61E1C660EFA896A3F8FFC6AF36" Guid="{C0878A2A-3649-4C9F-950B-9B85251A09C0}">
                                 <File Id="fil77BD9F5D771B2E1DA34C724A940C46B5" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\property.py" />
                             </Component>
-                            <Component Id="cmpFEFE5491D4E442F75CFFD9BF98A784FC" Guid="{C70D5746-9285-4D0B-B437-4DD695248AE4}">
+                            <Component Id="cmpFEFE5491D4E442F75CFFD9BF98A784FC" Guid="{4320F8CC-B852-4F72-9163-1358A3329153}">
                                 <File Id="fil9E27A29AF229EB7F951A58DC00D6A523" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\property.pyc" />
                             </Component>
-                            <Component Id="cmp07AAE7DF88645963843E37E6FFCE7B9F" Guid="{967A156B-A9B5-4DC3-9DDC-6863A47AFDAF}">
+                            <Component Id="cmp07AAE7DF88645963843E37E6FFCE7B9F" Guid="{6964B056-A47E-45AB-96B6-A0BE3213A21A}">
                                 <File Id="fil2680CF1537D4DD02ABA4190E6F01EEF6" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\query.py" />
                             </Component>
-                            <Component Id="cmpF8804E90A148D292A387E577A8F53548" Guid="{F1D1BA6B-A0A8-4F37-B55B-8A3600A46732}">
+                            <Component Id="cmpF8804E90A148D292A387E577A8F53548" Guid="{F2B1602E-4102-4684-9045-AA33B4A18209}">
                                 <File Id="fil0A9B3E8F12CFC7589D00F9160A4DB7A6" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\query.pyc" />
                             </Component>
-                            <Component Id="cmp1121D586E7E1E6345A4581C78DADE842" Guid="{F3C32A6E-A457-42DC-B7DF-C9633C1AD075}">
+                            <Component Id="cmp1121D586E7E1E6345A4581C78DADE842" Guid="{099B978C-0F8A-45A7-8744-84384CBA0B78}">
                                 <File Id="filA83C571C2032D06BD2E2810F7581E01F" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\test_db.py" />
                             </Component>
-                            <Component Id="cmpD5DA5FEC88DE2B6BEFB6ECE7238CAB8E" Guid="{D060F513-698A-4580-8F63-6C0FD4CA49FB}">
+                            <Component Id="cmpD5DA5FEC88DE2B6BEFB6ECE7238CAB8E" Guid="{C88458DF-6A98-4407-8A00-78F0C1A8CDEC}">
                                 <File Id="fil5565278CD50808A6456B69AD5434C9D4" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\test_db.pyc" />
                             </Component>
-                            <Component Id="cmp5A762651CAD3560D0371790A06AE1F30" Guid="{8091E633-D67E-4163-9D9A-F54000CDD15D}">
+                            <Component Id="cmp5A762651CAD3560D0371790A06AE1F30" Guid="{077BC2C3-3B6C-40EE-AC1B-D8C0B9D45E4E}">
                                 <File Id="fil13A0B99CFC2C0C6E9D23CF08703707F8" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\__init__.py" />
                             </Component>
-                            <Component Id="cmp66DC2B9115218732AC58CA0C129B7444" Guid="{20774490-C617-4FB0-A6AA-021B3E63BD40}">
+                            <Component Id="cmp66DC2B9115218732AC58CA0C129B7444" Guid="{0D42DC7A-02C5-4C00-BFD5-97A11EFEE607}">
                                 <File Id="fil7984A5C860D471CC710B92DC103E1E6E" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\__init__.pyc" />
                             </Component>
                             <Directory Id="dirB227CD72C2D17868B83F8D4DACF07515" Name="manager">
-                                <Component Id="cmp0F819F35850551592D72AD7C12B304C0" Guid="{0DDB7D40-2A0E-492F-99CE-9BD0BB1127C1}">
+                                <Component Id="cmp0F819F35850551592D72AD7C12B304C0" Guid="{DB6675F1-D087-4958-98F3-4EAC154BD4A0}">
                                     <File Id="filC362C7979ABEF25F2FE5D9F7E30E2149" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\pgmanager.py" />
                                 </Component>
-                                <Component Id="cmpEF990D5A09FD8C312CED3D52F1086E2A" Guid="{EA11B2CB-868D-425C-A5F9-7BED57A81F77}">
+                                <Component Id="cmpEF990D5A09FD8C312CED3D52F1086E2A" Guid="{CA526E0D-A5E5-4160-BD00-B27F752485E4}">
                                     <File Id="fil774F4E4ECC29BD73E3D3CF8F73DC37E5" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\pgmanager.pyc" />
                                 </Component>
-                                <Component Id="cmp01AE64F7EC9F178154D34DFB2FD1940E" Guid="{E24792FA-0889-4798-855A-6B4A5B0DCFD9}">
+                                <Component Id="cmp01AE64F7EC9F178154D34DFB2FD1940E" Guid="{67C690F3-744D-4F05-BEE1-CCEBF56D119C}">
                                     <File Id="filCD31AAFE89E0E25FE2BD7A596E366685" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\sdbmanager.py" />
                                 </Component>
-                                <Component Id="cmp4332406E2D52168024D18AEEF86E612C" Guid="{7741ABAF-7A24-47B2-AAA2-B7C26E15ACB3}">
+                                <Component Id="cmp4332406E2D52168024D18AEEF86E612C" Guid="{7C469CFA-5C32-410E-89BB-0AD428006A1C}">
                                     <File Id="fil6403DC8E081BC5FCAC2C1D3031D9243F" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\sdbmanager.pyc" />
                                 </Component>
-                                <Component Id="cmp7A770CDF63A6919800402B6A1507EFC5" Guid="{FC085002-4191-47B6-A0CA-A5639C69B6D2}">
+                                <Component Id="cmp7A770CDF63A6919800402B6A1507EFC5" Guid="{AC78EF16-F16F-4AA3-8070-BC1CE3854255}">
                                     <File Id="filCF88100E96507A9C705EB72D2B1A116C" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\xmlmanager.py" />
                                 </Component>
-                                <Component Id="cmp159D9BAB613EA5DCD5BA65C35E705174" Guid="{C15823FD-0DF3-4D32-91B1-5E0D289F5142}">
+                                <Component Id="cmp159D9BAB613EA5DCD5BA65C35E705174" Guid="{A5263800-4D8B-44A6-ACEE-E93B351D0F59}">
                                     <File Id="filE54409C71CC1FDF02CE0326669863DE0" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\xmlmanager.pyc" />
                                 </Component>
-                                <Component Id="cmpFDE612A45591E09A9AB8DAB967CF8672" Guid="{ED0B0F55-2681-4CCA-93F5-B6B9BE736CA1}">
+                                <Component Id="cmpFDE612A45591E09A9AB8DAB967CF8672" Guid="{0A9D5D90-FA5B-4080-A32B-BFBC63AA2A29}">
                                     <File Id="fil4757FCAA78EBCC3ADD1F7046840BC2EF" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\__init__.py" />
                                 </Component>
-                                <Component Id="cmp6F4C1A05F12FFFD6BDC43FBBBC274CEB" Guid="{916C4730-51B1-4F7A-8C86-12EAE936A4CC}">
+                                <Component Id="cmp6F4C1A05F12FFFD6BDC43FBBBC274CEB" Guid="{0E522A25-6183-467F-9672-5F348F238F24}">
                                     <File Id="filF6BDDFC371E544BDC8E95D57283C43E1" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\db\manager\__init__.pyc" />
                                 </Component>
                             </Directory>
                         </Directory>
                         <Directory Id="dir568949F3632E43E886E92F93F5EA6133" Name="persist">
-                            <Component Id="cmpD89A3FFBBCDA713B3952A631834885A2" Guid="{9671C09B-5A00-428E-BF9B-5792B3F7837C}">
+                            <Component Id="cmpD89A3FFBBCDA713B3952A631834885A2" Guid="{0A885FBB-C600-468F-A3C1-0BCF8032A927}">
                                 <File Id="fil8204D974D020C9A8C6AA2DC7443DEB0F" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\checker.py" />
                             </Component>
-                            <Component Id="cmpF5157CE9DD1169253E4001652106FD52" Guid="{F7381E82-7E96-4E22-BA01-3B2E396DDAD9}">
+                            <Component Id="cmpF5157CE9DD1169253E4001652106FD52" Guid="{750EFB09-44E4-48CD-AF43-5E73FB645B14}">
                                 <File Id="fil265EF376EF5F652B54B7C33688BE2A2D" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\checker.pyc" />
                             </Component>
-                            <Component Id="cmp0E831407660609FBD9DAB21C8BE08224" Guid="{FBDB6551-40F8-4300-96FF-1CA6845DF211}">
+                            <Component Id="cmp0E831407660609FBD9DAB21C8BE08224" Guid="{33A41D24-371A-40AB-A427-08DA10CD2FEB}">
                                 <File Id="filF82D7BE9EB8B9D726670936AF193196E" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\object.py" />
                             </Component>
-                            <Component Id="cmpAB548F7912FE51AF6754DEEE8845E9C8" Guid="{C5FA6EF9-CE32-4A14-A28A-AE3E0CF597DE}">
+                            <Component Id="cmpAB548F7912FE51AF6754DEEE8845E9C8" Guid="{1D732EF7-4C1F-4754-AC0C-B184B28A2EEB}">
                                 <File Id="filC2F51FD754B7CD803A31D03F98968490" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\object.pyc" />
                             </Component>
-                            <Component Id="cmpA219CDA1715E262D9ED7C9052649B53B" Guid="{6A9FF798-7A75-499D-BF51-5ACD2B07CBAD}">
+                            <Component Id="cmpA219CDA1715E262D9ED7C9052649B53B" Guid="{D00F81F8-BAA9-41DE-806B-A96BDCAA11DC}">
                                 <File Id="filE6864ADE3FD182268BAAAEDAB50EED95" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\property.py" />
                             </Component>
-                            <Component Id="cmpFD6651A3BBB7FFC4EF8A68301BD9D1DB" Guid="{9822484D-719B-48F0-8202-2535D1A92CC2}">
+                            <Component Id="cmpFD6651A3BBB7FFC4EF8A68301BD9D1DB" Guid="{35CD6D68-E280-47CD-BCFD-3CF16BDF6923}">
                                 <File Id="filA01BBFDEA8D1B409A82B1D36592D74BD" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\property.pyc" />
                             </Component>
-                            <Component Id="cmpCDAAE16549DB1F5CE2A0E3E12D4C3A2A" Guid="{32456E4E-821E-4DB8-A7EA-B6BCA6B7D8F0}">
+                            <Component Id="cmpCDAAE16549DB1F5CE2A0E3E12D4C3A2A" Guid="{EAE728A5-8334-496A-B5D5-555DDF238A05}">
                                 <File Id="filA060576FB3A478C21F8CC387A884629C" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\test_persist.py" />
                             </Component>
-                            <Component Id="cmp933E2BA14D01F8FF6EF629DE6BAB4BBA" Guid="{6B8E3261-E700-4CB6-A654-8434E85D1E12}">
+                            <Component Id="cmp933E2BA14D01F8FF6EF629DE6BAB4BBA" Guid="{878195E6-11B8-47B2-9769-D0A64661AC04}">
                                 <File Id="filC1DB405E13DEF86343051F16B15F1592" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\test_persist.pyc" />
                             </Component>
-                            <Component Id="cmpDF0142E023E73E2535097B931819A9D5" Guid="{974881A1-7CBE-49A4-821F-0CCA6A4DF3E0}">
+                            <Component Id="cmpDF0142E023E73E2535097B931819A9D5" Guid="{EE0351F5-029D-4069-97E0-7D03D5327F04}">
                                 <File Id="fil041CBBC29AA88FF56972FE6E2A71E21E" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\__init__.py" />
                             </Component>
-                            <Component Id="cmp316062FE99B31E67C505CC36421C0B4B" Guid="{8BBB73B9-1598-4BA7-8B09-4A88EDC1DFB6}">
+                            <Component Id="cmp316062FE99B31E67C505CC36421C0B4B" Guid="{28740457-A737-4C4D-98D9-3274D9D514EA}">
                                 <File Id="fil85EC7C8E93C200CBFB7EA454D2199FB1" KeyPath="yes" Source="$(var.BotoDir)\boto\sdb\persist\__init__.pyc" />
                             </Component>
                         </Directory>
                     </Directory>
                     <Directory Id="dir7E1130E48B6FAE04954607B43FB55402" Name="services">
-                        <Component Id="cmpAA58ABC4F9F52C3443CFF98C53C78FBA" Guid="{C8A235BD-28C5-4ABA-8700-82537EACFCA8}">
+                        <Component Id="cmpAA58ABC4F9F52C3443CFF98C53C78FBA" Guid="{483E6485-0753-4F0C-9BCB-FB811D055FC1}">
                             <File Id="fil2F75E394DB0B518265E4479A9C734829" KeyPath="yes" Source="$(var.BotoDir)\boto\services\bs.py" />
                         </Component>
-                        <Component Id="cmpF643DA052A20AF76492AAB0AEE4609C8" Guid="{51DD6498-89C0-4905-B229-E58097AE840B}">
+                        <Component Id="cmpF643DA052A20AF76492AAB0AEE4609C8" Guid="{D5B30B4E-4F45-4A70-A725-9DD30459CA98}">
                             <File Id="fil1A2E60B8634D0A2E844441F8FC0C884C" KeyPath="yes" Source="$(var.BotoDir)\boto\services\bs.pyc" />
                         </Component>
-                        <Component Id="cmp756916BA62A9DC375D3DD4BCFE399E17" Guid="{AF3FDFB4-8155-488B-954B-008C4DC77DEF}">
+                        <Component Id="cmp756916BA62A9DC375D3DD4BCFE399E17" Guid="{067E1129-74DA-4180-88EE-BCF973C0FB7B}">
                             <File Id="fil139AA11C8A2C7B601C6FC14069CD7103" KeyPath="yes" Source="$(var.BotoDir)\boto\services\message.py" />
                         </Component>
-                        <Component Id="cmpB8D897ABE677E657040845E9187E3BAE" Guid="{B5CAC7DD-A061-4F5A-897E-C8E172980C82}">
+                        <Component Id="cmpB8D897ABE677E657040845E9187E3BAE" Guid="{67478FE5-54D0-435B-81A4-055E6A4D1E61}">
                             <File Id="filFB0AA5CAF840A7253F005789857F7E78" KeyPath="yes" Source="$(var.BotoDir)\boto\services\message.pyc" />
                         </Component>
-                        <Component Id="cmpADADBD1446A6CBFBF9A346D168AEA894" Guid="{E176450D-142F-48B2-8113-9C26440CC5F9}">
+                        <Component Id="cmpADADBD1446A6CBFBF9A346D168AEA894" Guid="{17BCDF85-36E8-4026-B5A5-F3C6E993DEA3}">
                             <File Id="fil4FE9E5EC5A683DE7C69B549D72161240" KeyPath="yes" Source="$(var.BotoDir)\boto\services\result.py" />
                         </Component>
-                        <Component Id="cmp8CA160124F42EB8CB125473CB125D7AD" Guid="{A08E065F-1C6C-4BDD-A102-3419DA74DBF4}">
+                        <Component Id="cmp8CA160124F42EB8CB125473CB125D7AD" Guid="{4C3AB31C-4740-46CB-8B16-49464B77226A}">
                             <File Id="fil8AAE7BB8DB06132977CAAEBBDBEBB105" KeyPath="yes" Source="$(var.BotoDir)\boto\services\result.pyc" />
                         </Component>
-                        <Component Id="cmp3CC43F9E4CCF6B7DD53A8841CD097250" Guid="{F7B4BB3D-D8C5-451B-827C-1DE8A3F3F37F}">
+                        <Component Id="cmp3CC43F9E4CCF6B7DD53A8841CD097250" Guid="{C874F706-E64C-4A2F-A082-0C6D47693D24}">
                             <File Id="filA1D01FF97D4FB6B1270769ACE256A8B2" KeyPath="yes" Source="$(var.BotoDir)\boto\services\service.py" />
                         </Component>
-                        <Component Id="cmp97D41BDAF34916F33039B09179CCFCA6" Guid="{850B980B-2476-4CDE-A02F-41CF89B16D49}">
+                        <Component Id="cmp97D41BDAF34916F33039B09179CCFCA6" Guid="{19AA2B88-9AB7-447F-92DA-10235074D84A}">
                             <File Id="fil11AAE91E91159ED746C0B8BC87B006C1" KeyPath="yes" Source="$(var.BotoDir)\boto\services\service.pyc" />
                         </Component>
-                        <Component Id="cmp282C0B998CB01A480A1586C57E50F9C0" Guid="{9AD5866B-C26E-495A-B744-AA31DF6C94F5}">
+                        <Component Id="cmp282C0B998CB01A480A1586C57E50F9C0" Guid="{55F263B2-2806-4C3F-A431-02F6843DE6F1}">
                             <File Id="fil3671C09F9188D8378EFFA797DB20F084" KeyPath="yes" Source="$(var.BotoDir)\boto\services\servicedef.py" />
                         </Component>
-                        <Component Id="cmpEAC83F2D85AB284E125BDC86D72EF6AB" Guid="{72AA9EC5-6441-4AFE-AB35-2D4098139713}">
+                        <Component Id="cmpEAC83F2D85AB284E125BDC86D72EF6AB" Guid="{F43166D8-7BAB-4E93-A66D-2CDEFB6A7915}">
                             <File Id="fil429366B9B28DAE606BA8F9AD511F22B6" KeyPath="yes" Source="$(var.BotoDir)\boto\services\servicedef.pyc" />
                         </Component>
-                        <Component Id="cmp8E76F408A4EE76986E8FF2744C67F37D" Guid="{ED174A6B-DB93-4AAF-B77B-AC1982D6E0C9}">
+                        <Component Id="cmp8E76F408A4EE76986E8FF2744C67F37D" Guid="{01B65BF2-3543-407F-9C17-C7913B6F9032}">
                             <File Id="fil5B51009B1D3F2E7D4486BCEBCA0C3D7A" KeyPath="yes" Source="$(var.BotoDir)\boto\services\sonofmmm.py" />
                         </Component>
-                        <Component Id="cmp3A97349C396EFC6BE0141537DC91F086" Guid="{756EB58E-A0AE-4780-988B-D64E7C0CE058}">
+                        <Component Id="cmp3A97349C396EFC6BE0141537DC91F086" Guid="{70B03EC7-595C-402B-8E24-262F9A44230F}">
                             <File Id="fil184F97A80D90D332417FE0295CC5F272" KeyPath="yes" Source="$(var.BotoDir)\boto\services\sonofmmm.pyc" />
                         </Component>
-                        <Component Id="cmp53E1AC5E77F759BC27797B45A0736A98" Guid="{CD52FC24-5E76-4CCE-9ACB-502B87DAB79B}">
+                        <Component Id="cmp53E1AC5E77F759BC27797B45A0736A98" Guid="{6F8C22B0-F15D-4975-AE98-26056DF88405}">
                             <File Id="filCE1AEA8DC1025979A3F683D760C8175D" KeyPath="yes" Source="$(var.BotoDir)\boto\services\submit.py" />
                         </Component>
-                        <Component Id="cmp73226C867D012E474C2AF8545C738BD4" Guid="{12030786-9189-412B-B3D1-5796A128360C}">
+                        <Component Id="cmp73226C867D012E474C2AF8545C738BD4" Guid="{64505624-C4DE-47DC-BE04-BB0F61EAE931}">
                             <File Id="filFC41811DE6567ADA2D793589841ACC38" KeyPath="yes" Source="$(var.BotoDir)\boto\services\submit.pyc" />
                         </Component>
-                        <Component Id="cmpC6114351AE651539241036D3B9B7649A" Guid="{7FCA4D03-4250-4614-91EC-91B35256A219}">
+                        <Component Id="cmpC6114351AE651539241036D3B9B7649A" Guid="{9BA25289-A0D0-45D3-87A9-64615ABF16F6}">
                             <File Id="fil7657D3FBFE3940BD2C5BD09AFBD3CF9F" KeyPath="yes" Source="$(var.BotoDir)\boto\services\__init__.py" />
                         </Component>
-                        <Component Id="cmp37E787F88B1E1B6D766DE68412293BAB" Guid="{6D1A486F-AE3A-4B9E-BEEF-F78B94A969C7}">
+                        <Component Id="cmp37E787F88B1E1B6D766DE68412293BAB" Guid="{3013E7A9-8E99-4CA2-B4AE-EBC467A3C42B}">
                             <File Id="fil4AD4C347351FDC37E74EA751E037E453" KeyPath="yes" Source="$(var.BotoDir)\boto\services\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir321405F0F8F164C296B81AFFFA05FF7C" Name="sqs">
-                        <Component Id="cmp94AD6DAAE62FD0CC37A7A43F97E0CF00" Guid="{82FF1541-CA34-4821-AD21-36F68CCFC3BA}">
+                        <Component Id="cmp94AD6DAAE62FD0CC37A7A43F97E0CF00" Guid="{AA99F22E-A571-4641-81A0-FA4456FB6F7B}">
                             <File Id="fil751369A1CFDC8ABE040C82F1186415E6" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\attributes.py" />
                         </Component>
-                        <Component Id="cmpC05BF9A59512F3C5EFC652BB66B667A1" Guid="{026FC5D9-B9AE-47EB-B5E6-E7896B97957C}">
+                        <Component Id="cmpC05BF9A59512F3C5EFC652BB66B667A1" Guid="{AD114352-EE3B-4419-BA42-FDDA300079AE}">
                             <File Id="filE73A308B85BF3BFF6A811E60D73AA795" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\attributes.pyc" />
                         </Component>
-                        <Component Id="cmp454A283753067F059D62E186A69154B9" Guid="{EB27EC3D-1B66-4D7F-BE64-0DCFFF2333C8}">
+                        <Component Id="cmp454A283753067F059D62E186A69154B9" Guid="{97A0B16F-0E5E-4B44-A454-DDF189651563}">
                             <File Id="fil38B29464A4B1F91090875DD54DBE69BF" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\connection.py" />
                         </Component>
-                        <Component Id="cmpC9B8664966FDEEAAA346D74D856476B5" Guid="{A3AC7817-91A2-45F3-A64F-00B070862943}">
+                        <Component Id="cmpC9B8664966FDEEAAA346D74D856476B5" Guid="{DA0CEED9-29EF-430D-B661-BE9622F2B861}">
                             <File Id="filCC5AAC64D0E88898BCC35F98FA402432" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\connection.pyc" />
                         </Component>
-                        <Component Id="cmpA34341A94C54816AC2C02B56DF296BA5" Guid="{FBD514A1-A32C-4544-A8E0-A0E45681E9A9}">
+                        <Component Id="cmpA34341A94C54816AC2C02B56DF296BA5" Guid="{11DDA5E7-B0EE-45D1-92A2-3BCE65D04E06}">
                             <File Id="fil85168B529C6ED5BE02CA1933DD3DF467" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\jsonmessage.py" />
                         </Component>
-                        <Component Id="cmp1DB8F353FFD3E869657A7E19E90B0986" Guid="{E246853C-0EFD-4F21-B829-8759A1FFDFBF}">
+                        <Component Id="cmp1DB8F353FFD3E869657A7E19E90B0986" Guid="{2DA6518E-33E4-4E66-A750-6DE6116D4AE7}">
                             <File Id="filB49F538E106EFD20F446C4968EABAD87" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\jsonmessage.pyc" />
                         </Component>
-                        <Component Id="cmp09FB3613F81B6845D45FE7307A37D1BC" Guid="{6E360E48-CEE3-4BB8-A971-D1EB0DDED6E2}">
+                        <Component Id="cmp09FB3613F81B6845D45FE7307A37D1BC" Guid="{C62CF474-7A40-4ABB-A360-A9D9C35D6706}">
                             <File Id="filB89AD75C7C003E33C37296181A5C2391" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\message.py" />
                         </Component>
-                        <Component Id="cmpB0262D8B7FC4548E95370EE70F757DCC" Guid="{F8B003A5-94EE-4EBA-9569-7512727A0E8A}">
+                        <Component Id="cmpB0262D8B7FC4548E95370EE70F757DCC" Guid="{54D2A5AC-8215-41DA-9A87-7D3B67212AD5}">
                             <File Id="fil93ACEA5098DFF12B80CDE2D7B79011A1" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\message.pyc" />
                         </Component>
-                        <Component Id="cmp338978964463FA784E8CF3B9394CA968" Guid="{D582C573-AAEC-4698-8D02-D0E1528D8192}">
+                        <Component Id="cmp338978964463FA784E8CF3B9394CA968" Guid="{B3EDF639-74E3-428F-82B6-260202D2771A}">
                             <File Id="filCF2DD280A76FE210C8BC79ABD4749610" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\queue.py" />
                         </Component>
-                        <Component Id="cmpB0B4E661A6C288892BD73F8561EC92B1" Guid="{46A1CF50-ABDA-48FB-AE92-2B59354E1E25}">
+                        <Component Id="cmpB0B4E661A6C288892BD73F8561EC92B1" Guid="{55BB094D-5606-46F0-B240-08365B87C617}">
                             <File Id="fil4A9C3432937D1ADCFD5C3E1ED86F6864" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\queue.pyc" />
                         </Component>
-                        <Component Id="cmpB04D97C6513B33A9F442F3A3FC956B6B" Guid="{7F958A07-D3A9-475E-A51A-2F390C719477}">
+                        <Component Id="cmpB04D97C6513B33A9F442F3A3FC956B6B" Guid="{9B9C08E2-3E38-4DD8-9740-3C5CC48093F9}">
                             <File Id="filD6D0A293FA7540CFD08432AE5177F36A" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\regioninfo.py" />
                         </Component>
-                        <Component Id="cmp9987B8A3CD0624AD23F0240C5519F29F" Guid="{9C817E1A-1133-4697-9548-E2D7FD85F7F2}">
+                        <Component Id="cmp9987B8A3CD0624AD23F0240C5519F29F" Guid="{924F21D6-406E-4587-A365-0902354F279E}">
                             <File Id="fil9CF9C3C7956A56527D036009A740DCC5" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\regioninfo.pyc" />
                         </Component>
-                        <Component Id="cmp3400DAF37EBB6226C5ED4FE9161413BA" Guid="{6DCECC21-4F54-494C-9C41-CBDF1894B2CF}">
+                        <Component Id="cmp3400DAF37EBB6226C5ED4FE9161413BA" Guid="{629A368B-8B7F-412E-8015-4FC9678EC83A}">
                             <File Id="filCB91ECE838A9177DBB78B4BCD3758CCF" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\__init__.py" />
                         </Component>
-                        <Component Id="cmp0BC736B6F0EB7BABA2A07E4EB5331C39" Guid="{BC94E5CF-6551-4196-850A-8F7BB94A2539}">
+                        <Component Id="cmp0BC736B6F0EB7BABA2A07E4EB5331C39" Guid="{529FD45E-D708-43E7-AE7D-12030B4B44F6}">
                             <File Id="fil83AB0DABF713F0FFA9F64382C88077EE" KeyPath="yes" Source="$(var.BotoDir)\boto\sqs\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir2F0D59CA13538BF670D8DCBDED8A295E" Name="tests">
-                        <Component Id="cmp0CF14CFA6DB325BEC6CEED15750EE367" Guid="{C9BE013C-EB17-4041-A087-875429706FB6}">
+                        <Component Id="cmp0CF14CFA6DB325BEC6CEED15750EE367" Guid="{CB700CAE-F6D6-45C3-B841-EB9383DD0E90}">
                             <File Id="filEFBF88315CFACE630AA4E601FA8EA796" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\devpay_s3.py" />
                         </Component>
-                        <Component Id="cmpB0F5D3410BA40FF5F3ADDF30C01B96E9" Guid="{80367AA9-B5A4-40D5-BC3C-2B24E9BA39EE}">
+                        <Component Id="cmpB0F5D3410BA40FF5F3ADDF30C01B96E9" Guid="{8C5E9B16-9114-475D-A65F-B56D2C031A48}">
                             <File Id="fil9BD3E69545C1FD629CB822AFF14C3982" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\devpay_s3.pyc" />
                         </Component>
-                        <Component Id="cmpE92C8D5F5B1CE7B53437FF335245A0A3" Guid="{105B831D-90B6-4EB0-9D2E-2BFD58B7DEBF}">
+                        <Component Id="cmpE92C8D5F5B1CE7B53437FF335245A0A3" Guid="{7B1EFFCC-67EE-4052-AD2A-4954D02D138B}">
                             <File Id="fil4E276C6DF9D1FBCF8507B03EC767B34F" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test.py" />
                         </Component>
-                        <Component Id="cmpE79D8CFEDB033269EF0B6666083160C8" Guid="{CCC20390-326E-4601-8EF9-B21694C693F1}">
+                        <Component Id="cmpE79D8CFEDB033269EF0B6666083160C8" Guid="{CD726F1C-C7E2-4499-855E-EF0B016B9F3F}">
                             <File Id="fil2DD0B7C637F8C24B3719C61309E235E2" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test.pyc" />
                         </Component>
-                        <Component Id="cmp536CD7FF15E1D86E5D3399E68F2C1EC7" Guid="{046F9639-DC7D-4C31-9374-D3EAC42DBD88}">
+                        <Component Id="cmp536CD7FF15E1D86E5D3399E68F2C1EC7" Guid="{EB9ADFDE-4C0D-4DA8-8F13-A913DB535F69}">
                             <File Id="filCC852C84978BBAE5B96F46FDC287059B" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_ec2connection.py" />
                         </Component>
-                        <Component Id="cmpC325106F0628EDA33FE13A0332ABBEFC" Guid="{4A0F7ABD-6071-4FFA-B680-A56D6021F591}">
+                        <Component Id="cmpC325106F0628EDA33FE13A0332ABBEFC" Guid="{925F4B44-813F-44D3-A447-FF0718D26135}">
                             <File Id="filCB5BF0C3C14E017C014AD9FF9123D607" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_ec2connection.pyc" />
                         </Component>
-                        <Component Id="cmp7C647086B7C5D1C300CE3A75DEF2CC4F" Guid="{73FC5058-BAB1-4BC0-8032-6F7CF3371D3F}">
+                        <Component Id="cmp7C647086B7C5D1C300CE3A75DEF2CC4F" Guid="{3BDB95E9-72C9-44C5-821D-C1C696BE19CA}">
                             <File Id="filF22338F63AD6480256FCCAC2B28444FE" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_s3connection.py" />
                         </Component>
-                        <Component Id="cmp82673523F38291826FDBF5D2B88C4881" Guid="{D2970A6F-8BC9-49EB-B51E-9E1655C4BAF9}">
+                        <Component Id="cmp82673523F38291826FDBF5D2B88C4881" Guid="{889DF2F1-BE44-46D6-9A79-9E3C75ACA1D9}">
                             <File Id="fil6E8D98C05E7F9CD71CC4F49259DC2189" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_s3connection.pyc" />
                         </Component>
-                        <Component Id="cmp95E4DE2274DEF40D88E9C6D9167E4256" Guid="{BC34B9F7-0A13-4283-A9DB-9317E1274438}">
+                        <Component Id="cmp95E4DE2274DEF40D88E9C6D9167E4256" Guid="{DD5D9550-95B4-4612-80FB-AFF182138882}">
                             <File Id="fil0A789563089F7AE239A4823F3D39CC10" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_sdbconnection.py" />
                         </Component>
-                        <Component Id="cmp69BC1F21C5B88710EBB96879D1415AB3" Guid="{FF4ED911-EB73-4D4F-8E64-DB67C911173F}">
+                        <Component Id="cmp69BC1F21C5B88710EBB96879D1415AB3" Guid="{4679E7B9-B11C-4D9B-82B5-033DE89075CF}">
                             <File Id="fil22CBF191E55278DF16CF9B2B012D44B5" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_sdbconnection.pyc" />
                         </Component>
-                        <Component Id="cmp43466DEDB9EDF13576705073360FA46E" Guid="{F52BED6A-9666-4573-BE01-E7CFAFA99E87}">
+                        <Component Id="cmp43466DEDB9EDF13576705073360FA46E" Guid="{B94E08AA-2F5A-4D11-8FEE-95562A2DCB77}">
                             <File Id="fil4994CAD8A300D95E83A4F97A062245A6" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_sqsconnection.py" />
                         </Component>
-                        <Component Id="cmpCEE9F3BF3AC4E3545D0CADB39AB4AA59" Guid="{648A8E91-AA9E-4D23-91C5-ACD646F1CE38}">
+                        <Component Id="cmpCEE9F3BF3AC4E3545D0CADB39AB4AA59" Guid="{62BD339B-16ED-4D59-A911-D423FBCDCC1E}">
                             <File Id="filBAB50FFA2750A95905E995208D11ACD4" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\test_sqsconnection.pyc" />
                         </Component>
-                        <Component Id="cmp9F33C85F96B6AD14C1A3049FDC403F41" Guid="{DF3449A0-2984-46E9-9537-907669174006}">
+                        <Component Id="cmp9F33C85F96B6AD14C1A3049FDC403F41" Guid="{FABE3235-8498-4FD9-8C8E-18745826AF23}">
                             <File Id="fil9E059CC5D636270384593CFE4A62B652" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\__init__.py" />
                         </Component>
-                        <Component Id="cmp20BC16D4058C3E55F00F95C17526B214" Guid="{8517144D-4958-45AA-9736-07E2C8EBFBD0}">
+                        <Component Id="cmp20BC16D4058C3E55F00F95C17526B214" Guid="{6D98C0A5-1884-4BA7-A982-F4DB4C8D04AE}">
                             <File Id="fil5E6F9B98A1B7ADB52C2193B5D89600FB" KeyPath="yes" Source="$(var.BotoDir)\boto\tests\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dir4F16ACD2201A69E40100B5A2BF5649B7" Name="vpc">
-                        <Component Id="cmp13E6C51230AAFCE9D86567FAE33F8189" Guid="{5C6618AF-7012-4FC4-822C-527F812D9BE2}">
+                        <Component Id="cmp13E6C51230AAFCE9D86567FAE33F8189" Guid="{6BAA9DC0-A723-429A-AC8F-957AFCBA3A77}">
                             <File Id="fil71AF2C02B1FE9BE2FA2FBF5693495B23" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\customergateway.py" />
                         </Component>
-                        <Component Id="cmp91938D2B09700302FD3C3C15D3C33144" Guid="{A04D4BF9-5E40-49A3-88F1-53E4100C8F2D}">
+                        <Component Id="cmp91938D2B09700302FD3C3C15D3C33144" Guid="{A1504F68-35DD-45D8-839A-CF00B25EDD7B}">
                             <File Id="filB969CA1B393723D87C47D3E04BA19F1D" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\customergateway.pyc" />
                         </Component>
-                        <Component Id="cmp5ECE99F64115F70B659EC532AA704A87" Guid="{CC67F89F-75ED-4D57-BC81-1E73DDE6531C}">
+                        <Component Id="cmp5ECE99F64115F70B659EC532AA704A87" Guid="{E8D3475B-29FC-44A4-B9DD-C99F1F12B056}">
                             <File Id="fil908886D0F77C2F800527241E98174215" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\dhcpoptions.py" />
                         </Component>
-                        <Component Id="cmpB2B3412B95902706EE12B1C72A71EEB9" Guid="{F398AADD-56DB-452A-B15C-58390BDC0FCA}">
+                        <Component Id="cmpB2B3412B95902706EE12B1C72A71EEB9" Guid="{7EC8F224-ABA9-4008-9C4C-36FE86F0FE79}">
                             <File Id="fil0A5E94CE0A6D47075A8F884921151577" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\dhcpoptions.pyc" />
                         </Component>
-                        <Component Id="cmp16C1E44D5648846FB2B7EE24381B3456" Guid="{7DA1F7C8-A2B0-4538-942C-FC52C6981867}">
+                        <Component Id="cmp16C1E44D5648846FB2B7EE24381B3456" Guid="{D4B8FD71-FFC3-423C-9BB7-CCF6C60B247F}">
                             <File Id="fil452ADA327A2751EF12BDA68E44818A6D" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\subnet.py" />
                         </Component>
-                        <Component Id="cmp92988C5C59A6F7B34FCEEE55E33059E9" Guid="{2E71FC27-1819-4D5A-8636-B8333FE695BA}">
+                        <Component Id="cmp92988C5C59A6F7B34FCEEE55E33059E9" Guid="{2EF916EE-2AAF-43B3-80B9-DEEB87B7A49E}">
                             <File Id="fil23C57829F5373B55E9F3937F1AD38DBD" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\subnet.pyc" />
                         </Component>
-                        <Component Id="cmp7638D87197AB23A9984D529C28BE68F2" Guid="{B46A7EBB-BAA9-499A-8147-46B1074632AC}">
+                        <Component Id="cmp7638D87197AB23A9984D529C28BE68F2" Guid="{68DA90B5-7EC8-4C28-8ED0-2364F75D7E54}">
                             <File Id="filA1B39E74D3A0F5E75402AFCE82781C5D" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\vpc.py" />
                         </Component>
-                        <Component Id="cmp1BC4C08B4C015A203B583FDD40EA2CCB" Guid="{362E8584-84DB-4BF6-A7FC-4CEC78B53565}">
+                        <Component Id="cmp1BC4C08B4C015A203B583FDD40EA2CCB" Guid="{8D5E2186-2C37-4D5A-AA66-1702A2C668BF}">
                             <File Id="fil746C62EDEB95C462AE4DA1C54066D077" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\vpc.pyc" />
                         </Component>
-                        <Component Id="cmp802C5FC135C2E94A8F8DB9F8A7C56C58" Guid="{DC241DF0-31AF-4B51-8534-26A4C8850A1F}">
+                        <Component Id="cmp802C5FC135C2E94A8F8DB9F8A7C56C58" Guid="{2846668B-1865-42F8-9ECE-04214B5901CF}">
                             <File Id="fil69684A9E22C4F8BF51911E12D3776D42" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\vpnconnection.py" />
                         </Component>
-                        <Component Id="cmpC51E1A0B17A62FFF9C989CF4D57AD484" Guid="{B4A7AB42-BDC7-40D2-81BF-09F4CE814FC4}">
+                        <Component Id="cmpC51E1A0B17A62FFF9C989CF4D57AD484" Guid="{6042A191-81F6-49A1-ABE8-68B289ED5F04}">
                             <File Id="filDC04660215A1FC65B69CC0D105CF1DF8" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\vpnconnection.pyc" />
                         </Component>
-                        <Component Id="cmp08ECBEBAB715FF550A244EB6B33C9D99" Guid="{97D68691-CD9E-4FF9-B29C-EFDDB70C80CE}">
+                        <Component Id="cmp08ECBEBAB715FF550A244EB6B33C9D99" Guid="{F1B5C799-9CF8-4392-A274-C24A5B4104AD}">
                             <File Id="filC4562021FFFE0075B8225C0E9CF6FDE3" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\vpngateway.py" />
                         </Component>
-                        <Component Id="cmp652936EA5A201D0432FE1B099B2DF55E" Guid="{5904FAF9-0D76-44BA-9C8C-8FBEDF86BF87}">
+                        <Component Id="cmp652936EA5A201D0432FE1B099B2DF55E" Guid="{E0AD533A-1A9B-4EAA-9030-42402DC75AED}">
                             <File Id="fil674715919C0A6BDC577BC945C47427BC" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\vpngateway.pyc" />
                         </Component>
-                        <Component Id="cmp6426B19389CFE735018BC7AB467191C6" Guid="{46C205DF-1F62-490E-9C1C-A5CE9F8CE547}">
+                        <Component Id="cmp6426B19389CFE735018BC7AB467191C6" Guid="{DC75CD40-99A0-4FC9-B7F3-8653C5B77263}">
                             <File Id="fil57B115386286592F6833342E038619BC" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\__init__.py" />
                         </Component>
-                        <Component Id="cmp00442052CC2A1647E7984B439C3639FE" Guid="{2D6CBC9A-B38D-47C7-8938-2E78685FD57B}">
+                        <Component Id="cmp00442052CC2A1647E7984B439C3639FE" Guid="{1CB3FF54-F7D3-494A-816A-469347597DFE}">
                             <File Id="filE2BBB25BFAA0D4E604C7E01FDE04CDD8" KeyPath="yes" Source="$(var.BotoDir)\boto\vpc\__init__.pyc" />
                         </Component>
                     </Directory>
                 </Directory>
                 <Directory Id="dirB8EA4CBD3FEABDD75281F0E0B3452785" Name="EGG-INFO">
-                    <Component Id="cmpA0E30B5B59D20D4CC8F4AC765D657098" Guid="{342B75DC-AD79-485E-9B55-50496FC01B63}">
+                    <Component Id="cmpA0E30B5B59D20D4CC8F4AC765D657098" Guid="{A22E8483-809F-443C-9429-151075CE539D}">
                         <File Id="fil6F88F6C522409D67A775120179640BAC" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\dependency_links.txt" />
                     </Component>
-                    <Component Id="cmpDEE8F8B7C13A516A47B18FA8D4E6C62B" Guid="{D5A39878-5813-4B17-8F7C-2CAD19C5C95E}">
+                    <Component Id="cmpDEE8F8B7C13A516A47B18FA8D4E6C62B" Guid="{BDD29771-BE7A-4F9F-B987-3064850874BB}">
                         <File Id="fil2640A3A1466CCC168736F9F6C9487AFB" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\not-zip-safe" />
                     </Component>
-                    <Component Id="cmpA68C76FB717CB96E01A7C5971F7FC4FC" Guid="{3D4B9A7E-49C2-45EF-81DB-5DE22AFFBBB5}">
+                    <Component Id="cmpA68C76FB717CB96E01A7C5971F7FC4FC" Guid="{28B9ABD7-6A1D-4845-B4C2-8304DC83A851}">
                         <File Id="filDECD0999B8206D75F53D2426AF9E55C6" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\PKG-INFO" />
                     </Component>
-                    <Component Id="cmp79396466A5DC57E13F0AC97B22EDD054" Guid="{27097623-2A95-4515-9661-98F81EE4395D}">
+                    <Component Id="cmp79396466A5DC57E13F0AC97B22EDD054" Guid="{6E35D36E-0916-457F-9561-1078D7AAE8E0}">
                         <File Id="fil23B04C8473677EF9C2AEC76E5422FBEB" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\SOURCES.txt" />
                     </Component>
-                    <Component Id="cmp0765219050483C22A4685B23AECE6801" Guid="{A60D1932-3F8A-4364-B1CE-EB1C0D980806}">
+                    <Component Id="cmp0765219050483C22A4685B23AECE6801" Guid="{B1C3C36E-5BBF-4FE4-85E9-1C840E02CF28}">
                         <File Id="filA1C604C39DEC23788276BAD5B238CC55" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\top_level.txt" />
                     </Component>
                     <Directory Id="dir0742D7431016D048B67398D401FD1C00" Name="scripts">
-                        <Component Id="cmpBFB61D44F061C140D5A6C7B16A619C9A" Guid="{89AAE6E4-37DF-4108-A069-B279716B6D39}">
+                        <Component Id="cmpBFB61D44F061C140D5A6C7B16A619C9A" Guid="{7050F174-00BF-46F1-9964-8825E84C8309}">
                             <File Id="filF7BC4D490A070B1593C866D637A6111D" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\elbadmin" />
                         </Component>
-                        <Component Id="cmp4EABAD7B02C13CD7909A6458E83653D7" Guid="{25562E61-A472-47DB-B85D-96C454C984ED}">
+                        <Component Id="cmp4EABAD7B02C13CD7909A6458E83653D7" Guid="{92E64E07-A582-4FB2-8F06-69B61B52B660}">
                             <File Id="fil0B69E4C3268F8CBF3A6B9FE3C025BA41" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\fetch_file" />
                         </Component>
-                        <Component Id="cmp37B3BE39369CA3B113EABBCD4D046A9B" Guid="{189FB7F6-CA80-465E-99CB-AF415752365E}">
+                        <Component Id="cmp37B3BE39369CA3B113EABBCD4D046A9B" Guid="{BFA37690-C8C8-4328-AF2C-429C8227B6C2}">
                             <File Id="filC736945908E362665B9BBD532C72B22A" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\launch_instance" />
                         </Component>
-                        <Component Id="cmpC9804C4DB460C1786EF2D358B94BD874" Guid="{B94475F9-ED87-4F9E-8195-C1C68C6E4B65}">
+                        <Component Id="cmpC9804C4DB460C1786EF2D358B94BD874" Guid="{3C96BF59-41CA-4D70-8734-0D87C2BBE5A2}">
                             <File Id="fil0CE2219AC540FCBC83C3CB683FAE0E2C" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\list_instances" />
                         </Component>
-                        <Component Id="cmpCF5FDE68CA0D9520B073233D5AF12835" Guid="{95C72FCF-416F-4153-942A-409046B929BB}">
+                        <Component Id="cmpCF5FDE68CA0D9520B073233D5AF12835" Guid="{9A1219A5-52DC-40AD-9A91-29517BE240DB}">
                             <File Id="fil356033A2C3216780105836D132B52BA1" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\s3put" />
                         </Component>
-                        <Component Id="cmpE6E0A3EECCD085DB3A1AF2FAC7356832" Guid="{76B0CE12-A4D3-41C8-91E9-437CF37A2755}">
+                        <Component Id="cmpE6E0A3EECCD085DB3A1AF2FAC7356832" Guid="{A2C919EE-8C4B-46DA-8FB7-59E78591A634}">
                             <File Id="fil6081306514D7078035F4C85048CD5BF2" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\sdbadmin" />
                         </Component>
-                        <Component Id="cmp2EC33FE120DC155B2C06608CBB8F12EF" Guid="{86DC6062-ECD8-4945-8DC1-47F007699931}">
+                        <Component Id="cmp2EC33FE120DC155B2C06608CBB8F12EF" Guid="{0AE44B05-406B-4C1B-B4EC-0E031D6620F9}">
                             <File Id="filC1701210A570EC1D792D1FCBD16D2DE6" KeyPath="yes" Source="$(var.BotoDir)\EGG-INFO\scripts\taskadmin" />
                         </Component>
                     </Directory>

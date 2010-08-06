@@ -43,6 +43,7 @@
       <ComponentGroupRef Id="Boto19"/>
       <ComponentGroupRef Id="Mako033"/>
       <ComponentGroupRef Id="Pydns234"/>
+      <ComponentGroupRef Id="Httplib2060"/>
 
 			<!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
 			<ComponentGroupRef Id="Product.Generated" />

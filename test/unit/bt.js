@@ -26,7 +26,7 @@ test('bt.add.torrent', function() {
 
   // XXX - Need to test adding via. https
 
-  ok(bt.torrent.all(), 'Didn\'t crash');
+  same(bt.torrent.all(), {}, 'Torrents: ' + bt.torrent.all());
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
   var url_nocb = 'http://vodo.net/media/torrents/Everything.Unspoken.2004.Xvid-VODO.torrent';

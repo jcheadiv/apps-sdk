@@ -36,6 +36,6 @@ those using your operating system's package manager.
 
 Once you have python and setuptools installed, you can just run:
 
-    $ easy_install http://staging.apps.bittorrent.com/pkgs/apps-0.1-py2.6.egg
+    $ easy_install apps-sdk
 
 You should now be ready to go.

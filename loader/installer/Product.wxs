@@ -18,7 +18,7 @@
             <File Id="apps.exe" Name="apps.exe" Source="../dist/apps.exe"/>
             <File Id="bz2.pyd" Name="bz2.pyd" Source="../dist/bz2.pyd"/>
             <File Id="easy_install_pth" Name="easy-install.pth" Source="../dist/easy-install.pth"/>
-            <File Id="apps_0_1_py2_6_egg" Name="apps-0.1-py2.6.egg" Source="../dist/apps-0.1-py2.6.egg"/>
+            <File Id="apps_sdk_0_2_py2_6_egg" Name="apps_sdk-0.2-py2.6.egg" Source="../dist/apps_sdk-0.2-py2.6.egg"/>
             <File Id="library.zip" Name="library.zip" Source="../dist/library.zip"/>
             <File Id="pyexpat.pyd" Name="pyexpat.pyd" Source="../dist/pyexpat.pyd"/>
             <File Id="python26.dll" Name="python26.dll" Source="../dist/python26.dll"/>

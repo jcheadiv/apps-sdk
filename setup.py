@@ -15,7 +15,7 @@ __version__ = "%version%"
 from setuptools import setup, find_packages
 
 setup(
-    name = "apps",
+    name = "apps-sdk",
     version = '0.1',
     packages = find_packages(),
     author = __author__,

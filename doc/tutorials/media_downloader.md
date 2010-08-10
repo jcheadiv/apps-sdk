@@ -12,7 +12,7 @@ A complete version of the app from this tutorial can be found at: [Media Downloa
 
 First, let's get some tools installed. For Windows, there is a convenient
 installer. Download and run [the tools
-installer](/apps-sdk/client/apps-sdk-installer.msi). For other operating
+installer](http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.msi). For other operating
 systems, follow the instructions in the [install howto](../install-howto.html).
 
 To see all the commands that the tools provide, run:

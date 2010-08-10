@@ -18,7 +18,7 @@ out the [Contest Page](http://www.utorrent.com/app-developers-challenge).
 # Installation
 
 The easiest way to get up and running on Windows, is by running the [SDK
-installer](client/apps-sdk-installer.msi).
+installer](http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.msi).
 To see the other ways that you can install the SDK tools, check out the
 [howto](doc/install-howto.html).
 

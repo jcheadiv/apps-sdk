@@ -22,7 +22,7 @@ var peer_torrent = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P
 module('bt');
 
 test('bt.add.torrent', function() {
-  expect(8);
+  expect(9);
 
   // XXX - Need to test adding via. https
 

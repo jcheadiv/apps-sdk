@@ -7,7 +7,6 @@
     <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
 		<Directory Id="TARGETDIR" Name="SourceDir">
-      <Merge Id="CRT" Language="0" SourceFile="c:\Program Files\Common Files\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1"/>
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLLOCATION" Name="apps-sdk">
           <Component Id="BtAppLoaderComponent" Guid="{2195B83F-85D9-427a-BF1A-5C4480152111}">
@@ -45,10 +44,7 @@
       <ComponentGroupRef Id="Mako033"/>
       <ComponentGroupRef Id="Pydns234"/>
       <ComponentGroupRef Id="Httplib2060"/>
-      <MergeRef Id="CRT"/>
-
-			<!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
-			<ComponentGroupRef Id="Product.Generated" />
+      <ComponentGroupRef Id="MSVC90"/>
 		</Feature>
 	</Product>
 </Wix>

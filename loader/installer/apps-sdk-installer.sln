@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "apps-sdk-installer", "apps-sdk-installer.wixproj", "{A776BD62-D020-4211-8600-51ACF7F7039C}"
 EndProject
 Global

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <ComponentGroup Id="MSVC90">
+            <ComponentRef Id="cmp1A488EC96F1B14B16DC453EDD1563D7D" />
+            <ComponentRef Id="cmp5154A9EB43618E53B8F6DB7169FD08CA" />
+        </ComponentGroup>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="INSTALLLOCATION">
+            <Directory Id="dirAF82ECC14E83C0B90499E600A3BD1E69" Name="MICROSOFT.VC90.CRT">
+                <Component Id="cmp1A488EC96F1B14B16DC453EDD1563D7D" Guid="{D01DD9AA-26D9-443F-985B-1DCA9B05F1EE}">
+                    <File Id="fil2D41EDA39CBFE1F7C8C6813745279B9B" KeyPath="yes" Source="$(var.MSVCDir)\Microsoft.VC90.CRT.manifest" />
+                </Component>
+                <Component Id="cmp5154A9EB43618E53B8F6DB7169FD08CA" Guid="{176B2553-38B0-4304-BDB3-46A3081D96A5}">
+                    <File Id="fil305BFBC15F4715A47D39A77720A8E42C" KeyPath="yes" Source="$(var.MSVCDir)\msvcr90.dll" />
+                </Component>
+            </Directory>
+        </DirectoryRef>
+    </Fragment>
+</Wix>

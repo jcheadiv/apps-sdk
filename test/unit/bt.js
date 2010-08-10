@@ -246,7 +246,7 @@ test('bt.torrent.file', function() {
 });
 
 test('bt.torrent.peer', function() {
-  var testValue, messages = { set: undefined, reset: undefined };
+  var testValue;
   var tor = bt.torrent.get(peer_torrent);
   if (tor.peer.keys().length == 0) {
     throw Error('Need to have the peer_torrent added to run these ' +
@@ -255,143 +255,45 @@ test('bt.torrent.peer', function() {
   }
   var peer = tor.peer.get(tor.peer.keys()[0]);
   expect(2 * peer.properties.keys().length + 3);
+
+  // XXX - API doc indicates the existence of a peer.id property
+  // which doesn't actually exist
   try{
     ok(peer.id, "Peer has an ID property");
   }catch(err){
-    console.log(err);
+    ok(false, err.message);
   }
+
   ok(peer.torrent, "Peer has torrent association");
-  equals(peer.torrent.properties.get("name"), tor.properties.get("name"), 
+  equals(peer.torrent.properties.get("name"), tor.properties.get("name"),
     "Parent torrent is correct");
-    
-  _.each(peer.properties.all(), function(value, key) {
 
-    equals(peer.properties.get(key), value, sprintf('peer.properties.get() ' +
-      'matches value provided by peer.properties.all() for %s.', key));
+  // XXX - It appears that trying to set read-only peer properties crashes the client
+  //testProperties(peer.properties, [], peer.properties.keys())
+  testProperties(peer.properties, peer.properties.keys(), [])
 
-    ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
-      sprintf('property %s is an expected datatype.', key))
-      
-      /* XXX - It appears that attempting to set read-only peer properties 
-         crashes the client.
-      
-      // Set testvalue and assert messages according to datatype.
-      switch(typeof(value)) {
-
-        case 'boolean':
-          testValue = !value;
-          messages.set =
-            sprintf('set() can set %s to %s.', key, (testValue).toString());
-          messages.reset =
-            sprintf('set() can set %s back to %s.', key, (value).toString());
-          break;
-
-        case 'number':
-          testValue = 1 === value ? 0 : 1;
-          messages.set = sprintf('set() can set %s to %d.', key, testValue);
-          messages.reset = sprintf('set() can set %s back to %f.', key, value);
-          break;
-
-        case 'string':
-          testValue = "x";
-          messages.set = sprintf('set() can set %s to %s.', key, testValue);
-          messages.reset = sprintf('set() can set %s back to %s.', key, value);
-          break;
-      }
-
-      // set testValue
-      try {
-        peer.properties.set(key, testValue);
-        equals(peer.properties.get(key), testValue, messages.set);
-      }
-      catch(error) {
-        ok(false, sprintf('%s %s', messages.set, error.message));
-      }
-
-      // reset value
-      try {
-        peer.properties.set(key, value);
-        equals(peer.properties.get(key), value, messages.reset);
-      }
-      catch(error) {
-        ok(false, sprintf('%s %s', messages.reset, error.message));
-      }
-    */
-  });
 });
 
 test('bt.rss_filter', function() {
-  expect();
   var filtername = "FooBarBaz";
-  var testValue, messages = { set: undefined, reset: undefined };
+
   // XXX Setting 'name' property throws an Error with empty message and no description
   var setBlacklist = ['name'];
+  var readOnly = ['episode_filter', 'smart_ep_filter', 'feed', 'last_match', 'resolving_candidate'];
   btapp.add.rss_filter(filtername);
-  
+
   filterByName = btapp.rss_filter.get(filtername);
   ftkeys = btapp.rss_filter.keys();
   filterByKey = btapp.rss_filter.get(ftkeys[ftkeys.length-1]);
-  equals( filterByName.properties.get("name"), 
-          filterByKey.properties.get("name"), 
+
+  expect(4 * filterByName.properties.keys().length - 2 * setBlacklist.length - readOnly.length + 2);
+  equals( filterByName.properties.get("name"),
+          filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
 
   ok(filterByName.id, "Filter has an ID property");
 
-    _.each(filterByName.properties.all(), function(value, key) {
-
-    equals(filterByName.properties.get(key), value, sprintf('filter.properties.get() ' +
-      'matches value provided by filter.properties.all() for %s.', key));
-    
-    
-    ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
-      sprintf('property %s is an expected datatype.', key))
-    if (-1 === _.indexOf(setBlacklist, key)) {  
-      // XXX - It appears that attempting to set read-only peer properties 
-      // crashes the client.
-      
-      // Set testvalue and assert messages according to datatype.
-      switch(typeof(value)) {
-
-        case 'boolean':
-          testValue = !value;
-          messages.set =
-            sprintf('set() can set %s to %s.', key, (testValue).toString());
-          messages.reset =
-            sprintf('set() can set %s back to %s.', key, (value).toString());
-          break;
-
-        case 'number':
-          testValue = 1 === value ? 0 : 1;
-          messages.set = sprintf('set() can set %s to %d.', key, testValue);
-          messages.reset = sprintf('set() can set %s back to %f.', key, value);
-          break;
-
-        case 'string':
-          testValue = "x";
-          messages.set = sprintf('set() can set %s to %s.', key, testValue);
-          messages.reset = sprintf('set() can set %s back to %s.', key, value);
-          break;
-      }
-
-      // set testValue
-      try {
-        filterByName.properties.set(key, testValue);
-        equals(filterByName.properties.get(key), testValue, messages.set);
-      }
-      catch(error) {
-        ok(false, sprintf('%s %s', messages.set, error.message));
-      }
-
-      // reset value
-      try {
-        filterByName.properties.set(key, value);
-        equals(filterByName.properties.get(key), value, messages.reset);
-      }
-      catch(error) {
-        ok(false, sprintf('%s %s', messages.reset, error.message));
-      }
-      }
-  });
+  testProperties(filterByName.properties, setBlacklist, readOnly);
 });
 
 test('bt.resource', function() {
@@ -402,8 +304,10 @@ test('bt.resource', function() {
 });
 
 test('bt.settings', function() {
-  var setBlacklist = ['gui.show_btapps']; // Do not set-test evil untestables.
-  var testValue, messages = { set: undefined, reset: undefined };
+
+  // * Setting gui.show_btapps to false destroys the test environment.
+  // * Property avwindow is a read-only window handle used by Bitdefender.
+  var setBlacklist = ['gui.show_btapps', 'avwindow'];
 
   expect(4 * bt.settings.keys().length - 2 * setBlacklist.length + 2);
 
@@ -412,10 +316,28 @@ test('bt.settings', function() {
   same(_.keys(bt.settings.all()), bt.settings.keys(),
     'keys() matches keys in all().');
 
-  _.each(bt.settings.all(), function(value, key) {
+  testProperties(bt.settings, setBlacklist, []);
+});
 
-    equals(bt.settings.get(key), value, sprintf('bt.settings.get() correctly ' +
-      'matches value provided by bt.settings.all() for %s.', key));
+test('bt.log', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
+
+function testProperties(testobject, bl, ro){
+  var testValue, messages = { set: undefined, reset: undefined };
+
+  // Do not test set() on blacklisted properties.
+  var setBlacklist = bl || [];
+
+  // Test that read-only properties are not settable and throw the right error
+  var readOnly = ro || [];
+
+  _.each(testobject.all(), function(value, key) {
+
+    equals(testobject.get(key), value, sprintf('get() correctly ' +
+      'matches value provided by all() for %s.', key));
 
     ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
       sprintf('setting %s is an expected datatype.', key))
@@ -446,29 +368,39 @@ test('bt.settings', function() {
           break;
       }
 
-      // set testValue
-      try {
-        bt.settings.set(key, testValue);
-        equals(bt.settings.get(key), testValue, messages.set);
-      }
-      catch(error) {
-        ok(false, sprintf('%s %s', messages.set, error.message));
+      if (-1 === _.indexOf(readOnly, key)) {
+
+        // Set testValue.
+        try {
+          testobject.set(key, testValue);
+          equals(testobject.get(key), testValue, messages.set);
+        }
+        catch(error) {
+          ok(false, sprintf('%s %s', messages.set, error.message));
+        }
+
+        // Reset value.
+        try {
+          testobject.set(key, value);
+          equals(testobject.get(key), value, messages.reset);
+        }
+        catch(error) {
+          ok(false, sprintf('%s %s', messages.reset, error.message));
+        }
+
+      } else {
+
+        try {
+          testobject.set(key, testValue);
+          if(testobject.get(key) == testValue)
+            ok(false, sprintf('Successfully set read-only property %s', key));
+        }
+        catch(error) {
+          ok(true, sprintf('Could not set read-only property %s: %s', key, error.message));
+        }
+
       }
 
-      // reset value
-      try {
-        bt.settings.set(key, value);
-        equals(bt.settings.get(key), value, messages.reset);
-      }
-      catch(error) {
-        ok(false, sprintf('%s %s', messages.reset, error.message));
-      }
     }
   });
-});
-
-test('bt.log', function() {
-  expect();
-
-  // XXX - Fill out the unit tests
-});
+}

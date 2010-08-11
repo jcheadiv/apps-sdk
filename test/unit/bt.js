@@ -96,6 +96,7 @@ test('bt.add.rss_feed', function() {
   // there.
   setTimeout(function(){
     start();
+    var feed = btapp.rss_feed.get(rss_btapp);
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
@@ -106,8 +107,12 @@ test('bt.add.rss_feed', function() {
 
     //A duplicate feed object isn't created, but the keys are duplicated
     equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
-      "Number of keys and objects is consistent; good duplicate behavior")
+      "Number of keys and objects is consistent; good duplicate behavior");
+    
+    feed.remove();
   }, 2000);
+  
+
 
 });
 
@@ -132,6 +137,7 @@ test('bt.add.rss_filter', function() {
 
   setTimeout(function(){
     start();
+    var filter = btapp.rss_filter.get(filter_btapp);
     var filter_names = _.map(bt.rss_filter.all(), function(v) {
       return v.properties.get('name');
     });
@@ -140,8 +146,11 @@ test('bt.add.rss_filter', function() {
 
     //A duplicate filter object isn't created, but the keys are duplicated
     equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length,
-      "Number of keys and objects is consistent; good duplicate behavior")
-  }, 2000);
+      "Number of keys and objects is consistent; good duplicate behavior");
+      
+    filter.remove();
+  }, 1000);
+  
 });
 
 test('bt.stash', function() {
@@ -311,6 +320,7 @@ test('bt.rss_filter', function() {
   ok(filterByName.id, "Filter has an ID property");
 
   utils.testProperties(filterByName.properties, setBlacklist, readOnly);
+  filterByName.remove();
 });
 
 test('bt.resource', function() {

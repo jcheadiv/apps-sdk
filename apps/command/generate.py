@@ -14,11 +14,17 @@ import apps.command.base
 class generate(apps.command.base.Command):
 
     help = 'Generate `index.html` for the project.'
+    user_options = [
+        ('update=', None, 'Auto-update url to use in package.json', None) ]
     excludes = [ os.path.join('packages', 'firebug.js'),
                  os.path.join('lib', 'index.js') ]
 
     def run(self):
-        self.write_metadata()
+        update_json = True
+        if self.options.get('update', False):
+            self.project.metadata['bt:update_url'] = self.options['update']
+            update_json = False
+        self.write_metadata(update_json)
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]

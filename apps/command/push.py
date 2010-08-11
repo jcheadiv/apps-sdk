@@ -37,7 +37,10 @@ class push(apps.command.base.Command):
             return
 
     def package_name(self):
-        return os.path.join('dist', '%s.btapp' % (self.project.metadata['name'],))
+        extension = 'pkg' if self.project.metadata.get(
+            'bt:package', False) else 'btapp'
+        return os.path.join('dist', '%s.%s' % (self.project.metadata['name'],
+                                               extension))
 
     def push_s3(self):
         base_url = self.options['url'][5:]

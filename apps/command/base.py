@@ -72,9 +72,11 @@ class Command(object):
                 self.project.metadata != json.load(open('package.json')):
             self.write_metadata()
 
-    def write_metadata(self):
+    def write_metadata(self, refresh=True):
         logging.info('\tupdating project metadata')
-        if self.project.metadata != json.load(open('package.json')):
+        # Allow the optional overloading of certain values in package.json
+        # without saving them (and write them to btapp).
+        if refresh and self.project.metadata != json.load(open('package.json')):
           json.dump(self.project.metadata,
                     open(os.path.join(self.project.path, 'package.json'), 'wb'),
                     indent=4)

@@ -25,7 +25,6 @@ test('bt.add.torrent', function() {
   expect(9);
 
   // XXX - Need to test adding via. https
-
   same(bt.torrent.all(), {}, 'Torrents: ' + bt.torrent.all());
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
@@ -37,7 +36,7 @@ test('bt.add.torrent', function() {
   bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
   // For use in the torrent.peer tests
-  bt.add.torrent(peer_torrent);
+  // bt.add.torrent(peer_torrent);
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
   bt.add.torrent(url, function(resp) {
@@ -76,31 +75,36 @@ test('bt.add.torrent', function() {
 test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(3);
+  expect(4);
   var rss_bt = 'http://vodo.net/feeds/public';
   var rss_btapp = 'http://www.clearbits.net/rss.xml';
 
   // Looks like the way we add in the bt object is broken.
   // bt.js:46 btapp.add.rss_feed is null or not an object
   try{
-    ok(bt.add.rss_feed(rss_bt), "Didn't explode while trying to add");
+    bt.add.rss_feed(rss_bt)
+    ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_feed error:" + err.message);
   }
 
-  btapp.add.rss_feed(rss_btapp);
-  btapp.add.rss_feed(rss_btapp);
+  bt.add.rss_feed(rss_btapp);
+  bt.add.rss_feed(rss_btapp);
   stop();
 
+  // XXX - This should be transitioned into an event once the functionality is
+  // there.
   setTimeout(function(){
     start();
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
+    same(rss_urls, _.keys(bt.rss_feed.all()),
+         'Keys: ' + _.keys(bt.rss_feed.all()));
     ok(_.indexOf(rss_urls, rss_btapp) >= 0,
       'RSS feed added successfully');
 
-    //A duplicate filter object isn't created, but the keys are duplicated
+    //A duplicate feed object isn't created, but the keys are duplicated
     equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior")
   }, 2000);
@@ -258,7 +262,7 @@ test('bt.torrent.peer', function() {
     return;
   }
   var peer = tor.peer.get(tor.peer.keys()[0]);
-  
+
   // 3 tests for read-only properties (2 get, 1 set)
   // 2 tests for blacklisted properties (2 get)
   expect(2 * peer.properties.keys().length + 3);
@@ -296,9 +300,9 @@ test('bt.rss_filter', function() {
   // 4 tests for normal properties (2 get, 2 set)
   // 3 tests for read-only properties (2 get, 1 set), so subtract 1
   // 2 tests for blacklisted properties (2 get), so subtract 2
-  expect(4 * filterByName.properties.keys().length 
-           - 2 * setBlacklist.length 
-           - readOnly.length 
+  expect(4 * filterByName.properties.keys().length
+           - 2 * setBlacklist.length
+           - readOnly.length
            + 2);
   equals( filterByName.properties.get("name"),
           filterByKey.properties.get("name"),

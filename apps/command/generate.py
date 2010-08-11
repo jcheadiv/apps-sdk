@@ -21,7 +21,7 @@ class generate(apps.command.base.Command):
 
     def run(self):
         update_json = True
-        if self.options['update']:
+        if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
             update_json = False
         self.write_metadata(update_json)

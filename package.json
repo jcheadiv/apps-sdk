@@ -56,7 +56,7 @@
             "email": "thomas@bittorrent.com"
         }
     ],
-    "version": "0.1",
+    "version": "0.2",
     "bt:description": "The apps sdk provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.",
     "keywords": [
         "bittorrent",

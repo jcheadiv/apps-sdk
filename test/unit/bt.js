@@ -72,7 +72,8 @@ test('bt.add.torrent', function() {
   });
 });
 
-/* test('bt.add.rss_feed', function() {
+// XXX - Adding RSS feeds currently crashes the client
+test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
   expect(6);
@@ -124,9 +125,7 @@ test('bt.add.torrent', function() {
     
   }, 2000);
   
-
-
-}); */
+});
 
 test('bt.add.rss_filter', function() {
   // Do we want to expand the functionality to include

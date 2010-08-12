@@ -108,7 +108,7 @@ test('bt.add.rss_feed', function() {
     //A duplicate feed object isn't created, but the keys are duplicated
     equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
-    
+
     try{
       btappfeed.remove();
       ok(true, "Btapp RSS feed removed");
@@ -124,7 +124,7 @@ test('bt.add.rss_feed', function() {
     }
     
   }, 2000);
-  
+
 });
 
 test('bt.add.rss_filter', function() {
@@ -183,11 +183,11 @@ test('bt.add.rss_filter', function() {
     }
 
   }, 1000);
-  
+
 });
 
 test('bt.stash', function() {
-  expect(18);
+  expect(33);
 
   if (btapp.stash._clear)
     btapp.stash._clear();
@@ -201,6 +201,10 @@ test('bt.stash', function() {
                productcode: "",
                path: ""
             };
+  _.reduce(_.range(5), objs, function(acc, i) {
+    acc['client-' + i] = '';
+    return acc;
+  });
   _.each(objs, function(v, k) {
     bt.stash.set(k, v);
     same(bt.stash.get(k), v, 'Parsing works');
@@ -208,6 +212,21 @@ test('bt.stash', function() {
   });
   same(bt.stash.keys().sort(), _.keys(objs).sort(), 'keys() works');
   same(bt.stash.all(), objs, 'all() works');
+  // What happens when really big items are put into the stash more than once?
+  $.get('http://twitter.com', function(resp) {
+    _.each(_.range(5), function(i) {
+      bt.stash.set('client-' + i, resp);
+    });
+    _.each(_.range(5), function(i) {
+      ok(bt.stash.get('client-' + i, false) ? true : false,
+         'Can get data from the stash');
+    });
+    _.each(_.range(5), function(i) {
+      bt.stash.set('client-' + i, '');
+    });
+    start();
+  });
+  stop();
 });
 
 test('bt.events', function() {
@@ -351,7 +370,7 @@ test('bt.rss_filter', function() {
           "Filter can be accessed by name or key" );
 
   ok(filterByName.id, "Filter has an ID property");
-  console.log(filterByName.properties.keys());
+
   utils.testProperties(filterByName.properties, setBlacklist, readOnly);
   
   try{

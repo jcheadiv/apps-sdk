@@ -75,7 +75,7 @@ test('bt.add.torrent', function() {
 /* test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(4);
+  expect(6);
   var rss_bt = 'http://vodo.net/feeds/public';
   var rss_btapp = 'http://www.clearbits.net/rss.xml';
 
@@ -108,9 +108,20 @@ test('bt.add.torrent', function() {
     equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
     
-    btappfeed.remove();
-    btfeed.remove()
-    // XXX - Need to remove all the feeds at the end of this test.
+    try{
+      btappfeed.remove();
+      ok(true, "Btapp RSS feed removed");
+    }catch(err){
+      ok(false, "Btapp RSS feed was not removed: "+ err.message);
+    }
+    
+    try{
+      btfeed.remove();
+      ok(true, "Bt RSS feed removed");
+    }catch(err){
+      ok(false, "Bt RSS feed was not removed: "+ err.message);
+    }
+    
   }, 2000);
   
 
@@ -120,7 +131,7 @@ test('bt.add.torrent', function() {
 test('bt.add.rss_filter', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(6);
+  expect(7);
   var filter_bt = "BTFilterName";
   var filter_btapp = "BTAppFilterName";
 
@@ -138,22 +149,26 @@ test('bt.add.rss_filter', function() {
   setTimeout(function(){
     start();
     var btappfilter = btapp.rss_filter.get(filter_btapp);
-    var btfilter = btapp.rss_filter.get(filter_bt);
+    var btfilter = bt.rss_filter.get(filter_bt);
     
     var filter_names = _.map(bt.rss_filter.all(), function(v) {
       return v.properties.get('name');
     });
+    
     same(filter_names, _.keys(bt.rss_filter.all()),
          'Keys: ' + _.keys(bt.rss_filter.all()));
          
-    ok(_.indexOf(filter_names, filter_btapp) >= 0,
-      'RSS filter added successfully');
-    // XXX - Need test to see that the keys are correct here.
+    ok(_.indexOf(filter_names, filter_btapp) >= 0, 
+      'Filter added with correct name property');
+    
+    ok(_.indexOf(bt.rss_filter.keys(), filter_btapp) >= 0, 
+      'Filter added with correct key');
 
-    //A duplicate filter object isn't created, but the keys are duplicated
+    // XXX - A duplicate filter object isn't created, but the keys are duplicated
     equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
     
+    // XXX - Filter objects have no remove method
     try{
       btappfilter.remove();
       ok(true, "Btapp RSS filter removed");

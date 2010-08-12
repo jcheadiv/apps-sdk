@@ -76,7 +76,9 @@ class Command(object):
         logging.info('\tupdating project metadata')
         # Allow the optional overloading of certain values in package.json
         # without saving them (and write them to btapp).
-        if refresh and self.project.metadata != json.load(open('package.json')):
+        if refresh and (not os.path.exists('package.json') or \
+                            self.project.metadata != json.load(
+                open('package.json'))):
           json.dump(self.project.metadata,
                     open(os.path.join(self.project.path, 'package.json'), 'wb'),
                     indent=4)

@@ -110,6 +110,7 @@ test('bt.add.rss_feed', function() {
       "Number of keys and objects is consistent; good duplicate behavior");
     
     feed.remove();
+    // XXX - Need to remove all the feeds at the end of this test.
   }, 2000);
   
 
@@ -123,10 +124,9 @@ test('bt.add.rss_filter', function() {
   var filter_bt = "BTFilterName";
   var filter_btapp = "BTAppFilterName";
 
-  // Looks like the way we add in the bt object is broken.
-  // bt.js:49 btapp.add.rss_feed is null or not an object
   try{
-    ok(bt.add.rss_filter(filter_bt), "Didn't explode while trying to add");
+    bt.add.rss_filter(filter_bt)
+    ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_filter error:" + err.message);
   }
@@ -143,12 +143,14 @@ test('bt.add.rss_filter', function() {
     });
     ok(_.indexOf(filter_names, filter_btapp) >= 0,
       'RSS filter added successfully');
+    // XXX - Need test to see that the keys are correct here.
 
     //A duplicate filter object isn't created, but the keys are duplicated
     equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
       
     filter.remove();
+    // XXX - Need to remove the filters at the end of this test.
   }, 1000);
   
 });

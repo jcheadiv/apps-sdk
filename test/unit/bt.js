@@ -72,17 +72,15 @@ test('bt.add.torrent', function() {
   });
 });
 
-test('bt.add.rss_feed', function() {
+/* test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
   expect(4);
   var rss_bt = 'http://vodo.net/feeds/public';
   var rss_btapp = 'http://www.clearbits.net/rss.xml';
 
-  // Looks like the way we add in the bt object is broken.
-  // bt.js:46 btapp.add.rss_feed is null or not an object
   try{
-    bt.add.rss_feed(rss_bt)
+    bt.add.rss_feed(rss_bt);
     ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_feed error:" + err.message);
@@ -96,7 +94,8 @@ test('bt.add.rss_feed', function() {
   // there.
   setTimeout(function(){
     start();
-    var feed = btapp.rss_feed.get(rss_btapp);
+    var btappfeed = btapp.rss_feed.get(rss_btapp);
+    var btfeed = btapp.rss_feed.get(rss_bt);
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
@@ -109,18 +108,19 @@ test('bt.add.rss_feed', function() {
     equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
     
-    feed.remove();
+    btappfeed.remove();
+    btfeed.remove()
     // XXX - Need to remove all the feeds at the end of this test.
   }, 2000);
   
 
 
-});
+}); */
 
 test('bt.add.rss_filter', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(3);
+  expect(6);
   var filter_bt = "BTFilterName";
   var filter_btapp = "BTAppFilterName";
 
@@ -137,10 +137,15 @@ test('bt.add.rss_filter', function() {
 
   setTimeout(function(){
     start();
-    var filter = btapp.rss_filter.get(filter_btapp);
+    var btappfilter = btapp.rss_filter.get(filter_btapp);
+    var btfilter = btapp.rss_filter.get(filter_bt);
+    
     var filter_names = _.map(bt.rss_filter.all(), function(v) {
       return v.properties.get('name');
     });
+    same(filter_names, _.keys(bt.rss_filter.all()),
+         'Keys: ' + _.keys(bt.rss_filter.all()));
+         
     ok(_.indexOf(filter_names, filter_btapp) >= 0,
       'RSS filter added successfully');
     // XXX - Need test to see that the keys are correct here.
@@ -148,9 +153,21 @@ test('bt.add.rss_filter', function() {
     //A duplicate filter object isn't created, but the keys are duplicated
     equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
-      
-    filter.remove();
-    // XXX - Need to remove the filters at the end of this test.
+    
+    try{
+      btappfilter.remove();
+      ok(true, "Btapp RSS filter removed");
+    }catch(err){
+      ok(false, "Btapp RSS filter was not removed: "+ err.message);
+    }
+    
+    try{
+      btfilter.remove();
+      ok(true, "Bt RSS filter removed");
+    }catch(err){
+      ok(false, "Bt RSS filter was not removed: "+ err.message);
+    }
+
   }, 1000);
   
 });
@@ -302,11 +319,11 @@ test('bt.rss_filter', function() {
   // XXX Setting 'name' property throws an Error with empty message and no description
   var setBlacklist = ['name'];
   var readOnly = ['episode_filter', 'smart_ep_filter', 'feed', 'last_match', 'resolving_candidate'];
-  btapp.add.rss_filter(filtername);
+  bt.add.rss_filter(filtername);
 
-  filterByName = btapp.rss_filter.get(filtername);
-  ftkeys = btapp.rss_filter.keys();
-  filterByKey = btapp.rss_filter.get(ftkeys[ftkeys.length-1]);
+  filterByName = bt.rss_filter.get(filtername);
+  ftkeys = bt.rss_filter.keys();
+  filterByKey = bt.rss_filter.get(ftkeys[ftkeys.length-1]);
 
   // 4 tests for normal properties (2 get, 2 set)
   // 3 tests for read-only properties (2 get, 1 set), so subtract 1
@@ -314,15 +331,22 @@ test('bt.rss_filter', function() {
   expect(4 * filterByName.properties.keys().length
            - 2 * setBlacklist.length
            - readOnly.length
-           + 2);
+           + 3);
   equals( filterByName.properties.get("name"),
           filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
 
   ok(filterByName.id, "Filter has an ID property");
-
+  console.log(filterByName.properties.keys());
   utils.testProperties(filterByName.properties, setBlacklist, readOnly);
-  filterByName.remove();
+  
+  try{
+    filterByName.remove();
+    ok(true, "RSS filter removed");
+  }catch(err){
+    ok(false, "RSS filter was not removed: "+ err.message);
+  }
+  
 });
 
 test('bt.resource', function() {

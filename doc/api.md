@@ -82,7 +82,7 @@ Add a variety of elements to the client.
 
     >> btapp.add.torrent('http://example.com/test.torrent') // Add a torrent by url, file path or magnet link
     >> btapp.add.rss_feed() // Add a rss feed by url
-    >> btapp.add.rss_filter() // Add an rss filter
+    >> btapp.add.rss_filter() // Add an rss filter by name
 
 Note that add operations are asynchronous. If you'd like to get the results of
 add events, you must bind an event. When adding torrents, you probably want

@@ -17,4 +17,6 @@ class add(apps.command.base.Command):
           logging.error('ERROR: Nothing to add. '
             'Specify a file to add using the --file flag.')
           sys.exit(1)
-        self.add(self.options['file'])
+
+        self.add(self.options['file'].rsplit('/', 1)[-1],
+                 self.options['file'])

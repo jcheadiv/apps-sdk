@@ -213,7 +213,7 @@ test('bt.torrent', function() {
   expect(13);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
-  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
+  var url = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
   bt.add.torrent(url, function(resp) {
     var magnet = 'magnet:?xt=urn:btih:07a9de9750158471c3302e4e95edb1107f980fa6&dn=Pioneer.One.S01E01.720p.x264-VODO&tr=http%3a%2F%2Ftracker.vodo.net%3A6970%2Fannounce';
     var tor = bt.torrent.get(url);
@@ -234,7 +234,6 @@ test('bt.torrent', function() {
     ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
     tor.start();
     ok(tor.properties.get('status') & bt.status.started, 'Torrent Started');
-    console.log(tor.properties.get('status'));
     tor.pause();
     ok(tor.properties.get('status') & bt.status.paused,
        'Torrent status (pause): ' + tor.properties.get('status'));
@@ -245,8 +244,6 @@ test('bt.torrent', function() {
     // ok(tor.properties.get('status') & bt.status.checking,
     //    'Torrent status (recheck): ' + tor.properties.get('status'));
     _.each(bt.torrent.all(), function(v) {
-      if (v.properties.get('download_url') == peer_torrent)
-        return
       v.remove();
     });
     // XXX - Adding magnet links is broken.

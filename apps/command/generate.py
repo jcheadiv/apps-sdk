@@ -25,6 +25,11 @@ class generate(apps.command.base.Command):
             self.project.metadata['bt:update_url'] = self.options['update']
             update_json = False
         self.write_metadata(update_json)
+        # There's no reason to check packages into an SCM. This makes the
+        # initial checkout a little painful, fix that pain by just pulling
+        # everything down if the directory doesn't exist.
+        if not os.path.exists('packages/'):
+            self.update_deps()
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]

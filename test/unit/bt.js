@@ -244,7 +244,7 @@ test('bt.torrent', function() {
   expect(13);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
-  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
+  var url = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
   bt.add.torrent(url, function(resp) {
     var magnet = 'magnet:?xt=urn:btih:07a9de9750158471c3302e4e95edb1107f980fa6&dn=Pioneer.One.S01E01.720p.x264-VODO&tr=http%3a%2F%2Ftracker.vodo.net%3A6970%2Fannounce';
     var tor = bt.torrent.get(url);
@@ -258,42 +258,37 @@ test('bt.torrent', function() {
     ok(bt.torrent.all()[tor.hash], "Client didn't crash");
 
     var status = tor.properties.get('status');
-    ok(status & bt.status.loaded && status & bt.status.queued &&
-       status & bt.status.checking, 'Status looks good.');
+    ok(status & bt.status.loaded && status & bt.status.queued,
+       'Status: ' + status);
     // XXX - Currently freezes the client
-    // tor.stop();
-    // ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
-    // tor.start();
-    // console.log(tor.properties.get('status'));
-    // tor.pause();
-    // ok(tor.properties.get('status') & bt.status.paused,
-    //    'Torrent status (pause): ' + tor.properties.get('status'));
-    // tor.unpause();
-    // ok(!(tor.properties.get('status') & bt.status.paused),
-    //      'Torrent status (unpause): ' + tor.properties.get('status'));
+    tor.stop();
+    ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
+    tor.start();
+    ok(tor.properties.get('status') & bt.status.started, 'Torrent Started');
+    tor.pause();
+    ok(tor.properties.get('status') & bt.status.paused,
+       'Torrent status (pause): ' + tor.properties.get('status'));
+    tor.unpause();
+    ok(!(tor.properties.get('status') & bt.status.paused),
+         'Torrent status (unpause): ' + tor.properties.get('status'));
     // tor.recheck();
     // ok(tor.properties.get('status') & bt.status.checking,
     //    'Torrent status (recheck): ' + tor.properties.get('status'));
     _.each(bt.torrent.all(), function(v) {
-      if (v.properties.get('download_url') == peer_torrent)
-        return
       v.remove();
     });
-    equals(bt.torrent.keys().length, 1,
-           'Did not remove (' + bt.torrent.keys.length + ')');
     // XXX - Adding magnet links is broken.
-    start();
-    // bt.add.torrent(magnet, function(resp) {
-    //   var tor = bt.torrent.get(magnet);
-    //   equals(tor.properties.get('download_url'), magnet,
-    //          'Got the right torrent');
-    //   start();
-    // });
+    bt.add.torrent(magnet, function(resp) {
+      var tor = bt.torrent.get(magnet);
+      equals(tor.properties.get('download_url'), magnet,
+             'Got the right torrent');
+      start();
+    });
   });
   stop();
 });
 
-test('bt.torrent.file', function() {
+test('torrent.file', function() {
   expect(3);
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
@@ -314,7 +309,7 @@ test('bt.torrent.file', function() {
   stop();
 });
 
-test('bt.torrent.peer', function() {
+test('torrent.peer', function() {
   var testValue;
   var tor = bt.torrent.get(peer_torrent);
   if (tor.peer.keys().length == 0) {

@@ -48,6 +48,6 @@ class setup(apps.command.base.Command):
         self.update_deps()
         os.chdir(self.project.path)
         logging.error('Your new project is ready.')
-        logging.error('To get started, you can find your new project in the' \
+        logging.error('To get started, you can find your new project in the ' \
                           '"%s" directory' % (self.project.metadata['name'],))
 

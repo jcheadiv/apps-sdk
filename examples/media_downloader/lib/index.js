@@ -41,9 +41,10 @@ function update_progress() {
       var files = tor.file.all();
       var f;
       for (var i in files) {
-        if (!f || f.properties.get('size') > files[i].properties.get('size'))
+        if (!f || f.properties.get('size') < files[i].properties.get('size'))
           f = files[i];
       }
+      console.log('test', f);
       f.open();
     });
   }

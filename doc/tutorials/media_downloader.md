@@ -299,7 +299,7 @@ item.
 Making sure users are up to date with what's going it their client is
 important. Towards this end, let's add a little bit of notification chrome to
 the application to show when a user tries to add a torrent and whether it fails
-or not. First, edit `html/index.html` to have a place where we can notify users
+or not. First, edit `html/main.html` to have a place where we can notify users
 of what's going on. To the top of that file, add:
 
     <div id="notification"></div>

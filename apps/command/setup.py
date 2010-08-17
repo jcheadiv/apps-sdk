@@ -31,6 +31,9 @@ class setup(apps.command.base.Command):
                 'apps.data', 'main.html'),
                     os.path.join(self.project.path, 'html', 'main.html'))
         shutil.copy(pkg_resources.resource_filename(
+                'apps.data', 'main.css'),
+                    os.path.join(self.project.path, 'css', 'main.css'))
+        shutil.copy(pkg_resources.resource_filename(
                 'apps.data', 'index.js'),
                     os.path.join(self.project.path, 'lib', 'index.js'))
 

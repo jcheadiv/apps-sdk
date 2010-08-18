@@ -1,0 +1,1 @@
+exec java -jar test/lint/js.jar test/lint/dvcs_jslint.js test/lint/js.jar test/lint/jslint-rhino.js git

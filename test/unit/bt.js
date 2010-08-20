@@ -17,7 +17,8 @@ bt.status = {
   'loaded': 128
 }
 
-var peer_torrent = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
+var peer_torrent = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent',
+   rss_feeds = ['http://vodo.net/feeds/public', 'http://clearbits.net/rss.xml'];
 
 module('bt');
 
@@ -77,32 +78,30 @@ test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
   expect(6);
-  var rss_bt = 'http://vodo.net/feeds/public';
-  var rss_btapp = 'http://www.clearbits.net/rss.xml';
 
   try{
-    bt.add.rss_feed(rss_bt);
+    bt.add.rss_feed(rss_feeds[0]);
     ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_feed error:" + err.message);
   }
 
-  bt.add.rss_feed(rss_btapp);
-  bt.add.rss_feed(rss_btapp);
+  bt.add.rss_feed(rss_feeds[1]);
+  bt.add.rss_feed(rss_feeds[1]);
   stop();
 
   // XXX - This should be transitioned into an event once the functionality is
   // there.
   setTimeout(function(){
     start();
-    var btappfeed = btapp.rss_feed.get(rss_btapp);
-    var btfeed = btapp.rss_feed.get(rss_bt);
+    var btappfeed = btapp.rss_feed.get(rss_feeds[1]);
+    var btfeed = btapp.rss_feed.get(rss_feeds[0]);
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
     same(rss_urls, _.keys(bt.rss_feed.all()),
          'Keys: ' + _.keys(bt.rss_feed.all()));
-    ok(_.indexOf(rss_urls, rss_btapp) >= 0,
+    ok(_.indexOf(rss_urls, rss_feeds[1]) >= 0,
       'RSS feed added successfully');
 
     //A duplicate feed object isn't created, but the keys are duplicated
@@ -115,14 +114,14 @@ test('bt.add.rss_feed', function() {
     }catch(err){
       ok(false, "Btapp RSS feed was not removed: "+ err.message);
     }
-    
+
     try{
       btfeed.remove();
       ok(true, "Bt RSS feed removed");
     }catch(err){
       ok(false, "Bt RSS feed was not removed: "+ err.message);
     }
-    
+
   }, 2000);
 
 });
@@ -149,24 +148,24 @@ test('bt.add.rss_filter', function() {
     start();
     var btappfilter = btapp.rss_filter.get(filter_btapp);
     var btfilter = bt.rss_filter.get(filter_bt);
-    
+
     var filter_names = _.map(bt.rss_filter.all(), function(v) {
       return v.properties.get('name');
     });
-    
+
     same(filter_names, _.keys(bt.rss_filter.all()),
          'Keys: ' + _.keys(bt.rss_filter.all()));
-         
-    ok(_.indexOf(filter_names, filter_btapp) >= 0, 
+
+    ok(_.indexOf(filter_names, filter_btapp) >= 0,
       'Filter added with correct name property');
-    
-    ok(_.indexOf(bt.rss_filter.keys(), filter_btapp) >= 0, 
+
+    ok(_.indexOf(bt.rss_filter.keys(), filter_btapp) >= 0,
       'Filter added with correct key');
 
     // XXX - A duplicate filter object isn't created, but the keys are duplicated
     equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
-    
+
     // XXX - Filter objects have no remove method
     try{
       btappfilter.remove();
@@ -174,7 +173,7 @@ test('bt.add.rss_filter', function() {
     }catch(err){
       ok(false, "Btapp RSS filter was not removed: "+ err.message);
     }
-    
+
     try{
       btfilter.remove();
       ok(true, "Bt RSS filter removed");
@@ -367,14 +366,14 @@ test('bt.rss_filter', function() {
   ok(filterByName.id, "Filter has an ID property");
 
   utils.testProperties(filterByName.properties, setBlacklist, readOnly);
-  
+
   try{
     filterByName.remove();
     ok(true, "RSS filter removed");
   }catch(err){
     ok(false, "RSS filter was not removed: "+ err.message);
   }
-  
+
 });
 
 test('bt.resource', function() {
@@ -398,6 +397,68 @@ test('bt.settings', function() {
     'keys() matches keys in all().');
 
   utils.testProperties(bt.settings, setBlacklist, []);
+});
+
+test('bt.rss_feed', function() {
+
+  // Ensure we're testing with at minimum one feed.
+  if (0 === bt.rss_feed.keys.length) {
+    bt.add.rss_feed(rss_feeds[0]);
+  }
+
+  utils.testKeysAgainstAllKeys(bt.rss_feed);
+
+  utils.testFunction({
+    fn: bt.rss_feed.get,
+    name: 'get',
+    argc: 1
+  });
+
+  try { // XXX What's wrong with this assertion?
+    same(bt.rss_feed.all()[rss_feeds[0]], bt.rss_feed.get(rss_feeds[0]),
+      "get(key) corresponds to all()[key].");
+  }
+  catch(e) {
+    ok(false, sprintf("get(key) corresponds to all()[key]. %s", e.message));
+  }
+  utils.assertionCounter.increment();
+
+  // Now that we've tested get() and keys(), we can use them.
+  var testFeed = bt.rss_feed.get(bt.rss_feed.keys()[0]);
+  var feedProps = ['id', 'properties', 'item'];
+
+  _.each(feedProps, function(property) {
+    ok('undefined' !== typeof testFeed[property],
+      sprintf('testFeed has property "%s"', property));
+  });
+  utils.assertionCounter.increment(feedProps.length);
+
+  utils.testFunction({
+    fn: testFeed.force_update,
+    name: 'force_update',
+    argc: 0
+  });
+
+  utils.testProperties(testFeed.properties, [], ['url']);
+
+  // XXX The following utils.testFunction of remove should not execute remove(),
+  // XXX but it does.
+  console.log( 'bt.rss_feed.keys().length', bt.rss_feed.keys().length );
+  // XXX Remove the above debug statement once this has been fixed.
+  utils.testFunction({
+    fn: testFeed.remove,
+    name: 'remove',
+    argc: 0
+  });
+  // XXX Remove the below debug statement once this has been fixed.
+  console.log( 'bt.rss_feed.keys().length', bt.rss_feed.keys().length );
+  // XXX Once that's been fixed, test remove() execution.
+  // var feedCount = bt.rss_feed.keys().length;
+  // testFeed.remove();
+  // ok(bt.rss_feed.keys().length === feedCount - 1,
+  //  'remove() decrements keys().length by 1.');
+
+  expect(utils.assertionCounter.reset());
 });
 
 test('bt.log', function() {

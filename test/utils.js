@@ -30,102 +30,156 @@ var utils = {
   })(),
 
   //----------------------------------------------------------------------------
-  // testProperties()
+  // testPropertiesSet()
+  //    Test an object's set() method for each of its properties.
   //
-  testProperties: function(testobject, bl, ro){
-      var testValue, messages = { set: undefined, reset: undefined };
+  // settings (Object): An object with the following properties:
+  //
+  //    Required property:
+  //
+  //      testObject (Object): An object to set-test that is asserted to have
+  //        all(), get(), and set() methods.
+  //
+  //    Optional properties:
+  //
+  //      blacklist (Array): A list of properties to avoid set-testing. These
+  //        are typically cases that will do very bad things, like crash the
+  //        client or destroy the unit test.
+  //
+  //      readOnly (Array): A list of known read-only properties that are
+  //        asserted to be non-settable.
+  //
+  testPropertiesSet: function(settings) {
+    var testValue,
+      messages = {
+        set:   undefined,
+        reset: undefined
+      },
+      defaults = {
+        testObject: {
+          all: function() { return {};   },
+          get: function() { return null; },
+          set: function() {}
+        },
+        blacklist: [],
+        readOnly:  []
+      };
 
-      // Do not test set() on blacklisted properties.
-      var setBlacklist = bl || [];
+    // Set defaults where settings are unspecified.
+    settings = settings || defaults;
+    settings.blacklist = settings.blacklist || [];
+    settings.readOnly  = settings.readOnly  || [];
 
-      // Test that read-only properties are not settable and throw the right error
-      var readOnly = ro || [];
-
-      _.each(testobject.all(), function(value, key) {
-
-        equals(testobject.get(key), value, sprintf('get() correctly ' +
-          'matches value provided by all() for %s', key));
-
-        ok(-1 !== _.indexOf(['boolean','number','string'], typeof(value)),
-          sprintf('setting %s is an expected datatype.', key))
-
-        utils.assertionCounter.increment(2);
-
-        if (-1 === _.indexOf(setBlacklist, key)) {
-
-          // Set testvalue and assert messages according to datatype.
-          switch(typeof(value)) {
-
-            case 'boolean':
-              testValue = !value;
-              messages.set =
-                sprintf('set() can set %s to %s.', key, (testValue).toString());
-              messages.reset =
-                sprintf('set() can set %s back to %s.', key, (value).toString());
-              break;
-
-            case 'number':
-              testValue = 1 === value ? 0 : 1;
-              messages.set = sprintf('set() can set %s to %d.', key, testValue);
-              messages.reset = sprintf('set() can set %s back to %f.', key, value);
-              break;
-
-            case 'string':
-              testValue = "x";
-              messages.set = sprintf('set() can set %s to "%s".', key, testValue);
-              messages.reset = sprintf('set() can set %s back to "%s".', key, value);
-              break;
-          }
-
-          if (-1 === _.indexOf(readOnly, key)) {
-
-            // Set testValue.
-            try {
-              testobject.set(key, testValue);
-              equals(testobject.get(key), testValue, messages.set);
-            }
-            catch(error) {
-              ok(false, sprintf('%s %s', messages.set, error.message));
-            }
-
-            // Reset value.
-            try {
-              testobject.set(key, value);
-              equals(testobject.get(key), value, messages.reset);
-            }
-            catch(error) {
-              ok(false, sprintf('%s %s', messages.reset, error.message));
-            }
-
-            utils.assertionCounter.increment(2);
-
-          } else {
-
-            try {
-              testobject.set(key, testValue);
-              if(testobject.get(key) == testValue)
-                ok(false, sprintf('Successfully set read-only property %s', key));
-            }
-            catch(error) {
-              ok(true, sprintf('Could not set read-only property %s: %s', key, error.message));
-            }
-
-            utils.assertionCounter.increment();
-          }
-
-        }
+    // Ensure that settings.testObject has the expected methods.
+    _.each(['all', 'get', 'set'], function(method, index) {
+      var fn;
+      try { fn = settings.testObject[method]; } catch(e) { fn = {}; }
+      utils.testFunction({
+        fn:   fn,
+        name: method,
+        argc: index
       });
+    });
+
+    // Set testvalue and assert messages according to datatype.
+    var testDatum = {
+      'boolean': function(key, value) {
+        testValue = !value;
+        messages.set =
+          sprintf('set() can set %s to %s.', key, (testValue).toString());
+        messages.reset =
+          sprintf('set() can set %s back to %s.', key, (value).toString());
+      },
+
+      'number': function(key, value) {
+        testValue = 1 === value ? 0 : 1;
+        messages.set = sprintf('set() can set %s to %d.', key, testValue);
+        messages.reset = sprintf('set() can set %s back to %f.', key, value);
+      },
+
+      'string': function(key, value) {
+        testValue = "x";
+        messages.set = sprintf('set() can set %s to "%s".', key, testValue);
+        messages.reset = sprintf('set() can set %s back to "%s".', key, value);
+      }
+    };
+
+    // Check whether a value has been blacklisted
+    var isBlacklisted = function(value) {
+      return -1 < _.indexOf(settings.blacklist, value);
+    }
+
+    // Check whether a value has been specified as read-only
+    var isReadOnly = function(value) {
+      return -1 < _.indexOf(settings.readOnly, value);
+    }
+
+    _.each(settings.testObject.all(), function(value, key) {
+
+      equals(settings.testObject.get(key), value, sprintf('get() correctly ' +
+        'matches value provided by all() for %s', key));
+
+      ok(-1 !== _.indexOf(_.keys(testDatum), typeof(value)),
+        sprintf('setting %s is an expected datatype.', key))
+
+      utils.assertionCounter.increment(2);
+
+      if (! isBlacklisted(key)) {
+
+        testDatum[typeof value](key, value);
+        _.each(messages, function(message, index) {
+          messages[index] = 'testPropertiesSet: ' + message;
+        });
+
+        if (! isReadOnly(key)) {
+
+          // Set testValue.
+          try {
+            settings.testObject.set(key, testValue);
+            equals(settings.testObject.get(key), testValue, messages.set);
+          }
+          catch(error) {
+            ok(false, sprintf('%s %s', messages.set, error.message));
+          }
+
+          // Reset value.
+          try {
+            settings.testObject.set(key, value);
+            equals(settings.testObject.get(key), value, messages.reset);
+          }
+          catch(error) {
+            ok(false, sprintf('%s %s', messages.reset, error.message));
+          }
+
+          utils.assertionCounter.increment(2);
+
+        } else {
+
+          try {
+            settings.testObject.set(key, testValue);
+            if (settings.testObject.get(key) === testValue)
+              ok(false, sprintf('Successfully set read-only property %s', key));
+          }
+          catch(error) {
+            ok(true, sprintf('Could not set read-only property %s: %s', key,
+              error.message));
+          }
+
+          utils.assertionCounter.increment();
+        }
+      }
+    });
   },
 
   //----------------------------------------------------------------------------
   // testFunction()
   //    Generic test for any function or method.
   //
-  // Parameter: an object with the following properties:
+  // Parameter (Object): an object with the following properties:
   //
   //    Required property:
   //
-  //      fn (Object): Object asserted to be a function.
+  //      fn (Function): Object asserted to be a function.
   //
   //    Optional properties:
   //

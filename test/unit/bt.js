@@ -335,8 +335,14 @@ test('torrent.peer', function() {
     "Parent torrent is correct");
 
   // XXX - It appears that trying to set read-only peer properties crashes the client
-  //utils.testProperties(peer.properties, [], peer.properties.keys())
-  utils.testProperties(peer.properties, peer.properties.keys(), [])
+  // utils.testPropertiesSet({
+  //  testObject: peer.properties,
+  //  readOnly:   peer.properties.keys()
+  // });
+  utils.testPropertiesSet({
+    testObject: peer.properties,
+    blacklist:  peer.properties.keys()
+  });
 
 });
 
@@ -365,7 +371,11 @@ test('bt.rss_filter', function() {
 
   ok(filterByName.id, "Filter has an ID property");
 
-  utils.testProperties(filterByName.properties, setBlacklist, readOnly);
+  utils.testPropertiesSet({
+    testObject: filterByName.properties,
+    blacklist:  setBlacklist,
+    readOnly:   readOnly
+  });
 
   try{
     filterByName.remove();
@@ -389,14 +399,19 @@ test('bt.settings', function() {
   // * Property avwindow is a read-only window handle used by Bitdefender.
   var setBlacklist = ['gui.show_btapps', 'avwindow'];
 
-  expect(4 * bt.settings.keys().length - 2 * setBlacklist.length + 2);
-
   ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
 
   same(_.keys(bt.settings.all()), bt.settings.keys(),
     'keys() matches keys in all().');
 
-  utils.testProperties(bt.settings, setBlacklist, []);
+  utils.assertionCounter.increment(2);
+
+  utils.testPropertiesSet({
+    testObject: bt.settings,
+    blacklist:  setBlacklist
+  });
+
+  expect(utils.assertionCounter.reset());
 });
 
 test('bt.rss_feed', function() {
@@ -439,7 +454,10 @@ test('bt.rss_feed', function() {
     argc: 0
   });
 
-  utils.testProperties(testFeed.properties, [], ['url']);
+  utils.testPropertiesSet({
+    testObject: testFeed.properties,
+    readOnly:   ['url']
+  });
 
   // XXX The following utils.testFunction of remove should not execute remove(),
   // XXX but it does.

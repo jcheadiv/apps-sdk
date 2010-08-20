@@ -309,11 +309,12 @@ test('torrent.file', function() {
 test('torrent.peer', function() {
   var testValue;
   var tor = bt.torrent.get(utils.sampleResources.torrents[0]);
-  if (tor.peer.keys().length == 0) {
-    throw Error('Need to have the peer_torrent added to run these ' +
-                'tests (since you\'ve gotta connect to some peers)');
-    return;
+  // Ensure we're testing with at minimum one torrent.
+  if (0 === bt.torrent.keys.length) {
+    bt.add.torrent(utils.sampleResources.torrents[0]);
   }
+
+  // XXX peer doesn't seem to exist anymore...
   var peer = tor.peer.get(tor.peer.keys()[0]);
 
   // 3 tests for read-only properties (2 get, 1 set)

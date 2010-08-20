@@ -1,5 +1,20 @@
 var utils = {
   //----------------------------------------------------------------------------
+  // utils.sampleResources
+  //    Provides URLs for sample resources used in various unit tests.
+  //
+  sampleResources: {
+    torrents: [
+      'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.' +
+        '2010.Xvid-VODO.torrent'
+    ],
+    rssFeeds: [
+      'http://vodo.net/feeds/public',
+      'http://clearbits.net/rss.xml'
+    ]
+  },
+
+  //----------------------------------------------------------------------------
   // utils.assertionCounter
   //    Track count of expected assertions.
   //

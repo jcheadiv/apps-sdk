@@ -17,9 +17,6 @@ bt.status = {
   'loaded': 128
 }
 
-var peer_torrent = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent',
-   rss_feeds = ['http://vodo.net/feeds/public', 'http://clearbits.net/rss.xml'];
-
 module('bt');
 
 test('bt.add.torrent', function() {
@@ -37,7 +34,7 @@ test('bt.add.torrent', function() {
   bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
   // For use in the torrent.peer tests
-  // bt.add.torrent(peer_torrent);
+  // bt.add.torrent(utils.sampleResources.torrents[0]);
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
   bt.add.torrent(url, function(resp) {
@@ -64,8 +61,9 @@ test('bt.add.torrent', function() {
           equals(tor.properties.get(k), v, 'Callback + defaults works');
         });
       _.each(bt.torrent.all(), function(v) {
-        if (v.properties.get('download_url') == peer_torrent)
-          return
+        if (v.properties.get('download_url') ===
+          utils.sampleResources.torrents[0])
+            return
         v.remove();
       });
       start();
@@ -80,28 +78,28 @@ test('bt.add.rss_feed', function() {
   expect(6);
 
   try{
-    bt.add.rss_feed(rss_feeds[0]);
+    bt.add.rss_feed(utils.sampleResources.rssFeeds[0]);
     ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_feed error:" + err.message);
   }
 
-  bt.add.rss_feed(rss_feeds[1]);
-  bt.add.rss_feed(rss_feeds[1]);
+  bt.add.rss_feed(utils.sampleResources.rssFeeds[1]);
+  bt.add.rss_feed(utils.sampleResources.rssFeeds[1]);
   stop();
 
   // XXX - This should be transitioned into an event once the functionality is
   // there.
   setTimeout(function(){
     start();
-    var btappfeed = btapp.rss_feed.get(rss_feeds[1]);
-    var btfeed = btapp.rss_feed.get(rss_feeds[0]);
+    var btappfeed = btapp.rss_feed.get(utils.sampleResources.rssFeeds[1]);
+    var btfeed    = btapp.rss_feed.get(utils.sampleResources.rssFeeds[0]);
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
     same(rss_urls, _.keys(bt.rss_feed.all()),
          'Keys: ' + _.keys(bt.rss_feed.all()));
-    ok(_.indexOf(rss_urls, rss_feeds[1]) >= 0,
+    ok(_.indexOf(rss_urls, utils.sampleResources.rssFeeds[1]) >= 0,
       'RSS feed added successfully');
 
     //A duplicate feed object isn't created, but the keys are duplicated
@@ -310,7 +308,7 @@ test('torrent.file', function() {
 
 test('torrent.peer', function() {
   var testValue;
-  var tor = bt.torrent.get(peer_torrent);
+  var tor = bt.torrent.get(utils.sampleResources.torrents[0]);
   if (tor.peer.keys().length == 0) {
     throw Error('Need to have the peer_torrent added to run these ' +
                 'tests (since you\'ve gotta connect to some peers)');
@@ -418,7 +416,7 @@ test('bt.rss_feed', function() {
 
   // Ensure we're testing with at minimum one feed.
   if (0 === bt.rss_feed.keys.length) {
-    bt.add.rss_feed(rss_feeds[0]);
+    bt.add.rss_feed(utils.sampleResources.rssFeeds[0]);
   }
 
   utils.testKeysAgainstAllKeys(bt.rss_feed);
@@ -430,7 +428,8 @@ test('bt.rss_feed', function() {
   });
 
   try { // XXX What's wrong with this assertion?
-    same(bt.rss_feed.all()[rss_feeds[0]], bt.rss_feed.get(rss_feeds[0]),
+    same(bt.rss_feed.all()[utils.sampleResources.rssFeeds[0]],
+      bt.rss_feed.get(utils.sampleResources.rssFeeds[0]),
       "get(key) corresponds to all()[key].");
   }
   catch(e) {

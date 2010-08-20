@@ -394,20 +394,17 @@ test('bt.resource', function() {
 
 test('bt.settings', function() {
 
+  ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
+  utils.assertionCounter.increment();
+
+  utils.testKeysAgainstAllKeys(bt.settings);
+
   // * Setting gui.show_btapps to false destroys the test environment.
   // * Property avwindow is a read-only window handle used by Bitdefender.
-  var setBlacklist = ['gui.show_btapps', 'avwindow'];
-
-  ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
-
-  same(_.keys(bt.settings.all()), bt.settings.keys(),
-    'keys() matches keys in all().');
-
-  utils.assertionCounter.increment(2);
-
   utils.testPropertiesSet({
     testObject: bt.settings,
-    blacklist:  setBlacklist
+    blacklist:  ['gui.show_btapps'],
+    readOnly:   ['avwindow']
   });
 
   expect(utils.assertionCounter.reset());

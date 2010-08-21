@@ -286,24 +286,46 @@ test('bt.torrent', function() {
 });
 
 test('torrent.file', function() {
-  expect(3);
-
-  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
+  var url = utils.sampleResources.torrents[0];
   bt.add.torrent(url, function(resp) {
     var tor = bt.torrent.get(url);
-    same(tor.file.keys(), _.keys(tor.file.all()),
-         'Mismatch on keys: ' + tor.file.keys() + '\t' +
-         _.keys(tor.file.all()));
+    utils.testKeysAgainstAllKeys(tor.file);
     var file = _.values(tor.file.all())[0];
+    var testParentByNameMsg = 'Test parent by name succeeded';
     try {
-      ok(file.torrent, "Client didn't crash");
       equals(tor.properties.get('name'), file.torrent.properties.get('name'),
-             'Parent is the right object');
-    } catch(err) { console.log('Failed trying to get a file\'s torrent'); }
+             testParentByNameMsg);
+    }
+    catch(error) {
+      ok(false, sprintf('%s %s', testParentByNameMsg, error.message));
+    }
+    utils.assertionCounter.increment();
+
+    utils.testProperties({
+      object:     file,
+      properties: ['index', 'torrent'],
+      name:       'torrent.file'
+    });
+
+    _.each(['open', 'get_data'], function(method) {
+      try { fn = file[method]; } catch(error) { fn = {} }
+      utils.testFunction({
+        fn:   fn,
+        name: sprintf('file.%s', method),
+        argc: 0
+      });
+    });
+
+    utils.testPropertiesSet({
+      testObject: file.properties,
+      readOnly:   ['name', 'size', 'downloaded']
+    });
+
     tor.remove();
     start();
   });
   stop();
+  expect(utils.assertionCounter.reset());
 });
 
 test('torrent.peer', function() {
@@ -437,16 +459,15 @@ test('bt.rss_feed', function() {
 
   // Now that we've tested get() and keys(), we can use them.
   var testFeed = bt.rss_feed.get(bt.rss_feed.keys()[0]);
-  var feedProps = ['id', 'properties', 'item'];
 
-  _.each(feedProps, function(property) {
-    ok('undefined' !== typeof testFeed[property],
-      sprintf('testFeed has property "%s"', property));
+  utils.testProperties({
+    object:     testFeed,
+    properties: ['id', 'properties', 'item'],
+    name:       'testFeed'
   });
-  utils.assertionCounter.increment(feedProps.length);
 
   utils.testFunction({
-    fn: testFeed.force_update,
+    fn:   testFeed.force_update,
     name: 'force_update',
     argc: 0
   });

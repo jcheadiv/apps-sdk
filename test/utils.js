@@ -244,6 +244,28 @@ var utils = {
     same(_.keys(object.all()), object.keys(),
       'testKeysAgainstAllKeys: keys() matches keys in all()');
     utils.assertionCounter.increment();
+  },
+
+  //----------------------------------------------------------------------------
+  // testProperties()
+  //    Generic test for any set of properties
+  //
+  // Parameter: settings (Object): an object with the following properties:
+  //
+  //    object (Object): An object asserted to have the specified properties.
+  //    properties (Array): A list of properties to test.
+  //    name (String): Name of the object to report.
+  //
+  testProperties: function(settings) {
+    var settings   = settings            || {};
+    var object     = settings.object     || {};
+    var properties = settings.properties || [];
+    var name       = settings.name       || object.name;
+    _.each(properties, function(property) {
+      ok('undefined' !== typeof object[property],
+        sprintf('testProperties: %s has property "%s"', name, property));
+    });
+    utils.assertionCounter.increment(properties.length);
   }
 
 };

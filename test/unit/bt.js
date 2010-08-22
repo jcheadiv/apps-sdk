@@ -392,10 +392,13 @@ test('bt.rss_filter', function() {
   equals( filterByName.properties.get("name"),
           filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
+  utils.assertionCounter.increment();
 
-  ok(filterByName.id, "Filter has an ID property");
-
-  utils.assertionCounter.increment(2);
+  utils.testProperties({
+    object:     filterByName,
+    properties: ['id'],
+    name:       'filter'
+  });
 
   utils.testPropertiesSet({
     testObject: filterByName.properties,
@@ -405,9 +408,9 @@ test('bt.rss_filter', function() {
 
   try{
     filterByName.remove();
-    ok(true, "RSS filter removed");
+    ok(true, "RSS filter was removed");
   }catch(err){
-    ok(false, "RSS filter was not removed: "+ err.message);
+    ok(false, "RSS filter was removed: " + err.message);
   }
   utils.assertionCounter.increment();
 

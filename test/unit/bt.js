@@ -381,25 +381,21 @@ test('bt.rss_filter', function() {
 
   // XXX Setting 'name' property throws an Error with empty message and no description
   var setBlacklist = ['name'];
-  var readOnly = ['episode_filter', 'smart_ep_filter', 'feed', 'last_match', 'resolving_candidate'];
+  var readOnly = ['episode_filter', 'smart_ep_filter', 'feed', 'last_match',
+    'resolving_candidate'];
   bt.add.rss_filter(filtername);
 
   filterByName = bt.rss_filter.get(filtername);
   ftkeys = bt.rss_filter.keys();
   filterByKey = bt.rss_filter.get(ftkeys[ftkeys.length-1]);
 
-  // 4 tests for normal properties (2 get, 2 set)
-  // 3 tests for read-only properties (2 get, 1 set), so subtract 1
-  // 2 tests for blacklisted properties (2 get), so subtract 2
-  expect(4 * filterByName.properties.keys().length
-           - 2 * setBlacklist.length
-           - readOnly.length
-           + 3);
   equals( filterByName.properties.get("name"),
           filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
 
   ok(filterByName.id, "Filter has an ID property");
+
+  utils.assertionCounter.increment(2);
 
   utils.testPropertiesSet({
     testObject: filterByName.properties,
@@ -413,7 +409,9 @@ test('bt.rss_filter', function() {
   }catch(err){
     ok(false, "RSS filter was not removed: "+ err.message);
   }
+  utils.assertionCounter.increment();
 
+  expect(utils.assertionCounter.reset());
 });
 
 test('bt.resource', function() {

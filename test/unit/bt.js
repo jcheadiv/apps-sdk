@@ -20,55 +20,64 @@ bt.status = {
 module('bt');
 
 test('bt.add.torrent', function() {
-  expect(9);
 
   // XXX - Need to test adding via. https
-  same(bt.torrent.all(), {}, 'Torrents: ' + bt.torrent.all());
+  ok(false, 'Added HTTPS test');
 
-  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
-  var url_nocb = 'http://vodo.net/media/torrents/Everything.Unspoken.2004.Xvid-VODO.torrent';
-  var url_def = 'http://vodo.net/media/torrents/Smalltown.Boy.2007.Xvid-VODO.torrent';
-  var url_cbdef = 'http://vodo.net/media/torrents/Warring.Factions.2010.Xvid-VODO.torrent';
+  var peer_torrent = utils.sampleResources.torrents[0];
+  var url          = utils.sampleResources.torrents[1];
+  var url_nocb     = utils.sampleResources.torrents[2];
+  var url_def      = utils.sampleResources.torrents[3];
+  var url_cbdef    = utils.sampleResources.torrents[4];
   var defs = { label: 'foobar' };
   // Just in case.
+
   bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
   // For use in the torrent.peer tests
   // bt.add.torrent(utils.sampleResources.torrents[0]);
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
+
+  utils.assertionCounter.increment(7 + _.keys(defs).length * 2);
   bt.add.torrent(url, function(resp) {
     equals(resp.url, url, 'Url\'s set right');
     equals(resp.status, 200, 'Status is okay');
     equals(resp.state, 1, 'State is okay');
     equals(resp.message, '', 'Message is okay');
+
     var download_urls = _.map(bt.torrent.all(), function(v) {
       return v.properties.get('download_url');
     });
+
     ok(_.indexOf(download_urls, url) >= 0,
        'Torrent added successfully');
     ok(_.indexOf(download_urls, url_nocb) >= 0,
        'No cb or defaults added okay');
+
     var tor = bt.torrent.get(url_def);
     if (tor)
       _.each(defs, function(v, k) {
         equals(tor.properties.get(k), v, 'Defaults are set');
       });
+
     bt.add.torrent(url_cbdef, defs, function(resp) {
       var tor = bt.torrent.get(url_cbdef);
       if (tor)
         _.each(defs, function(v, k) {
           equals(tor.properties.get(k), v, 'Callback + defaults works');
         });
+
       _.each(bt.torrent.all(), function(v) {
-        if (v.properties.get('download_url') ===
-          utils.sampleResources.torrents[0])
-            return
+        if (v.properties.get('download_url') === peer_torrent)
+          return
         v.remove();
       });
+
       start();
     });
   });
+  expect(utils.assertionCounter.reset());
 });
 
 // XXX - Adding RSS feeds currently crashes the client

@@ -3,16 +3,24 @@ var utils = {
   // utils.sampleResources
   //    Provides URLs for sample resources used in various unit tests.
   //
-  sampleResources: {
-    torrents: [
-      'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.' +
-        '2010.Xvid-VODO.torrent'
-    ],
-    rssFeeds: [
-      'http://vodo.net/feeds/public',
-      'http://clearbits.net/rss.xml'
-    ]
-  },
+  sampleResources: (function() {
+    var vodoTorrent = function(title) {
+      return sprintf('http://vodo.net/media/torrents/%s-VODO.torrent', title);
+    }
+    return {
+      torrents: [
+        vodoTorrent('The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid'),
+        vodoTorrent('Pioneer.One.S01E01.720p.x264'),
+        vodoTorrent('Everything.Unspoken.2004.Xvid'),
+        vodoTorrent('Smalltown.Boy.2007.Xvid'),
+        vodoTorrent('Warring.Factions.2010.Xvid')
+      ],
+      rssFeeds: [
+        'http://vodo.net/feeds/public',
+        'http://clearbits.net/rss.xml'
+      ]
+    }
+  })(),
 
   //----------------------------------------------------------------------------
   // utils.assertionCounter

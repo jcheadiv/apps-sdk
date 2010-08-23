@@ -17,55 +17,63 @@ bt.status = {
   'loaded': 128
 }
 
-module('bt');
+module('bt', bt.testUtils.moduleLifecycle);
 
 test('bt.add.torrent', function() {
-  expect(9);
 
   // XXX - Need to test adding via. https
-  same(bt.torrent.all(), {}, 'Torrents: ' + bt.torrent.all());
+  ok(false, 'Added HTTPS test');
 
-  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
-  var url_nocb = 'http://vodo.net/media/torrents/Everything.Unspoken.2004.Xvid-VODO.torrent';
-  var url_def = 'http://vodo.net/media/torrents/Smalltown.Boy.2007.Xvid-VODO.torrent';
-  var url_cbdef = 'http://vodo.net/media/torrents/Warring.Factions.2010.Xvid-VODO.torrent';
+  var peer_torrent = this.utils.sampleResources.torrents[0];
+  var url          = this.utils.sampleResources.torrents[1];
+  var url_nocb     = this.utils.sampleResources.torrents[2];
+  var url_def      = this.utils.sampleResources.torrents[3];
+  var url_cbdef    = this.utils.sampleResources.torrents[4];
   var defs = { label: 'foobar' };
   // Just in case.
+
   bt.events.set('torrentStatus', bt._handlers.torrent);
-  stop();
+  stop(30000);
   // For use in the torrent.peer tests
-  // bt.add.torrent(utils.sampleResources.torrents[0]);
+  // bt.add.torrent(this.utils.sampleResources.torrents[0]);
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
+
+  this.utils.assertionCounter.increment(7 + _.keys(defs).length * 2);
   bt.add.torrent(url, function(resp) {
     equals(resp.url, url, 'Url\'s set right');
     equals(resp.status, 200, 'Status is okay');
     equals(resp.state, 1, 'State is okay');
     equals(resp.message, '', 'Message is okay');
+
     var download_urls = _.map(bt.torrent.all(), function(v) {
       return v.properties.get('download_url');
     });
+
     ok(_.indexOf(download_urls, url) >= 0,
        'Torrent added successfully');
     ok(_.indexOf(download_urls, url_nocb) >= 0,
        'No cb or defaults added okay');
+
     var tor = bt.torrent.get(url_def);
     if (tor)
       _.each(defs, function(v, k) {
         equals(tor.properties.get(k), v, 'Defaults are set');
       });
+
     bt.add.torrent(url_cbdef, defs, function(resp) {
       var tor = bt.torrent.get(url_cbdef);
       if (tor)
         _.each(defs, function(v, k) {
           equals(tor.properties.get(k), v, 'Callback + defaults works');
         });
+
       _.each(bt.torrent.all(), function(v) {
-        if (v.properties.get('download_url') ===
-          utils.sampleResources.torrents[0])
-            return
+        if (v.properties.get('download_url') === peer_torrent)
+          return
         v.remove();
       });
+
       start();
     });
   });
@@ -75,59 +83,58 @@ test('bt.add.torrent', function() {
 test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(6);
 
   try{
-    bt.add.rss_feed(utils.sampleResources.rssFeeds[0]);
+    bt.add.rss_feed(this.utils.sampleResources.rssFeeds[0]);
     ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_feed error:" + err.message);
   }
+  this.utils.assertionCounter.increment();
 
-  bt.add.rss_feed(utils.sampleResources.rssFeeds[1]);
-  bt.add.rss_feed(utils.sampleResources.rssFeeds[1]);
-  stop();
+  bt.add.rss_feed(this.utils.sampleResources.rssFeeds[1]);
+  bt.add.rss_feed(this.utils.sampleResources.rssFeeds[1]);
+  stop(30000);
 
   // XXX - This should be transitioned into an event once the functionality is
   // there.
+  var that = this;
   setTimeout(function(){
     start();
-    var btappfeed = btapp.rss_feed.get(utils.sampleResources.rssFeeds[1]);
-    var btfeed    = btapp.rss_feed.get(utils.sampleResources.rssFeeds[0]);
+    var btappfeed = btapp.rss_feed.get(that.utils.sampleResources.rssFeeds[1]);
+    var btfeed    = btapp.rss_feed.get(that.utils.sampleResources.rssFeeds[0]);
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
     same(rss_urls, _.keys(bt.rss_feed.all()),
-         'Keys: ' + _.keys(bt.rss_feed.all()));
-    ok(_.indexOf(rss_urls, utils.sampleResources.rssFeeds[1]) >= 0,
+      'Keys in bt.rss_feed.all() are accurate: ' +  _.keys(bt.rss_feed.all()));
+    ok(_.indexOf(rss_urls, that.utils.sampleResources.rssFeeds[1]) >= 0,
       'RSS feed added successfully');
 
-    //A duplicate feed object isn't created, but the keys are duplicated
-    equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
-      "Number of keys and objects is consistent; good duplicate behavior");
+    that.utils.testKeysAgainstAllKeys(bt.rss_feed);
 
     try{
       btappfeed.remove();
-      ok(true, "Btapp RSS feed removed");
+      ok(true, "Btapp RSS feed was removed");
     }catch(err){
-      ok(false, "Btapp RSS feed was not removed: "+ err.message);
+      ok(false, "Btapp RSS feed was removed: " + err.message);
     }
 
     try{
       btfeed.remove();
-      ok(true, "Bt RSS feed removed");
+      ok(true, "Bt RSS feed was removed");
     }catch(err){
-      ok(false, "Bt RSS feed was not removed: "+ err.message);
+      ok(false, "Bt RSS feed was removed: " + err.message);
     }
 
   }, 2000);
-
+  this.utils.assertionCounter.increment(4);
 });
 
 test('bt.add.rss_filter', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(7);
+  this.utils.assertionCounter.increment(7);
   var filter_bt = "BTFilterName";
   var filter_btapp = "BTAppFilterName";
 
@@ -140,7 +147,7 @@ test('bt.add.rss_filter', function() {
 
   btapp.add.rss_filter(filter_btapp);
   btapp.add.rss_filter(filter_btapp);
-  stop();
+  stop(30000);
 
   setTimeout(function(){
     start();
@@ -184,7 +191,7 @@ test('bt.add.rss_filter', function() {
 });
 
 test('bt.stash', function() {
-  expect(33);
+  this.utils.assertionCounter.increment(33);
 
   if (btapp.stash._clear)
     btapp.stash._clear();
@@ -223,11 +230,11 @@ test('bt.stash', function() {
     });
     start();
   });
-  stop();
+  stop(30000);
 });
 
 test('bt.events', function() {
-  expect(3);
+  this.utils.assertionCounter.increment(3);
 
   var fn = function() { };
   bt.events.set('torrentStatus', fn);
@@ -238,7 +245,7 @@ test('bt.events', function() {
 });
 
 test('bt.torrent', function() {
-  expect(13);
+  this.utils.assertionCounter.increment(13);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
   var url = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
@@ -257,8 +264,7 @@ test('bt.torrent', function() {
     var status = tor.properties.get('status');
     ok(status & bt.status.loaded && status & bt.status.queued,
        'Status: ' + status);
-    // XXX - Currently freezes the client
-    tor.stop();
+    tor.stop(30000);
     ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
     tor.start();
     ok(tor.properties.get('status') & bt.status.started, 'Torrent Started');
@@ -271,9 +277,14 @@ test('bt.torrent', function() {
     // tor.recheck();
     // ok(tor.properties.get('status') & bt.status.checking,
     //    'Torrent status (recheck): ' + tor.properties.get('status'));
-    _.each(bt.torrent.all(), function(v) {
-      v.remove();
-    });
+    //
+    // XXX - Currently freezes the client
+    // XXX - I wonder if this is because remove() returns while removal is still
+    // XXX - in progress.
+    //_.each(bt.torrent.all(), function(v) {
+    //  v.remove();
+    //});
+    //
     // XXX - Adding magnet links is broken.
     bt.add.torrent(magnet, function(resp) {
       var tor = bt.torrent.get(magnet);
@@ -282,44 +293,70 @@ test('bt.torrent', function() {
       start();
     });
   });
-  stop();
+  stop(30000);
 });
 
 test('torrent.file', function() {
-  expect(3);
-
-  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
+  var url = this.utils.sampleResources.torrents[0];
+  var that = this;
   bt.add.torrent(url, function(resp) {
     var tor = bt.torrent.get(url);
-    same(tor.file.keys(), _.keys(tor.file.all()),
-         'Mismatch on keys: ' + tor.file.keys() + '\t' +
-         _.keys(tor.file.all()));
+    that.utils.testKeysAgainstAllKeys(tor.file);
     var file = _.values(tor.file.all())[0];
+    var testParentByNameMsg = 'Test parent by name succeeded';
     try {
-      ok(file.torrent, "Client didn't crash");
       equals(tor.properties.get('name'), file.torrent.properties.get('name'),
-             'Parent is the right object');
-    } catch(err) { console.log('Failed trying to get a file\'s torrent'); }
-    tor.remove();
+             testParentByNameMsg);
+    }
+    catch(error) {
+      ok(false, sprintf('%s %s', testParentByNameMsg, error.message));
+    }
+    that.utils.assertionCounter.increment();
+
+    that.utils.testProperties({
+      object:     file,
+      properties: ['index', 'torrent'],
+      name:       'torrent.file'
+    });
+
+    _.each(['open', 'get_data'], function(method) {
+      try { fn = file[method]; } catch(error) { fn = {} }
+      that.utils.testFunction({
+        fn:   fn,
+        name: sprintf('file.%s', method),
+        argc: 0
+      });
+    });
+
+    that.utils.testPropertiesSet({
+      testObject: file.properties,
+      readOnly:   ['name', 'size', 'downloaded']
+    });
+
+    // XXX remove() takes a while to work, and results in failure of the
+    // XXX following test.
+    //tor.remove();
     start();
   });
-  stop();
+  stop(30000);
 });
 
 test('torrent.peer', function() {
   var testValue;
-  var tor = bt.torrent.get(utils.sampleResources.torrents[0]);
+  var tor = bt.torrent.get(this.utils.sampleResources.torrents[0]);
   // Ensure we're testing with at minimum one torrent.
   if (0 === bt.torrent.keys.length) {
-    bt.add.torrent(utils.sampleResources.torrents[0]);
+    bt.add.torrent(this.utils.sampleResources.torrents[0]);
   }
 
   // XXX peer doesn't seem to exist anymore...
-  var peer = tor.peer.get(tor.peer.keys()[0]);
-
-  // 3 tests for read-only properties (2 get, 1 set)
-  // 2 tests for blacklisted properties (2 get)
-  expect(2 * peer.properties.keys().length + 3);
+  try {
+    var peer = tor.peer.get(tor.peer.keys()[0]);
+    ok(peer, "tor.peer.get works.");
+  } catch(error) {
+    ok(false, error.message);
+  }
+  this.utils.assertionCounter.increment();
 
   // XXX - API doc indicates the existence of a peer.id property
   // which doesn't actually exist
@@ -328,17 +365,19 @@ test('torrent.peer', function() {
   }catch(err){
     ok(false, err.message);
   }
+  this.utils.assertionCounter.increment();
 
   ok(peer.torrent, "Peer has torrent association");
   equals(peer.torrent.properties.get("name"), tor.properties.get("name"),
     "Parent torrent is correct");
+  this.utils.assertionCounter.increment(2);
 
   // XXX - It appears that trying to set read-only peer properties crashes the client
-  // utils.testPropertiesSet({
+  // this.utils.testPropertiesSet({
   //  testObject: peer.properties,
   //  readOnly:   peer.properties.keys()
   // });
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: peer.properties,
     blacklist:  peer.properties.keys()
   });
@@ -350,27 +389,26 @@ test('bt.rss_filter', function() {
 
   // XXX Setting 'name' property throws an Error with empty message and no description
   var setBlacklist = ['name'];
-  var readOnly = ['episode_filter', 'smart_ep_filter', 'feed', 'last_match', 'resolving_candidate'];
+  var readOnly = ['episode_filter', 'smart_ep_filter', 'feed', 'last_match',
+    'resolving_candidate'];
   bt.add.rss_filter(filtername);
 
   filterByName = bt.rss_filter.get(filtername);
   ftkeys = bt.rss_filter.keys();
   filterByKey = bt.rss_filter.get(ftkeys[ftkeys.length-1]);
 
-  // 4 tests for normal properties (2 get, 2 set)
-  // 3 tests for read-only properties (2 get, 1 set), so subtract 1
-  // 2 tests for blacklisted properties (2 get), so subtract 2
-  expect(4 * filterByName.properties.keys().length
-           - 2 * setBlacklist.length
-           - readOnly.length
-           + 3);
   equals( filterByName.properties.get("name"),
           filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
+  this.utils.assertionCounter.increment();
 
-  ok(filterByName.id, "Filter has an ID property");
+  this.utils.testProperties({
+    object:     filterByName,
+    properties: ['id'],
+    name:       'filter'
+  });
 
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: filterByName.properties,
     blacklist:  setBlacklist,
     readOnly:   readOnly
@@ -378,80 +416,77 @@ test('bt.rss_filter', function() {
 
   try{
     filterByName.remove();
-    ok(true, "RSS filter removed");
+    ok(true, "RSS filter was removed");
   }catch(err){
-    ok(false, "RSS filter was not removed: "+ err.message);
+    ok(false, "RSS filter was removed: " + err.message);
   }
-
+  this.utils.assertionCounter.increment();
 });
 
 test('bt.resource', function() {
-  expect(1);
-
   var txt = 'test123\n';
   equal(bt.resource('data/foobar'), txt, 'Fetched the right data');
+  this.utils.assertionCounter.increment();
+
 });
 
 test('bt.settings', function() {
 
   ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
-  utils.assertionCounter.increment();
+  this.utils.assertionCounter.increment();
 
-  utils.testKeysAgainstAllKeys(bt.settings);
+  this.utils.testKeysAgainstAllKeys(bt.settings);
 
   // * Setting gui.show_btapps to false destroys the test environment.
   // * Property avwindow is a read-only window handle used by Bitdefender.
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: bt.settings,
     blacklist:  ['gui.show_btapps'],
     readOnly:   ['avwindow']
   });
-
-  expect(utils.assertionCounter.reset());
 });
 
 test('bt.rss_feed', function() {
 
   // Ensure we're testing with at minimum one feed.
   if (0 === bt.rss_feed.keys.length) {
-    bt.add.rss_feed(utils.sampleResources.rssFeeds[0]);
+    bt.add.rss_feed(this.utils.sampleResources.rssFeeds[0]);
   }
 
-  utils.testKeysAgainstAllKeys(bt.rss_feed);
+  this.utils.testKeysAgainstAllKeys(bt.rss_feed);
 
-  utils.testFunction({
+  this.utils.testFunction({
     fn: bt.rss_feed.get,
     name: 'get',
     argc: 1
   });
 
   try { // XXX What's wrong with this assertion?
-    same(bt.rss_feed.all()[utils.sampleResources.rssFeeds[0]],
-      bt.rss_feed.get(utils.sampleResources.rssFeeds[0]),
+    same(bt.rss_feed.all()[this.utils.sampleResources.rssFeeds[0]],
+      bt.rss_feed.get(this.utils.sampleResources.rssFeeds[0]),
       "get(key) corresponds to all()[key].");
   }
   catch(e) {
     ok(false, sprintf("get(key) corresponds to all()[key]. %s", e.message));
   }
-  utils.assertionCounter.increment();
+  this.utils.assertionCounter.increment();
 
   // Now that we've tested get() and keys(), we can use them.
   var testFeed = bt.rss_feed.get(bt.rss_feed.keys()[0]);
-  var feedProps = ['id', 'properties', 'item'];
 
-  _.each(feedProps, function(property) {
-    ok('undefined' !== typeof testFeed[property],
-      sprintf('testFeed has property "%s"', property));
+  this.utils.testProperties({
+    object:     testFeed,
+    properties: ['id', 'properties', 'item'],
+    name:       'testFeed'
   });
-  utils.assertionCounter.increment(feedProps.length);
 
-  utils.testFunction({
-    fn: testFeed.force_update,
+  this.utils.testFunction({
+    fn:   testFeed.force_update,
     name: 'force_update',
     argc: 0
   });
 
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: testFeed.properties,
     readOnly:   ['url']
   });
@@ -460,7 +495,7 @@ test('bt.rss_feed', function() {
   // XXX but it does.
   console.log( 'bt.rss_feed.keys().length', bt.rss_feed.keys().length );
   // XXX Remove the above debug statement once this has been fixed.
-  utils.testFunction({
+  this.utils.testFunction({
     fn: testFeed.remove,
     name: 'remove',
     argc: 0
@@ -472,12 +507,8 @@ test('bt.rss_feed', function() {
   // testFeed.remove();
   // ok(bt.rss_feed.keys().length === feedCount - 1,
   //  'remove() decrements keys().length by 1.');
-
-  expect(utils.assertionCounter.reset());
 });
 
 test('bt.log', function() {
-  expect();
-
   // XXX - Fill out the unit tests
 });

@@ -338,6 +338,29 @@ bt.testUtils = {
         sprintf('testProperties: %s has property "%s"', name, property));
     });
     this.assertionCounter.increment(properties.length);
-  }
+  },
 
+  //----------------------------------------------------------------------------
+  // setupStop
+  //
+  //    Set a timeout for all stop()s. Although the QUint docs recommend against
+  //    using a stop() timeout, they are misguided; if start() is never executed
+  //    then expect() is never checked. The important factor is to ensure
+  //    expect() gets an accurate assertion count, which is assured by using
+  //    assertionCounter. My only concern is that 30 seconds may be too short.
+  //    We should increase it to, say, 5 minutes once the unit tests are
+  //    automated.
+  //
+  //    This function should be called once for each module at the bottom of
+  //    this script.
+  //
+  setupStop: function() {
+    window.stop = function(timeout) {
+      timeout = timeout || 30000;
+      QUnit.stop(timeout);
+    }
+  }
 };
+
+// Set up stop().
+bt.testUtils.setupStop();

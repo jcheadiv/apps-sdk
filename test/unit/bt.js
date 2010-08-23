@@ -128,13 +128,13 @@ test('bt.add.rss_feed', function() {
     }
 
   }, 2000);
-  that.utils.assertionCounter.increment(4);
+  this.utils.assertionCounter.increment(4);
 });
 
 test('bt.add.rss_filter', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(7);
+  this.utils.assertionCounter.increment(7);
   var filter_bt = "BTFilterName";
   var filter_btapp = "BTAppFilterName";
 
@@ -191,7 +191,7 @@ test('bt.add.rss_filter', function() {
 });
 
 test('bt.stash', function() {
-  expect(33);
+  this.utils.assertionCounter.increment(33);
 
   if (btapp.stash._clear)
     btapp.stash._clear();
@@ -234,7 +234,7 @@ test('bt.stash', function() {
 });
 
 test('bt.events', function() {
-  expect(3);
+  this.utils.assertionCounter.increment(3);
 
   var fn = function() { };
   bt.events.set('torrentStatus', fn);
@@ -245,7 +245,7 @@ test('bt.events', function() {
 });
 
 test('bt.torrent', function() {
-  expect(13);
+  this.utils.assertionCounter.increment(13);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
   var url = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
@@ -356,10 +356,7 @@ test('torrent.peer', function() {
   } catch(error) {
     ok(false, error.message);
   }
-
-  // 3 tests for read-only properties (2 get, 1 set)
-  // 2 tests for blacklisted properties (2 get)
-  expect(2 * peer.properties.keys().length + 3);
+  this.utils.assertionCounter.increment();
 
   // XXX - API doc indicates the existence of a peer.id property
   // which doesn't actually exist
@@ -368,10 +365,12 @@ test('torrent.peer', function() {
   }catch(err){
     ok(false, err.message);
   }
+  this.utils.assertionCounter.increment();
 
   ok(peer.torrent, "Peer has torrent association");
   equals(peer.torrent.properties.get("name"), tor.properties.get("name"),
     "Parent torrent is correct");
+  this.utils.assertionCounter.increment(2);
 
   // XXX - It appears that trying to set read-only peer properties crashes the client
   // this.utils.testPropertiesSet({
@@ -425,10 +424,10 @@ test('bt.rss_filter', function() {
 });
 
 test('bt.resource', function() {
-  expect(1);
-
   var txt = 'test123\n';
   equal(bt.resource('data/foobar'), txt, 'Fetched the right data');
+  this.utils.assertionCounter.increment();
+
 });
 
 test('bt.settings', function() {
@@ -511,7 +510,5 @@ test('bt.rss_feed', function() {
 });
 
 test('bt.log', function() {
-  expect();
-
   // XXX - Fill out the unit tests
 });

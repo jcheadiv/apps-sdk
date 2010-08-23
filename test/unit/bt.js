@@ -264,7 +264,6 @@ test('bt.torrent', function() {
     var status = tor.properties.get('status');
     ok(status & bt.status.loaded && status & bt.status.queued,
        'Status: ' + status);
-    // XXX - Currently freezes the client
     tor.stop();
     ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
     tor.start();
@@ -278,9 +277,14 @@ test('bt.torrent', function() {
     // tor.recheck();
     // ok(tor.properties.get('status') & bt.status.checking,
     //    'Torrent status (recheck): ' + tor.properties.get('status'));
-    _.each(bt.torrent.all(), function(v) {
-      v.remove();
-    });
+    //
+    // XXX - Currently freezes the client
+    // XXX - I wonder if this is because remove() returns while removal is still
+    // XXX - in progress.
+    //_.each(bt.torrent.all(), function(v) {
+    //  v.remove();
+    //});
+    //
     // XXX - Adding magnet links is broken.
     bt.add.torrent(magnet, function(resp) {
       var tor = bt.torrent.get(magnet);
@@ -289,7 +293,7 @@ test('bt.torrent', function() {
       start();
     });
   });
-  stop();
+  stop(10000);
 });
 
 test('torrent.file', function() {

@@ -115,16 +115,16 @@ test('bt.add.rss_feed', function() {
 
     try{
       btappfeed.remove();
-      ok(true, "Btapp RSS feed removed");
+      ok(true, "Btapp RSS feed was removed");
     }catch(err){
-      ok(false, "Btapp RSS feed was not removed: " + err.message);
+      ok(false, "Btapp RSS feed was removed: " + err.message);
     }
 
     try{
       btfeed.remove();
-      ok(true, "Bt RSS feed removed");
+      ok(true, "Bt RSS feed was removed");
     }catch(err){
-      ok(false, "Bt RSS feed was not removed: " + err.message);
+      ok(false, "Bt RSS feed was removed: " + err.message);
     }
 
   }, 2000);

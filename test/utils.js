@@ -1,6 +1,68 @@
-var utils = {
+bt.testUtils = {
   //----------------------------------------------------------------------------
-  // utils.sampleResources
+  // bt.testUtils.moduleLifecycle
+  //
+  //    Provide this object as the second parameter for QUnit module() in order
+  //    to make use of the testUtils within the module. This will create an
+  //    instance of the utils (see factory below) made available as a property
+  //    of the module called utils.
+  //
+  //    Note that teardown() takes care of each test's expect(). This is so
+  //    event cascades can pile on any arbitrary number of assertions, without
+  //    any need to manually keep track of the assertion count. You must
+  //    use assertionCounter.increment() for each assertion so this will work.
+  //
+  moduleLifecycle: {
+    setup: function() {
+      this.utils = bt.testUtils.factory.create();
+    },
+    teardown: function() {
+      expect(this.utils.assertionCounter.reset());
+    }
+  },
+
+  //----------------------------------------------------------------------------
+  // bt.testUtils.factory
+  //
+  //    Asynchronous and delayed functions can cause multiple tests to run
+  //    simultaneously. Each test needs its own instance of testUtils so that
+  //    its assertions can be counted in isolation from other concurrent tests.
+  //    This factory accomodates. It should not be necessary to create any new
+  //    instances above and beyond the one created for each test by the
+  //    moduleLifecycle setup function (above).
+  //
+  //    Note that the testUtils must be instantiated prior to use of any of its
+  //    methods.
+  //
+  factory: (function() {
+    var instances = [];
+    var applicant = function(instance, property) {
+      return function() {
+        bt.testUtils[property].apply(instance, arguments);
+      }
+    }
+    return {
+      create: function() {
+        var F = function() {};
+        F.prototype = bt.testUtils;
+        var instance = new F;
+        for (property in bt.testUtils) {
+          if ('function' === typeof bt.testUtils[property]) {
+            instance[property] = applicant(instance, property);
+          }
+        }
+        instances.push(instance);
+        instance.id = instances.length;
+        return instance;
+      },
+      retrieve: function(id) {
+        return instances[id];
+      }
+    };
+  })(),
+
+  //----------------------------------------------------------------------------
+  // bt.testUtils.sampleResources
   //    Provides URLs for sample resources used in various unit tests.
   //
   sampleResources: (function() {
@@ -23,7 +85,7 @@ var utils = {
   })(),
 
   //----------------------------------------------------------------------------
-  // utils.assertionCounter
+  // bt.testUtils.assertionCounter
   //    Track count of expected assertions.
   //
   // Methods:
@@ -86,7 +148,8 @@ var utils = {
         },
         blacklist: [],
         readOnly:  []
-      };
+      },
+      that = this;
 
     // Set defaults where settings are unspecified.
     settings = settings || defaults;
@@ -97,7 +160,7 @@ var utils = {
     _.each(['all', 'get', 'set'], function(method, index) {
       var fn;
       try { fn = settings.testObject[method]; } catch(e) { fn = {}; }
-      utils.testFunction({
+      that.testFunction({
         fn:   fn,
         name: method,
         argc: index
@@ -145,7 +208,7 @@ var utils = {
       ok(-1 !== _.indexOf(_.keys(testDatum), typeof(value)),
         sprintf('setting %s is an expected datatype.', key))
 
-      utils.assertionCounter.increment(2);
+      that.assertionCounter.increment(2);
 
       if (! isBlacklisted(key)) {
 
@@ -174,7 +237,7 @@ var utils = {
             ok(false, sprintf('%s %s', messages.reset, error.message));
           }
 
-          utils.assertionCounter.increment(2);
+          that.assertionCounter.increment(2);
 
         } else {
 
@@ -188,7 +251,7 @@ var utils = {
               error.message));
           }
 
-          utils.assertionCounter.increment();
+          that.assertionCounter.increment();
         }
       }
     });
@@ -229,7 +292,7 @@ var utils = {
       ok(false,
         sprintf('testFunction: Can test argc on nonfunction %s.', name));
     }
-    utils.assertionCounter.increment(2);
+    this.assertionCounter.increment(2);
   },
 
   //----------------------------------------------------------------------------
@@ -242,8 +305,9 @@ var utils = {
   //      methods.
   //
   testKeysAgainstAllKeys: function(object) {
+    var that = this;
     _.each(['all', 'keys'], function(method) {
-      utils.testFunction({
+      that.testFunction({
         fn: object[method],
         name: method,
         argc: 0
@@ -251,7 +315,7 @@ var utils = {
     });
     same(_.keys(object.all()), object.keys(),
       'testKeysAgainstAllKeys: keys() matches keys in all()');
-    utils.assertionCounter.increment();
+    this.assertionCounter.increment();
   },
 
   //----------------------------------------------------------------------------
@@ -273,7 +337,7 @@ var utils = {
       ok('undefined' !== typeof object[property],
         sprintf('testProperties: %s has property "%s"', name, property));
     });
-    utils.assertionCounter.increment(properties.length);
+    this.assertionCounter.increment(properties.length);
   }
 
 };

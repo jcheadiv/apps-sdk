@@ -17,29 +17,29 @@ bt.status = {
   'loaded': 128
 }
 
-module('bt');
+module('bt', bt.testUtils.moduleLifecycle);
 
 test('bt.add.torrent', function() {
 
   // XXX - Need to test adding via. https
   ok(false, 'Added HTTPS test');
 
-  var peer_torrent = utils.sampleResources.torrents[0];
-  var url          = utils.sampleResources.torrents[1];
-  var url_nocb     = utils.sampleResources.torrents[2];
-  var url_def      = utils.sampleResources.torrents[3];
-  var url_cbdef    = utils.sampleResources.torrents[4];
+  var peer_torrent = this.utils.sampleResources.torrents[0];
+  var url          = this.utils.sampleResources.torrents[1];
+  var url_nocb     = this.utils.sampleResources.torrents[2];
+  var url_def      = this.utils.sampleResources.torrents[3];
+  var url_cbdef    = this.utils.sampleResources.torrents[4];
   var defs = { label: 'foobar' };
   // Just in case.
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
   // For use in the torrent.peer tests
-  // bt.add.torrent(utils.sampleResources.torrents[0]);
+  // bt.add.torrent(this.utils.sampleResources.torrents[0]);
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
 
-  utils.assertionCounter.increment(7 + _.keys(defs).length * 2);
+  this.utils.assertionCounter.increment(7 + _.keys(defs).length * 2);
   bt.add.torrent(url, function(resp) {
     equals(resp.url, url, 'Url\'s set right');
     equals(resp.status, 200, 'Status is okay');
@@ -77,60 +77,58 @@ test('bt.add.torrent', function() {
       start();
     });
   });
-  expect(utils.assertionCounter.reset());
 });
 
 // XXX - Adding RSS feeds currently crashes the client
 test('bt.add.rss_feed', function() {
   // Do we want to expand the functionality to include
   // a callback and default property setting?
-  expect(6);
 
   try{
-    bt.add.rss_feed(utils.sampleResources.rssFeeds[0]);
+    bt.add.rss_feed(this.utils.sampleResources.rssFeeds[0]);
     ok(true, "Didn't explode while trying to add");
   }catch(err){
     ok(false, "bt.add.rss_feed error:" + err.message);
   }
+  this.utils.assertionCounter.increment();
 
-  bt.add.rss_feed(utils.sampleResources.rssFeeds[1]);
-  bt.add.rss_feed(utils.sampleResources.rssFeeds[1]);
+  bt.add.rss_feed(this.utils.sampleResources.rssFeeds[1]);
+  bt.add.rss_feed(this.utils.sampleResources.rssFeeds[1]);
   stop();
 
   // XXX - This should be transitioned into an event once the functionality is
   // there.
+  var that = this;
   setTimeout(function(){
     start();
-    var btappfeed = btapp.rss_feed.get(utils.sampleResources.rssFeeds[1]);
-    var btfeed    = btapp.rss_feed.get(utils.sampleResources.rssFeeds[0]);
+    var btappfeed = btapp.rss_feed.get(that.utils.sampleResources.rssFeeds[1]);
+    var btfeed    = btapp.rss_feed.get(that.utils.sampleResources.rssFeeds[0]);
     var rss_urls = _.map(bt.rss_feed.all(), function(v) {
       return v.properties.get('url');
     });
     same(rss_urls, _.keys(bt.rss_feed.all()),
-         'Keys: ' + _.keys(bt.rss_feed.all()));
-    ok(_.indexOf(rss_urls, utils.sampleResources.rssFeeds[1]) >= 0,
+      'Keys in bt.rss_feed.all() are accurate: ' +  _.keys(bt.rss_feed.all()));
+    ok(_.indexOf(rss_urls, that.utils.sampleResources.rssFeeds[1]) >= 0,
       'RSS feed added successfully');
 
-    //A duplicate feed object isn't created, but the keys are duplicated
-    equals(bt.rss_feed.keys().length, _.keys(bt.rss_feed.all()).length,
-      "Number of keys and objects is consistent; good duplicate behavior");
+    that.utils.testKeysAgainstAllKeys(bt.rss_feed);
 
     try{
       btappfeed.remove();
       ok(true, "Btapp RSS feed removed");
     }catch(err){
-      ok(false, "Btapp RSS feed was not removed: "+ err.message);
+      ok(false, "Btapp RSS feed was not removed: " + err.message);
     }
 
     try{
       btfeed.remove();
       ok(true, "Bt RSS feed removed");
     }catch(err){
-      ok(false, "Bt RSS feed was not removed: "+ err.message);
+      ok(false, "Bt RSS feed was not removed: " + err.message);
     }
 
   }, 2000);
-
+  that.utils.assertionCounter.increment(4);
 });
 
 test('bt.add.rss_filter', function() {
@@ -295,10 +293,11 @@ test('bt.torrent', function() {
 });
 
 test('torrent.file', function() {
-  var url = utils.sampleResources.torrents[0];
+  var url = this.utils.sampleResources.torrents[0];
+  var that = this;
   bt.add.torrent(url, function(resp) {
     var tor = bt.torrent.get(url);
-    utils.testKeysAgainstAllKeys(tor.file);
+    that.utils.testKeysAgainstAllKeys(tor.file);
     var file = _.values(tor.file.all())[0];
     var testParentByNameMsg = 'Test parent by name succeeded';
     try {
@@ -308,9 +307,9 @@ test('torrent.file', function() {
     catch(error) {
       ok(false, sprintf('%s %s', testParentByNameMsg, error.message));
     }
-    utils.assertionCounter.increment();
+    that.utils.assertionCounter.increment();
 
-    utils.testProperties({
+    that.utils.testProperties({
       object:     file,
       properties: ['index', 'torrent'],
       name:       'torrent.file'
@@ -318,14 +317,14 @@ test('torrent.file', function() {
 
     _.each(['open', 'get_data'], function(method) {
       try { fn = file[method]; } catch(error) { fn = {} }
-      utils.testFunction({
+      that.utils.testFunction({
         fn:   fn,
         name: sprintf('file.%s', method),
         argc: 0
       });
     });
 
-    utils.testPropertiesSet({
+    that.utils.testPropertiesSet({
       testObject: file.properties,
       readOnly:   ['name', 'size', 'downloaded']
     });
@@ -334,19 +333,23 @@ test('torrent.file', function() {
     start();
   });
   stop();
-  expect(utils.assertionCounter.reset());
 });
 
 test('torrent.peer', function() {
   var testValue;
-  var tor = bt.torrent.get(utils.sampleResources.torrents[0]);
+  var tor = bt.torrent.get(this.utils.sampleResources.torrents[0]);
   // Ensure we're testing with at minimum one torrent.
   if (0 === bt.torrent.keys.length) {
-    bt.add.torrent(utils.sampleResources.torrents[0]);
+    bt.add.torrent(this.utils.sampleResources.torrents[0]);
   }
 
   // XXX peer doesn't seem to exist anymore...
-  var peer = tor.peer.get(tor.peer.keys()[0]);
+  try {
+    var peer = tor.peer.get(tor.peer.keys()[0]);
+    ok(peer, "tor.peer.get works.");
+  } catch(error) {
+    ok(false, error.message);
+  }
 
   // 3 tests for read-only properties (2 get, 1 set)
   // 2 tests for blacklisted properties (2 get)
@@ -365,11 +368,11 @@ test('torrent.peer', function() {
     "Parent torrent is correct");
 
   // XXX - It appears that trying to set read-only peer properties crashes the client
-  // utils.testPropertiesSet({
+  // this.utils.testPropertiesSet({
   //  testObject: peer.properties,
   //  readOnly:   peer.properties.keys()
   // });
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: peer.properties,
     blacklist:  peer.properties.keys()
   });
@@ -392,15 +395,15 @@ test('bt.rss_filter', function() {
   equals( filterByName.properties.get("name"),
           filterByKey.properties.get("name"),
           "Filter can be accessed by name or key" );
-  utils.assertionCounter.increment();
+  this.utils.assertionCounter.increment();
 
-  utils.testProperties({
+  this.utils.testProperties({
     object:     filterByName,
     properties: ['id'],
     name:       'filter'
   });
 
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: filterByName.properties,
     blacklist:  setBlacklist,
     readOnly:   readOnly
@@ -412,9 +415,7 @@ test('bt.rss_filter', function() {
   }catch(err){
     ok(false, "RSS filter was removed: " + err.message);
   }
-  utils.assertionCounter.increment();
-
-  expect(utils.assertionCounter.reset());
+  this.utils.assertionCounter.increment();
 });
 
 test('bt.resource', function() {
@@ -427,62 +428,60 @@ test('bt.resource', function() {
 test('bt.settings', function() {
 
   ok(!_.isEmpty(bt.settings.all()), 'all() is nonempty.');
-  utils.assertionCounter.increment();
+  this.utils.assertionCounter.increment();
 
-  utils.testKeysAgainstAllKeys(bt.settings);
+  this.utils.testKeysAgainstAllKeys(bt.settings);
 
   // * Setting gui.show_btapps to false destroys the test environment.
   // * Property avwindow is a read-only window handle used by Bitdefender.
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: bt.settings,
     blacklist:  ['gui.show_btapps'],
     readOnly:   ['avwindow']
   });
-
-  expect(utils.assertionCounter.reset());
 });
 
 test('bt.rss_feed', function() {
 
   // Ensure we're testing with at minimum one feed.
   if (0 === bt.rss_feed.keys.length) {
-    bt.add.rss_feed(utils.sampleResources.rssFeeds[0]);
+    bt.add.rss_feed(this.utils.sampleResources.rssFeeds[0]);
   }
 
-  utils.testKeysAgainstAllKeys(bt.rss_feed);
+  this.utils.testKeysAgainstAllKeys(bt.rss_feed);
 
-  utils.testFunction({
+  this.utils.testFunction({
     fn: bt.rss_feed.get,
     name: 'get',
     argc: 1
   });
 
   try { // XXX What's wrong with this assertion?
-    same(bt.rss_feed.all()[utils.sampleResources.rssFeeds[0]],
-      bt.rss_feed.get(utils.sampleResources.rssFeeds[0]),
+    same(bt.rss_feed.all()[this.utils.sampleResources.rssFeeds[0]],
+      bt.rss_feed.get(this.utils.sampleResources.rssFeeds[0]),
       "get(key) corresponds to all()[key].");
   }
   catch(e) {
     ok(false, sprintf("get(key) corresponds to all()[key]. %s", e.message));
   }
-  utils.assertionCounter.increment();
+  this.utils.assertionCounter.increment();
 
   // Now that we've tested get() and keys(), we can use them.
   var testFeed = bt.rss_feed.get(bt.rss_feed.keys()[0]);
 
-  utils.testProperties({
+  this.utils.testProperties({
     object:     testFeed,
     properties: ['id', 'properties', 'item'],
     name:       'testFeed'
   });
 
-  utils.testFunction({
+  this.utils.testFunction({
     fn:   testFeed.force_update,
     name: 'force_update',
     argc: 0
   });
 
-  utils.testPropertiesSet({
+  this.utils.testPropertiesSet({
     testObject: testFeed.properties,
     readOnly:   ['url']
   });
@@ -491,7 +490,7 @@ test('bt.rss_feed', function() {
   // XXX but it does.
   console.log( 'bt.rss_feed.keys().length', bt.rss_feed.keys().length );
   // XXX Remove the above debug statement once this has been fixed.
-  utils.testFunction({
+  this.utils.testFunction({
     fn: testFeed.remove,
     name: 'remove',
     argc: 0
@@ -503,8 +502,6 @@ test('bt.rss_feed', function() {
   // testFeed.remove();
   // ok(bt.rss_feed.keys().length === feedCount - 1,
   //  'remove() decrements keys().length by 1.');
-
-  expect(utils.assertionCounter.reset());
 });
 
 test('bt.log', function() {

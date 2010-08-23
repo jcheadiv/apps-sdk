@@ -333,7 +333,9 @@ test('torrent.file', function() {
       readOnly:   ['name', 'size', 'downloaded']
     });
 
-    tor.remove();
+    // XXX remove() takes a while to work, and results in failure of the
+    // XXX following test.
+    //tor.remove();
     start();
   });
   stop();

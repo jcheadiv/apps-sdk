@@ -351,16 +351,12 @@ bt.testUtils = {
   //    We should increase it to, say, 5 minutes once the unit tests are
   //    automated.
   //
-  //    This function should be called once for each module at the bottom of
-  //    this script.
+  //    This method can not be called; it runs once and becomes undefined.
   //
-  setupStop: function() {
+  setupStop: (function() {
     window.stop = function(timeout) {
       timeout = timeout || 30000;
       QUnit.stop(timeout);
     }
-  }
+  })()
 };
-
-// Set up stop().
-bt.testUtils.setupStop();

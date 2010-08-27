@@ -69,13 +69,17 @@ bt.testUtils = {
     var vodoTorrent = function(title) {
       return sprintf('http://vodo.net/media/torrents/%s-VODO.torrent', title);
     }
+    var clearBitsTorrent = function(title) {
+      return sprintf('http://clearbits.net/get/%s.torrent', title);
+    }
     return {
       torrents: [
         vodoTorrent('The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid'),
         vodoTorrent('Pioneer.One.S01E01.720p.x264'),
         vodoTorrent('Everything.Unspoken.2004.Xvid'),
         vodoTorrent('Smalltown.Boy.2007.Xvid'),
-        vodoTorrent('Warring.Factions.2010.Xvid')
+        vodoTorrent('Warring.Factions.2010.Xvid'),
+        clearBitsTorrent('346-film-makers-guideline-to-fair-use') // Only 429k
       ],
       rssFeeds: [
         'http://vodo.net/feeds/public',

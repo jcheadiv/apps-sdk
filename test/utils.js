@@ -290,7 +290,7 @@ bt.testUtils = {
     ok(isFunction, sprintf('testFunction: %s() is a function.', name));
     if (isFunction) {
       equals(argc, fn.length,
-        sprintf('testFunction: %s() expects %s', name, argc, arg));
+        sprintf('testFunction: %s() expects %d %s.', name, argc, arg));
     }
     else {
       ok(false,

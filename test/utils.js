@@ -369,6 +369,55 @@ bt.testUtils = {
   },
 
   //----------------------------------------------------------------------------
+  // testExpectedExceptions
+  //    Test a set of expected exceptions, expecting each assertion to fail
+  //    predictably. You can use this function in one of two ways.
+  //
+  // Usage 0.
+  // Parameter: settings (Object): An object with the following properties:
+  //
+  //    Required properties:
+  //
+  //      fn (Function): Object asserted to be a function.
+  //      exception (String): The name value of the expected Error object.
+  //      failure (String): A string describing the expectation in English.
+  //
+  //    Optional properties:
+  //
+  //      args (Array): Array to be applied to fn.
+  //      setup (Function): Function to initialize the desired state.
+  //      teardown (Function): Function to restore the initial state.
+  //
+  // Usage 1.
+  // Parameter: array of settings objects as described in Usage 0.
+  //
+  testExpectedExceptions: function(settings) {
+    var that = this;
+    if (_.isArray(settings)) {
+      _.each(settings, function(settings) {
+        that.testExpectedExceptions(settings);
+      });
+      return;
+    }
+    if ('function' === typeof settings.setup) settings.setup();
+    try {
+      settings.fn.apply(settings.fn, settings.args || []);
+      ok(false, settings.failure);
+    }
+    catch(error) {
+      var errorName = 'string' === typeof error ?
+        error : error.name || '[Unnamed error]';
+      same(errorName, settings.exception,
+        sprintf('Expected exception "%s" thrown. Thrown error message: %s',
+        settings.exception, error.message || '[No error message]'));
+    }
+    finally {
+      if ('function' === typeof settings.teardown) settings.teardown();
+    }
+    this.assertionCounter.increment();
+  },
+
+  //----------------------------------------------------------------------------
   // setupStop
   //
   //    Set a timeout for all stop()s. Although the QUint docs recommend against

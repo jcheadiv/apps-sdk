@@ -264,7 +264,9 @@ bt.testUtils = {
   //----------------------------------------------------------------------------
   // testFunction()
   //    Generic test for any function or method.
+  //    You can use this function in one of two ways.
   //
+  // Usage 0.
   // Parameter (Object): an object with the following properties:
   //
   //    Required property:
@@ -280,7 +282,17 @@ bt.testUtils = {
   //      argc (Number): The expected argument count for the specified
   //        function. Defaults to 0.
   //
+  // Usage 1.
+  // Parameter: array of settings objects as described in Usage 0.
+  //
   testFunction: function() {
+    var that = this;
+    if (_.isArray(arguments[0])) {
+      _.each(arguments[0], function(settings) {
+        that.testFunction(settings);
+      });
+      return;
+    }
     var argument = arguments[0] || {},
       fn = argument.fn,
       name = argument.name || fn.name || fn.toString(),
@@ -325,14 +337,26 @@ bt.testUtils = {
   //----------------------------------------------------------------------------
   // testProperties()
   //    Generic test for any set of properties
+  //    You can use this function in one of two ways.
   //
+  // Usage 0.
   // Parameter: settings (Object): an object with the following properties:
   //
   //    object (Object): An object asserted to have the specified properties.
   //    properties (Array): A list of properties to test.
   //    name (String): Name of the object to report.
   //
+  // Usage 1.
+  // Parameter: array of settings objects as described in Usage 0.
+  //
   testProperties: function(settings) {
+    var that = this;
+    if (_.isArray(settings)) {
+      _.each(settings, function(settings) {
+        that.testProperties(settings);
+      });
+      return;
+    }
     var settings   = settings            || {};
     var object     = settings.object     || {};
     var properties = settings.properties || [];

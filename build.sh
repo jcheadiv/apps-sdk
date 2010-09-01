@@ -1,3 +1,4 @@
+#!/bin/sh
 python setup.py develop
 python setup.py bdist_egg
 cd loader/

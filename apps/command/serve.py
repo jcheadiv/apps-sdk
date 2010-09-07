@@ -204,6 +204,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if headers:
             self.send_header('Server', self.version_string())
             self.send_header('Date', self.date_time_string())
+            self.send_header('Content-Encoding', 'utf-8')
 
 class serve(apps.command.base.Command):
 

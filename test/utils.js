@@ -69,13 +69,17 @@ bt.testUtils = {
     var vodoTorrent = function(title) {
       return sprintf('http://vodo.net/media/torrents/%s-VODO.torrent', title);
     }
+    var clearBitsTorrent = function(title) {
+      return sprintf('http://clearbits.net/get/%s.torrent', title);
+    }
     return {
       torrents: [
         vodoTorrent('The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid'),
         vodoTorrent('Pioneer.One.S01E01.720p.x264'),
         vodoTorrent('Everything.Unspoken.2004.Xvid'),
         vodoTorrent('Smalltown.Boy.2007.Xvid'),
-        vodoTorrent('Warring.Factions.2010.Xvid')
+        vodoTorrent('Warring.Factions.2010.Xvid'),
+        clearBitsTorrent('346-film-makers-guideline-to-fair-use') // Only 429k
       ],
       rssFeeds: [
         'http://vodo.net/feeds/public',
@@ -260,7 +264,9 @@ bt.testUtils = {
   //----------------------------------------------------------------------------
   // testFunction()
   //    Generic test for any function or method.
+  //    You can use this function in one of two ways.
   //
+  // Usage 0.
   // Parameter (Object): an object with the following properties:
   //
   //    Required property:
@@ -276,7 +282,17 @@ bt.testUtils = {
   //      argc (Number): The expected argument count for the specified
   //        function. Defaults to 0.
   //
+  // Usage 1.
+  // Parameter: array of settings objects as described in Usage 0.
+  //
   testFunction: function() {
+    var that = this;
+    if (_.isArray(arguments[0])) {
+      _.each(arguments[0], function(settings) {
+        that.testFunction(settings);
+      });
+      return;
+    }
     var argument = arguments[0] || {},
       fn = argument.fn,
       name = argument.name || fn.name || fn.toString(),
@@ -285,7 +301,7 @@ bt.testUtils = {
       arg = 1 === argc ? "argument" : "arguments";
     ok(isFunction, sprintf('testFunction: %s() is a function.', name));
     if (isFunction) {
-      ok(argc === fn.length,
+      equals(argc, fn.length,
         sprintf('testFunction: %s() expects %d %s.', name, argc, arg));
     }
     else {
@@ -321,14 +337,26 @@ bt.testUtils = {
   //----------------------------------------------------------------------------
   // testProperties()
   //    Generic test for any set of properties
+  //    You can use this function in one of two ways.
   //
+  // Usage 0.
   // Parameter: settings (Object): an object with the following properties:
   //
   //    object (Object): An object asserted to have the specified properties.
   //    properties (Array): A list of properties to test.
   //    name (String): Name of the object to report.
   //
+  // Usage 1.
+  // Parameter: array of settings objects as described in Usage 0.
+  //
   testProperties: function(settings) {
+    var that = this;
+    if (_.isArray(settings)) {
+      _.each(settings, function(settings) {
+        that.testProperties(settings);
+      });
+      return;
+    }
     var settings   = settings            || {};
     var object     = settings.object     || {};
     var properties = settings.properties || [];
@@ -338,6 +366,74 @@ bt.testUtils = {
         sprintf('testProperties: %s has property "%s"', name, property));
     });
     this.assertionCounter.increment(properties.length);
-  }
+  },
 
+  //----------------------------------------------------------------------------
+  // testExpectedExceptions
+  //    Test a set of expected exceptions, expecting each assertion to fail
+  //    predictably. You can use this function in one of two ways.
+  //
+  // Usage 0.
+  // Parameter: settings (Object): An object with the following properties:
+  //
+  //    Required properties:
+  //
+  //      fn (Function): Object asserted to be a function.
+  //      exception (String): The name value of the expected Error object.
+  //      failure (String): A string describing the expectation in English.
+  //
+  //    Optional properties:
+  //
+  //      args (Array): Array to be applied to fn.
+  //      setup (Function): Function to initialize the desired state.
+  //      teardown (Function): Function to restore the initial state.
+  //
+  // Usage 1.
+  // Parameter: array of settings objects as described in Usage 0.
+  //
+  testExpectedExceptions: function(settings) {
+    var that = this;
+    if (_.isArray(settings)) {
+      _.each(settings, function(settings) {
+        that.testExpectedExceptions(settings);
+      });
+      return;
+    }
+    if ('function' === typeof settings.setup) settings.setup();
+    try {
+      settings.fn.apply(settings.fn, settings.args || []);
+      ok(false, settings.failure);
+    }
+    catch(error) {
+      var errorName = 'string' === typeof error ?
+        error : error.name || '[Unnamed error]';
+      same(errorName, settings.exception,
+        sprintf('Expected exception "%s" thrown. Thrown error message: %s',
+        settings.exception, error.message || '[No error message]'));
+    }
+    finally {
+      if ('function' === typeof settings.teardown) settings.teardown();
+    }
+    this.assertionCounter.increment();
+  },
+
+  //----------------------------------------------------------------------------
+  // setupStop
+  //
+  //    Set a timeout for all stop()s. Although the QUint docs recommend against
+  //    using a stop() timeout, they are misguided; if start() is never executed
+  //    then expect() is never checked. The important factor is to ensure
+  //    expect() gets an accurate assertion count, which is assured by using
+  //    assertionCounter. My only concern is that 30 seconds may be too short.
+  //    We should increase it to, say, 5 minutes once the unit tests are
+  //    automated.
+  //
+  //    This method can not be called; it runs once and becomes undefined.
+  //
+  setupStop: (function() {
+    window.stop = function(timeout) {
+      timeout = timeout || 30000;
+      QUnit.stop(timeout);
+    }
+  })()
 };

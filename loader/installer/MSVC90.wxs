@@ -3,16 +3,24 @@
     <Fragment>
         <ComponentGroup Id="MSVC90">
             <ComponentRef Id="cmp1A488EC96F1B14B16DC453EDD1563D7D" />
+            <ComponentRef Id="cmpB8A1EF2624A4D9B9AA1C1CAFE1B7547E" />
+            <ComponentRef Id="cmp1357FE75F9C4FF2DF83DBA80D2732D00" />
             <ComponentRef Id="cmp5154A9EB43618E53B8F6DB7169FD08CA" />
         </ComponentGroup>
     </Fragment>
     <Fragment>
         <DirectoryRef Id="INSTALLLOCATION">
             <Directory Id="dirAF82ECC14E83C0B90499E600A3BD1E69" Name="MICROSOFT.VC90.CRT">
-                <Component Id="cmp1A488EC96F1B14B16DC453EDD1563D7D" Guid="{6C3C35AE-1249-429C-8A19-5FA0BCDCE9F7}">
+                <Component Id="cmp1A488EC96F1B14B16DC453EDD1563D7D" Guid="{4C2B6CE6-E8D7-4FA8-BD02-A9E95BDF44CA}">
                     <File Id="fil2D41EDA39CBFE1F7C8C6813745279B9B" KeyPath="yes" Source="$(var.MSVCDir)\Microsoft.VC90.CRT.manifest" />
                 </Component>
-                <Component Id="cmp5154A9EB43618E53B8F6DB7169FD08CA" Guid="{D41C04D7-2549-4FAC-AC89-861C497E6B80}">
+                <Component Id="cmpB8A1EF2624A4D9B9AA1C1CAFE1B7547E" Guid="{DEAAFC00-70D3-4047-B254-2F8CC8030591}">
+                    <File Id="filDA4238ABD6D9DDC6203EEF86985F9D57" KeyPath="yes" Source="$(var.MSVCDir)\msvcm90.dll" />
+                </Component>
+                <Component Id="cmp1357FE75F9C4FF2DF83DBA80D2732D00" Guid="{A72406AC-2E43-4CBB-A1D5-718012E8822E}">
+                    <File Id="filE89E3AC380AD377FD88A79FA4A2DC516" KeyPath="yes" Source="$(var.MSVCDir)\msvcp90.dll" />
+                </Component>
+                <Component Id="cmp5154A9EB43618E53B8F6DB7169FD08CA" Guid="{810E9AB8-75F4-462C-8413-58AC34AB00E7}">
                     <File Id="fil305BFBC15F4715A47D39A77720A8E42C" KeyPath="yes" Source="$(var.MSVCDir)\msvcr90.dll" />
                 </Component>
             </Directory>

@@ -17,33 +17,33 @@
         <DirectoryRef Id="INSTALLLOCATION">
             <Directory Id="dir010385527DE87332840D28FE6A9F1F04" Name="httplib2-0.6.0-py2.6.egg">
                 <Directory Id="dir1E14AA092816AD64BE27CCD7FDA10DBC" Name="EGG-INFO">
-                    <Component Id="cmp75CF73A72E5F337C11EDB1E15A20780F" Guid="{4B69A1AC-AA3D-475B-8C40-57BAF9CC4E68}">
+                    <Component Id="cmp75CF73A72E5F337C11EDB1E15A20780F" Guid="{38653239-88CC-4C89-8A76-7A613CD6A5B4}">
                         <File Id="filE501DF1552A456F2927894E9F5799AFC" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\dependency_links.txt" />
                     </Component>
-                    <Component Id="cmp7081320ED7AD50A97A2475C36CB1CE37" Guid="{162FC6A1-CD17-48F6-8905-E8305AB0E7E0}">
+                    <Component Id="cmp7081320ED7AD50A97A2475C36CB1CE37" Guid="{F61E0F2F-7DD3-47BD-A0E1-B552469ABF09}">
                         <File Id="fil6915F7FDB0E5A68312300499A65A0DC6" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\PKG-INFO" />
                     </Component>
-                    <Component Id="cmp00426B723012C0FCCA738FDD384B3336" Guid="{30A51E52-7EFF-477C-B9AF-34B64944259B}">
+                    <Component Id="cmp00426B723012C0FCCA738FDD384B3336" Guid="{C82D5A2D-03BB-432B-A267-705252E04BF5}">
                         <File Id="fil8950DFD30769C439789AF0F5C9290DE0" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\SOURCES.txt" />
                     </Component>
-                    <Component Id="cmpADADD3D49CFFC5E14FC408BE9E263622" Guid="{3F801DEE-C8A0-4D8D-9FFB-494F693047E6}">
+                    <Component Id="cmpADADD3D49CFFC5E14FC408BE9E263622" Guid="{69ABAF4B-0C3A-4201-9DE1-AA22C8658443}">
                         <File Id="fil64DFA57B4A374FAC769BC5F85513489C" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\top_level.txt" />
                     </Component>
-                    <Component Id="cmpA9C015C077406E0DC1CBDB5B76763C1F" Guid="{032F17B6-7B6E-4E30-80EE-53EBB51BBC7F}">
+                    <Component Id="cmpA9C015C077406E0DC1CBDB5B76763C1F" Guid="{8F98F913-B844-4440-9957-FF45C92B481D}">
                         <File Id="fil7403C8E530BE86338DC9AC08F5EC20D9" KeyPath="yes" Source="$(var.Httplib2Dir)\EGG-INFO\zip-safe" />
                     </Component>
                 </Directory>
                 <Directory Id="dirCF49B77E1F61D6EF5B45291B8A189C9B" Name="httplib2">
-                    <Component Id="cmp48CD0F35D174A57CAB46FF74EE31D52C" Guid="{04B0A5FB-9AD1-476D-B178-778ABFF7C775}">
+                    <Component Id="cmp48CD0F35D174A57CAB46FF74EE31D52C" Guid="{69223E4C-E2CC-4A7D-8C0A-86C24AE6B7C2}">
                         <File Id="fil4B506D3437389754F72093BBF4CD91A2" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\iri2uri.py" />
                     </Component>
-                    <Component Id="cmpDB92B0F1C2E657F17486AD5B5ED7CC2F" Guid="{B744C341-A634-4869-AD08-F672464261FB}">
+                    <Component Id="cmpDB92B0F1C2E657F17486AD5B5ED7CC2F" Guid="{3284AF01-5A16-4173-A320-DB9CBB295502}">
                         <File Id="fil0119CCA40CBE87C7DF9AACC85590F65B" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\iri2uri.pyc" />
                     </Component>
-                    <Component Id="cmp39F58053C0E8A44901E74403B99E7D35" Guid="{C5899963-16DF-4A4F-9587-6714F4988198}">
+                    <Component Id="cmp39F58053C0E8A44901E74403B99E7D35" Guid="{AD7A4CC5-16BF-4B67-B0B5-0DFF8C449476}">
                         <File Id="filD2F06298C9467DC2869716DD80C67704" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\__init__.py" />
                     </Component>
-                    <Component Id="cmpF05A3770B77673984DA4B4CFF8BADC98" Guid="{DB17DD48-8EB8-4881-933E-DFCEF2D3A7C7}">
+                    <Component Id="cmpF05A3770B77673984DA4B4CFF8BADC98" Guid="{A3E86710-4244-4244-9B61-209A478BE174}">
                         <File Id="fil2F175F45CA49E7E862D5D6E91EDE7B33" KeyPath="yes" Source="$(var.Httplib2Dir)\httplib2\__init__.pyc" />
                     </Component>
                 </Directory>

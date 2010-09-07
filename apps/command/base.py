@@ -18,6 +18,8 @@ import sys
 import apps.project
 
 class Command(object):
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 
     help = 'Uninteresting command.'
     user_options = []

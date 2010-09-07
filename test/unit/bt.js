@@ -33,7 +33,7 @@ test('bt.add.torrent', function() {
   // Just in case.
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
-  stop(30000);
+  stop();
   // For use in the torrent.peer tests
   // bt.add.torrent(this.utils.sampleResources.torrents[0]);
   bt.add.torrent(url_nocb);
@@ -94,7 +94,7 @@ test('bt.add.rss_feed', function() {
 
   bt.add.rss_feed(this.utils.sampleResources.rssFeeds[1]);
   bt.add.rss_feed(this.utils.sampleResources.rssFeeds[1]);
-  stop(30000);
+  stop();
 
   // XXX - This should be transitioned into an event once the functionality is
   // there.
@@ -147,7 +147,7 @@ test('bt.add.rss_filter', function() {
 
   btapp.add.rss_filter(filter_btapp);
   btapp.add.rss_filter(filter_btapp);
-  stop(30000);
+  stop();
 
   setTimeout(function(){
     start();
@@ -230,7 +230,7 @@ test('bt.stash', function() {
     });
     start();
   });
-  stop(30000);
+  stop();
 });
 
 test('bt.events', function() {
@@ -264,7 +264,7 @@ test('bt.torrent', function() {
     var status = tor.properties.get('status');
     ok(status & bt.status.loaded && status & bt.status.queued,
        'Status: ' + status);
-    tor.stop(30000);
+    tor.stop();
     ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
     tor.start();
     ok(tor.properties.get('status') & bt.status.started, 'Torrent Started');
@@ -293,7 +293,7 @@ test('bt.torrent', function() {
       start();
     });
   });
-  stop(30000);
+  stop();
 });
 
 test('torrent.file', function() {
@@ -338,7 +338,7 @@ test('torrent.file', function() {
     //tor.remove();
     start();
   });
-  stop(30000);
+  stop();
 });
 
 test('torrent.peer', function() {

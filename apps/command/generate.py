@@ -30,6 +30,8 @@ class generate(apps.command.base.Command):
         # everything down if the directory doesn't exist.
         if not os.path.exists('packages/'):
             self.update_deps()
+        if self.project.metadata.get('bt:package', False):
+            return
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]

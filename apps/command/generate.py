@@ -37,6 +37,8 @@ class generate(apps.command.base.Command):
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'apps.data', 'index.html'), cache_enabled=False)
+        if not os.path.exists(os.path.join(self.project.path, 'build')):
+            os.mkdir(os.path.join(self.project.path, 'build'))
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
         index.write(template.render(scripts=self._scripts_list(

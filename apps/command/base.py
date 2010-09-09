@@ -18,9 +18,6 @@ import sys
 import apps.project
 
 class Command(object):
-    reload(sys)
-    sys.setdefaultencoding('utf-8')
-
     help = 'Uninteresting command.'
     user_options = []
     option_defaults = {}
@@ -31,6 +28,9 @@ class Command(object):
     btapp_excludes = ['libs']
 
     def __init__(self, vanguard):
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
+
         self.vanguard = vanguard
         self.options = self.vanguard.command_options.get(
             self.__class__.__name__, {})

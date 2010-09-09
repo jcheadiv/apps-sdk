@@ -10,11 +10,6 @@ The [Apps for BitTorrent SDK](/) is a collection of tools, libraries and
 documentation to make the process of creating, authoring and testing apps as
 easy as possible.
 
-### Contest
-
-We are currently sponsoring a contest! If you would like to participate, check
-out the [Contest Page](http://www.utorrent.com/app-developers-challenge).
-
 # Installation
 
 The easiest way to get up and running on Windows, is by running the [SDK

@@ -30,6 +30,8 @@ class generate(apps.command.base.Command):
         # everything down if the directory doesn't exist.
         if not os.path.exists('packages/'):
             self.update_deps()
+        if self.project.metadata.get('bt:package', False):
+            return
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]
@@ -37,6 +39,8 @@ class generate(apps.command.base.Command):
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'apps.data', 'index.html'), cache_enabled=False)
+        if not os.path.exists(os.path.join(self.project.path, 'build')):
+            os.mkdir(os.path.join(self.project.path, 'build'))
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
         index.write(template.render(scripts=self._scripts_list(

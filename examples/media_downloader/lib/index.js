@@ -1,66 +1,31 @@
-function render_item(item) {
-  item.torrents[0].url = item.torrents[0].url.replace(/ /g, '');
-  if ($(sprintf("li a[href=%s]", item.torrents[0].url)).length > 0)
-    return
-  var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
-                   ["div", { "class": "bar" } ] ];
-  var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
-                        template));
-  $("#items").append(elem);
-  $("a", elem).click(function() {
-    $("#notification").text(
-      'Adding a torrent, please be patient...').slideDown();
-    bt.add.torrent(item.torrents[0].url, function(resp) {
-      if (resp.state == bt._tor.added) {
-        $("#notification").slideUp();
-        $(".bar", elem).progressbar();
-      } else {
-        $("#notification").text('There was a problem adding the torrent :(');
-      }
-    });
-    return false;
-  });
-}
-
-function update_progress() {
-  var torrents = bt.torrent.all();
-  for (var i in torrents) {
-    var tor = torrents[i];
-    var container = $(
-      sprintf("li a[href=%s]", tor.properties.get('download_url'))
-    ).closest('li');
-    var progress = tor.properties.get('progress') / 10;
-    if (progress != 100) {
-      $(".bar", container).progressbar({ value: progress });
-      continue
-    }
-    if ($(".play", container).length > 0)
-      continue
-    $(".bar", container).hide();
-    $("<button class='play'>Play</button>").appendTo(container).click(function() {
-      var files = tor.file.all();
-      var f;
-      for (var i in files) {
-        if (!f || f.properties.get('size') < files[i].properties.get('size'))
-          f = files[i];
-      }
-      console.log('test', f);
-      f.open();
-    });
-  }
-}
-
 $(document).ready(function() {
-  $("head").append('<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">');
-  $.getJSON('http://vodo.net/jsonp/releases/all?callback=?', function(items) {
-    bt.stash.set('items', items);
-    for (var i = 0, ii = items.length; i < ii; i++)
-      render_item(items[i]);
-  });
-  setInterval(update_progress, 100);
+  var JSONP_URL = 'http://vodo.net/jsonp/releases/all?callback=?';
 
-  var items = bt.stash.get('items', []);
-  for (var i=0; i < items.length; i++) {
-    render_item(items[i]);
-  }
+  var itemsToDlWidgets = function(items) {
+    _.each(items, function(value, key) {
+
+      var elemId = value.title.replace(/\W+/g, '_');
+      var elem = $(sprintf('#items #%s', elemId));
+      if (0 === elem.length) {
+        elem = $(sprintf('<li id="%s">', elemId)).appendTo('#items');
+      }
+
+      new bt.Widget.Download({
+        name : value.title,
+        url  : value.torrents[0].url,
+        elem      : elem.empty(),
+        buttons   : {
+          download  : ['Get %s',  'Loading\u2026'],
+          play      : ['Play %s', 'Replay %s']
+        }
+      });
+
+    });
+    return arguments.callee;
+  }(bt.stash.get('items', []));
+
+  $.getJSON(JSONP_URL, function(items) {
+    bt.stash.set('items', items);
+    itemsToDlWidgets(items);
+  });
 });

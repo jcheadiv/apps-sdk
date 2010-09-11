@@ -1,3 +1,5 @@
+@import url(href=http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css);
+
 #notification {
     display: none;
     border: 1px solid;

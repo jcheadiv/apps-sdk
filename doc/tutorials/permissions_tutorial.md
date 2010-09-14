@@ -43,9 +43,11 @@ Open package.json and add a line before the closing brace:
 To confirm that you have read access to all torrents, add the following to
 `$(document).ready()` in `lib/index.js`:
 
+    {% highlight js %}
     $.each(bt.torrent.keys(), function(i, item){
         console.log(i+", "+item+", "+bt.torrent.get(item).properties.get("name"));
     });
+    {% endhighlight %}
 
 Compile the app with:
 
@@ -64,11 +66,14 @@ which will dynamically display information about each torrent. Replace your
 
 Add the following JUP template variables to your `lib/index.js`:
 
+    {% highlight js %}
     var li_template = [ "li", "{{'{{'}}label}}", "{{'{{'}}property}}" ];
     var opt_template = [ "option", { "value": "{{'{{'}}hash}}" }, "{{'{{'}}name}}" ];
+    {% endhighlight %}
 
 Add a list of torrent properties and appropriate labels in the follwing way:
 
+    {% highlight js %}
     var properties = { "remaining":"Remaining: ",
                        "size":"Size: ",
                        "progress":"Progress: ",
@@ -78,19 +83,23 @@ Add a list of torrent properties and appropriate labels in the follwing way:
                        "peers_in_swarm":"Total peers: ",
                        "seeds_connected":"Seeds: ",
                        "seeds_in_swarm":"Total seeds: "};
+    {% endhighlight %}
 
 For a full list of torrent properties, refer to the [API documentation](../api.index).
 
 Replace the line in `$(document).ready()` which calls console.log with this:
 
+    {% highlight js %}
     $("#torrentSelector").append($(JUP.html(
         { hash: item,
           name: bt.torrent.get(item).properties.get("name")
         }, opt_template)));
+    {% endhighlight %}
 
 Now that the select box will be populated with the names of all the torrents,
 add the following to `$(document).ready()`:
 
+    {% highlight js %}
     $("#torrentSelector").change(function() {
         var torrent = bt.torrent.get($("#torrentSelector").val());
         $("#torrentinfo").html("");
@@ -101,6 +110,7 @@ add the following to `$(document).ready()`:
                 }, li_template)));
         });
      });
+    {% endhighlight %}
 
 When the selection in the select box changes, this code clears the torrent
 info list and prints all of the propeties for the selected torrent.

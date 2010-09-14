@@ -38,6 +38,7 @@ simple. It goes in html/main.html:
 We'll use the [jquery form plugin][jqform] to submit the search form via XHR.
 The following goes in lib/index.js, inside your `$(document).ready` function:
 
+    {% highlight js %}
     $('form#search').ajaxForm({
       type: 'GET',
       dataType: 'xml',
@@ -48,6 +49,7 @@ The following goes in lib/index.js, inside your `$(document).ready` function:
         parseXml(data);
       }
     });
+    {% endhighlight %}
 
 It's followed by definitions of `removeResults()` and `parseXml()`. Before
 presenting those, let's examine the template that they utilize.
@@ -106,10 +108,12 @@ Let's return to the functions used by the [jquery form plugin][jqform].
 `removeResults()` allows multiple searches to be performed without preserving
 the results of previous searches.
 
+    {% highlight js %}
     var removeResults = function() {
       $("ul#items").empty();
       $("#search .summary").empty();
     }
+    {% endhighlight %}
 
 `parseXml()` the meat of this app. It is responsible for receiving the search
 results in XML form, and creating a UI to access them. It does a few things:
@@ -120,6 +124,7 @@ results in XML form, and creating a UI to access them. It does a few things:
 
 The following javaScript does this work:
 
+    {% highlight js %}
     var parseXml = (function() {
       var node, values = {};
 
@@ -154,6 +159,7 @@ The following javaScript does this work:
             d = d.fromW3cDtf($(this).attr("datetime"));
           $(this).parent().html(d.howLongAgo());
         });
+    {% endhighlight %}
 
 Note that we have extended the `Date` prototype with two methods: `fromW3cDtf()`
 and `howLongAgo()`. The first allows us to parse [W3C DTF][w3cdtf]-formatted
@@ -166,6 +172,7 @@ Continuing with `parseXml()`, let's identify the Creative Commons license based
 on its URL, and add a summary of the search results to the search form's
 `span.summary` if we have any results.
 
+    {% highlight js %}
         // Display the license name
         $("ul#items .license").each(function() {
           var licenses = $(this).attr("href").match(/by-\w+/);
@@ -182,11 +189,13 @@ on its URL, and add a summary of the search results to the search form's
         $("#search .summary").text(keywords ?
           sprintf('%d results found for "%s"',
           $(xml).find("torrent").length, keywords) : "");
+    {% endhighlight %}
 
 The remainder of `parseXml()` appears in the following code block. Here we'll
 use bt.progressManager (described below) to add a progress bar to each added
 torrent.
 
+    {% highlight js %}
         $("a[href$='torrent']").click(function() {
           var elem = $(this).closest("ul").next().prepend(
             "<tr><th>Progress</th><td class='progress'>" +
@@ -206,6 +215,7 @@ torrent.
         });
       }
     })();
+    {% endhighlight %}
 
 Progress Manager
 ================
@@ -215,6 +225,7 @@ a progress manager to handle progress bars. We'll use [jquery ui][jqui] to
 handle the bars themselves, while he progressManager will keep them synchronized
 with the torrent download progress.
 
+    {% highlight js %}
     bt.progressManager = (function() {
       var bars = {};
       return {
@@ -244,6 +255,7 @@ with the torrent download progress.
         }
       };
     })();
+    {% endhighlight %}
 
 
 Cross-Origin Resource Sharing

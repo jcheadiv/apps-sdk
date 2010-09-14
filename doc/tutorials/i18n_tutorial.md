@@ -43,23 +43,27 @@ app; test the code in a browser using `apps serve` and in the uTorrent
 client using `apps package`
 
 The first thing to is update our project and correctly format the code we
-already have. We'll be using an extension of the bt object which supports 
-dynamic loading of new language files within a .btapp. The necessary file 
+already have. We'll be using an extension of the bt object which supports
+dynamic loading of new language files within a .btapp. The necessary file
 (gettext.js) should already be included in your packages/apps-sdk directory.
 
-Format all of the strings in index.js so that gettext can parse them; we'll 
-be referring to our gettext object as b_gt, so enclose strings in 
+Format all of the strings in index.js so that gettext can parse them; we'll
+be referring to our gettext object as b_gt, so enclose strings in
 `b_gt.gettext("string")`.
 
 - Before
 
+    {% highlight js %}
     $("&lt;button class='play'>Play</button>").appendTo(container).click(
         function() {
+    {% endhighlight %}
 
 - After
 
+    {% highlight js %}
     $("&lt;button class='play'>"+b_gt.gettext("Play")+"</button>").appendTo(
         container).click(function() {
+    {% endhighlight %}
 
 There are only three translatable strings in index.js right now; two
 notification messages and 'Play' for downloaded files. Let's make
@@ -70,38 +74,49 @@ First, add a display container to the top of your `html/index.html` file:
 
     <div id="lang"><span id="current"></span><span id="other"></span></div>
 
-Create an object containing your language options at the top of `index.js`, 
+Create an object containing your language options at the top of `index.js`,
 as well as a global variable for the gettext object:
 
-	var languages = {"fr":"French", "en":"English", "ja":"Japanese"};
-	var b_gt;
-	
-All of the language-specific links, text, etc. will be generated from 
-the list of languages, so you can easily add a new language without changing 
+    {% highlight js %}
+    var languages = {"fr":"French", "en":"English", "ja":"Japanese"};
+    var b_gt;
+    {% endhighlight %}
+
+All of the language-specific links, text, etc. will be generated from
+the list of languages, so you can easily add a new language without changing
 the following code.
 
-Generate the links for each language by adding the following to 
+Generate the links for each language by adding the following to
 the top of `$(document).ready()`:
 
-  var link_template = ["link", {"class":"lang", "rel":"gettext", "href":"lang/"+"{{l}}"+"/"+"{{l}}"+".po", "lang":"{{l}}"}];
-  $.each(languages, function(i, item){
-	$("head").append($(JUP.html({ l:i }, link_template)));
-  });
+    {% highlight js %}
+    var link_template = ["link", {"class":"lang", "rel":"gettext",
+      "href":"lang/{{'{'}}{l}}/{{'{'}}{l}}.po", "lang":"{{'{'}}{l}}"}];
+    $.each(languages, function(i, item) {
+      $("head").append($(JUP.html({ l:i }, link_template)));
+    });
+    {% endhighlight %}
 
 We'll have to reorganize the language container every time a new language is
-chosen to show the options in the right language, of course. This function 
+chosen to show the options in the right language, of course. This function
 will handle printing out all of the options:
 
-function render_languagebar(){
-	$("#other").html("");
-	$.each(languages, function(i, item){
-		if(i==b_gt.lang){
-			var langstr = b_gt.gettext(item);
-			$("#current").html(b_gt.gettext("Current language: %s", langstr));
-		}else $("#other").append(" &lt;a class=\"lang\" href=# name=\""+i+"\">"+b_gt.gettext(item)+"</a> ");
-	});
-	$("#notification").text(b_gt.gettext($("#notification").text()));
-}
+    {% highlight js %}
+    function render_languagebar() {
+      $("#other").html("");
+      $.each(languages, function(i, item){
+        if (i==b_gt.lang) {
+          var langstr = b_gt.gettext(item);
+          $("#current").html(b_gt.gettext("Current language: %s", langstr));
+        }
+        else {
+          $("#other").append(sprintf(" <a class='lang' href=# name='%s'>%s</a> ",
+            i, b_gt.gettext(item)));
+        }
+      });
+      $("#notification").text(b_gt.gettext($("#notification").text()));
+    }
+    {% endhighlight %}
 
 Note that, at the time we call this function, we want to have set the current
 language so that the labels evaluate correctly.
@@ -121,7 +136,7 @@ create, since they are destroyed and recreated every time we choose the
 language.
 
 Now that we're pretty confident that we've laid out all the strings we'll
-need, let's internationalize them. 
+need, let's internationalize them.
 
 First, create a .pot file from your code using xgettext. Unix/Linux users will
 already have this program installed; Windows users can install Cygwin for
@@ -142,13 +157,13 @@ Finally, run the following command from the media_downloader file:
 
     % apps localize
 
-Your translation files will be copied into an organized directory structure. 
-The localize command can use a different directory name with the --dir= 
-option; lang is the default. Your original translation files are kept in the lang 
+Your translation files will be copied into an organized directory structure.
+The localize command can use a different directory name with the --dir=
+option; lang is the default. Your original translation files are kept in the lang
 directory by default; to remove them, use the -r option:
 
     % apps localize -r
-	
+
 Note that this command asusmes your .mo files have the same name as their
 respective .po files, which is true for Poedit-generated files.
 

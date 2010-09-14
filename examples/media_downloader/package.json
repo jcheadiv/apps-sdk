@@ -14,10 +14,6 @@
         {
             "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js",
             "name": "jquery-ui"
-        },
-        {
-            "url": "http://staging.apps.bittorrent.com/pkgs/jup.js",
-            "name": "jup"
         }
     ],
     "site": "http://apps-sdk.bittorrent.com",

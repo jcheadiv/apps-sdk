@@ -1,9 +1,29 @@
-@import url(href=http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css);
+@import url(http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css);
+
+body {
+  background: #FFF;
+  color: #000;
+}
 
 #notification {
-    display: none;
-    border: 1px solid;
-    margin: 2px;
-    padding: 2px;
-    text-align: center;
+  display: none;
+  border: 1px solid;
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+}
+
+button {
+  background: #FFF;
+  border: 0 none;
+  color: #00A;
+  text-decoration: underline;
+  display: block;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+}
+
+button:hover {
+  text-decoration: none;
 }

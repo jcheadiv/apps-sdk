@@ -46,17 +46,18 @@
 .highlight .js .sb { color: #4070a0 } /* Literal.String.Backtick */
 .highlight .js .sc { color: #4070a0 } /* Literal.String.Char */
 .highlight .js .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
-.highlight .js .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .js .s2 { color: #69C } /* Literal.String.Double */
 .highlight .js .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
 .highlight .js .sh { color: #4070a0 } /* Literal.String.Heredoc */
 .highlight .js .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
 .highlight .js .sx { color: #c65d09 } /* Literal.String.Other */
-.highlight .js .sr { color: #235388 } /* Literal.String.Regex */
-.highlight .js .s1 { color: #5080B0 } /* Literal.String.Single */
+.highlight .js .sr { color: #888 } /* Literal.String.Regex */
+.highlight .js .s1 { color: #69C } /* Literal.String.Single */
 .highlight .js .ss { color: #517918 } /* Literal.String.Symbol */
 .highlight .js .bp { color: #007020 } /* Name.Builtin.Pseudo */
 .highlight .js .vc { color: #bb60d5 } /* Name.Variable.Class */
 .highlight .js .vg { color: #bb60d5 } /* Name.Variable.Global */
 .highlight .js .vi { color: #bb60d5 } /* Name.Variable.Instance */
 .highlight .js .il { color: #40a070 } /* Literal.Number.Integer.Long */
+.highlight .js .p  { color: #8F8 } /* points, parens, brackets */
 .highlight .js .nx { color: #EEE } /* Default */

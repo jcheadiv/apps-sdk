@@ -1,4 +1,4 @@
----
+﻿---
 layout: default
 title: Media Downloader
 ---
@@ -307,8 +307,8 @@ refresh the app in the client, right?
 
 To start, run:
 
-% apps --debug generate --update http://localhost:8080/dist/media_downloader.btapp package
-% apps --debug generate --update http://localhost:8080/dist/media_downloader.btapp serve
+    % apps --debug generate --update http://localhost:8080/dist/media_downloader.btapp package
+    % apps --debug generate --update http://localhost:8080/dist/media_downloader.btapp serve
 
 Go to http://localhost:8080/dist/media_downloader.btapp; download and install 
 the app right from your browser. In the server log, you should see the GET 

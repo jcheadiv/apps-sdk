@@ -1,32 +1,32 @@
 {
-    "description": "The example media downloader project.",
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>",
-    "bt:publisher": "BitTorrent, Inc.",
+    "description": "The example media downloader project.", 
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg",
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
             "name": "apps-sdk"
-        },
+        }, 
         {
-            "url": "file:///home/bkaplan/src/bittorrent/apps/widgets/dist/widgets.pkg",
+            "url": "http://staging.apps.bittorrent.com/pkgs/widgets.pkg", 
             "name": "widgets"
-        },
+        }, 
         {
-            "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js",
+            "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js", 
             "name": "jquery-ui"
         }
-    ],
-    "site": "http://apps-sdk.bittorrent.com",
-    "bt:update_url": "http://dle.ctrl.char:8080/dist/media-downloader.btapp",
-    "version": "0.1",
-    "bt:description": "This is an example media downloader.",
+    ], 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "site": "http://apps-sdk.bittorrent.com", 
+    "bt:update_url": "http://localhost:8080/dist/media_downloader.btapp", 
+    "version": "0.1", 
+    "bt:description": "This is an example media downloader.", 
     "keywords": [
-        "example",
-        "media",
-        "vodo",
-        "downloader",
+        "example", 
+        "media", 
+        "vodo", 
+        "downloader", 
         "catalog"
-    ],
-    "bt:release_date": "06/01/2010",
+    ], 
+    "bt:release_date": "06/01/2010", 
     "name": "media_downloader"
 }

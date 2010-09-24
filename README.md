@@ -7,7 +7,7 @@ easy as possible.
 # Installation
 
 The easiest way to get up and running on Windows, is by running the [SDK
-installer](http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.msi).
+installer](http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.exe)
 To see the other ways that you can install the SDK tools, check out the
 [howto](doc/install-howto.html).
 

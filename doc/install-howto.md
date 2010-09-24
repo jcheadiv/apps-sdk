@@ -7,7 +7,7 @@ title: Tool Installation Howto
 
 ### Normal
 
-To install on Windows, run the [tools installer](http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.msi).
+To install on Windows, run the [tools installer](http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.exe).
 
 ### Contribution
 

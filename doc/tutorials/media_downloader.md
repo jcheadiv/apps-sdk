@@ -288,21 +288,21 @@ this for your own app, make sure you think about what constitutes a new/old
 item.
 
 Once the torrent(s) you have downloaded are complete, the Download Widget will
-present a "Play" button. For multiple-file torrents, the biggest file in the 
+present a "Play" button. For multiple-file torrents, the biggest file in the
 torrent is the file that will play.
 
-Since you won't be able to see this new feature in action from a web browser, 
-give this a try in your client. You can play content from right inside the 
+Since you won't be able to see this new feature in action from a web browser,
+give this a try in your client. You can play content from right inside the
 app, instead of having to hunt around on the file system for it.
 
 Auto-Updating The App
 ---------------------
 
-As you've been developing your app, you might notice that you've been 
-alternating between using the serve command, for doing development in a 
-browser, and the package command, to zip up all the source files and view the 
-app in the client. It would be nice to not have to stop the server, run 
-the package command and double-click the .btapp file every time you want to 
+As you've been developing your app, you might notice that you've been
+alternating between using the serve command, for doing development in a
+browser, and the package command, to zip up all the source files and view the
+app in the client. It would be nice to not have to stop the server, run
+the package command and double-click the .btapp file every time you want to
 refresh the app in the client, right?
 
 To start, run:
@@ -310,26 +310,26 @@ To start, run:
     % apps --debug generate --update http://localhost:8080/dist/media_downloader.btapp package
     % apps --debug generate --update http://localhost:8080/dist/media_downloader.btapp serve
 
-Go to http://localhost:8080/dist/media_downloader.btapp; download and install 
-the app right from your browser. In the server log, you should see the GET 
-request you just made to the server; above that, notice that the server 
+Go to http://localhost:8080/dist/media_downloader.btapp; download and install
+the app right from your browser. In the server log, you should see the GET
+request you just made to the server; above that, notice that the server
 actually ran the package command before delivering the btapp file to you.
 
-The upshot of this is that you can now make changes to the source files, view 
-them live in a browser, then tell the client to go fetch the latest version of 
-the app from the server. The server will package up your changes so you can see 
+The upshot of this is that you can now make changes to the source files, view
+them live in a browser, then tell the client to go fetch the latest version of
+the app from the server. The server will package up your changes so you can see
 them in the client without running any commands at all.
 
-With the server running, make some change to the app and check that the change 
-appears in the browser. Then switch to your client and select 
-Help > Check for Updates in the menu bar. When you refresh the app, you 
+With the server running, make some change to the app and check that the change
+appears in the browser. Then switch to your client and select
+Help > Check for Updates in the menu bar. When you refresh the app, you
 should see your new change in the client.
 
-If this trick isn't working (you should see the package commands running in 
-the server log), check your Advanced preferences for the 
+If this trick isn't working (you should see the package commands running in
+the server log), check your Advanced preferences for the
 btapps.auto_update_apps setting and make sure it's set to true.
 
 [example]:      http://github.com/bittorrent/apps-sdk/tree/master/examples/media_downloader
-[installer]:    http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.msi
+[installer]:    http://github.com/downloads/bittorrent/apps-sdk/apps-sdk-installer.exe
 [installHowTo]: ../install-howto.html
 

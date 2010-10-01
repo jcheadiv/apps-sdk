@@ -167,23 +167,23 @@ test('bt.add.rss_filter', function() {
     ok(_.indexOf(bt.rss_filter.keys(), filter_btapp) >= 0,
       'Filter added with correct key');
 
-    // XXX - A duplicate filter object isn't created, but the keys are duplicated
+    //XXX - A duplicate filter object isn't created, but the keys are duplicated
     equals(bt.rss_filter.keys().length, _.keys(bt.rss_filter.all()).length,
       "Number of keys and objects is consistent; good duplicate behavior");
 
     // XXX - Filter objects have no remove method
-    try{
+    try {
       btappfilter.remove();
-      ok(true, "Btapp RSS filter removed");
-    }catch(err){
-      ok(false, "Btapp RSS filter was not removed: "+ err.message);
+      ok(true, "Btapp RSS filter was removed.");
+    } catch(err) {
+      ok(false, "Btapp RSS filter was removed. " + err.message);
     }
 
-    try{
+    try {
       btfilter.remove();
-      ok(true, "Bt RSS filter removed");
-    }catch(err){
-      ok(false, "Bt RSS filter was not removed: "+ err.message);
+      ok(true, "Bt RSS filter was removed.");
+    } catch(err) {
+      ok(false, "Bt RSS filter was removed. " + err.message);
     }
 
   }, 1000);
@@ -222,8 +222,7 @@ test('bt.stash', function() {
       bt.stash.set('client-' + i, resp);
     });
     _.each(_.range(5), function(i) {
-      ok(bt.stash.get('client-' + i, false) ? true : false,
-         'Can get data from the stash');
+      ok(bt.stash.get('client-' + i, false), 'Can get data from the stash');
     });
     _.each(_.range(5), function(i) {
       bt.stash.set('client-' + i, '');
@@ -248,7 +247,7 @@ test('bt.torrent', function() {
   this.utils.assertionCounter.increment(13);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
-  var url = 'http://vodo.net/media/torrents/The.Yes.Men.Fix.The.World.P2P.Edition.2010.Xvid-VODO.torrent';
+  var url = this.utils.sampleResources.torrents[0];
   bt.add.torrent(url, function(resp) {
     var magnet = 'magnet:?xt=urn:btih:07a9de9750158471c3302e4e95edb1107f980fa6&dn=Pioneer.One.S01E01.720p.x264-VODO&tr=http%3a%2F%2Ftracker.vodo.net%3A6970%2Fannounce';
     var tor = bt.torrent.get(url);
@@ -265,14 +264,14 @@ test('bt.torrent', function() {
     ok(status & bt.status.loaded && status & bt.status.queued,
        'Status: ' + status);
     tor.stop();
-    ok(tor.properties.get('status') & bt.status.loaded, 'Torrent stopped');
+    ok(tor.properties.get('status') && bt.status.loaded, 'Torrent stopped');
     tor.start();
-    ok(tor.properties.get('status') & bt.status.started, 'Torrent Started');
+    ok(tor.properties.get('status') && bt.status.started, 'Torrent Started');
     tor.pause();
-    ok(tor.properties.get('status') & bt.status.paused,
+    ok(tor.properties.get('status') && bt.status.paused,
        'Torrent status (pause): ' + tor.properties.get('status'));
     tor.unpause();
-    ok(!(tor.properties.get('status') & bt.status.paused),
+    ok(!(tor.properties.get('status') && bt.status.paused),
          'Torrent status (unpause): ' + tor.properties.get('status'));
     // tor.recheck();
     // ok(tor.properties.get('status') & bt.status.checking,
@@ -330,7 +329,7 @@ test('torrent.file', function() {
 
     that.utils.testPropertiesSet({
       testObject: file.properties,
-      readOnly:   ['name', 'size', 'downloaded']
+      readOnly:   ['name', 'size', 'downloaded', 'scanstate', 'infection']
     });
 
     // XXX remove() takes a while to work, and results in failure of the

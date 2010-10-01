@@ -1,5 +1,6 @@
 *.btapp
 .ignore
+.mixpanel
 *.svn/*
 .git/*
 .hg/*

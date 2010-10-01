@@ -211,8 +211,9 @@ bt.testUtils = {
     }
 
     _.each(settings.testObject.all(), function(value, key) {
-      if (_.isNull(value)) { value = '[NULL]'; }
-      else if ('undefined' === typeof value) { value = '[UNDEFINED]'; }
+      var softValue = value;
+      if (_.isNull(value)) { softValue = '[NULL]'; }
+      else if ('undefined' === typeof value) { softValue = '[UNDEFINED]'; }
 
       ('object' === typeof value ? same : equals)(settings.testObject.get(key),
         value,
@@ -225,7 +226,7 @@ bt.testUtils = {
 
       if (! isBlacklisted(key)) {
 
-        testDatum[typeof value](key, value);
+        testDatum[typeof value](key, softValue);
         _.each(messages, function(message, index) {
           messages[index] = 'testPropertiesSet: ' + message;
         });

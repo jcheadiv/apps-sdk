@@ -211,6 +211,8 @@ bt.testUtils = {
     }
 
     _.each(settings.testObject.all(), function(value, key) {
+      if (_.isNull(value)) { value = '[NULL]'; }
+      else if ('undefined' === typeof value) { value = '[UNDEFINED]'; }
 
       ('object' === typeof value ? same : equals)(settings.testObject.get(key),
         value,

@@ -191,6 +191,12 @@ bt.testUtils = {
         testValue = "x";
         messages.set = sprintf('set() can set %s to "%s".', key, testValue);
         messages.reset = sprintf('set() can set %s back to "%s".', key, value);
+      },
+
+      'object': function(key, value) {
+        testValue = _.isArray(value) ? ['A','B','C'] : { A:0, B:1, C:2 };
+        messages.set = sprintf('set() can set %s to "%s".', key, testValue);
+        messages.reset = sprintf('set() can set %s back to "%s".', key, value);
       }
     };
 
@@ -206,8 +212,9 @@ bt.testUtils = {
 
     _.each(settings.testObject.all(), function(value, key) {
 
-      equals(settings.testObject.get(key), value, sprintf('get() correctly ' +
-        'matches value provided by all() for %s', key));
+      ('object' === typeof value ? same : equals)(settings.testObject.get(key),
+        value,
+        sprintf('get() correctly matches value provided by all() for %s', key));
 
       ok(-1 !== _.indexOf(_.keys(testDatum), typeof(value)),
         sprintf('setting %s is an expected datatype.', key))

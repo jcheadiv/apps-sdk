@@ -144,6 +144,8 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         for k, v in resp.iteritems():
             if k == 'content-location':
                 continue
+            if k == 'connection':
+                continue
             if k in remove:
                 continue
             self.send_header(k, v)

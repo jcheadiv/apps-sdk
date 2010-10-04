@@ -6,6 +6,7 @@ import DNS
 import email.mime.base
 import email.mime.text
 import email.mime.application
+import logging
 import os
 import smtplib
 

@@ -77,12 +77,14 @@ Several of the directories are important too:
 Take a look at `package.json` now. Pay special attention to a`bt:libs`. It
 should look like:
 
+    {% highlight js %}
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg",
             "name": "apps-sdk"
         }
     ]
+    {% endhighlight %}
 
 `bt:libs` specifies the third party dependencies for your application. To
 update these to the latest versions at any time, run:
@@ -96,6 +98,7 @@ Now, let's add a couple new external dependencies:
 
 Take a look at `package.json` again. `bt:libs` will look a little different:
 
+    {% highlight js %}
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg",
@@ -110,6 +113,7 @@ Take a look at `package.json` again. `bt:libs` will look a little different:
             "name": "widgets"
         }
     ]
+    {% endhighlight %}
 
 As you can see, there are 2 new dependencies that have been added to your
 project under the `packages` directory and can be updated via.
@@ -143,6 +147,7 @@ and should be where all the main loading logic for your program should go. Now,
 open `lib/index.js` so that we can add some JavaScript to populate that list
 using the Download Widget.
 
+    {% highlight js %}
     $(document).ready(function() {
       var JSONP_URL = 'http://vodo.net/jsonp/releases/all?callback=?';
       var loading = $('<p>Loading\u2026</p>').appendTo('body');
@@ -164,6 +169,7 @@ using the Download Widget.
         loading.remove();
       });
     });
+    {% endhighlight %}
 
 The Download Widget gets a settings object that can specify the above values in
 addition to callbacks. The buttons object defined above specifies the button
@@ -203,7 +209,7 @@ automatically. To get something added to your progress bars, add any torrent on
 the page by clicking on it and then type this into your debugging console
 (Firebug for example):
 
-    >>> bt.torrent.all()[bt.torrent.keys()[0]].properties.set('progress', 500)
+    {% highlight js %}>>> bt.torrent.all()[bt.torrent.keys()[0]].properties.set('progress', 500){% endhighlight %}
 
 If everything is working correctly, you will see the progress bar of that
 torrent jump to half completion almost at once.
@@ -230,6 +236,7 @@ a local data store. Our new JavaScript will package the original code into
 a function that will be run twice: first immediately using the stashed copy of
 items (if any), and then once a fresh set of results have been received.
 
+    {% highlight js %}
     $(document).ready(function() {
       var JSONP_URL = 'http://vodo.net/jsonp/releases/all?callback=?';
       var loading = $('<p>Loading\u2026</p>').appendTo('body');
@@ -262,6 +269,7 @@ items (if any), and then once a fresh set of results have been received.
         itemsToDlWidgets(items);
       });
     });
+    {% endhighlight %}
 
 There are a few of changes that have been made here to accommodate loading
 both stashed items and fetched ones:

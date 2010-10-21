@@ -12,7 +12,7 @@ import os
 class Project(object):
 
     default_metadata =  {
-        'name': self.path,
+        'name': '',
         'version': '0.1',
         'description': 'The default project.',
         'site': 'http://apps.bittorrent.com',
@@ -38,5 +38,6 @@ class Project(object):
                                                         'package.json'), 'r'))
         except IOError, err:
             self.metadata = self.default_metadata
+            self.metadata['name'] = self.path
 
 

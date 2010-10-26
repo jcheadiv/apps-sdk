@@ -19,6 +19,10 @@ class submit(apps.command.base.Command):
         http = httplib2.Http()
         btapp = open(os.path.join('dist', '%s.btapp' % (
                     self.project.metadata['name'],)), 'rb').read()
-        resp, content = http.request(self.options.get('url'), 'POST',
-                                     btapp)
+        try:
+            resp, content = http.request(self.options.get('url'), 'POST',
+                                         btapp)
+        except AttributeError:
+            logging.error('The remote server is down. Please try again later.')
+            return
         logging.info('%s\n%s' % (resp, content))

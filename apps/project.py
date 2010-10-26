@@ -25,7 +25,21 @@ class Project(object):
         'bt:libs': [
             { 'name': 'apps-sdk',
               'url': 'http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg' }
-            ]
+            ],
+        'bt:store': {
+            'screenshots': [
+                { "small": "example_small.png",
+                  "large": "example_large.png",
+                  "title": "Example title"
+                  }
+                ],
+            "description": "Example store description",
+            "links": [
+                { "href": "http://btapps-sdk.bittorrent.com",
+                  "name": "SDK"
+                  }
+                ]
+            }
         }
 
     def __init__(self, path):

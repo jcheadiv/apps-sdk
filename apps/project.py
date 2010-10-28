@@ -38,9 +38,9 @@ class Project(object):
                 { "href": "http://btapps-sdk.bittorrent.com",
                   "name": "SDK"
                   }
-                ]
-            },
-        "bt:ie_version": 1
+                ],
+            "ie_version": 1
+            }
         }
 
     def __init__(self, path):

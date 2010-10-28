@@ -40,10 +40,7 @@ class Project(object):
                   }
                 ]
             },
-        "required": {
-            "ie": 1,
-            "client": "1.0"
-            }
+        "bt:ie_version": 1
         }
 
     def __init__(self, path):

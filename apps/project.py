@@ -39,6 +39,10 @@ class Project(object):
                   "name": "SDK"
                   }
                 ]
+            },
+        "required": {
+            "ie": 1,
+            "client": "1.0"
             }
         }
 

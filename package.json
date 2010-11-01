@@ -14,7 +14,7 @@
             "name": "jquery"
         },
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js",
             "name": "underscore"
         },
         {

@@ -176,3 +176,9 @@ class Command(object):
         for pkg in pkg_manifest.get('bt:libs', []):
             self.add(pkg['name'], pkg['url'], False)
         return pkg_manifest['name']
+
+    def _output_file(self, path='dist'):
+        extension = 'pkg' if self.project.metadata.get(
+            'bt:package', False) else 'btapp'
+        return os.path.join(path, '%s.%s' % (
+                    self.project.metadata['name'], extension))

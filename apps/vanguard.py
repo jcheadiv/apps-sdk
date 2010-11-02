@@ -21,6 +21,7 @@ import apps.config
 # dependencies.
 import apps.command.base
 import apps.command.add
+import apps.command.bundle
 import apps.command.config
 import apps.command.generate
 import apps.command.localize

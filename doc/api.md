@@ -5,7 +5,7 @@ layout: default
 
 # Overview
 
-The apps api provides applications a method to interface with the BitTorrent
+The apps API provides applications a method to interface with the BitTorrent
 client that an application has been installed within. The API allows sandboxed
 access to the client for tasks such as adding a torrent or an rss feed. This
 document outlines the raw interface presented by the client. If you'd like a
@@ -15,7 +15,7 @@ somewhat more user friendly version, check out the
 For those that prefer to look at code instead of documentation, take a look at
 [api.js](https://github.com/bittorrent/apps-sdk/blob/master/doc/api.js).
 
-This document will be using a specific style to introduce the api. Look at each
+This document will be using a specific style to introduce the API. Look at each
 code block as a javascript interpreter. The lines that have either `>>` or `>`
 on the front of them are user input to the interpreter and the lines without
 anything are output from the interpreter.
@@ -58,6 +58,28 @@ The available properties are:
     "local_client"
 
 For a discussion of the methods that you're able to use, please read on.
+
+# API Version
+
+As additions and changes are made to the apps API, it's important to know 
+what API version you're developing for. You can access the API version in 
+any client by reading the 'api_version' setting of the btapp object.
+
+    >> btapp.settings.get("api_version")
+    "1.0"
+    
+If your app requires a user to be using a version of the API with a given 
+minimum or maximum value, add the min_api_version and/or max_api_version fields 
+to your app's btapp file.
+
+    min_api_version:1.0
+    min_api_version:1.1
+
+Alternately, if your are using the SDK tools, add "bt:min_api_version" and/or 
+"bt:max_api_version" to your package.json file.
+
+    "bt:min_api_version":"1.0",
+    "bt:min_api_version":"1.1"
 
 # Settings
 

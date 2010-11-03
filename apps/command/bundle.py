@@ -8,6 +8,7 @@ import os
 import sys
 import tempfile
 import urllib2
+import zipfile
 
 import apps.command.base
 import apps.pe
@@ -27,7 +28,13 @@ class bundle(apps.command.base.Command):
         fp.write(urllib2.urlopen(self.options['exe']).read())
         fp.flush()
         p = apps.pe.pecoff(fp)
-        add = open(self._output_file(), 'rb').read()
+        add_fp = tempfile.TemporaryFile()
+        zfile = zipfile.ZipFile(add_fp, 'w')
+        zfile.write(self._output_file(), 'app.btapp')
+        zfile.close()
+        add_fp.flush()
+        add_fp.seek(0)
+        add = add_fp.read()
         while len(add) % p.filealign:
             add += '\0'
         p.sections.append(apps.pe.pesect(

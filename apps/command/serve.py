@@ -125,7 +125,8 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         method()
 
     def proxy_request(self):
-        remove = [ 'transfer-encoding', 'status', '-content-encoding' ]
+        remove = [ 'transfer-encoding', 'status', '-content-encoding',
+                   'content-location', 'connection' ]
         body = ''
         self.requestline = '%s %s' % (self.command,
                                       self.headers.get('x-location'))
@@ -142,10 +143,6 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             return
         self.send_response(resp.status, headers=False)
         for k, v in resp.iteritems():
-            if k == 'content-location':
-                continue
-            if k == 'connection':
-                continue
             if k in remove:
                 continue
             self.send_header(k, v)

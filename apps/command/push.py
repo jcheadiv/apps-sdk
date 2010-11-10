@@ -59,6 +59,8 @@ class push(apps.command.base.Command):
             bucket = conn.create_bucket(bucket)
         key = bucket.new_key(fname)
         acl = key.get_acl() if key.exists() else None
-        key.set_contents_from_filename(self.package_name(), replace=True)
+        key.set_contents_from_filename(
+            self.package_name(), replace=True,
+            headers={ 'Content-Type': 'application/btapp' })
         if acl:
             key.set_acl(acl)

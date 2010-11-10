@@ -12,7 +12,7 @@ class submit(apps.command.base.Command):
 
     user_options = [ ('url=', None, 'URL to submit to', None) ]
     pre_commands = [ 'package' ]
-    option_defaults = { 'url': 'http://10.20.30.79:5000/submit' }
+    option_defaults = { 'url': 'http://fishtank/submit' }
     help = 'Submit a package or app for inclusion in the app store.'
 
     def run(self):

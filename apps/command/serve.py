@@ -3,9 +3,11 @@
 #
 
 import BaseHTTPServer
+import bencode
 import copy
 import httplib
 import httplib2
+import json
 import logging
 import os
 import re
@@ -141,6 +143,15 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         except httplib2.ServerNotFoundError:
             self.send_response(404)
             return
+
+        # If the fetched file is a torrent, convert it to a JSON object so that
+        # javascript can do things with it.
+        if resp['content-type'] == 'application/x-bittorrent':
+            tor = bencode.bdecode(content)
+            tor['info']['pieces'] = ''
+            print tor
+            content = json.dumps(tor)
+
         self.send_response(resp.status, headers=False)
         for k, v in resp.iteritems():
             if k in remove:

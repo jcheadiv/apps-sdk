@@ -163,14 +163,12 @@ class Command(object):
         tmpdir = tempfile.mkdtemp(dir=os.path.join(self.project.path,
                                                    'packages'))
         # Move over the package specific files
-        for finfo in pkg.infolist():
-            if re.match('lib/.+', finfo.filename):
-                pkg.extract(finfo.filename, tmpdir)
+        pkg.extractall(tmpdir)
+        shutil.rmtree(os.path.join(tmpdir, 'packages'), True)
         # This is because I'm lazy ....
         shutil.rmtree(pkg_root, True)
-        shutil.copytree(os.path.join(tmpdir, 'lib'), pkg_root)
+        shutil.copytree(tmpdir, pkg_root)
         shutil.rmtree(tmpdir)
-        pkg.extract('package.json', pkg_root)
         # Handle the dependencies specifically
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest.get('bt:libs', []):

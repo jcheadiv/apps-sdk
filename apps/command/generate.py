@@ -51,12 +51,20 @@ class generate(apps.command.base.Command):
         index.close()
 
     def _styles_list(self):
+        styles = []
+        for lib in self.project.metadata.get('bt:libs', []):
+            path = os.path.join('packages', lib['name'], 'css')
+            if os.path.exists(path):
+                pkg_styles = []
+                for stylesheet in os.listdir(path):
+                    pkg_styles += [os.path.join(path, stylesheet)]
+                styles += sorted(pkg_styles)
         path = os.path.join(self.project.path, 'css');
         if os.path.exists(path):
-            return [os.path.join('css', x).replace('\\', '/') for x in
+            styles += [os.path.join('css', x).replace('\\', '/') for x in
                     filter(lambda x: os.path.splitext(x)[1] == '.css',
                            os.listdir(path))]
-        return []
+        return styles
 
     def filter(self, existing, lst):
         return filter(lambda x: not x in existing and not x in self.excludes \
@@ -92,8 +100,8 @@ class generate(apps.command.base.Command):
                                         'packages', pkg['name'],
                                         'package.json'))))
         pkg_scripts += sorted([
-            os.path.join('packages', pkg['name'], x) for x in
+            os.path.join('packages', pkg['name'], 'lib', x) for x in
             filter(lambda x: x != 'package.json', os.listdir(os.path.join(
                         self.project.path, 'packages',
-                        pkg['name'])))])
+                        pkg['name'], 'lib')))])
         return pkg_scripts

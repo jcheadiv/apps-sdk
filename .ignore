@@ -22,3 +22,8 @@ _site/*
 loader/*
 .gitmodules
 build.bash
+apps_sdk.egg-info/*
+CNAME
+build.sh
+css/*
+favicon.ico

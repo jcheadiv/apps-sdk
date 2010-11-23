@@ -166,7 +166,7 @@ class Command(object):
         pkg.extractall(tmpdir)
         # This is because I'm lazy ....
         shutil.rmtree(pkg_root, True)
-        shutil.copytree(tmpdir, pkg_root
+        shutil.copytree(tmpdir, pkg_root,
                         ignore=shutil.ignore_patterns('packages*'))
         shutil.rmtree(tmpdir)
         # Handle the dependencies specifically

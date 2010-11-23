@@ -149,7 +149,6 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if resp['content-type'] == 'application/x-bittorrent':
             tor = bencode.bdecode(content)
             tor['info']['pieces'] = ''
-            print tor
             content = json.dumps(tor)
 
         self.send_response(resp.status, headers=False)

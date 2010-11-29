@@ -164,10 +164,10 @@ class Command(object):
                                                    'packages'))
         # Move over the package specific files
         pkg.extractall(tmpdir)
-        shutil.rmtree(os.path.join(tmpdir, 'packages'), True)
         # This is because I'm lazy ....
         shutil.rmtree(pkg_root, True)
-        shutil.copytree(tmpdir, pkg_root)
+        shutil.copytree(tmpdir, pkg_root,
+                        ignore=shutil.ignore_patterns('packages*'))
         shutil.rmtree(tmpdir)
         # Handle the dependencies specifically
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))

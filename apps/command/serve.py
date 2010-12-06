@@ -5,6 +5,7 @@
 import BaseHTTPServer
 import bencode
 import copy
+import hashlib
 import httplib
 import httplib2
 import json
@@ -12,15 +13,21 @@ import logging
 import os
 import re
 import SimpleHTTPServer
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
 import socket
 import time
 import urllib
 import urlparse
+import zipfile
 
 import apps.command.base
 
 # XXX - This is bad and makes me cranky
 cookies = {}
+project_path = ''
 
 class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
@@ -153,6 +160,12 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             resp['content-type'] = 'application/json'
             resp['content-length'] = len(content)
 
+        if os.path.splitext(
+            self.headers.get('x-location'))[-1][:-1] == '.btapp':
+            resp['content-type'] = 'application/json'
+            content = self.install_app(content)
+            resp['content-length'] = len(content)
+
         self.send_response(resp.status, headers=False)
         for k, v in resp.iteritems():
             if k in remove:
@@ -217,6 +230,16 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_header('Date', self.date_time_string())
             self.send_header('Content-Encoding', 'utf-8')
 
+    def install_app(self, content):
+        fobj = StringIO.StringIO(content)
+        zobj = zipfile.ZipFile(fobj)
+        pkg = json.loads(zobj.read('package.json'))
+        dir_name = hashlib.sha1(pkg['bt:update_url']).hexdigest().upper()
+        if not os.path.exists(os.path.join(project_path, 'tmp')):
+            os.makedirs(os.path.join(project_path, 'tmp'))
+        zobj.extractall(os.path.join(project_path, 'tmp', dir_name))
+        return zobj.read('package.json')
+
 class serve(apps.command.base.Command):
 
     help = 'Run a development server to debug the project.'
@@ -225,6 +248,8 @@ class serve(apps.command.base.Command):
     pre_commands = [ 'generate' ]
 
     def run(self):
+        global project_path
+        project_path = self.project.path
         logging.info('\tStarting server. Access it at http://localhost:%s/' %
                 (self.options['port'],))
         httpd = BaseHTTPServer.HTTPServer(

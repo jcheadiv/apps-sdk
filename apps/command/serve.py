@@ -153,12 +153,13 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         # If the fetched file is a torrent, convert it to a JSON object so that
         # javascript can do things with it.
-        if resp['content-type'] == 'application/x-bittorrent':
-            tor = bencode.bdecode(content)
-            tor['info']['pieces'] = ''
-            content = json.dumps(tor)
-            resp['content-type'] = 'application/json'
-            resp['content-length'] = len(content)
+        if 'content-type' in resp:
+            if resp['content-type'] == 'application/x-bittorrent':
+                tor = bencode.bdecode(content)
+                tor['info']['pieces'] = ''
+                content = json.dumps(tor)
+                resp['content-type'] = 'application/json'
+                resp['content-length'] = len(content)
 
         if os.path.splitext(
             self.headers.get('x-location'))[-1][:-1] == '.btapp':

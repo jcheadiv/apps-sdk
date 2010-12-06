@@ -151,6 +151,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             tor['info']['pieces'] = ''
             content = json.dumps(tor)
             resp['content-type'] = 'application/json'
+            resp['content-length'] = len(content)
 
         self.send_response(resp.status, headers=False)
         for k, v in resp.iteritems():

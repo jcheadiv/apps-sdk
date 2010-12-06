@@ -150,6 +150,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             tor = bencode.bdecode(content)
             tor['info']['pieces'] = ''
             content = json.dumps(tor)
+            resp['content-type'] = 'application/json'
 
         self.send_response(resp.status, headers=False)
         for k, v in resp.iteritems():

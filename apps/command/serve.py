@@ -103,7 +103,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.path = '/build' + self.path
             f = self.send_head()
         if not f:
-            self.send_error(404, 'File not found')
+            self.send_error(404, '%s File not found' % self.path)
         if f:
             self.copyfile(f, self.wfile)
             f.close()

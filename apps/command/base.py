@@ -58,7 +58,7 @@ class Command(object):
             return True
 
         file_list = []
-        for p, dirs, files in os.walk(self.project.path):
+        for p, dirs, files in os.walk(self.project.path, followlinks=True):
             for f in filter(_filter, [os.path.join(p, x) for x in files]):
                 file_list.append(f)
         return file_list
@@ -66,10 +66,11 @@ class Command(object):
     def run(self):
         logging.error('This command has not been implemented yet.')
 
-    def update_libs(self, name, url):
+    def update_libs(self, name, url, develop=False):
         if not name in [x['name'] for x in
                         self.project.metadata.get('bt:libs', [])]:
-            self.project.metadata['bt:libs'].append({ "name": name, "url": url})
+            self.project.metadata['bt:libs'].append(
+                { "name": name, "url": url, "develop": develop})
         if not os.path.exists('package.json') or \
                 self.project.metadata != json.load(open('package.json')):
             self.write_metadata()
@@ -109,40 +110,46 @@ class Command(object):
             pass
         os.makedirs(pkg_dir)
         for pkg in self.project.metadata.get('bt:libs', []):
-            self.add(pkg['name'], pkg['url'])
+            self.add(pkg['name'], pkg['url'], develop=pkg.get('develop', False))
 
-    def add(self, name, url, update=True):
+    def add(self, name, url, update=True, develop=False):
         if name in self.added:
             return
         self.added.append(name)
         handlers = { '.js': self._add_javascript,
-                     '.pkg': self._add_pkg
+                     '.pkg': self._add_pkg,
+                     '': self._add_pkg
                      }
         url_handlers = { 'file': self._get_file,
                          }
-        fobj = tempfile.NamedTemporaryFile('wb', delete=False)
-        fname = fobj.name
-        try:
-            logging.info('\tfetching %s ...' % (url,))
-            protocol = url.split('://', 1)[0]
-            handler = url_handlers.get(protocol, self._get_url)
-            fobj.write(handler(url))
-            fobj.close()
-        except urllib2.HTTPError:
-            print 'The file at <%s> is missing.' % (url,)
-            sys.exit(1)
-        except urllib2.URLError, e:
-            logging.error(e.reason)
-            sys.exit(1)
+        if develop:
+            fname = url
+        else:
+            fobj = tempfile.NamedTemporaryFile('wb', delete=False)
+            fname = fobj.name
+            try:
+                logging.info('\tfetching %s ...' % (url,))
+                protocol = url.split('://', 1)[0]
+                handler = url_handlers.get(protocol, self._get_url)
+                fobj.write(handler(url))
+                fobj.close()
+            except urllib2.HTTPError:
+                print 'The file at <%s> is missing.' % (url,)
+                sys.exit(1)
+            except urllib2.URLError, e:
+                logging.error(e.reason)
+                sys.exit(1)
+
         ext = os.path.splitext(urlparse.urlsplit(url).path)[-1]
         if not(handlers.has_key(ext)):
           logging.error('ERROR: Unsupported file type: %s' % (ext,))
           sys.exit(1)
         name = handlers[ext](fname,
-                             os.path.split(urlparse.urlsplit(url).path)[-1])
-        os.remove(fname)
+                             os.path.split(urlparse.urlsplit(url).path)[-1],
+                             develop)
+        if not develop: os.remove(fname)
         if update:
-            self.update_libs(name, url)
+            self.update_libs(name, url, develop)
 
     def _get_file(self, url):
         url = url.split('://', 1)[1]
@@ -151,28 +158,40 @@ class Command(object):
     def _get_url(self, url):
         return urllib2.urlopen(url).read()
 
-    def _add_javascript(self, source, fname):
-        shutil.copy(source, os.path.join(self.project.path, 'packages', fname))
+    def _add_javascript(self, source, fname, develop=False):
+        dest = os.path.join(self.project.path, 'packages', fname)
+        if develop:
+            os.symlink(source, dest)
+        else:
+            shutil.copy(source, dest)
         return os.path.splitext(fname)[0]
 
-    def _add_pkg(self, source, fname):
-        pkg = zipfile.ZipFile(source)
-        pkg_manifest = json.loads(pkg.read('package.json'))
+    def _add_pkg(self, source, fname, develop=False):
+        if develop:
+            pkg_manifest = json.loads(
+                open(os.path.join(source, 'package.json')).read())
+        else:
+            pkg = zipfile.ZipFile(source)
+            pkg_manifest = json.loads(pkg.read('package.json'))
         pkg_root = os.path.join(self.project.path, 'packages',
                                 pkg_manifest['name'])
-        tmpdir = tempfile.mkdtemp(dir=os.path.join(self.project.path,
-                                                   'packages'))
-        # Move over the package specific files
-        pkg.extractall(tmpdir)
-        # This is because I'm lazy ....
-        shutil.rmtree(pkg_root, True)
-        shutil.copytree(tmpdir, pkg_root,
-                        ignore=shutil.ignore_patterns('packages*'))
-        shutil.rmtree(tmpdir)
+        if develop:
+            os.symlink(source, pkg_root)
+        else:
+            tmpdir = tempfile.mkdtemp(dir=os.path.join(self.project.path,
+                                                       'packages'))
+            # Move over the package specific files
+            pkg.extractall(tmpdir)
+            # This is because I'm lazy ....
+            shutil.rmtree(pkg_root, True)
+            shutil.copytree(tmpdir, pkg_root,
+                            ignore=shutil.ignore_patterns('packages*'))
+            shutil.rmtree(tmpdir)
         # Handle the dependencies specifically
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest.get('bt:libs', []):
-            self.add(pkg['name'], pkg['url'], False)
+            self.add(pkg['name'], pkg['url'], False,
+                     develop=pkg.get('develop', False))
         return pkg_manifest['name']
 
     def _output_file(self, path='dist'):

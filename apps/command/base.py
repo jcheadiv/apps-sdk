@@ -66,10 +66,11 @@ class Command(object):
     def run(self):
         logging.error('This command has not been implemented yet.')
 
-    def update_libs(self, name, url):
+    def update_libs(self, name, url, develop=False):
         if not name in [x['name'] for x in
                         self.project.metadata.get('bt:libs', [])]:
-            self.project.metadata['bt:libs'].append({ "name": name, "url": url})
+            self.project.metadata['bt:libs'].append(
+                { "name": name, "url": url, "develop": develop})
         if not os.path.exists('package.json') or \
                 self.project.metadata != json.load(open('package.json')):
             self.write_metadata()
@@ -109,9 +110,9 @@ class Command(object):
             pass
         os.makedirs(pkg_dir)
         for pkg in self.project.metadata.get('bt:libs', []):
-            self.add(pkg['name'], pkg['url'])
+            self.add(pkg['name'], pkg['url'], develop=pkg.get('develop', False))
 
-    def add(self, name, url, update=True):
+    def add(self, name, url, update=True, develop=False):
         if name in self.added:
             return
         self.added.append(name)
@@ -120,29 +121,34 @@ class Command(object):
                      }
         url_handlers = { 'file': self._get_file,
                          }
-        fobj = tempfile.NamedTemporaryFile('wb', delete=False)
-        fname = fobj.name
-        try:
-            logging.info('\tfetching %s ...' % (url,))
-            protocol = url.split('://', 1)[0]
-            handler = url_handlers.get(protocol, self._get_url)
-            fobj.write(handler(url))
-            fobj.close()
-        except urllib2.HTTPError:
-            print 'The file at <%s> is missing.' % (url,)
-            sys.exit(1)
-        except urllib2.URLError, e:
-            logging.error(e.reason)
-            sys.exit(1)
+        if develop:
+            fname = url
+        else:
+            fobj = tempfile.NamedTemporaryFile('wb', delete=False)
+            fname = fobj.name
+            try:
+                logging.info('\tfetching %s ...' % (url,))
+                protocol = url.split('://', 1)[0]
+                handler = url_handlers.get(protocol, self._get_url)
+                fobj.write(handler(url))
+                fobj.close()
+            except urllib2.HTTPError:
+                print 'The file at <%s> is missing.' % (url,)
+                sys.exit(1)
+            except urllib2.URLError, e:
+                logging.error(e.reason)
+                sys.exit(1)
+
         ext = os.path.splitext(urlparse.urlsplit(url).path)[-1]
         if not(handlers.has_key(ext)):
           logging.error('ERROR: Unsupported file type: %s' % (ext,))
           sys.exit(1)
         name = handlers[ext](fname,
-                             os.path.split(urlparse.urlsplit(url).path)[-1])
-        os.remove(fname)
+                             os.path.split(urlparse.urlsplit(url).path)[-1],
+                             develop)
+        if not develop: os.remove(fname)
         if update:
-            self.update_libs(name, url)
+            self.update_libs(name, url, develop)
 
     def _get_file(self, url):
         url = url.split('://', 1)[1]
@@ -151,11 +157,15 @@ class Command(object):
     def _get_url(self, url):
         return urllib2.urlopen(url).read()
 
-    def _add_javascript(self, source, fname):
-        shutil.copy(source, os.path.join(self.project.path, 'packages', fname))
+    def _add_javascript(self, source, fname, develop=False):
+        dest = os.path.join(self.project.path, 'packages', fname)
+        if develop:
+            os.symlink(source, dest)
+        else:
+            shutil.copy(source, dest)
         return os.path.splitext(fname)[0]
 
-    def _add_pkg(self, source, fname):
+    def _add_pkg(self, source, fname, develop=False):
         pkg = zipfile.ZipFile(source)
         pkg_manifest = json.loads(pkg.read('package.json'))
         pkg_root = os.path.join(self.project.path, 'packages',

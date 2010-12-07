@@ -8,7 +8,9 @@ import sys
 
 class add(apps.command.base.Command):
 
-    user_options = [ ('file=', 'f', 'file to add', None) ]
+    user_options = [ ('file=', 'f', 'file to add', None),
+                     ('develop', 'd', 'Symlink local project', None)
+                     ]
     post_commands = [ 'generate' ]
     help = 'Add an external dependency to the project.'
 
@@ -19,4 +21,4 @@ class add(apps.command.base.Command):
           sys.exit(1)
 
         self.add(self.options['file'].rsplit('/', 1)[-1],
-                 self.options['file'])
+                 self.options['file'], develop=self.options.has_key('develop'))

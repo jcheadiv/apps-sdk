@@ -117,7 +117,8 @@ class Command(object):
             return
         self.added.append(name)
         handlers = { '.js': self._add_javascript,
-                     '.pkg': self._add_pkg
+                     '.pkg': self._add_pkg,
+                     '': self._add_pkg
                      }
         url_handlers = { 'file': self._get_file,
                          }
@@ -166,23 +167,31 @@ class Command(object):
         return os.path.splitext(fname)[0]
 
     def _add_pkg(self, source, fname, develop=False):
-        pkg = zipfile.ZipFile(source)
-        pkg_manifest = json.loads(pkg.read('package.json'))
+        if develop:
+            pkg_manifest = json.loads(
+                open(os.path.join(source, 'package.json')).read())
+        else:
+            pkg = zipfile.ZipFile(source)
+            pkg_manifest = json.loads(pkg.read('package.json'))
         pkg_root = os.path.join(self.project.path, 'packages',
                                 pkg_manifest['name'])
-        tmpdir = tempfile.mkdtemp(dir=os.path.join(self.project.path,
-                                                   'packages'))
-        # Move over the package specific files
-        pkg.extractall(tmpdir)
-        # This is because I'm lazy ....
-        shutil.rmtree(pkg_root, True)
-        shutil.copytree(tmpdir, pkg_root,
-                        ignore=shutil.ignore_patterns('packages*'))
-        shutil.rmtree(tmpdir)
+        if develop:
+            os.symlink(source, pkg_root)
+        else:
+            tmpdir = tempfile.mkdtemp(dir=os.path.join(self.project.path,
+                                                       'packages'))
+            # Move over the package specific files
+            pkg.extractall(tmpdir)
+            # This is because I'm lazy ....
+            shutil.rmtree(pkg_root, True)
+            shutil.copytree(tmpdir, pkg_root,
+                            ignore=shutil.ignore_patterns('packages*'))
+            shutil.rmtree(tmpdir)
         # Handle the dependencies specifically
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest.get('bt:libs', []):
-            self.add(pkg['name'], pkg['url'], False)
+            self.add(pkg['name'], pkg['url'], False,
+                     develop=pkg.get('develop', False))
         return pkg_manifest['name']
 
     def _output_file(self, path='dist'):

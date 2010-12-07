@@ -161,8 +161,8 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 resp['content-type'] = 'application/json'
                 resp['content-length'] = len(content)
 
-        if os.path.splitext(
-            self.headers.get('x-location'))[-1][:-1] == '.btapp':
+        if 'btapp' in os.path.splitext(
+            self.headers.get('x-location'))[-1]:
             resp['content-type'] = 'application/json'
             content = self.install_app(content)
             resp['content-length'] = len(content)

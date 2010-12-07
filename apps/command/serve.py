@@ -236,10 +236,11 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         zobj = zipfile.ZipFile(fobj)
         pkg = json.loads(zobj.read('package.json'))
         dir_name = hashlib.sha1(pkg['bt:update_url']).hexdigest().upper()
+        pkg['bt:id'] = dir_name
         if not os.path.exists(os.path.join(project_path, 'tmp')):
             os.makedirs(os.path.join(project_path, 'tmp'))
         zobj.extractall(os.path.join(project_path, 'tmp', dir_name))
-        return zobj.read('package.json')
+        return json.dumps(pkg)
 
 class serve(apps.command.base.Command):
 

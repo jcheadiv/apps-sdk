@@ -58,7 +58,7 @@ class Command(object):
             return True
 
         file_list = []
-        for p, dirs, files in os.walk(self.project.path):
+        for p, dirs, files in os.walk(self.project.path, followlinks=True):
             for f in filter(_filter, [os.path.join(p, x) for x in files]):
                 file_list.append(f)
         return file_list

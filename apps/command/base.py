@@ -158,8 +158,17 @@ class Command(object):
     def _get_url(self, url):
         return urllib2.urlopen(url).read()
 
+    def already_exists(self, name):
+        logging.warn('%s already exists. You\'re probably adding ' \
+                             'something that\'s already been included. ' \
+                             'Just igoring.' % name)
+
     def _add_javascript(self, source, fname, develop=False):
         dest = os.path.join(self.project.path, 'packages', fname)
+        # For anything that's already been added, warn the user and ignore.
+        if os.path.exists(dest):
+            self.already_exists(fname)
+            return os.path.splitext(fname)[0]
         if develop:
             os.symlink(source, dest)
         else:
@@ -175,12 +184,11 @@ class Command(object):
             pkg_manifest = json.loads(pkg.read('package.json'))
         pkg_root = os.path.join(self.project.path, 'packages',
                                 pkg_manifest['name'])
+        # For anything that's already been added, warn the user and ignore.
+        if os.path.exists(pkg_root):
+            self.already_exists(pkg_manifest['name'])
+            return pkg_manifest['name']
 
-        if develop and os.path.isdir(pkg_root) or \
-        not develop and os.path.islink(pkg_root) or os.path.isfile(pkg_root):
-            logging.info(
-                '\tWARNING: Dependency already exists %sin develop mode: %s' %
-                (('NOT ' if develop else ''), pkg_manifest['name']))
         elif develop:
             os.symlink(source, pkg_root)
         else:

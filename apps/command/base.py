@@ -175,7 +175,13 @@ class Command(object):
             pkg_manifest = json.loads(pkg.read('package.json'))
         pkg_root = os.path.join(self.project.path, 'packages',
                                 pkg_manifest['name'])
-        if develop:
+
+        if develop and os.path.isdir(pkg_root) or \
+        not develop and os.path.islink(pkg_root) or os.path.isfile(pkg_root):
+            logging.info(
+                '\tWARNING: Dependency already exists %sin develop mode: %s' %
+                (('NOT ' if develop else ''), pkg_manifest['name']))
+        elif develop:
             os.symlink(source, pkg_root)
         else:
             tmpdir = tempfile.mkdtemp(dir=os.path.join(self.project.path,

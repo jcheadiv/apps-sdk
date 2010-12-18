@@ -16,7 +16,7 @@ class generate(apps.command.base.Command):
     help = 'Generate `index.html` for the project.'
     user_options = [
         ('update=', None, 'Auto-update url to use in package.json', None) ]
-    excludes = [ os.path.join('packages', 'firebug.js'),
+    excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('lib', 'index.js') ]
 
     def run(self):

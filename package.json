@@ -2,10 +2,6 @@
     "name": "apps-sdk",
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/code/apps-sdk/test/firebug-lite.js",
-            "name": "firebug"
-        },
-        {
             "url": "http://staging.apps.bittorrent.com/pkgs/json2.js",
             "name": "json2"
         },

@@ -6,7 +6,7 @@
             "name": "json2"
         },
         {
-            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js",
+            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
             "name": "jquery"
         },
         {

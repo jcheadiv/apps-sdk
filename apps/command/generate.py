@@ -15,7 +15,10 @@ class generate(apps.command.base.Command):
 
     help = 'Generate `index.html` for the project.'
     user_options = [
-        ('update=', None, 'Auto-update url to use in package.json', None) ]
+        ('update=', None, 'Auto-update url to use in package.json', None),
+        ('local', 'l', 'Use a local auto-update url.', None),
+        ('host=', None, 'Host to use for local. Defaults to localhost', None),
+        ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('lib', 'index.js') ]
 
@@ -23,6 +26,13 @@ class generate(apps.command.base.Command):
         update_json = True
         if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
+            update_json = False
+        if self.options.get('local', False):
+            # XXX - This should dynamically pick up the port from serve
+            host = self.options.get('host', 'localhost:8080')
+            self.project.metadata['bt:update_url'] = 'http://%s/%s' % (
+                host, self._output_file().replace('\\', '/'))
+            logging.error(self.project.metadata['bt:update_url'])
             update_json = False
         self.write_metadata(update_json)
         # There's no reason to check packages into an SCM. This makes the

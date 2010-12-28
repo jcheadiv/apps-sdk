@@ -9268,7 +9268,7 @@ FBL.FirebugChrome =
     initialize: function()
     {
         if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("FirebugChrome.initialize", "initializing chrome window");
-        
+
         if (Env.chrome.type == "frame" || Env.chrome.type == "div")
             ChromeMini.create(Env.chrome);
         
@@ -9652,6 +9652,7 @@ var Chrome = function Chrome(chrome)
     append(this, new Context(chrome.window)); // inherit from Context class
     
     FirebugChrome.chromeMap[type] = this;
+
     Firebug.chrome = this;
     Env.chrome = chrome.window;
     
@@ -10877,11 +10878,11 @@ var ChromeFrameBase = extend(ChromeBase,
             if (Firebug.showIconWhenHidden)
             {
                 node.style.visibility = "hidden"; // Avoid flickering
-                
                 // TODO: xxxpedro - persist IE fixed? 
-                var main = $("fbChrome", FirebugChrome.chromeMap.frame.document);
+                var main = $("fbChrome", FirebugChrome.chromeMap[
+                  Firebug.chrome.type].document);
                 main.style.display = "none";
-                        
+
                 ChromeMini.initialize();
                 
                 node.style.visibility = "visible";
@@ -10953,12 +10954,12 @@ var ChromeMini = extend(Controller,
     initialize: function()
     {
         Controller.initialize.apply(this);
-        
-        var doc = FirebugChrome.chromeMap.frame.document;
-        
+        // XXX - I imagine this isn't the right place to fix this.
+        var doc = FirebugChrome.chromeMap[Firebug.chrome.type].document;
+
         var mini = $("fbMiniChrome", doc);
         mini.style.display = "block";
-        
+
         var miniIcon = $("fbMiniIcon", doc);
         var width = miniIcon.offsetWidth + 10;
         miniIcon.title = "Open " + Firebug.version;
@@ -10966,13 +10967,14 @@ var ChromeMini = extend(Controller,
         var errors = $("fbMiniErrors", doc);
         if (errors.offsetWidth)
             width += errors.offsetWidth + 10;
-        
+
+
         var node = this.node;
         node.style.height = "27px";
         node.style.width = width + "px";
         node.style.left = "";
         node.style.right = 0;
-        
+
         if (this.node.nodeName.toLowerCase() == "iframe")
         {
             node.setAttribute("allowTransparency", "true");
@@ -11017,7 +11019,7 @@ var ChromeMini = extend(Controller,
         if (noFixedPosition)
             this.fixIEPosition();
         
-        var doc = FirebugChrome.chromeMap.frame.document;
+        var doc = FirebugChrome.chromeMap[Firebug.chrome.type].document;
         
         var mini = $("fbMiniChrome", doc);
         mini.style.display = "none";

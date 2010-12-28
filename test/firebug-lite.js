@@ -9311,7 +9311,6 @@ FBL.FirebugChrome =
 var createChromeWindow = function(options)
 {
     options = extend(WindowDefaultOptions, options || {});
-    
     //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
     // Locals
     
@@ -9435,9 +9434,7 @@ var createChromeWindow = function(options)
             node.setAttribute("frameBorder", "0");
             
             formatNode(node);
-            
             body.appendChild(node);
-            
             // must set the id after appending to the document, otherwise will cause an
             // strange error in IE, making the iframe load the page in which the bookmarklet
             // was created (like getfirebug.com), before loading the injected UI HTML,
@@ -9488,16 +9485,15 @@ var createChromeWindow = function(options)
         
         //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
         // Inject the interface HTML if it is not using the local skin
-        
         if (!useLocalSkin)
         {
+          // XXX - For some reason the IEFrame throws an access denied for
+          // node.contentWindow.document.
             var tpl = getChromeTemplate(!isChromeFrame),
                 doc = isChromeFrame ? node.contentWindow.document : node.document;
-            
             doc.write(tpl);
             doc.close();
         }
-        
         //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
         // Wait the Window to be loaded
         
@@ -9532,7 +9528,6 @@ var createChromeWindow = function(options)
     catch(e)
     {
         var msg = e.message || e;
-        
         if (/access/i.test(msg))
         {
             // Firebug Lite could not create a window for its Graphical User Interface due to
@@ -9545,6 +9540,7 @@ var createChromeWindow = function(options)
                 node.close();
             
             // Load the GUI in a "windowless mode"
+          type = chrome.type = 'div';
             createChromeDiv();
         }
         else
@@ -9638,7 +9634,6 @@ var getChromeTemplate = function(isPopup)
     r[++i] = '</head><body class="fbBody' + (isPopup ? ' FirebugPopup' : '') + '">';
     r[++i] = tpl.HTML;
     r[++i] = '</body></html>';
-    
     return r.join("");
 };
 
@@ -11437,6 +11432,7 @@ var onVSplitterMouseUp = function onVSplitterMouseUp(event)
 
 // ************************************************************************************************
 }});
+
 
 /* See license.txt for terms of usage */
 

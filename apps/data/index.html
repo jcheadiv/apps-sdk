@@ -5,10 +5,8 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title>${title}</title>
   % if debug:
-    <script src="http://staging.apps.bittorrent.com/pkgs/firebug/firebug-lite.js">
-      { overrideConsole: false
-      }
-    </script>
+    <script src="http://staging.apps.bittorrent.com/pkgs/firebug.js"></script>
+    <script>firebug.env.height = 250;</script>
     <script type="text/javascript">
       window.debug = true
     </script>

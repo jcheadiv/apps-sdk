@@ -46,7 +46,8 @@ class Vanguard(object):
                        ('quiet', 'q', 'run quiety (turns verbose off)', None),
                        ('help', 'h', 'show detailed help message', None),
                        ('debug', 'd', 'run with debugging options enabled',
-                        None)
+                        None),
+                       ('firebug', 'f', 'use a new version of firebug', None)
                        ]
     display_options = [
         ('help-commands', None, 'list all available commands', None),

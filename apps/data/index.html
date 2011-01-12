@@ -4,6 +4,11 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title>${title}</title>
+  % if firebug:
+    <!-- <script src="http://10.20.30.79/code/apps-sdk/test/firebug-lite.js"></script>
+  -->
+    <script src="/packages/firebug-lite.js"></script>
+  % endif
   % if debug:
     <script src="http://staging.apps.bittorrent.com/pkgs/firebug.js"></script>
     <script>firebug.env.height = 250;</script>

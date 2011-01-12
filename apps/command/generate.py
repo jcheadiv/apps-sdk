@@ -57,7 +57,8 @@ class generate(apps.command.base.Command):
                     self.project.metadata),
                                     styles=self._styles_list(),
                                     title=self.project.metadata['name'],
-                                    debug=self.vanguard.options.debug))
+                                    debug=self.vanguard.options.debug,
+                                    firebug=self.vanguard.options.firebug))
         index.close()
 
     def _styles_list(self):

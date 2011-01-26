@@ -31,7 +31,7 @@ And, you're ready to go!
 
 # Linux & Mac OS X
 
-The prerequisites for the build tools are Python 2.6 and setuptools. Install
+The prerequisites for the build tools are Python 2.6+ and setuptools (or distribute). Install
 those using your operating system's package manager.
 
 Once you have python and setuptools installed, you can just run:

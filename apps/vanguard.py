@@ -30,6 +30,7 @@ import apps.command.push
 import apps.command.serve
 import apps.command.setup
 import apps.command.submit
+import apps.command.test
 import apps.command.update
 
 class Options(dict):
@@ -171,8 +172,10 @@ class Vanguard(object):
             logging.error('')
 
     def run_command(self, command_name):
-        if command_name in self.ran:
-            return
+        for com in command_name.split('|'):
+            if com in self.ran:
+                return
+        command_name = command_name.split('|')[0]
         command = self.get_command(command_name)
         for pre in command.pre_commands:
             self.run_command(pre)

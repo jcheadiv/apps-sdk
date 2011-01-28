@@ -21,6 +21,7 @@ class generate(apps.command.base.Command):
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('lib', 'index.js') ]
+    template = 'index.html'
 
     def run(self):
         update_json = True
@@ -48,18 +49,22 @@ class generate(apps.command.base.Command):
         #self.flist = self.file_list()
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
-                'apps.data', 'index.html'), cache_enabled=False)
+                'apps.data', self.template), cache_enabled=False)
         if not os.path.exists(os.path.join(self.project.path, 'build')):
             os.mkdir(os.path.join(self.project.path, 'build'))
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
-        index.write(template.render(scripts=self._scripts_list(
-                    self.project.metadata),
-                                    styles=self._styles_list(),
-                                    title=self.project.metadata['name'],
-                                    debug=self.vanguard.options.debug,
-                                    firebug=self.vanguard.options.firebug))
+        index.write(template.render(**self._template()))
         index.close()
+
+    def _template(self):
+        return {
+            'scripts': self._scripts_list(self.project.metadata),
+            'styles': self._styles_list(),
+            'title': self.project.metadata['name'],
+            'debug': self.vanguard.options.debug,
+            'firebug': self.vanguard.options.firebug
+            }
 
     def _styles_list(self):
         styles = []

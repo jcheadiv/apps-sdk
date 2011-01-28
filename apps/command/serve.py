@@ -247,7 +247,7 @@ class serve(apps.command.base.Command):
     help = 'Run a development server to debug the project.'
     user_options = [ ('port=', 'p', 'Port to listen on.', None) ]
     option_defaults = { 'port': '8080' }
-    pre_commands = [ 'generate' ]
+    pre_commands = [ 'generate|test' ]
 
     def run(self):
         global project_path

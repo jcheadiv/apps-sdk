@@ -15,7 +15,7 @@ class package(apps.command.base.Command):
     user_options = [
         ('path=', None, 'full path to place the package in.', None) ]
     option_defaults = { 'path': 'dist' }
-    pre_commands = [ 'generate' ]
+    pre_commands = [ 'generate|test' ]
 
     def run(self):
         path = self.options['path']

@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title>${title}</title>
+  % if firebug:
+    <!-- <script src="http://10.20.30.79/code/apps-sdk/test/firebug-lite.js"></script>
+  -->
+    <script src="/packages/firebug-lite.js"></script>
+  % endif
+  % if debug:
+    <script src="http://staging.apps.bittorrent.com/pkgs/firebug.js"></script>
+    <script>firebug.env.height = 250;</script>
+    <script type="text/javascript">
+      window.debug = true;
+    </script>
+  % endif
+    <script type="text/javascript">
+      window.testing = true;
+    </script>
+  % for src in scripts:
+    <script type="text/javascript" src="${src}"></script>
+  % endfor
+  <script type="text/javascript" src="http://staging.apps.bittorrent.com/pkgs/test/qunit-1.0.js"></script>
+  <script type="text/javascript" src="http://staging.apps.bittorrent.com/pkgs/test/sinon-1.0.0.js"></script>
+  <script type="text/javascript" src="http://staging.apps.bittorrent.com/pkgs/test/sinon-ie-1.0.0.js"></script>
+  <script type="text/javascript" src="http://staging.apps.bittorrent.com/pkgs/test/sinon-qunit-1.0.0.js"></script>
+    <link rel="Stylesheet" media="screen" href="http://staging.apps.bittorrent.com/pkgs/test/qunit-1.0.css" />
+  </head>
+  <body>
+    <h1 id="qunit-header">Test: ${title}</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+  % for src in tests:
+    <script type="text/javascript" src="${src}"></script>
+  % endfor
+  </body>
+</html>

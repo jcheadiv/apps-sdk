@@ -33,7 +33,6 @@ class generate(apps.command.base.Command):
             host = self.options.get('host', 'localhost:8080')
             self.project.metadata['bt:update_url'] = 'http://%s/%s' % (
                 host, self._output_file().replace('\\', '/'))
-            logging.error(self.project.metadata['bt:update_url'])
             update_json = False
         self.write_metadata(update_json)
         # There's no reason to check packages into an SCM. This makes the

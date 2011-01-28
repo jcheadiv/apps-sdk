@@ -72,10 +72,11 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             handler = apps.vanguard.Vanguard()
             handler.parse_config_files()
             handler.parse_command_line()
-            if 'debug' in qs:
-                handler.options.debug = True
-            handler.ran = []
-            handler.run_command('package')
+            handler.commands = [x for x in handler.commands if
+                                x.__name__ != 'serve']
+            if not 'package' in [x.__name__ for x in handler.commands]:
+                handler.commands.append(handler.get_command('package'))
+            handler.run_commands()
         try:
             # Always read in binary mode. Opening files in text mode may cause
             # newline translations, making the actual size of the content

@@ -16,7 +16,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "apps-sdk",
-    version = '0.2.4.1',
+    version = '0.5',
     packages = find_packages(),
     author = __author__,
     author_email = __author_email__,

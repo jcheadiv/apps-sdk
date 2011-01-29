@@ -8,12 +8,19 @@ An apps sdk project.
 
 import json
 import os
+import pkg_resources
+import shutil
 
 class Project(object):
 
     def __init__(self, path):
         self.path = path
         self.read_metadata()
+        if not os.path.exists(os.path.join(self.path, '.ignore')):
+            shutil.copy(pkg_resources.resource_filename('apps.data', '.ignore'),
+                        os.path.join(self.path, '.ignore'))
+        self.ignore = open(os.path.join(self.path, '.ignore')
+                           ).read().split('\n')
 
     def read_metadata(self):
         try:

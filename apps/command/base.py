@@ -37,19 +37,14 @@ class Command(object):
         for k,v in self.option_defaults.iteritems():
             if not self.options.get(k, None):
                 self.options[k] = v
-        self.project = apps.project.Project(self.options.get('name', '.'))
+        self.project = vanguard.project
         # Keeps track of which dependencies have been added, if one has already
         # been added (via name), don't add it again.
         self.added = []
 
     def file_list(self):
-        if not os.path.exists(os.path.join(self.project.path,
-                                           '.ignore')):
-            shutil.copy(pkg_resources.resource_filename('apps.data', '.ignore'),
-                        os.path.join(self.project.path, '.ignore'))
         ignore = [os.path.join(self.project.path, x) for x in
-                  open(os.path.join(self.project.path,
-                                    '.ignore')).read().split('\n')]
+                  self.project.ignore]
 
         def _filter(fname):
             for pat in ignore:

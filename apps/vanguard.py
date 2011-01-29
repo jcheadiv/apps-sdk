@@ -119,6 +119,9 @@ class Vanguard(object):
             return
         return True
 
+    def parse_project(self):
+        self.project = apps.project.Project(self.options.get('name', '.'))
+
     def get_command(self, name):
         module_name = 'apps.command.%s' % (name,)
         try:
@@ -224,6 +227,7 @@ def run():
     handler = Vanguard()
     handler.parse_config_files()
     handler.parse_command_line()
+    handler.parse_project()
     if not handler.options.help and \
             len(filter(lambda x: 'help' in x,
                        [x.keys() for x in

@@ -72,6 +72,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             handler = apps.vanguard.Vanguard()
             handler.parse_config_files()
             handler.parse_command_line()
+            handler.parse_project()
             handler.commands = [x for x in handler.commands if
                                 x.__name__ != 'serve']
             if not 'package' in [x.__name__ for x in handler.commands]:

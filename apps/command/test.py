@@ -2,12 +2,8 @@
 # Copyright (c) 2011 BitTorrent Inc.
 #
 
-import json
 import logging
-import mako.template
 import os
-import pkg_resources
-import urlparse
 
 import apps.command.generate
 
@@ -15,6 +11,10 @@ class test(apps.command.generate.generate):
 
     help = 'Run the steps needed to do testing on an app'
     template = 'test.html'
+
+    def __init__(self, *args, **kwargs):
+        apps.command.generate.generate.__init__(self, *args, **kwargs)
+        self.project.ignore.remove('test/*')
 
     def _template(self):
         opts = apps.command.generate.generate._template(self)

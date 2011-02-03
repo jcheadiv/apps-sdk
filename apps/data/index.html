@@ -16,11 +16,22 @@
       window.debug = true
     </script>
   % endif
+  % if falcon:
+    <script>
+     window.falcon = { get_xhr_prefix: function() { return '/appsxhr'; }};
+     if (window.parent && window.parent.config && window.parent.config) {
+       window.config = window.parent.config;
+     }
+     var _bt_scripts = [ "${'","'.join(scripts)}" ];
+    </script>
+    <script type="text/javascript" src="/static/apps/apploader.js"></script>
+  % else:
   % for src in scripts:
     <script type="text/javascript" src="${src}"></script>
   % endfor
+  % endif
   % for href in styles:
-    <link rel="stylesheet" type="text/css" href="/${href}" />
+    <link rel="stylesheet" type="text/css" href="${href}" />
   % endfor
   </head>
   <body>

@@ -18,6 +18,7 @@ class generate(apps.command.base.Command):
         ('update=', None, 'Auto-update url to use in package.json', None),
         ('local', 'l', 'Use a local auto-update url.', None),
         ('host=', None, 'Host to use for local. Defaults to localhost', None),
+        ('falcon', None, 'Build app for falcon (scripts load dynamically)', None), # TODO: don't require special build option for falcon
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('lib', 'index.js') ]
@@ -25,6 +26,8 @@ class generate(apps.command.base.Command):
 
     def run(self):
         update_json = True
+        self.falcon = self.options.get('falcon', False)
+        print 'falcon is %s' % self.falcon
         if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
             update_json = False
@@ -62,6 +65,7 @@ class generate(apps.command.base.Command):
             'styles': self._styles_list(),
             'title': self.project.metadata['name'],
             'debug': self.vanguard.options.debug,
+            'falcon': self.falcon,
             'firebug': self.vanguard.options.firebug
             }
 

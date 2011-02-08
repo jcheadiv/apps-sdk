@@ -105,6 +105,8 @@ class Command(object):
             pass
         os.makedirs(pkg_dir)
         for pkg in self.project.metadata.get('bt:libs', []):
+            # TODO: figure out how to set an option here (one set in generate did not work)
+            # pkg['url'] = pkg['url'].replace('10.20.30.79','127.0.0.1')
             self.add(pkg['name'], pkg['url'], develop=pkg.get('develop', False))
 
     def add(self, name, url, update=True, develop=False):

@@ -7,6 +7,7 @@ import logging
 import mako.template
 import os
 import pkg_resources
+import re
 import scss.parser
 import urlparse
 
@@ -93,7 +94,9 @@ class generate(apps.command.base.Command):
         for base, dirs, files in os.walk('build'):
             files = [x for x in files if os.path.splitext(x)[1] == '.css']
             for f in files:
-                styles.append(os.path.join(base, f).replace('\\', '/'))
+                styles.append(
+                    re.sub('^build', '',
+                           os.path.join(base, f).replace('\\', '/')))
         return styles
 
     def filter(self, existing, lst):

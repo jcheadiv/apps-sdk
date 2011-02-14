@@ -31,7 +31,6 @@ class package(apps.command.base.Command):
             # they mirror the normal path and are only in the build
             # directory to keep it out of the way of users.
             fpath = os.path.split(f)
-            print re.sub('\..build', '.', f)
             arcname = os.path.join(*fpath[1:]) \
                 if re.match('\..build', fpath[0]) \
                 else os.path.join(*fpath)

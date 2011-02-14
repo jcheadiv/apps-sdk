@@ -142,7 +142,7 @@ class generate(apps.command.base.Command):
             files = [x for x in files if os.path.splitext(x)[1] == '.scss']
             for f in files:
                 compiled = scss.parser.load(
-                    open(os.path.join(base, f), 'rb'), precache=True)
+                    open(os.path.join(base, f), 'rb'))
                 # Try and create the build dirs, ignore if they're already
                 # there.
                 try:

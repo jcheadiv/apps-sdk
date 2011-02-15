@@ -6,6 +6,7 @@ import fnmatch
 import json
 import logging
 import os
+import PIL.Image
 import pkg_resources
 import re
 import shutil
@@ -72,6 +73,11 @@ class Command(object):
 
     def write_metadata(self, refresh=True):
         logging.info('\tupdating project metadata')
+
+        # There are certain values that are dynamically generated, just check
+        # every time they are saved.
+        self.project.metadata['bt:border'] = self.calculate_border()
+
         # Allow the optional overloading of certain values in package.json
         # without saving them (and write them to btapp).
         if refresh and (not os.path.exists('package.json') or \
@@ -80,12 +86,14 @@ class Command(object):
           json.dump(self.project.metadata,
                     open(os.path.join(self.project.path, 'package.json'), 'wb'),
                     indent=4)
+
         # Don't bother with btapp/index.html for packages
         if self.project.metadata.get('bt:package', False):
             return
         keys = [ 'name', 'version' ] + filter(
             lambda x: x[:3] == 'bt:' and not x[3:] in self.btapp_excludes,
             self.project.metadata.keys())
+
         try:
             os.makedirs(os.path.join(self.project.path, 'build'))
         except OSError:
@@ -95,6 +103,13 @@ class Command(object):
             btapp.write('%s:%s\n' % (i.split(':')[-1],
                                      self.project.metadata[i]))
         btapp.close()
+
+    def calculate_border(self):
+        try:
+            return '#%02x%02x%02x' % PIL.Image.open(
+                'img/icon_64.png').load()[0, 0][:-1]
+        except:
+            return '#000000'
 
     def update_deps(self):
         logging.info('\tupdating project dependencies')

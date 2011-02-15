@@ -21,7 +21,8 @@ setup(
     author = __author__,
     author_email = __author_email__,
     description = "Build tool to develop, build and package apps.",
-    install_requires = [ 'mako', 'boto', 'pydns', 'httplib2', 'bencode' ],
+    install_requires = [ 'mako', 'boto', 'pydns', 'httplib2', 'bencode',
+                         'scss' ],
     include_package_data = True,
     package_data = {
         "": ['data/*', 'data/.*'],

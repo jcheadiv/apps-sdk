@@ -43,5 +43,3 @@ class Project(object):
                       'url': 'http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg' }
                     ]
                 }
-
-

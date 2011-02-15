@@ -27,6 +27,8 @@ class package(apps.command.base.Command):
             'bt:package', False) else 'btapp'
         btapp = zipfile.ZipFile(open(self._output_file(path), 'wb'), 'w',
                                 zipfile.ZIP_DEFLATED)
+        if  hasattr(self.project, 'compiled') and self.project.compiled:
+            self.project.ignore.append('*.js')
         for f in self.file_list():
             # Files in the build/ directory are auto-created for users,
             # they mirror the normal path and are only in the build

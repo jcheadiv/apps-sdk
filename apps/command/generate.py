@@ -9,9 +9,57 @@ import os
 import pkg_resources
 import re
 import scss.parser
+import shlex
+import subprocess
 import urlparse
 
 import apps.command.base
+
+# Exception classes used by this module.
+class CalledProcessError(subprocess.CalledProcessError):
+    """This exception is raised when a process run by check_call() returns
+    a non-zero exit status.  The exit status will be stored in the
+    returncode attribute."""
+    def __init__(self, returncode=None, cmd=None, output=None):
+        self.returncode = returncode
+        self.cmd = cmd
+        self.output = output
+    def __str__(self):
+        return "Command '%s' returned non-zero exit status %d\n\n%s" % (self.cmd, self.returncode, self.output)
+
+# Cut and paste from python2.7 because I don't want to upgrade.
+def check_output(*popenargs, **kwargs):
+    """Run command with arguments and return its output as a byte string.
+
+    If the exit code was non-zero it raises a CalledProcessError.  The
+    CalledProcessError object will have the return code in the returncode
+    attribute and output in the output attribute.
+
+    The arguments are the same as for the Popen constructor.  Example:
+
+    >>> check_output(["ls", "-l", "/dev/null"])
+    'crw-rw-rw- 1 root root 1, 3 Oct 18  2007 /dev/null\n'
+
+    The stdout argument is not allowed as it is used internally.
+    To capture standard error in the result, use stderr=subprocess.STDOUT.
+
+    >>> check_output(["/bin/sh", "-c",
+                      "ls -l non_existant_file ; exit 0"],
+                     stderr=subprocess.STDOUT)
+    'ls: non_existant_file: No such file or directory\n'
+    """
+    if 'stdout' in kwargs:
+        raise ValueError('stdout argument not allowed, it will be overridden.')
+    process = subprocess.Popen(*popenargs, stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE, **kwargs)
+    output, unused_err = process.communicate()
+    retcode = process.poll()
+    if retcode:
+        cmd = kwargs.get("args")
+        if cmd is None:
+            cmd = popenargs[0]
+        raise CalledProcessError(retcode, cmd, output=output)
+    return output
 
 class generate(apps.command.base.Command):
 
@@ -20,7 +68,9 @@ class generate(apps.command.base.Command):
         ('update=', None, 'Auto-update url to use in package.json', None),
         ('local', 'l', 'Use a local auto-update url.', None),
         ('host=', None, 'Host to use for local. Defaults to localhost', None),
-        ('falcon', None, 'Build app for falcon (scripts load dynamically)', None), # TODO: don't require special build option for falcon
+        ('falcon', None, 'Build app for falcon (scripts load dynamically)',
+         None), # TODO: don't require special build option for falcon
+        ('compile', None, 'Compile/minify the javascript', None)
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('lib', 'index.js') ]
@@ -64,7 +114,11 @@ class generate(apps.command.base.Command):
             os.mkdir(os.path.join(self.project.path, 'build'))
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
-        index.write(template.render(**self._template()))
+        tmpl_vals = self._template()
+        if self.options.get('compile', False):
+            self.compile(tmpl_vals)
+            self.project.compiled = True
+        index.write(template.render(**tmpl_vals))
         index.close()
 
     def _template(self):
@@ -154,3 +208,12 @@ class generate(apps.command.base.Command):
                     pass
                 dest = os.path.splitext(f)[0] + '.css'
                 open(os.path.join('build', base, dest), 'wb').write(compiled)
+
+    def compile(self, vals):
+        command = shlex.split('java -jar compiler/compiler.jar ' \
+                                  '--js_output_file build/compiled.cjs')
+        for fname in vals['scripts']:
+            command += ['--js', fname]
+        logging.info('\tcompiling and compressing javascript')
+        check_output(command)
+        vals['scripts'] = ['compiled.cjs']

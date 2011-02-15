@@ -24,6 +24,7 @@ import urlparse
 import zipfile
 
 import apps.command.base
+import apps.vanguard
 
 # XXX - This is bad and makes me cranky
 cookies = {}
@@ -42,6 +43,18 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         path = urllib.unquote(path).replace('\\', '/')
         return SimpleHTTPServer.SimpleHTTPRequestHandler.translate_path(
             self, path)
+
+    def run_command(self, command):
+        # XXX - This is an ugly hack
+        handler = apps.vanguard.Vanguard()
+        handler.parse_config_files()
+        handler.parse_command_line()
+        handler.parse_project()
+        handler.commands = [x for x in handler.commands if
+                            x.__name__ != 'serve']
+        if not command in [x.__name__ for x in handler.commands]:
+            handler.commands.append(handler.get_command(command))
+        handler.run_commands()
 
     def send_head(self):
         # Special version of send_head that falls back to the build directory.
@@ -66,18 +79,9 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 return self.list_directory(path)
         ctype = self.guess_type(path)
         if re.match('/dist/\S+\.btapp', self.path):
-            qs = urlparse.parse_qs(urlparse.urlparse(self.path).query)
-            # XXX - This is an ugly hack
-            import apps.vanguard
-            handler = apps.vanguard.Vanguard()
-            handler.parse_config_files()
-            handler.parse_command_line()
-            handler.parse_project()
-            handler.commands = [x for x in handler.commands if
-                                x.__name__ != 'serve']
-            if not 'package' in [x.__name__ for x in handler.commands]:
-                handler.commands.append(handler.get_command('package'))
-            handler.run_commands()
+            self.run_command('package')
+        if self.path == '/':
+            self.run_command('generate')
         try:
             # Always read in binary mode. Opening files in text mode may cause
             # newline translations, making the actual size of the content

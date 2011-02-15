@@ -7,6 +7,8 @@ import logging
 import mako.template
 import os
 import pkg_resources
+import re
+import scss.parser
 import urlparse
 
 import apps.command.base
@@ -27,10 +29,11 @@ class generate(apps.command.base.Command):
     def run(self):
         update_json = True
         self.falcon = self.options.get('falcon', False)
-        print 'falcon is %s' % self.falcon
+
         if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
             update_json = False
+
         if self.options.get('local', False):
             # XXX - This should dynamically pick up the port from serve
             host = self.options.get('host', 'localhost:8080')
@@ -38,6 +41,7 @@ class generate(apps.command.base.Command):
                 host, self._output_file().replace('\\', '/'))
             update_json = False
         self.write_metadata(update_json)
+
         # There's no reason to check packages into an SCM. This makes the
         # initial checkout a little painful, fix that pain by just pulling
         # everything down if the directory doesn't exist.
@@ -45,10 +49,14 @@ class generate(apps.command.base.Command):
             self.update_deps()
         if self.project.metadata.get('bt:package', False):
             return
+
+        # pre-compile the scss sheets.
+        self._generate_scss()
+
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]
-        #self.flist = self.file_list()
+
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'apps.data', self.template), cache_enabled=False)
@@ -83,6 +91,12 @@ class generate(apps.command.base.Command):
             styles += [os.path.join('css', x).replace('\\', '/') for x in
                     filter(lambda x: os.path.splitext(x)[1] == '.css',
                            os.listdir(path))]
+        for base, dirs, files in os.walk('build'):
+            files = [x for x in files if os.path.splitext(x)[1] == '.css']
+            for f in files:
+                styles.append(
+                    re.sub('^build', '',
+                           os.path.join(base, f).replace('\\', '/')))
         return styles
 
     def filter(self, existing, lst):
@@ -125,3 +139,18 @@ class generate(apps.command.base.Command):
                         self.project.path, 'packages',
                         pkg['name'], 'lib')))])
         return pkg_scripts
+
+    def _generate_scss(self):
+        for base, dirs, files in os.walk('.'):
+            files = [x for x in files if os.path.splitext(x)[1] == '.scss']
+            for f in files:
+                compiled = scss.parser.load(
+                    open(os.path.join(base, f), 'rb'))
+                # Try and create the build dirs, ignore if they're already
+                # there.
+                try:
+                    os.makedirs(os.path.join('build', base))
+                except:
+                    pass
+                dest = os.path.splitext(f)[0] + '.css'
+                open(os.path.join('build', base, dest), 'wb').write(compiled)

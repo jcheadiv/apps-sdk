@@ -25,14 +25,13 @@ class package(apps.command.base.Command):
             pass
         extension = 'pkg' if self.project.metadata.get(
             'bt:package', False) else 'btapp'
-        btapp = zipfile.ZipFile(open(self._output_file(path), 'wb'), 'w')
+        btapp = zipfile.ZipFile(open(self._output_file(path), 'wb'), 'w',
+                                zipfile.ZIP_DEFLATED)
         for f in self.file_list():
             # Files in the build/ directory are auto-created for users,
             # they mirror the normal path and are only in the build
             # directory to keep it out of the way of users.
             fpath = os.path.split(f)
-            arcname = os.path.join(*fpath[1:]) \
-                if re.match('\..build', fpath[0]) \
-                else os.path.join(*fpath)
+            arcname = re.sub('\..build', '.', f)
             btapp.write(f, arcname)
         btapp.close()

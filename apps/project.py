@@ -59,12 +59,5 @@ class Project(object):
             self.metadata = json.load(open(os.path.join(self.path,
                                                         'package.json'), 'r'))
         except IOError, err:
-<<<<<<< HEAD
             self.metadata = self.default_metadata
             self.metadata['name'] = self.path
-
-
-=======
-            self.metadata = default_metadata
-            self.metadata['name'] = self.path
->>>>>>> master

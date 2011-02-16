@@ -1,0 +1,24 @@
+{
+    "description": "Example app for the share widget.", 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "site": "http://apps.bittorrent.com", 
+    "keywords": [
+        "example"
+    ], 
+    "bt:release_date": "00/00/0000", 
+    "name": "share_widget", 
+    "author": "Default Author <default@example.com>", 
+    "bt:libs": [
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
+            "name": "apps-sdk"
+        },
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/widgets.pkg", 
+            "name": "widgets"
+        }       
+    ], 
+    "bt:update_url": "http://localhost/example", 
+    "version": "0.1", 
+    "bt:description": "Example app for the share widget."
+}

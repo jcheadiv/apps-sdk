@@ -3,22 +3,32 @@
 #
 
 import BaseHTTPServer
+import bencode
 import copy
+import hashlib
 import httplib
 import httplib2
+import json
 import logging
 import os
 import re
 import SimpleHTTPServer
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
 import socket
 import time
 import urllib
 import urlparse
+import zipfile
 
 import apps.command.base
+import apps.vanguard
 
 # XXX - This is bad and makes me cranky
 cookies = {}
+project_path = ''
 
 class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
@@ -33,6 +43,18 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         path = urllib.unquote(path).replace('\\', '/')
         return SimpleHTTPServer.SimpleHTTPRequestHandler.translate_path(
             self, path)
+
+    def run_command(self, command):
+        # XXX - This is an ugly hack
+        handler = apps.vanguard.Vanguard()
+        handler.parse_config_files()
+        handler.parse_command_line()
+        handler.parse_project()
+        handler.commands = [x for x in handler.commands if
+                            x.__name__ != 'serve']
+        if not command in [x.__name__ for x in handler.commands]:
+            handler.commands.append(handler.get_command(command))
+        handler.run_commands()
 
     def send_head(self):
         # Special version of send_head that falls back to the build directory.
@@ -57,16 +79,9 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 return self.list_directory(path)
         ctype = self.guess_type(path)
         if re.match('/dist/\S+\.btapp', self.path):
-            qs = urlparse.parse_qs(urlparse.urlparse(self.path).query)
-            # XXX - This is an ugly hack
-            import apps.vanguard
-            handler = apps.vanguard.Vanguard()
-            handler.parse_config_files()
-            handler.parse_command_line()
-            if 'debug' in qs:
-                handler.options.debug = True
-            handler.ran = []
-            handler.run_command('package')
+            self.run_command('package')
+        if self.path == '/':
+            self.run_command('generate')
         try:
             # Always read in binary mode. Opening files in text mode may cause
             # newline translations, making the actual size of the content
@@ -94,7 +109,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.path = '/build' + self.path
             f = self.send_head()
         if not f:
-            self.send_error(404, 'File not found')
+            self.send_error(404, '%s File not found' % self.path)
         if f:
             self.copyfile(f, self.wfile)
             f.close()
@@ -125,7 +140,8 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         method()
 
     def proxy_request(self):
-        remove = [ 'transfer-encoding', 'status', '-content-encoding' ]
+        remove = [ 'transfer-encoding', 'status', '-content-encoding',
+                   'content-location', 'connection' ]
         body = ''
         self.requestline = '%s %s' % (self.command,
                                       self.headers.get('x-location'))
@@ -140,12 +156,25 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         except httplib2.ServerNotFoundError:
             self.send_response(404)
             return
+
+        # If the fetched file is a torrent, convert it to a JSON object so that
+        # javascript can do things with it.
+        if 'content-type' in resp:
+            if resp['content-type'] == 'application/x-bittorrent':
+                tor = bencode.bdecode(content)
+                tor['info']['pieces'] = ''
+                content = json.dumps(tor)
+                resp['content-type'] = 'application/json'
+                resp['content-length'] = len(content)
+
+        if 'btapp' in os.path.splitext(
+            self.headers.get('x-location'))[-1]:
+            resp['content-type'] = 'application/json'
+            content = self.install_app(content)
+            resp['content-length'] = len(content)
+
         self.send_response(resp.status, headers=False)
         for k, v in resp.iteritems():
-            if k == 'content-location':
-                continue
-            if k == 'connection':
-                continue
             if k in remove:
                 continue
             self.send_header(k, v)
@@ -208,14 +237,27 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_header('Date', self.date_time_string())
             self.send_header('Content-Encoding', 'utf-8')
 
+    def install_app(self, content):
+        fobj = StringIO.StringIO(content)
+        zobj = zipfile.ZipFile(fobj)
+        pkg = json.loads(zobj.read('package.json'))
+        dir_name = hashlib.sha1(pkg['bt:update_url']).hexdigest().upper()
+        pkg['bt:id'] = dir_name
+        if not os.path.exists(os.path.join(project_path, 'tmp')):
+            os.makedirs(os.path.join(project_path, 'tmp'))
+        zobj.extractall(os.path.join(project_path, 'tmp', dir_name))
+        return json.dumps(pkg)
+
 class serve(apps.command.base.Command):
 
     help = 'Run a development server to debug the project.'
     user_options = [ ('port=', 'p', 'Port to listen on.', None) ]
     option_defaults = { 'port': '8080' }
-    pre_commands = [ 'generate' ]
+    pre_commands = [ 'generate|test' ]
 
     def run(self):
+        global project_path
+        project_path = self.project.path
         logging.info('\tStarting server. Access it at http://localhost:%s/' %
                 (self.options['port'],))
         httpd = BaseHTTPServer.HTTPServer(

@@ -1,0 +1,16 @@
+
+@import url('http://staging.apps.bittorrent.com/pkgs/share/share.css');
+
+a.custom-share{
+    display:inline;
+    padding-left: 18px;
+    text-decoration: none;
+    color: #777;
+    outline: none;
+}
+a.custom-share.reddit{background:no-repeat url(http://staging.apps.bittorrent.com/pkgs/share/reddit.gif)}
+a.custom-share.digg{background:no-repeat url(http://staging.apps.bittorrent.com/pkgs/share/digg.gif)}
+a.custom-share.facebook{background:no-repeat url(http://staging.apps.bittorrent.com/pkgs/share/facebook.gif)}
+a.custom-share.email{background:no-repeat url(http://staging.apps.bittorrent.com/pkgs/share/email.gif)}
+a.custom-share.twitter{background:no-repeat url(http://staging.apps.bittorrent.com/pkgs/share/twitter.gif)}
+a.custom-share.delicious{background:no-repeat url(http://staging.apps.bittorrent.com/pkgs/share/delicious.gif)}

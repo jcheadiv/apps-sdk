@@ -21,6 +21,7 @@ import apps.config
 # dependencies.
 import apps.command.base
 import apps.command.add
+import apps.command.bundle
 import apps.command.config
 import apps.command.generate
 import apps.command.localize
@@ -29,6 +30,7 @@ import apps.command.push
 import apps.command.serve
 import apps.command.setup
 import apps.command.submit
+import apps.command.test
 import apps.command.update
 
 class Options(dict):
@@ -45,7 +47,8 @@ class Vanguard(object):
                        ('quiet', 'q', 'run quiety (turns verbose off)', None),
                        ('help', 'h', 'show detailed help message', None),
                        ('debug', 'd', 'run with debugging options enabled',
-                        None)
+                        None),
+                       ('firebug', 'f', 'use a new version of firebug', None)
                        ]
     display_options = [
         ('help-commands', None, 'list all available commands', None),
@@ -116,6 +119,9 @@ class Vanguard(object):
             return
         return True
 
+    def parse_project(self):
+        self.project = apps.project.Project(self.options.get('name', '.'))
+
     def get_command(self, name):
         module_name = 'apps.command.%s' % (name,)
         try:
@@ -169,8 +175,10 @@ class Vanguard(object):
             logging.error('')
 
     def run_command(self, command_name):
-        if command_name in self.ran:
-            return
+        for com in command_name.split('|'):
+            if com in self.ran:
+                return
+        command_name = command_name.split('|')[0]
         command = self.get_command(command_name)
         for pre in command.pre_commands:
             self.run_command(pre)
@@ -219,6 +227,7 @@ def run():
     handler = Vanguard()
     handler.parse_config_files()
     handler.parse_command_line()
+    handler.parse_project()
     if not handler.options.help and \
             len(filter(lambda x: 'help' in x,
                        [x.keys() for x in

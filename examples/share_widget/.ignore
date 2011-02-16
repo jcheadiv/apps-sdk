@@ -1,6 +1,5 @@
 *.btapp
 .ignore
-.mixpanel
 *.svn/*
 .git/*
 .hg/*
@@ -11,5 +10,3 @@ doc/*
 examples/*
 client/*
 dist/*
-utorrent.exe
-*.scss

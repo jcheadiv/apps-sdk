@@ -16,12 +16,13 @@ from setuptools import setup, find_packages
 
 setup(
     name = "apps-sdk",
-    version = '0.2.4.1',
+    version = '0.5',
     packages = find_packages(),
     author = __author__,
     author_email = __author_email__,
     description = "Build tool to develop, build and package apps.",
-    install_requires = [ 'mako', 'boto', 'pydns', 'httplib2' ],
+    install_requires = [ 'mako', 'boto', 'pydns', 'httplib2', 'bencode',
+                         'scss', 'PIL' ],
     include_package_data = True,
     package_data = {
         "": ['data/*', 'data/.*'],

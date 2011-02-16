@@ -2,15 +2,11 @@
     "name": "apps-sdk",
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/firebug.js",
-            "name": "firebug"
-        },
-        {
             "url": "http://staging.apps.bittorrent.com/pkgs/json2.js",
             "name": "json2"
         },
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/jquery.js",
+            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
             "name": "jquery"
         },
         {

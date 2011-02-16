@@ -9,6 +9,7 @@ import shutil
 import sys
 
 import apps.command.base
+import apps.project
 
 class setup(apps.command.base.Command):
 
@@ -41,6 +42,7 @@ class setup(apps.command.base.Command):
         if not self.options.get('name', None):
             logging.error('Must use the `--name` option to name the project.')
             return -1
+        self.project.path = self.options.get('name')
         if os.path.exists(self.project.path):
             logging.error('The project already exists. Remove it if ' \
                               'you\'d like to create it again.')
@@ -50,6 +52,7 @@ class setup(apps.command.base.Command):
         self.move_defaults()
         self.update_deps()
         os.chdir(self.project.path)
+        self.vanguard.project = apps.project.Project('.')
         logging.error('Your new project is ready.')
         logging.error('To get started, you can find your new project in the ' \
                           '"%s" directory' % (self.project.metadata['name'],))

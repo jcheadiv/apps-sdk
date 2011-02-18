@@ -4,6 +4,9 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title>${title}</title>
+  % for href in styles:
+    <link rel="stylesheet" type="text/css" href="${href}" />
+  % endfor
   % if firebug:
     <!-- <script src="http://10.20.30.79/code/apps-sdk/test/firebug-lite.js"></script>
   -->
@@ -30,10 +33,7 @@
     <script type="text/javascript" src="${src}"></script>
   % endfor
   % endif
-  % for href in styles:
-    <link rel="stylesheet" type="text/css" href="${href}" />
-  % endfor
   </head>
-  <body>
+  <body class="body">
   </body>
 </html>

@@ -91,7 +91,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             # XXX - Modification, don't send the error here.
             return None
         self.send_response(200)
-        self.send_header("Content-type", ctype)
+        self.send_header("Content-Type", ctype)
         fs = os.fstat(f.fileno())
         self.send_header("Content-Length", str(fs[6]))
         self.send_header('Cache-Control', 'no-cache')
@@ -190,7 +190,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if headers.has_key('host'):
             headers.pop('host')
         headers['cookie'] = self.get_cookies()
-        if body:
+        if body and not 'content-type' in headers:
             headers['content-type'] = 'application/x-www-form-urlencoded'
         resp, content = http.request(url, method, headers=headers, body=body)
         self.log_message('"%s %s" - %s - %s', method, url,

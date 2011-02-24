@@ -145,6 +145,7 @@ class generate(apps.command.base.Command):
             styles += [os.path.join('css', x).replace('\\', '/') for x in
                     filter(lambda x: os.path.splitext(x)[1] == '.css',
                            os.listdir(path))]
+            styles.sort()
         for base, dirs, files in os.walk('build'):
             files = [x for x in files if os.path.splitext(x)[1] == '.css']
             for f in files:

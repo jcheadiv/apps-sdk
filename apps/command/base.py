@@ -26,7 +26,7 @@ class Command(object):
     post_commands = []
     # Most of the 'bt:' namespace goes into the btapp file. There are a couple
     # in that namespace that are used by commands which don't belong.
-    btapp_excludes = ['libs']
+    btapp_excludes = ['libs', 'store', 'border']
 
     def __init__(self, vanguard):
         reload(sys)

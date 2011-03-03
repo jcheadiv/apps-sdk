@@ -143,10 +143,11 @@ class generate(apps.command.base.Command):
                 styles += sorted(pkg_styles)
         path = os.path.join(self.project.path, 'css');
         if os.path.exists(path):
-            styles += [os.path.join('css', x).replace('\\', '/') for x in
-                    filter(lambda x: os.path.splitext(x)[1] == '.css',
-                           os.listdir(path))]
-            styles.sort()
+            package_styles = [os.path.join('css', x).replace('\\', '/') for x in
+                              filter(lambda x: os.path.splitext(x)[1] == '.css',
+                                     os.listdir(path))]
+            package_styles.sort()
+            styles += package_styles
         for base, dirs, files in os.walk('build'):
             files = [x for x in files if os.path.splitext(x)[1] == '.css']
             for f in files:

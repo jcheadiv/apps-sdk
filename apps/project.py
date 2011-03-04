@@ -13,7 +13,8 @@ import shutil
 
 class Project(object):
 
-    default_metadata = {
+    default_metadata =  {
+        'name': '',
         'version': '0.1',
         'description': 'The default project.',
         'site': 'http://apps.bittorrent.com',
@@ -26,7 +27,22 @@ class Project(object):
         'bt:libs': [
             { 'name': 'apps-sdk',
               'url': 'http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg' }
-            ]
+            ],
+        'bt:store': {
+            'screenshots': [
+                { "small": "example_small.png",
+                  "large": "example_large.png",
+                  "title": "Example title"
+                  }
+                ],
+            "description": "Example store description",
+            "links": [
+                { "href": "http://btapps-sdk.bittorrent.com",
+                  "name": "SDK"
+                  }
+                ],
+            "ie_version": 1
+            }
         }
 
     def __init__(self, path):
@@ -43,5 +59,5 @@ class Project(object):
             self.metadata = json.load(open(os.path.join(self.path,
                                                         'package.json'), 'r'))
         except IOError, err:
-            self.metadata = default_metadata
+            self.metadata = self.default_metadata
             self.metadata['name'] = self.path

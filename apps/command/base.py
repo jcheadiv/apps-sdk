@@ -192,7 +192,7 @@ class Command(object):
     def _add_repo(self, source, fname, develop=False):
         fname = fname.replace(".git", "")
         (pjpath, pjname) = os.path.split(self.project.path)    
-        dest = os.path.join("..", fname)
+        dest = os.path.join(os.path.abspath(".."), fname)
 
         # For anything that's already been added, warn the user and ignore.
         if os.path.exists(dest):
@@ -214,7 +214,7 @@ class Command(object):
             self.add(pkg['name'], pkg['url'], False,
                      develop=pkg.get('develop', False))
 
-        os.symlink(os.path.join("..", dest), pkg_root)
+        os.symlink(dest, pkg_root)
         return pkg_manifest['name']
 
     def _add_pkg(self, source, fname, develop=False):

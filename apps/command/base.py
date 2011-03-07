@@ -194,8 +194,17 @@ class Command(object):
         (pjpath, pjname) = os.path.split(self.project.path)    
         dest = os.path.join(os.path.abspath(".."), fname)
 
+        def _link(self, dest):
+            pkg_manifest = json.loads(
+                open(os.path.join(dest, 'package.json')).read())
+            pkg_root = os.path.join(self.project.path, 'packages',
+                                pkg_manifest['name'])   
+            os.symlink(dest, pkg_root)
+            return pkg_manifest
+
         # For anything that's already been added, warn the user and ignore.
         if os.path.exists(dest):
+            _link(self, dest)
             self.already_exists(fname)
             return os.path.splitext(fname)[0]
         os.mkdir(dest)
@@ -203,18 +212,12 @@ class Command(object):
         remote = git.Remote.add(repo, "origin", source)
         remote.pull("master:origin")
 
-        pkg_manifest = json.loads(
-                open(os.path.join(dest, 'package.json')).read())
-        pkg_root = os.path.join(self.project.path, 'packages',
-                                pkg_manifest['name'])
-
+        pkg_manifest = _link(self, dest)
         
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest.get('bt:libs', []):
             self.add(pkg['name'], pkg['url'], False,
                      develop=pkg.get('develop', False))
-
-        os.symlink(dest, pkg_root)
         return pkg_manifest['name']
 
     def _add_pkg(self, source, fname, develop=False):

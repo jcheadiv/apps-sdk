@@ -200,6 +200,11 @@ class Command(object):
             pkg_root = os.path.join(self.project.path, 'packages',
                                 pkg_manifest['name'])   
             os.symlink(dest, pkg_root)
+            
+            logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
+            for pkg in pkg_manifest.get('bt:libs', []):
+                self.add(pkg['name'], pkg['url'], False,
+                    develop=pkg.get('develop', False))
             return pkg_manifest
 
         # For anything that's already been added, warn the user and ignore.
@@ -214,10 +219,6 @@ class Command(object):
 
         pkg_manifest = _link(self, dest)
         
-        logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
-        for pkg in pkg_manifest.get('bt:libs', []):
-            self.add(pkg['name'], pkg['url'], False,
-                     develop=pkg.get('develop', False))
         return pkg_manifest['name']
 
     def _add_pkg(self, source, fname, develop=False):

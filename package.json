@@ -1,75 +1,85 @@
 {
-    "name": "apps-sdk",
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>",
-    "bt:publisher": "BitTorrent, Inc.",
-    "directories": {
-        "test": "test",
-        "src": "src",
-        "lib": "lib",
-        "doc": "doc"
-    },
+    "name": "apps-sdk", 
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/json2.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/json2.js", 
             "name": "json2"
-        },
+        }, 
         {
-            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
+            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js", 
             "name": "jquery"
-        },
+        }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js", 
             "name": "underscore"
-        },
+        }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/jquery.json.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/jquery.json.js", 
             "name": "jquery.json"
-        },
+        }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/jstorage.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/jstorage.js", 
             "name": "jstorage"
-        },
+        }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/object.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/object.js", 
             "name": "object"
-        },
+        }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/sprintf.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/sprintf.js", 
             "name": "sprintf"
+        }, 
+        {
+            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js", 
+            "develop": false, 
+            "name": "jquery.min"
+        }, 
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js", 
+            "develop": false, 
+            "name": "underscore-1.1.2"
         }
-    ],
+    ], 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "directories": {
+        "test": "test", 
+        "src": "src", 
+        "lib": "lib", 
+        "doc": "doc"
+    }, 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "repositories": [
         {
-            "url": "git://github.com/bittorrent/apps-sdk.git",
+            "url": "git://github.com/bittorrent/apps-sdk.git", 
             "type": "git"
         }
-    ],
-    "site": "http://apps-sdk.bittorrent.com",
-    "bt:package": true,
-    "bt:update_url": "http://apps-sdk.bittorrent.com",
+    ], 
+    "site": "http://apps-sdk.bittorrent.com", 
+    "bt:package": true, 
+    "bt:update_url": "http://apps-sdk.bittorrent.com", 
     "maintainers": [
         {
-            "name": "Thomas Rampelberg",
+            "name": "Thomas Rampelberg", 
             "email": "thomas@bittorrent.com"
         }
-    ],
-    "version": "0.2",
-    "bt:description": "The apps sdk provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.",
-    "bt:border": "#000000",
+    ], 
+    "version": "0.2", 
+    "bt:description": "The apps sdk provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.", 
+    "bt:border": "#000000", 
     "keywords": [
-        "bittorrent",
-        "griffin",
-        "utorrent",
-        "application",
-        "apps",
+        "bittorrent", 
+        "griffin", 
+        "utorrent", 
+        "application", 
+        "apps", 
         "sdk"
-    ],
+    ], 
     "licenses": [
         {
-            "url": "http://www.opensource.org/licenses/bsd-license.php",
+            "url": "http://www.opensource.org/licenses/bsd-license.php", 
             "type": "New BSD License"
         }
-    ],
-    "bt:release_date": "June 1, 2010",
+    ], 
+    "bt:release_date": "June 1, 2010", 
     "description": "The apps sdk provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client."
 }

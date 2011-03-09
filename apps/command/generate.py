@@ -8,7 +8,7 @@ import mako.template
 import os
 import pkg_resources
 import re
-import scss.parser
+import scss
 import shlex
 import subprocess
 import urlparse
@@ -201,8 +201,8 @@ class generate(apps.command.base.Command):
         for base, dirs, files in os.walk('.'):
             files = [x for x in files if os.path.splitext(x)[1] == '.scss']
             for f in files:
-                compiled = scss.parser.load(
-                    open(os.path.join(base, f), 'rb'))
+                compiled = scss.Scss().compile(
+                    open(os.path.join(base, f), 'rb').read())
                 # Try and create the build dirs, ignore if they're already
                 # there.
                 try:

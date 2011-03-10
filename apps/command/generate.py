@@ -199,7 +199,8 @@ class generate(apps.command.base.Command):
 
     def _generate_scss(self):
         for base, dirs, files in os.walk('.'):
-            files = [x for x in files if os.path.splitext(x)[1] == '.scss']
+            files = [x for x in files
+                     if os.path.splitext(x)[1] == '.scss' and not x[0] == '_']
             for f in files:
                 compiled = scss.Scss().compile(
                     open(os.path.join(base, f), 'rb').read())

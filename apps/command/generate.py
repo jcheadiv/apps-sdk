@@ -164,6 +164,7 @@ class generate(apps.command.base.Command):
     def _scripts_list(self, metadata):
         handlers = { '.js': self._list_lib,
                      '.pkg': self._list_pkg,
+                     '.git': self._list_pkg,
                      '': self._list_pkg
                      }
         scripts = []

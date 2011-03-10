@@ -3,6 +3,7 @@
 #
 
 import fnmatch
+import git
 import json
 import logging
 import os
@@ -130,6 +131,7 @@ class Command(object):
         self.added.append(name)
         handlers = { '.js': self._add_javascript,
                      '.pkg': self._add_pkg,
+                     '.git': self._add_repo,
                      '': self._add_pkg
                      }
         url_handlers = { 'file': self._get_file,
@@ -182,10 +184,42 @@ class Command(object):
             self.already_exists(fname)
             return os.path.splitext(fname)[0]
         if develop:
-            os.symlink(source, dest)
+                os.symlink(source, dest)
         else:
             shutil.copy(source, dest)
         return os.path.splitext(fname)[0]
+
+    def _add_repo(self, source, fname, develop=False):
+        fname = fname.replace(".git", "")
+        (pjpath, pjname) = os.path.split(self.project.path)    
+        dest = os.path.join(os.path.abspath(".."), fname)
+
+        def _link(self, dest):
+            pkg_manifest = json.loads(
+                open(os.path.join(dest, 'package.json')).read())
+            pkg_root = os.path.join(self.project.path, 'packages',
+                                pkg_manifest['name'])   
+            os.symlink(dest, pkg_root)
+            
+            logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
+            for pkg in pkg_manifest.get('bt:libs', []):
+                self.add(pkg['name'], pkg['url'], False,
+                    develop=pkg.get('develop', False))
+            return pkg_manifest
+
+        # For anything that's already been added, warn the user and ignore.
+        if os.path.exists(dest):
+            _link(self, dest)
+            self.already_exists(fname)
+            return os.path.splitext(fname)[0]
+        os.mkdir(dest)
+        repo = git.Repo.init(dest)
+        remote = git.Remote.add(repo, "origin", source)
+        remote.pull("master:origin")
+
+        pkg_manifest = _link(self, dest)
+        
+        return pkg_manifest['name']
 
     def _add_pkg(self, source, fname, develop=False):
         if develop:

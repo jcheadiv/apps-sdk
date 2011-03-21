@@ -165,6 +165,11 @@ class generate(apps.command.base.Command):
         for sheet in project_styles:
         	styles.remove(sheet)
         styles+=sorted(project_styles)
+        def remove_leading_slash(s):
+            # don't use absolute paths for css - it breaks falcon builds
+            if s[0] == '/':
+                return s[1:]
+        styles = map(remove_leading_slash, styles)
         return styles
 
     def filter(self, existing, lst):

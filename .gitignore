@@ -9,6 +9,7 @@ build/
 *.egg-info
 .#*
 packages/
+git-packages/
 *.svn/
 loader/installer/bin/
 loader/installer/obj/

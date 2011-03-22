@@ -25,7 +25,8 @@ class CalledProcessError(subprocess.CalledProcessError):
         self.cmd = cmd
         self.output = output
     def __str__(self):
-        return "Command '%s' returned non-zero exit status %d\n\n%s" % (self.cmd, self.returncode, self.output)
+        return "Command '%s' returned non-zero exit status %d\n\n%s" % (
+            self.cmd, self.returncode, self.output)
 
 # Cut and paste from python2.7 because I don't want to upgrade.
 def check_output(*popenargs, **kwargs):
@@ -68,9 +69,11 @@ class generate(apps.command.base.Command):
         ('update=', None, 'Auto-update url to use in package.json', None),
         ('local', 'l', 'Use a local auto-update url.', None),
         ('host=', None, 'Host to use for local. Defaults to localhost', None),
-        ('falcon', None, 'Build app for falcon (scripts load dynamically)', None),
-        ('compileresources', None, 
-         'Template files are compiled into resources.js (intended for use with falcon)',
+        ('falcon', None, 'Build app for falcon (scripts load dynamically)',
+         None),
+        ('compileresources', None,
+         'Template files are compiled into resources.js ' \
+             '(intended for use with falcon)',
          None),
         ('compile', None, 'Compile/minify the javascript', None)
         ]
@@ -128,13 +131,16 @@ class generate(apps.command.base.Command):
 
     def _template(self):
         return {
-            'scripts': json.dumps(self._scripts_list(self.project.metadata)) if self.falcon else self._scripts_list(self.project.metadata),
+            'scripts': json.dumps(self._scripts_list(self.project.metadata)) \
+                if self.falcon else self._scripts_list(self.project.metadata),
             'styles': self._styles_list(),
             'title': self.project.metadata['name'],
             'debug': self.vanguard.options.debug,
             'falcon': self.falcon,
             'firebug': self.vanguard.options.firebug,
-            'resources': json.dumps(self._resources(), indent=2, sort_keys=True) if self.compileresources else None
+            'resources': json.dumps(self._resources(), indent=2,
+                                    sort_keys=True) \
+                if self.compileresources else None
             }
 
     def _styles_list(self):
@@ -181,12 +187,15 @@ class generate(apps.command.base.Command):
                       lst)
 
     def _resources(self):
-        resources = { 'package.json': open(os.path.join(self.project.path,'package.json')).read() }
-        for root, dirs, files in os.walk(os.path.join(self.project.path,'html')):
+        resources = { 'package.json': open(os.path.join(
+                    self.project.path, 'package.json')).read() }
+        for root, dirs, files in os.walk(os.path.join(self.project.path,
+                                                      'html')):
             for name in files:
                 if name.endswith('.html'):
                     parts = root.split(os.sep)
-                    key = os.path.join( '/'.join(parts[parts.index('html'):]), name)
+                    key = os.path.join( '/'.join(parts[parts.index('html'):]),
+                                        name)
                     filepath = os.path.join(root,name)
                     resources[ key ] = open(filepath).read()
 

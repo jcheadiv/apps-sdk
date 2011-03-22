@@ -31,7 +31,8 @@
      if (window.parent && window.parent.config && window.parent.config) {
        window.config = window.parent.config;
      }
-     var _bt_scripts = ${ json.dumps(scripts) };
+     var _bt_scripts = ${ scripts };
+     window.__defineSetter__('$', function(val) { this.val = val; debugger;});
     </script>
     <script type="text/javascript" src="/static/apps/apploader.js"></script>
   % else:
@@ -41,7 +42,7 @@
   % endif
   % if resources:
     <script>
-    var _bt_resources = ${ json.dumps(resources, indent=2, sort_keys=True) };
+    var _bt_resources = ${ resources };
     </script>
   % endif
   </head>

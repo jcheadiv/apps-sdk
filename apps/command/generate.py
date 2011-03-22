@@ -81,8 +81,8 @@ class generate(apps.command.base.Command):
 
     def run(self):
         update_json = True
-        self.falcon = self.options.get('falcon', False)
-        self.compileresources = self.options.get('compileresources', False)
+        self.falcon = self.options.get('falcon')
+        self.compileresources = self.options.get('compileresources')
 
         if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
@@ -128,13 +128,13 @@ class generate(apps.command.base.Command):
 
     def _template(self):
         return {
-            'scripts': self._scripts_list(self.project.metadata),
+            'scripts': json.dumps(self._scripts_list(self.project.metadata)) if self.falcon else self._scripts_list(self.project.metadata),
             'styles': self._styles_list(),
             'title': self.project.metadata['name'],
             'debug': self.vanguard.options.debug,
             'falcon': self.falcon,
             'firebug': self.vanguard.options.firebug,
-            'resources': self._resources() if self.compileresources else None
+            'resources': json.dumps(self._resources(), indent=2, sort_keys=True) if self.compileresources else None
             }
 
     def _styles_list(self):

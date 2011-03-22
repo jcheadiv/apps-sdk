@@ -68,8 +68,10 @@ class generate(apps.command.base.Command):
         ('update=', None, 'Auto-update url to use in package.json', None),
         ('local', 'l', 'Use a local auto-update url.', None),
         ('host=', None, 'Host to use for local. Defaults to localhost', None),
-        ('falcon', None, 'Build app for falcon (scripts load dynamically)',
-         None), # TODO: don't require special build option for falcon
+        ('falcon', None, 'Build app for falcon (scripts load dynamically)', None),
+        ('compileresources', None, 
+         'Template files are compiled into resources.js (intended for use with falcon)',
+         None),
         ('compile', None, 'Compile/minify the javascript', None)
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
@@ -79,7 +81,8 @@ class generate(apps.command.base.Command):
 
     def run(self):
         update_json = True
-        self.falcon = self.options.get('falcon', False)
+        self.falcon = self.options.get('falcon')
+        self.compileresources = self.options.get('compileresources')
 
         if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
@@ -116,6 +119,7 @@ class generate(apps.command.base.Command):
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
         tmpl_vals = self._template()
+        tmpl_vals['json'] = json
         if self.options.get('compile', False):
             self.compile(tmpl_vals)
             self.project.compiled = True
@@ -124,12 +128,13 @@ class generate(apps.command.base.Command):
 
     def _template(self):
         return {
-            'scripts': self._scripts_list(self.project.metadata),
+            'scripts': json.dumps(self._scripts_list(self.project.metadata)) if self.falcon else self._scripts_list(self.project.metadata),
             'styles': self._styles_list(),
             'title': self.project.metadata['name'],
             'debug': self.vanguard.options.debug,
             'falcon': self.falcon,
-            'firebug': self.vanguard.options.firebug
+            'firebug': self.vanguard.options.firebug,
+            'resources': json.dumps(self._resources(), indent=2, sort_keys=True) if self.compileresources else None
             }
 
     def _styles_list(self):
@@ -174,6 +179,18 @@ class generate(apps.command.base.Command):
         return filter(lambda x: not x in existing and not x in self.excludes \
                           and x in self.flist,
                       lst)
+
+    def _resources(self):
+        resources = { 'package.json': open(os.path.join(self.project.path,'package.json')).read() }
+        for root, dirs, files in os.walk(os.path.join(self.project.path,'html')):
+            for name in files:
+                if name.endswith('.html'):
+                    parts = root.split(os.sep)
+                    key = os.path.join( '/'.join(parts[parts.index('html'):]), name)
+                    filepath = os.path.join(root,name)
+                    resources[ key ] = open(filepath).read()
+
+        return resources
 
     def _scripts_list(self, metadata):
         handlers = { '.js': self._list_lib,

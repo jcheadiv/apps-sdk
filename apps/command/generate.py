@@ -134,7 +134,6 @@ class generate(apps.command.base.Command):
 
     def _styles_list(self):
         styles = []
-        package_styles = []
         for lib in self.project.metadata.get('bt:libs', []):
             path = os.path.join('packages', lib['name'], 'css')
             if os.path.exists(path):
@@ -142,22 +141,33 @@ class generate(apps.command.base.Command):
                 for stylesheet in  [x for x in os.listdir(path)
                                     if os.path.splitext(x)[1] == '.css']:
                     pkg_styles += [os.path.join(path, stylesheet)]
+                scss_path = os.path.join('build', path)
+                if os.path.exists(scss_path):
+                    for stylesheet in [x for x in os.listdir(
+                            os.path.join('build', path))
+                                       if os.path.splitext(x)[1] == '.css']:
+                        pkg_styles += [os.path.join(path, stylesheet)]
                 styles += sorted(pkg_styles)
         path = os.path.join(self.project.path, 'css');
+
+        local_styles = []
         if os.path.exists(path):
-            package_styles = [os.path.join('css', x).replace('\\', '/') for x in
-                              filter(lambda x: os.path.splitext(x)[1] == '.css',
-                                     os.listdir(path))]
+            local_styles += [
+                os.path.join('css', x).replace('\\', '/') for x
+                in os.listdir(path) if os.path.splitext(x)[1] == '.css']
 
-        for base, dirs, files in os.walk('build'):
-            files = [x for x in files if os.path.splitext(x)[1] == '.css']
+        for base, dirs, files in os.walk('build/css'):
+            # built_styles = []
+            files = [x for x in files
+                     if os.path.splitext(x)[1] == '.css']
             for f in files:
-                package_styles.append(
-                    re.sub('^build', '',
-                           os.path.join(base, f).replace('\\', '/')))
-
-        package_styles.sort()
-        styles += package_styles
+                # `base` has a / at the front, get rid of this so we can have
+                # relative paths instead of absolute.
+                local_styles.append(re.sub('^build', '',
+                                           os.path.join(base, f).replace(
+                            '\\', '/'))[1:])
+        local_styles.sort()
+        styles += local_styles
         return styles
 
     def filter(self, existing, lst):

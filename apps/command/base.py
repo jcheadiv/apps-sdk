@@ -122,7 +122,11 @@ class Command(object):
         os.makedirs(pkg_dir)
         for pkg in self.project.metadata.get('bt:libs', []):
             # TODO: figure out how to set an option here (one set in generate did not work)
-            # pkg['url'] = pkg['url'].replace('10.20.30.79','127.0.0.1')
+            if pkg['url'].find('10.20.30.') != -1 or pkg['url'].find('192.168.') != -1:
+                if hasattr(self, 'ignorelocal') and self.ignorelocal:
+                    if pkg['url'].find('apps-sdk') != -1:
+                        pkg['url'] = 'http://staging.apps.bittorrent.com/pkgs/apps-sdk.2.pkg'
+                        # pkg['url'] = pkg['url'].replace('10.20.30.79','127.0.0.1')
             self.add(pkg['name'], pkg['url'], develop=pkg.get('develop', False))
 
     def add(self, name, url, update=True, develop=False):

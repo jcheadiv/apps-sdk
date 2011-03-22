@@ -139,7 +139,8 @@ class generate(apps.command.base.Command):
             path = os.path.join('packages', lib['name'], 'css')
             if os.path.exists(path):
                 pkg_styles = []
-                for stylesheet in os.listdir(path):
+                for stylesheet in  [x for x in os.listdir(path)
+                                    if os.path.splitext(x)[1] == '.css']:
                     pkg_styles += [os.path.join(path, stylesheet)]
                 styles += sorted(pkg_styles)
         path = os.path.join(self.project.path, 'css');
@@ -147,16 +148,16 @@ class generate(apps.command.base.Command):
             package_styles = [os.path.join('css', x).replace('\\', '/') for x in
                               filter(lambda x: os.path.splitext(x)[1] == '.css',
                                      os.listdir(path))]
-            
+
         for base, dirs, files in os.walk('build'):
             files = [x for x in files if os.path.splitext(x)[1] == '.css']
             for f in files:
                 package_styles.append(
                     re.sub('^build', '',
                            os.path.join(base, f).replace('\\', '/')))
-            
+
         package_styles.sort()
-        styles += package_styles                   
+        styles += package_styles
         return styles
 
     def filter(self, existing, lst):

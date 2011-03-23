@@ -1,0 +1,15 @@
+*.btapp
+.ignore
+.mixpanel
+*.svn/*
+.git/*
+.hg/*
+*.egg-info
+apps/*
+test/*
+doc/*
+examples/*
+client/*
+dist/*
+utorrent.exe
+*.scss

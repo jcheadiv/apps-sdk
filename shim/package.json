@@ -1,20 +1,21 @@
 {
-    "description": "Used to shim the browser to the client", 
-    "bt:publisher": "BitTorrent, Inc.", 
-    "site": "http://apps-sdk.bittorrent.com", 
-    "bt:border": "#000000", 
-    "keywords": [ ], 
-    "bt:release_date": "03/23/011", 
-    "name": "shim", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "description": "Used to shim the browser to the client",
+    "bt:publisher": "BitTorrent, Inc.",
+    "site": "http://apps-sdk.bittorrent.com",
+    "bt:border": "#000000",
+    "keywords": [ ],
+    "bt:release_date": "03/23/011",
+    "name": "shim",
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>",
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/code/apps-sdk/dist/apps-sdk.pkg", 
+            "url": "http://10.20.30.79/code/apps-sdk/dist/apps-sdk.pkg",
             "name": "apps-sdk"
         }
-    ], 
-    "bt:update_url": "http://apps-sdk.bittorrent.com", 
-    "version": "0.0.1", 
-    "bt:description": "Used to shim the browser to the client", 
-    "bt:store": { }
+    ],
+    "bt:update_url": "http://apps-sdk.bittorrent.com",
+    "version": "0.0.1",
+    "bt:description": "Used to shim the browser to the client",
+    "bt:store": { },
+    "bt:access": "list_restricted activex restricted"
 }

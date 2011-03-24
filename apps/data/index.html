@@ -14,8 +14,6 @@
     <link rel="stylesheet" type="text/css" href="${href}" />
   % endfor
   % if firebug:
-    <!-- <script src="http://10.20.30.79/code/apps-sdk/test/firebug-lite.js"></script>
-  -->
     <script src="/packages/firebug-lite.js"></script>
   % endif
   % if debug:
@@ -31,13 +29,18 @@
      if (window.parent && window.parent.config && window.parent.config) {
        window.config = window.parent.config;
      }
-     var _bt_scripts = [ "${'","'.join(scripts)}" ];
+     var _bt_scripts = ${ scripts };
     </script>
     <script type="text/javascript" src="/static/apps/apploader.js"></script>
   % else:
   % for src in scripts:
     <script type="text/javascript" src="${src}"></script>
   % endfor
+  % endif
+  % if resources:
+    <script>
+    var _bt_resources = ${ resources };
+    </script>
   % endif
   </head>
   <body class="body">

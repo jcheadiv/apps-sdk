@@ -25,7 +25,8 @@ class CalledProcessError(subprocess.CalledProcessError):
         self.cmd = cmd
         self.output = output
     def __str__(self):
-        return "Command '%s' returned non-zero exit status %d\n\n%s" % (self.cmd, self.returncode, self.output)
+        return "Command '%s' returned non-zero exit status %d\n\n%s" % (
+            self.cmd, self.returncode, self.output)
 
 # Cut and paste from python2.7 because I don't want to upgrade.
 def check_output(*popenargs, **kwargs):
@@ -69,7 +70,11 @@ class generate(apps.command.base.Command):
         ('local', 'l', 'Use a local auto-update url.', None),
         ('host=', None, 'Host to use for local. Defaults to localhost', None),
         ('falcon', None, 'Build app for falcon (scripts load dynamically)',
-         None), # TODO: don't require special build option for falcon
+         None),
+        ('compileresources', None,
+         'Template files are compiled into resources.js ' \
+             '(intended for use with falcon)',
+         None),
         ('compile', None, 'Compile/minify the javascript', None)
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
@@ -79,7 +84,8 @@ class generate(apps.command.base.Command):
 
     def run(self):
         update_json = True
-        self.falcon = self.options.get('falcon', False)
+        self.falcon = self.options.get('falcon')
+        self.compileresources = self.options.get('compileresources')
 
         if self.options.get('update', False):
             self.project.metadata['bt:update_url'] = self.options['update']
@@ -116,6 +122,7 @@ class generate(apps.command.base.Command):
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
         tmpl_vals = self._template()
+        tmpl_vals['json'] = json
         if self.options.get('compile', False):
             self.compile(tmpl_vals)
             self.project.compiled = True
@@ -124,58 +131,75 @@ class generate(apps.command.base.Command):
 
     def _template(self):
         return {
-            'scripts': self._scripts_list(self.project.metadata),
+            'scripts': json.dumps(self._scripts_list(self.project.metadata)) \
+                if self.falcon else self._scripts_list(self.project.metadata),
             'styles': self._styles_list(),
             'title': self.project.metadata['name'],
             'debug': self.vanguard.options.debug,
             'falcon': self.falcon,
-            'firebug': self.vanguard.options.firebug
+            'firebug': self.vanguard.options.firebug,
+            'resources': json.dumps(self._resources(), indent=2,
+                                    sort_keys=True) \
+                if self.compileresources else None
             }
 
     def _styles_list(self):
         styles = []
-        package_styles = []
         for lib in self.project.metadata.get('bt:libs', []):
             path = os.path.join('packages', lib['name'], 'css')
             if os.path.exists(path):
                 pkg_styles = []
-                for stylesheet in os.listdir(path):
-                    if os.path.splitext(stylesheet)[1] == '.css':
+                for stylesheet in  [x for x in os.listdir(path)
+                                    if os.path.splitext(x)[1] == '.css']:
+                    pkg_styles += [os.path.join(path, stylesheet)]
+                scss_path = os.path.join('build', path)
+                if os.path.exists(scss_path):
+                    for stylesheet in [x for x in os.listdir(
+                            os.path.join('build', path))
+                                       if os.path.splitext(x)[1] == '.css']:
                         pkg_styles += [os.path.join(path, stylesheet)]
                 styles += sorted(pkg_styles)
         path = os.path.join(self.project.path, 'css');
+
+        local_styles = []
         if os.path.exists(path):
-            package_styles = [os.path.join('/css', x).replace('\\', '/') for x in
-                              filter(lambda x: os.path.splitext(x)[1] == '.css',
-                                     os.listdir(path))] 
-            
-        for base, dirs, files in os.walk('build'):
-            built_styles = []
-            files = [x for x in files if os.path.splitext(x)[1] == '.css']
+            local_styles += [
+                os.path.join('css', x).replace('\\', '/') for x
+                in os.listdir(path) if os.path.splitext(x)[1] == '.css']
+
+        for base, dirs, files in os.walk('build/css'):
+            # built_styles = []
+            files = [x for x in files
+                     if os.path.splitext(x)[1] == '.css']
             for f in files:
-                built_styles.append(re.sub('^build', '',
-                           os.path.join(base, f).replace('\\', '/')))
-            package_styles += built_styles
-            
-        styles += sorted(package_styles)
-        project_styles = []
-        for sheet in styles:
-            if re.match("^/css/", sheet):
-                project_styles.append(sheet)
-        for sheet in project_styles:
-        	styles.remove(sheet)
-        styles+=sorted(project_styles)
-        def remove_leading_slash(s):
-            # don't use absolute paths for css - it breaks falcon builds
-            if s[0] == '/':
-                return s[1:]
-        styles = map(remove_leading_slash, styles)
+                # `base` has a / at the front, get rid of this so we can have
+                # relative paths instead of absolute.
+                local_styles.append(re.sub('^build', '',
+                                           os.path.join(base, f).replace(
+                            '\\', '/'))[1:])
+        local_styles.sort()
+        styles += local_styles
         return styles
 
     def filter(self, existing, lst):
         return filter(lambda x: not x in existing and not x in self.excludes \
                           and x in self.flist,
                       lst)
+
+    def _resources(self):
+        resources = { 'package.json': open(os.path.join(
+                    self.project.path, 'package.json')).read() }
+        for root, dirs, files in os.walk(os.path.join(self.project.path,
+                                                      'html')):
+            for name in files:
+                if name.endswith('.html'):
+                    parts = root.split(os.sep)
+                    key = os.path.join( '/'.join(parts[parts.index('html'):]),
+                                        name)
+                    filepath = os.path.join(root,name)
+                    resources[ key ] = open(filepath).read()
+
+        return resources
 
     def _scripts_list(self, metadata):
         handlers = { '.js': self._list_lib,

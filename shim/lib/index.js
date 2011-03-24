@@ -3,6 +3,6 @@ WEB_SOCKET_DEBUG = true;
 
 $(document).ready(function() {
 
-
+  $.get("http://ask.com", function(v) { console.log(v) });
 
 });

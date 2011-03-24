@@ -2,13 +2,21 @@
 # Copyright (c) 2010 BitTorrent Inc.
 #
 
+import bencode
 import cookielib
 import functools
+import hashlib
+import json
 import logging
 import mimetypes
 import os
 import pkg_resources
 import posixpath
+try:
+    import cStringIO as StringIO
+except ImportError:
+    import StringIO
+import tempfile
 import time
 import tornado.httpclient
 import tornado.httpserver
@@ -16,6 +24,8 @@ import tornado.options
 from tornado.options import define, options
 import tornado.simple_httpclient
 import tornado.web
+import urllib
+import zipfile
 
 import apps.command.base
 import apps.vanguard
@@ -60,7 +70,7 @@ class FileHandler(tornado.web.RequestHandler):
         if self.request.path == '/':
             self.request.path = '/index.html'
         fs_pth = self.build_path()
-        if not os.path.exists(fs_pth):
+        if not os.path.exists(fs_pth) or os.path.isdir(fs_pth):
             raise tornado.web.HTTPError(404)
 
         self.set_header("Content-Type", self.guess_type(fs_pth))
@@ -85,6 +95,7 @@ class FileHandler(tornado.web.RequestHandler):
         '.py': 'text/plain',
         '.c': 'text/plain',
         '.h': 'text/plain',
+        '.json': 'application/json'
         })
 
 class ProxyHandler(tornado.web.RequestHandler):
@@ -93,6 +104,13 @@ class ProxyHandler(tornado.web.RequestHandler):
         'response': [ 'Transfer-Encoding', 'Status', 'Content-Encoding',
                       'Content-Location', 'Connection', 'Host' ],
         'request': [ 'Host', 'Cookie', 'X-Location', ],
+        }
+    content_type = {
+        'application/x-bittorrent': 'torrent',
+        'default': 'default'
+        }
+    file_type = {
+        '.btapp': 'btapp'
         }
 
     def __init__(self, *args, **kwargs):
@@ -127,8 +145,39 @@ class ProxyHandler(tornado.web.RequestHandler):
         self.alter_headers(resp.headers, 'response', self.set_header)
 
         self.set_status(resp.code)
+
+        getattr(self, 'content_' + self.content_type.get(resp.headers.get(
+                    'content-type'), ''), lambda x: x)(resp)
+
+        getattr(self, 'file_' + self.file_type.get(
+                os.path.splitext(urllib.splitquery(
+                        resp.effective_url)[0])[-1], ''), lambda x: x)(resp)
+
         self.write(resp.body)
         self.finish()
+
+    def content_torrent(self, resp):
+        torrent = bencode.bdecode(resp.body)
+        torrent['info']['pieces'] = ''
+        resp._body = json.dumps(torrent)
+        self.set_header('Content-Type', 'application/json')
+        self.set_header('Content-Length', len(resp.body))
+
+    def file_btapp(self, resp):
+        root = os.path.join(options.root, 'tmp')
+        if not os.path.exists(root):
+            os.makedirs(root)
+
+        zobj = zipfile.ZipFile(StringIO.StringIO(resp.body))
+        pkg = json.loads(zobj.read('package.json'))
+        dir_name = hashlib.sha1(pkg['bt:update_url']).hexdigest().upper()
+        pkg['bt:id'] = dir_name
+
+        zobj.extractall(os.path.join(root, dir_name))
+        resp._body = json.dumps(pkg)
+
+        self.set_header('Content-Type', 'application/json')
+        self.set_header('Content-Length', len(resp.body))
 
     post = get
 

@@ -2,6 +2,7 @@ WebSocket.__flash = true;
 
 $(document).ready(function() {
 
+  console.log('asdf');
   // sock = new io.Socket('10.20.30.79', {
   //   port: 8080,
   //   transports: [ 'websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling',

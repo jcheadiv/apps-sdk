@@ -94,10 +94,13 @@ class FileHandler(tornado.web.RequestHandler):
             raise tornado.web.HTTPError(404)
 
         self.set_header("Content-Type", self.guess_type(fs_pth))
-        self.set_header('Cache-Control', 'max-age=0, no-store, no-cache, ' \
-                            'must-revalidate')
-        self.set_header('Expires', email.utils.formatdate(
-                timeval=None, localtime=False, usegmt=True))
+        self.set_header('Cache-Control', 'no-cache')
+
+        # IE really likes to cache, make absolute sure it doesn't
+        for i in [ 'Expires', 'Date', 'Last-Modified' ]:
+            self.set_header(i, email.utils.formatdate(
+                    timeval=None, localtime=False, usegmt=True))
+
         self.write(open(fs_pth).read())
 
     # Cut and paste from simplehttpserver

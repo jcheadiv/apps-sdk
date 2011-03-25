@@ -17,5 +17,5 @@
     "version": "0.0.1",
     "bt:description": "Used to shim the browser to the client",
     "bt:store": { },
-    "bt:access": "list_restricted activex restricted"
+    "bt:access": "list_restricted restricted"
 }

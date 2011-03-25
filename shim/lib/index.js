@@ -4,16 +4,15 @@ $(document).ready(function() {
 
   sock = new io.Socket('10.20.30.79', {
     port: 8080,
-    transports: [ 'websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling',
-                  'jsonp-polling' ]
+    transports: [ 'xhr-multipart', 'xhr-polling', 'jsonp-polling' ]
   });
   sock.connect();
   sock.on('connect', function() {
-    sock.send(JSON.stringify({ task: 'register', type: 'manager' }));
     sock.send(JSON.stringify({ task: 'register', type: 'worker' }));
   });
 
   sock.on('message', function(msg) {
+    msg = JSON.parse(msg);
     console.log(msg);
     if (msg.task != 'push') return
 

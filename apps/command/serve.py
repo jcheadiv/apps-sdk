@@ -217,9 +217,11 @@ class RPCHandler(tornado.web.RequestHandler):
     def post(self):
         if not ComChannel.worker: raise tornado.web.HTTPError(404)
 
+        logging.info('TASK ' + self.request.body)
+
         ComChannel.worker.send(self.request.body)
         ComChannel.worker.task_complete = functools.partial(
-            ComChannel.worker._task_complete, self._complete)
+            ComChannel.worker._on_message, self._complete)
 
     def _complete(self, result):
         self.write(json.dumps(result))
@@ -231,24 +233,13 @@ class ComChannel(tornadio.SocketConnection):
 
     def __init__(self, *args, **kwargs):
         tornadio.SocketConnection.__init__(self, *args, **kwargs)
-        self._task_complete = self.task_complete
+        self._on_message = self.on_message
 
-    def on_message(self, message):
-        message = json.loads(message)
-        getattr(self, 'task_' + message['task'], lambda x: x)(message)
-
-    def task_register(self, message):
-        logging.info('register %s' % (json.dumps(message),))
+    def on_connect(self):
         ComChannel.worker = self
 
-    def task_push(self, message):
-        logging.info('push %s %i' % (json.dumps(message), len(self.worker)))
-        for work in self.worker:
-            work.send(message)
-
-    def task_complete(self, cb, message):
+    def on_message(self, message):
         logging.info('complete %s' % (json.dumps(message),))
-
         cb(message)
 
     def on_close(self):

@@ -60,7 +60,19 @@ class HTTPResponse(tornado.httpclient.HTTPResponse):
 
 tornado.simple_httpclient.HTTPResponse = HTTPResponse
 
-class FileHandler(tornado.web.RequestHandler):
+class CacheHandler(tornado.web.RequestHandler):
+
+    def finish(self, *args, **kwargs):
+        self.set_header('Cache-Control', 'no-cache')
+
+        # IE really likes to cache, make absolute sure it doesn't
+        for i in [ 'Expires', 'Date', 'Last-Modified' ]:
+            self.set_header(i, email.utils.formatdate(
+                    timeval=None, localtime=False, usegmt=True))
+
+        tornado.web.RequestHandler.finish(self, *args, **kwargs)
+
+class FileHandler(CacheHandler):
 
     def run_command(self, command):
         # XXX - This is an ugly hack
@@ -94,12 +106,6 @@ class FileHandler(tornado.web.RequestHandler):
             raise tornado.web.HTTPError(404)
 
         self.set_header("Content-Type", self.guess_type(fs_pth))
-        self.set_header('Cache-Control', 'no-cache')
-
-        # IE really likes to cache, make absolute sure it doesn't
-        for i in [ 'Expires', 'Date', 'Last-Modified' ]:
-            self.set_header(i, email.utils.formatdate(
-                    timeval=None, localtime=False, usegmt=True))
 
         self.write(open(fs_pth).read())
 
@@ -211,7 +217,7 @@ class ProxyHandler(tornado.web.RequestHandler):
 
     post = get
 
-class RPCHandler(tornado.web.RequestHandler):
+class RPCHandler(CacheHandler):
 
     @tornado.web.asynchronous
     def post(self):
@@ -220,11 +226,12 @@ class RPCHandler(tornado.web.RequestHandler):
         logging.info('TASK ' + self.request.body)
 
         ComChannel.worker.send(self.request.body)
-        ComChannel.worker.task_complete = functools.partial(
+        ComChannel.worker.on_message = functools.partial(
             ComChannel.worker._on_message, self._complete)
 
     def _complete(self, result):
-        self.write(json.dumps(result))
+        self.set_header('Content-Type', 'application/json')
+        self.write(result)
         self.finish()
 
 class ComChannel(tornadio.SocketConnection):
@@ -235,10 +242,11 @@ class ComChannel(tornadio.SocketConnection):
         tornadio.SocketConnection.__init__(self, *args, **kwargs)
         self._on_message = self.on_message
 
-    def on_connect(self):
+    def on_open(self, *args, **kwargs):
+        logging.info('connected')
         ComChannel.worker = self
 
-    def on_message(self, message):
+    def on_message(self, cb, message):
         logging.info('complete %s' % (json.dumps(message),))
         cb(message)
 

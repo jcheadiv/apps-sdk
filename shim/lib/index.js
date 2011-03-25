@@ -7,9 +7,7 @@ $(document).ready(function() {
     transports: [ 'xhr-multipart', 'xhr-polling', 'jsonp-polling' ]
   });
   sock.connect();
-  sock.on('connect', function() {
-    sock.send(JSON.stringify({ task: 'register', type: 'worker' }));
-  });
+  sock.on('connect', function() { });
 
   sock.on('message', function(msg) {
     msg = JSON.parse(msg);
@@ -23,7 +21,7 @@ $(document).ready(function() {
     });
 
     var result = obj.apply(this, msg.args);
-    sock.send(JSON.stringify({ task: 'complete', id: msg.id, result: result }));
+    sock.send(JSON.stringify({ result: result }));
   });
 
 });

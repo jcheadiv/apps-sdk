@@ -33,6 +33,9 @@ import apps.command.submit
 import apps.command.test
 import apps.command.update
 
+# Keep Vanguard from stepping over tornado's logs
+ignore_logs = False
+
 class Options(dict):
 
     def __getattr__(self, k):
@@ -190,6 +193,8 @@ class Vanguard(object):
             self.run_command(post)
 
     def setup_logging(self):
+        if ignore_logs:
+            return
         handlers = logging.getLogger().handlers
         if len(handlers) == 1:
             handlers.pop()

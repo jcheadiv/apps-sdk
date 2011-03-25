@@ -4,6 +4,7 @@
 
 import bencode
 import cookielib
+import email.utils
 import functools
 import hashlib
 import json
@@ -12,12 +13,14 @@ import mimetypes
 import os
 import pkg_resources
 import posixpath
+import re
 try:
     import cStringIO as StringIO
 except ImportError:
     import StringIO
 import tempfile
 import time
+import tornadio
 import tornado.httpclient
 import tornado.httpserver
 import tornado.options
@@ -59,6 +62,19 @@ tornado.simple_httpclient.HTTPResponse = HTTPResponse
 
 class FileHandler(tornado.web.RequestHandler):
 
+    def run_command(self, command):
+        # XXX - This is an ugly hack
+        handler = apps.vanguard.Vanguard()
+        apps.vanguard.ignore_logs = True
+        handler.parse_config_files()
+        handler.parse_command_line()
+        handler.parse_project()
+        handler.commands = [x for x in handler.commands if
+                            x.__name__ != 'serve']
+        if not command in [x.__name__ for x in handler.commands]:
+            handler.commands.append(handler.get_command(command))
+        handler.run_commands()
+
     def build_path(self):
         pth = self.request.path[1:]
         if os.path.exists(os.path.join(options.root, 'build', pth)):
@@ -67,13 +83,21 @@ class FileHandler(tornado.web.RequestHandler):
         return pth
 
     def get(self):
+        if re.match('/dist/\S+\.btapp', self.request.path):
+            self.run_command('package')
         if self.request.path == '/':
             self.request.path = '/index.html'
+            self.run_command('generate')
+
         fs_pth = self.build_path()
         if not os.path.exists(fs_pth) or os.path.isdir(fs_pth):
             raise tornado.web.HTTPError(404)
 
         self.set_header("Content-Type", self.guess_type(fs_pth))
+        self.set_header('Cache-Control', 'max-age=0, no-store, no-cache, ' \
+                            'must-revalidate')
+        self.set_header('Expires', email.utils.formatdate(
+                timeval=None, localtime=False, usegmt=True))
         self.write(open(fs_pth).read())
 
     # Cut and paste from simplehttpserver
@@ -184,6 +208,42 @@ class ProxyHandler(tornado.web.RequestHandler):
 
     post = get
 
+class ComChannel(tornadio.SocketConnection):
+
+    queue = []
+    manager = set()
+    worker = set()
+
+    def on_message(self, message):
+        message = json.loads(message)
+        getattr(self, 'task_' + message['task'], lambda x: x)(message)
+
+    def task_register(self, message):
+        logging.info('register %s' % (json.dumps(message),))
+        getattr(self, message['type']).add(self)
+
+    def task_push(self, message):
+        logging.info('push %s %i' % (json.dumps(message), len(self.worker)))
+        for work in self.worker:
+            work.send(message)
+
+    def task_complete(self, message):
+        logging.info('complete %s %i' % (json.dumps(message),
+                                         len(self.manager)))
+        for mgr in self.manager:
+            mgr.send(message)
+
+    def on_close(self):
+        logging.info('close')
+        try:
+            self.manager.remove(self)
+        except:
+            pass
+        try:
+            self.worker.remove(self)
+        except:
+            pass
+
 class serve(apps.command.base.Command):
 
     help = 'Run a development server to debug the project.'
@@ -222,10 +282,12 @@ class serve(apps.command.base.Command):
         logging.getLogger().setLevel(logging.INFO)
 
         application = tornado.web.Application([
+                tornadio.get_router(ComChannel).route(),
                 (r"/proxy", ProxyHandler),
                 (r"/.*", FileHandler),
                 ], **{ "debug": options.debug,
-                       "cookie": self.setup_cookie() })
+                       "cookie": self.setup_cookie(),
+                       "socket_io_port": int(self.options['port']) })
         http_server = tornado.httpserver.HTTPServer(application)
         http_server.listen(int(self.options['port']))
         tornado.ioloop.IOLoop.instance().start()

@@ -211,11 +211,27 @@ class ProxyHandler(tornado.web.RequestHandler):
 
     post = get
 
+class RPCHandler(tornado.web.RequestHandler):
+
+    @tornado.web.asynchronous
+    def post(self):
+        if not ComChannel.worker: raise tornado.web.HTTPError(404)
+
+        ComChannel.worker.send(self.request.body)
+        ComChannel.worker.task_complete = functools.partial(
+            ComChannel.worker._task_complete, self._complete)
+
+    def _complete(self, result):
+        self.write(json.dumps(result))
+        self.finish()
+
 class ComChannel(tornadio.SocketConnection):
 
-    queue = []
-    manager = set()
-    worker = set()
+    worker = None
+
+    def __init__(self, *args, **kwargs):
+        tornadio.SocketConnection.__init__(self, *args, **kwargs)
+        self._task_complete = self.task_complete
 
     def on_message(self, message):
         message = json.loads(message)
@@ -223,27 +239,22 @@ class ComChannel(tornadio.SocketConnection):
 
     def task_register(self, message):
         logging.info('register %s' % (json.dumps(message),))
-        getattr(self, message['type']).add(self)
+        ComChannel.worker = self
 
     def task_push(self, message):
         logging.info('push %s %i' % (json.dumps(message), len(self.worker)))
         for work in self.worker:
             work.send(message)
 
-    def task_complete(self, message):
-        logging.info('complete %s %i' % (json.dumps(message),
-                                         len(self.manager)))
-        for mgr in self.manager:
-            mgr.send(message)
+    def task_complete(self, cb, message):
+        logging.info('complete %s' % (json.dumps(message),))
+
+        cb(message)
 
     def on_close(self):
         logging.info('close')
         try:
-            self.manager.remove(self)
-        except:
-            pass
-        try:
-            self.worker.remove(self)
+            self.worker = None
         except:
             pass
 
@@ -286,6 +297,7 @@ class serve(apps.command.base.Command):
 
         application = tornado.web.Application([
                 tornadio.get_router(ComChannel).route(),
+                (r"/rpc", RPCHandler),
                 (r"/proxy", ProxyHandler),
                 (r"/.*", FileHandler),
                 ], **{ "debug": options.debug,

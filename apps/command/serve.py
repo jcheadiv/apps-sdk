@@ -95,7 +95,8 @@ class FileHandler(CacheHandler):
         return pth
 
     def get(self):
-        if re.match('/dist/\S+\.btapp', self.request.path):
+        if os.path.splitext(urllib.splitquery(
+                self.request.uri)[0])[-1] == '.btapp':
             self.run_command('package')
         if self.request.path == '/':
             self.request.path = '/index.html'
@@ -247,7 +248,7 @@ class ComChannel(tornadio.SocketConnection):
         ComChannel.worker = self
 
     def on_message(self, cb, message):
-        logging.info('complete %s' % (json.dumps(message),))
+        logging.info('complete %s' % (message,))
         cb(message)
 
     def on_close(self):

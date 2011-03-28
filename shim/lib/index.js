@@ -2,9 +2,12 @@ WebSocket.__flash = true;
 
 $(document).ready(function() {
 
+  window.obj_cache = {};
+
   var shim = {
     torrent: function(msg) {
       var result = eval(shim._query('bt.torrent.get', msg.args));
+      obj_cache[result.properties.get('hash')] = result;
 
       var special = [ 'properties', 'file', 'peer' ];
 
@@ -53,6 +56,11 @@ $(document).ready(function() {
   sock.on('message', function(msg) {
     msg = JSON.parse(msg);
     console.log('task', msg);
+
+    if ('id' in msg)
+      msg.call = sprintf('obj_cache["%s"].%s', msg.id, msg.call);
+
+    console.log(msg.call);
 
     try {
       var result = (msg.call in shim._handlers ? shim._handlers[msg.call] :

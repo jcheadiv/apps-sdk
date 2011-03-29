@@ -1,7 +1,15 @@
-/* All *.css files in the css/ directory are automatically added to index.html
- * for you. The 'main.css' file is not special in any way.
- *
- * To get remote CSS working without javascript, you can import it via:
- *     @import url('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css');
- *
- */
+
+.header {
+    width: 100%;
+    height: 50px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.disconnected {
+    background-color: red;
+}
+
+.connected {
+    background-color: green;
+}

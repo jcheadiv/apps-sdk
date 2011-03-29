@@ -85,8 +85,11 @@ $(document).ready(function() {
         var handler = msg.call in shim._handlers ? shim._handlers[msg.call] :
           shim._default;
 
-        if ('id' in msg)
+        if ('id' in msg) {
+          msg.id = msg.id.replace(/\\/g, '\\\\');
           msg.call = sprintf('obj_cache["%s"].%s', msg.id, msg.call);
+          console.log(msg.id, msg.id in obj_cache);
+        }
 
         try {
           var result = handler(msg);

@@ -61,7 +61,43 @@ $(document).ready(function() {
     },
     _default: function(msg) {
       return eval(shim._query(msg.call, msg.args));
+    },
+    _connect: function() {
+      var url = parseUri(bt.stash.get('dev_server'));
+      if (url.port == "") url.port = "80";
+      url.port = parseInt(url.port, 10);
+      sock = new io.Socket(url.host, {
+        port: url.port,
+        transports: [ 'xhr-multipart', 'xhr-polling', 'jsonp-polling' ]
+      });
+
+      sock.connect();
+      sock.on('connect', function() {
+        $(".header").removeClass("connected disconnected").addClass(
+          "connected");
+        $(".header").text("Connected");
+      });
+
+      sock.on('message', function(msg) {
+        msg = JSON.parse(msg);
+        console.log('task', msg);
+
+        var handler = msg.call in shim._handlers ? shim._handlers[msg.call] :
+          shim._default;
+
+        if ('id' in msg)
+          msg.call = sprintf('obj_cache["%s"].%s', msg.id, msg.call);
+
+        try {
+          var result = handler(msg);
+
+          sock.send(JSON.stringify({ result: result }));
+        } catch(err) {
+          sock.send(JSON.stringify({ error: err }));
+        }
+      });
     }
+
   };
   window.shim = shim;
 
@@ -74,36 +110,21 @@ $(document).ready(function() {
     "peer.get": shim.subobj
   };
 
-  sock = new io.Socket('10.20.30.79', {
-    port: 8080,
-    transports: [ 'xhr-multipart', 'xhr-polling', 'jsonp-polling' ]
-  });
-  sock.connect();
-  sock.on('connect', function() { });
-
-  sock.on('message', function(msg) {
-    msg = JSON.parse(msg);
-    console.log('task', msg);
-
-    var handler = msg.call in shim._handlers ? shim._handlers[msg.call] :
-      shim._default;
-
-    if ('id' in msg)
-      msg.call = sprintf('obj_cache["%s"].%s', msg.id, msg.call);
+  $("form").submit(function() {
 
     try {
-      var result = handler(msg);
+      var _this = $(this);
 
-      sock.send(JSON.stringify({ result: result }));
-    } catch(err) {
-      sock.send(JSON.stringify({ error: err }));
-    }
+      bt.stash.set('dev_server', _this.find("#host").val());
+      shim._connect();
+    } catch (err) { console.log(err) }
 
-    // if (obj == bt.torrent.get) obj = shim.torrent;
-
-    // if ('keys' in msg) obj = shim.torrent_method(msg);
-
-
+    return false;
   });
+
+  if (bt.stash.get('dev_server', false)) {
+    $("#host").val(bt.stash.get('dev_server'));
+    shim._connect();
+  }
 
 });

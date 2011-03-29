@@ -75,7 +75,9 @@ class generate(apps.command.base.Command):
          'Template files are compiled into resources.js ' \
              '(intended for use with falcon)',
          None),
-        ('compile', None, 'Compile/minify the javascript', None)
+        ('compile', None, 'Compile/minify the javascript', None),
+        ('remote', None, 'Use a remote utorrent client for all api calls.',
+         None)
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('packages', 'firebug.js'),
@@ -140,7 +142,8 @@ class generate(apps.command.base.Command):
             'firebug': self.vanguard.options.firebug,
             'resources': json.dumps(self._resources(), indent=2,
                                     sort_keys=True) \
-                if self.compileresources else None
+                if self.compileresources else None,
+            'remote': self.options.get('remote', False)
             }
 
     def _styles_list(self):

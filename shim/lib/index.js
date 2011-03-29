@@ -102,8 +102,8 @@ $(document).ready(function() {
   window.shim = shim;
 
   shim._handlers = {
-    "bt.torrent.all": shim.all_torrents,
-    "bt.torrent.get": shim.torrent,
+    "btapp.torrent.all": shim.all_torrents,
+    "btapp.torrent.get": shim.torrent,
     "file.all": shim.all_subobj,
     "file.get": shim.subobj,
     "peer.all": shim.all_subobj,

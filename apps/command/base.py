@@ -195,8 +195,10 @@ class Command(object):
 
     def _add_repo(self, source, fname, develop=False):
         fname = fname.replace(".git", "")
-        (pjpath, pjname) = os.path.split(self.project.path)    
-        dest = os.path.join(os.path.abspath(".."), fname)
+        (pjpath, pjname) = os.path.split(self.project.path)
+        if not os.path.exists(os.path.abspath("./git-packages")):
+          os.mkdir(os.path.abspath("./git-packages"))   
+        dest = os.path.join(os.path.abspath("./git-packages"), fname)
 
         def _link(self, dest):
             pkg_manifest = json.loads(
@@ -216,6 +218,7 @@ class Command(object):
             _link(self, dest)
             self.already_exists(fname)
             return os.path.splitext(fname)[0]
+        logging.info('\tfetching `%s` repository...' % (fname,))
         os.mkdir(dest)
         repo = git.Repo.init(dest)
         remote = git.Remote.add(repo, "origin", source)

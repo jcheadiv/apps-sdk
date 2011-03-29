@@ -5,24 +5,45 @@ $(document).ready(function() {
   window.obj_cache = {};
 
   var shim = {
-    torrent: function(msg) {
-      var result = eval(shim._query('bt.torrent.get', msg.args));
-      obj_cache[result.properties.get('hash')] = result;
-
-      var special = [ 'properties', 'file', 'peer' ];
-
-      var methods = _(result).chain().keys().filter(function(v) {
-        return _.indexOf(special, v) == -1;
-      }).value();
+    _tor_obj: function(obj) {
+      obj_cache[obj.properties.get('hash')] = obj;
 
       return {
-        id: result.properties.get('hash'),
-        methods: methods,
-        properties: result.properties.all()
+        id: obj.properties.get('hash'),
+        methods: _.keys(obj)
       }
     },
+    _file_obj: function(tor_id, obj) {
+      var id = tor_id + '::' + obj.properties.get('name');
+      obj_cache[id] = obj;
+
+      return {
+        id: id,
+        methods: _.keys(obj)
+      }
+    },
+    all_torrents: function(msg) {
+      return _(eval(shim._query(msg.call, msg.args))).chain().map(
+        shim._tor_obj).reduce(function(acc, v) {
+          acc[v.id] = v;
+          return acc;
+        }, {}).value();
+    },
+    torrent: function(msg) {
+      return shim._tor_obj(eval(shim._query(msg.call, msg.args)));
+    },
+    all_files: function(msg) {
+      var _fobj = _.bind(shim._file_obj, this, msg.id);
+      return _(eval(shim._query(msg.call, msg.args))).chain().map(
+        _fobj).reduce(function(acc, v) {
+          acc[_.last(v.id.split('::'))] = v;
+          return acc;
+        }, {}).value();
+    },
+    file: function(msg) {
+      return shim._file_obj(msg.id, eval(shim._query(msg.call, msg.args)));
+    },
     torrent_method: function(msg) {
-      console.log(msg);
       var tor = bt.torrent.get(msg.keys[0]);
       console.log(eval("tor." + msg.call + "()"));
       return function() { }
@@ -43,7 +64,10 @@ $(document).ready(function() {
   window.shim = shim;
 
   shim._handlers = {
-    "bt.torrent.get": shim.torrent
+    "bt.torrent.all": shim.all_torrents,
+    "bt.torrent.get": shim.torrent,
+    "file.all": shim.all_files,
+    "file.get": shim.file
   };
 
   sock = new io.Socket('10.20.30.79', {
@@ -57,14 +81,14 @@ $(document).ready(function() {
     msg = JSON.parse(msg);
     console.log('task', msg);
 
+    var handler = msg.call in shim._handlers ? shim._handlers[msg.call] :
+      shim._default;
+
     if ('id' in msg)
       msg.call = sprintf('obj_cache["%s"].%s', msg.id, msg.call);
 
-    console.log(msg.call);
-
     try {
-      var result = (msg.call in shim._handlers ? shim._handlers[msg.call] :
-                    shim._default)(msg);
+      var result = handler(msg);
 
       sock.send(JSON.stringify({ result: result }));
     } catch(err) {

@@ -170,7 +170,7 @@ class ProxyHandler(tornado.web.RequestHandler):
         if self.request.body:
             req.body = self.request.body
 
-        if req.body and not 'content-type' in headers:
+        if req.body and not 'Content-Type' in req.headers:
             req.headers.add('Content-Type', 'application/x-www-form-urlencoded')
 
         self.cookie.add_cookie_header(req)

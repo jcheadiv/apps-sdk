@@ -13,7 +13,7 @@ $(document).ready(function() {
         methods: _.keys(obj)
       }
     },
-    _file_obj: function(tor_id, obj) {
+    _subobj: function(tor_id, obj) {
       var id = tor_id + '::' + ('id' in obj.properties.all() ?
                                 obj.properties.get('id') :
                                 obj.properties.get('name'));
@@ -34,16 +34,16 @@ $(document).ready(function() {
     torrent: function(msg) {
       return shim._tor_obj(eval(shim._query(msg.call, msg.args)));
     },
-    all_files: function(msg) {
-      var _fobj = _.bind(shim._file_obj, this, msg.id);
+    all_subobj: function(msg) {
+      var _fobj = _.bind(shim._subobj, this, msg.id);
       return _(eval(shim._query(msg.call, msg.args))).chain().map(
         _fobj).reduce(function(acc, v) {
           acc[_.last(v.id.split('::'))] = v;
           return acc;
         }, {}).value();
     },
-    file: function(msg) {
-      return shim._file_obj(msg.id, eval(shim._query(msg.call, msg.args)));
+    subobj: function(msg) {
+      return shim._subobj(msg.id, eval(shim._query(msg.call, msg.args)));
     },
     torrent_method: function(msg) {
       var tor = bt.torrent.get(msg.keys[0]);
@@ -68,10 +68,10 @@ $(document).ready(function() {
   shim._handlers = {
     "bt.torrent.all": shim.all_torrents,
     "bt.torrent.get": shim.torrent,
-    "file.all": shim.all_files,
-    "file.get": shim.file,
-    "peer.all": shim.all_files,
-    "peer.get": shim.file
+    "file.all": shim.all_subobj,
+    "file.get": shim.subobj,
+    "peer.all": shim.all_subobj,
+    "peer.get": shim.subobj
   };
 
   sock = new io.Socket('10.20.30.79', {

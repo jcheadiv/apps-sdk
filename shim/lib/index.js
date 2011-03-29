@@ -14,7 +14,9 @@ $(document).ready(function() {
       }
     },
     _file_obj: function(tor_id, obj) {
-      var id = tor_id + '::' + obj.properties.get('name');
+      var id = tor_id + '::' + ('id' in obj.properties.all() ?
+                                obj.properties.get('id') :
+                                obj.properties.get('name'));
       obj_cache[id] = obj;
 
       return {
@@ -67,7 +69,9 @@ $(document).ready(function() {
     "bt.torrent.all": shim.all_torrents,
     "bt.torrent.get": shim.torrent,
     "file.all": shim.all_files,
-    "file.get": shim.file
+    "file.get": shim.file,
+    "peer.all": shim.all_files,
+    "peer.get": shim.file
   };
 
   sock = new io.Socket('10.20.30.79', {

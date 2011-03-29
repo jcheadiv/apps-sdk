@@ -1,0 +1,110 @@
+
+<div id="sidebar_close"><a href="#">Close</a></div>
+<div id="close_spacer"></div> <!-- NEEDED SO THAT THE H2 WILL WRAP, REAL CLOSE BUTTON HAS TO BE ABSOLUTE POSITIONED -->
+<div id="sidebar_version">{{ version }}</div>
+
+<h2>Options</h2>
+
+<ul id="sidebar_breadcrumbs" class="group">
+  <li class="breadcrumb_1"><a href="#">Home</a></li>
+  <li class="breadcrumb_2"><a href="#"></a></li>
+</ul>
+
+<div id="sidebar_home">
+
+  <ul>
+    <li class="general"><a href="#sidebar_general"><span>General</span></a></li>
+    <li class="advanced"><a href="#sidebar_advanced"><span>Advanced</span></a></li>
+    <li class="expert"><a href="#"><span>Expert</span></a></li>
+  </ul>
+
+</div>
+
+<div id="sidebar_general" class="basic_sidebar_style">
+
+  <h3>Adding Torrents</h3>
+
+  <ul>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.torrents_start_stopped"><span></span></div>
+      <label>Start downloads automatically</label>
+    </li>
+  </ul>
+
+  <div class="hr"><hr /></div>
+
+  <h3>Privacy</h3>
+
+  <ul>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.check_update"><span></span></div>
+      <label>Automatically check for updates</label>
+    </li>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.anoninfo"><span></span></div>
+      <label>Send info on updates (anonymous)</label>
+    </li>
+  </ul>
+
+  <div class="hr"><hr /></div>
+
+  <h3>Start &amp; Standby</h3>
+
+  <ul>
+    <!--<li class="checkbox_container group">
+        <div class="checkbox" id="setting.check_assoc_on_start"><span></span></div>
+        <label>Make BitTorrent my default client</label>
+        <div class="button"><a href="#">Check</a></div>
+    </li>-->
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.sys.prevent_standby"><span></span></div>
+      <label>Prevent standby if there are active torrents</label>
+    </li>
+  </ul>
+
+ <!-- <div class="hr"><hr /></div>
+
+ <h3>Downloading</h3>
+
+  <ul>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.dir_active_download_flag"><span></span></div>
+      <label>Location of downloads: <strong><em>Not Selected</em></strong></label>
+      <div class="button"><a href="#">Select Directory</a></div>
+    </li>
+  </ul>-->
+
+</div>
+
+<div id="sidebar_advanced" class="basic_sidebar_style">
+
+  <h3>Incoming Port</h3>
+
+  <ul>
+    <li>
+      <input type="text" class="text_input text_input_int" value="80" id="setting.bind_port" />
+    </li>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.rand_port_on_start"><span></span></div>
+      <label>Randomize port during launch</label>
+      <div class="button"><a href="#" id="randomize_port">Randomize Now</a></div>
+    </li>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.natpmp"><span></span></div>
+      <label>Automatically map port (using NAT-PMP or UPnP)</label>
+    </li>
+  </ul>
+
+  <div class="hr"><hr /></div>
+
+  <h3>Seeding</h3>
+
+  <ul>
+    <li class="checkbox_container">
+      <div class="checkbox" id="setting.seed_prio_limitul_flag"><span></span></div>
+      <div class"group"><label>Stop seeding at up / down ratio:</label></div>
+      <span class="int_wrapper"><input type="text" class="text_input text_input_int" value="1.5" id="setting.seed_ratio" /><span class="add"><a href="#">Add</a></span><span class="subtract"><a href="#">Subtract</a></span></span>
+    </li>
+  </ul>
+
+</div>

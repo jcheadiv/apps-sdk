@@ -24,6 +24,7 @@ import apps.command.add
 import apps.command.bundle
 import apps.command.config
 import apps.command.generate
+import apps.command.gettxt
 import apps.command.localize
 import apps.command.package
 import apps.command.push

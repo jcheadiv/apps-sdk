@@ -1,0 +1,201 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-24 10:14-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ./lib/index.js:3
+msgid "goodbye"
+msgstr "さようなら"
+
+#: ./lib/index.js:3
+msgid "Goodbye"
+msgstr "さようなら"
+
+#: ./html/torrent.html:24
+msgid "GOODBYE"
+msgstr "さようなら"
+
+#: ./html/torrent.html:24
+msgid "GOODBYE"
+msgstr "さようなら"
+
+#: ./html/torrent.html:24
+msgid "GOODBYE "
+msgstr "さようなら "
+
+#: ./lib/index.js:3
+msgid "hello"
+msgstr "こんにちは"
+
+#: ./lib/index.js:3
+msgid "Hello"
+msgstr "こんにちは"
+
+#: ./html/torrent.html:24
+msgid "HELLO"
+msgstr "こんにちは"
+
+#: ./html/settings.html:100
+#: ./html/torrent.html:39
+msgid "cruel"
+msgstr "残酷な"
+
+#: ./html/torrent.html:39
+msgid "world"
+msgstr "世界"
+
+#: ./html/torrent.html:39
+msgid "Goodbye\ncruel\nworld!"
+msgstr "さようなら\n残酷な\n世界!"
+
+#: ./html/torrent.html:39
+msgid "Goodbye cruel world!"
+msgstr "さようなら 残酷な 世界!"
+
+msgid "GOODBYE cruel world!"
+msgstr "さようなら 残酷な 世界!"
+
+msgid "cruel world!"
+msgstr "残酷な 世界!"
+
+msgid "Goodbye beautiful world!"
+msgstr "さようなら 美しい 世界!"
+
+msgid "beautiful"
+msgstr "美しい"
+
+msgid "world!"
+msgstr "世界!"
+
+msgid "Goodbye  world!"
+msgstr "さようなら  世界!"
+
+msgid "world world world "
+msgstr "世界世界世界 "
+
+msgid "Alan's\nTest"
+msgstr "アランの\nテスト"
+
+msgid "Alan's\rTest"
+msgstr "アランの\rテスト"
+
+msgid "helloHelloHELLO"
+msgstr "こんにちはこんにちはこんにちは"
+
+msgid "goodbyeGoodbyeGOODBYE"
+msgstr "さようならさようならさようなら"
+
+msgid "Right On!"
+msgstr "ヨッシ!"
+
+msgid "Alan!"
+msgstr "アラン!"
+
+msgid "Alan"
+msgstr "アラン"
+
+msgid "goodbye! Goodbye! GOODBYE! cruel world!"
+msgstr "さようなら! さようなら! さようなら! 残酷な 世界!"
+
+msgid "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! "
+msgstr "さようなら 残酷な アラン! さようなら 残酷な アラン! さようなら 残酷な アラン! "
+
+msgid "Goodbye Alan! goodbye Alan! GOODBYE Alan! "
+msgstr "さようなら アラン! さようなら アラン! さようなら アラン! "
+
+msgid "Goodbye cruel OMG!"
+msgstr "さようなら 残酷な OMG!"
+
+msgid "GOODBYE! cruel world!"
+msgstr "さようなら! 残酷な 世界!"
+
+msgid "Yehuda"
+msgstr "イェフダ"
+
+msgid "Frank"
+msgstr "フランク"
+
+msgid "Harold"
+msgstr "ヘロルド"
+
+msgid "Nobody's here"
+msgstr "誰もここにいる"
+
+msgid "No people"
+msgstr "誰もいない"
+
+msgid "Dudes:"
+msgstr "男の人達:"
+
+msgid "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
+msgstr "男の人達: イェフダ (http://yehuda) アラン (http://alan) "
+
+msgid "Johnson"
+msgstr "ジョンソン"
+
+msgid "Alan Johnson"
+msgstr "アラン ジョンソン"
+
+msgid "world"
+msgstr "世界"
+
+msgid "Message:"
+msgstr "メッセージ:"
+
+msgid "Goodbye cruel world"
+msgstr "さようなら 残酷な 世界"
+
+msgid "GOODBYE cruel WORLD"
+msgstr "さようなら 残酷な 世界"
+
+msgid "cruel WORLD"
+msgstr "残酷な 世界"
+
+msgid "Message: Goodbye cruel world"
+msgstr "メッセージ: さようなら 残酷な 世界"
+
+msgid "Message: Hello Alan's world"
+msgstr "メッセージ: こんにちは アランの 世界"
+
+msgid "Hello Alan's world"
+msgstr "こんにちは アランの 世界"
+
+msgid "Message: Hello world"
+msgstr "メッセージ: こんにちは 世界"
+
+msgid "Message: Hello \\"world\\""
+msgstr "メッセージ: こんにちは \\"世界\\""
+
+msgid "Hello world"
+msgstr "こんにちは 世界"
+
+msgid "Hello \\"world\\""
+msgstr "こんにちは \\"世界\\""
+
+msgid "Jeepers"
+msgstr "ジーパーズ"
+
+msgid "Creepers"
+msgstr "クリーパーズ"
+
+msgid "Dudes: Jeepers Creepers"
+msgstr "男の人達: ジーパーズ クリーパーズ"
+
+msgid "Hello <a>world</a>"
+msgstr "こんにちは <a>世界</a>"
+
+msgid "<a>world</a>"
+msgstr "<a>世界</a>"

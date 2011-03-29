@@ -1,0 +1,25 @@
+{
+    "description": "The default project.", 
+    "author": "Default Author <default@example.com>", 
+    "bt:publisher": "Example Publisher", 
+    "bt:libs": [
+        {
+            "url": "http://10.20.30.79/code/apps-sdk/dist/apps-sdk.pkg", 
+            "name": "apps-sdk"
+        },
+        {
+            "url": "http://10.20.30.79/code/v8/pkg/backbone.js", 
+            "name": "backbone"
+        }
+    ], 
+    "site": "http://apps.bittorrent.com", 
+    "bt:update_url": "http://localhost/example", 
+    "version": "0.1", 
+    "bt:description": "This is the example app.", 
+    "bt:border": "#000000", 
+    "keywords": [
+        "example"
+    ], 
+    "bt:release_date": "00/00/0000", 
+    "name": "handlebars-i18n"
+}

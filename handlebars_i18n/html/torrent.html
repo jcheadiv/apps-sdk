@@ -1,0 +1,43 @@
+<div class="primary-info">
+  <div class="player">
+    <a class="pause" action="pause" href="#">Pause</a>
+    <a class="resume" action="start" href="#">Resume</a>
+    <a class="cancel" action="cancel" href="#">Cancel</a>
+  </div>
+  <div class="overview">
+    <h3><span>{{ name }}</span>
+      <br/><a class="open-containing" href="#"><span>{{name}}.torrent</span></a>
+      
+    </h3>
+    <div class="details"><span class="completed">{{ complete }}</span>
+      <span> of </span>
+      <span class="total">{{ total }}</span></div>
+    <a class="play" href="#">Play media</a>
+  </div>
+  <a class="details-link files" href="#">Waiting...</a>
+  <a class="remove_torrent" title="Remove"></a>
+  
+  <!--<div class="health"><div class="display two"><div class="overlay"></div></div><label>Torrent<br/><strong>Health</strong></label></div>-->
+  <div class="health">
+    <div class="primary">
+      <div class="status">
+        <label>Status <br/><strong class="seeding">seeding</strong><strong class="stopped">not seeding</strong><strong class="downloading">downloading</strong><strong class="paused">paused</strong></label>
+      </div>
+      <div class="bars">
+        <div class="display"><div class="overlay"></div></div>
+        <label>Torrent <br/><strong class="seeding">health</strong></label>
+      </div>
+    </div>
+    <div class="secondary">
+      <div class="seeds-peers">
+        <label class="seeds one">Seeds <strong>{{ seeds_connected }}</strong></label>
+        <label class="peers two">Peers <strong>{{ peers_connected }}</strong></label>
+      </div>
+      <div class="seed-ratio">
+        <!--<div class="ratio-gauge"></div>-->
+        <span class="ratio"></span>
+        <label>Seeding <strong>ratio</strong></label>
+      </div>
+    </div>
+  </div>
+</div>

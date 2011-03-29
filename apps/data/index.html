@@ -23,6 +23,11 @@
       window.debug = true
     </script>
   % endif
+  % if remote:
+    <script type="text/javascript">
+      window.use_remote = true;
+    </script>
+  % endif
   % if falcon:
     <script>
      window.falcon = { get_xhr_prefix: function() { return '/appsxhr'; }};

@@ -24,6 +24,14 @@ msgstr "さようなら"
 msgid "Goodbye"
 msgstr "さようなら"
 
+#: ./lib/index.js:3
+msgid "Goodbye "
+msgstr "さようなら"
+
+#: ./lib/index.js:3
+msgid "Goodbye\n"
+msgstr "さようなら\n"
+
 #: ./html/torrent.html:24
 msgid "GOODBYE"
 msgstr "さようなら"
@@ -34,7 +42,7 @@ msgstr "さようなら"
 
 #: ./html/torrent.html:24
 msgid "GOODBYE "
-msgstr "さようなら "
+msgstr "さようなら"
 
 #: ./lib/index.js:3
 msgid "hello"
@@ -44,6 +52,10 @@ msgstr "こんにちは"
 msgid "Hello"
 msgstr "こんにちは"
 
+#: ./lib/index.js:3
+msgid "Hello "
+msgstr "こんにちは"
+
 #: ./html/torrent.html:24
 msgid "HELLO"
 msgstr "こんにちは"
@@ -51,6 +63,16 @@ msgstr "こんにちは"
 #: ./html/settings.html:100
 #: ./html/torrent.html:39
 msgid "cruel"
+msgstr "残酷な"
+
+#: ./html/settings.html:100
+#: ./html/torrent.html:39
+msgid "cruel "
+msgstr "残酷な"
+
+#: ./html/settings.html:100
+#: ./html/torrent.html:39
+msgid " cruel "
 msgstr "残酷な"
 
 #: ./html/torrent.html:39
@@ -63,16 +85,16 @@ msgstr "さようなら\n残酷な\n世界!"
 
 #: ./html/torrent.html:39
 msgid "Goodbye cruel world!"
-msgstr "さようなら 残酷な 世界!"
+msgstr "さようなら残酷な世界!"
 
 msgid "GOODBYE cruel world!"
-msgstr "さようなら 残酷な 世界!"
+msgstr "さようなら残酷な世界!"
 
 msgid "cruel world!"
-msgstr "残酷な 世界!"
+msgstr "残酷な世界!"
 
 msgid "Goodbye beautiful world!"
-msgstr "さようなら 美しい 世界!"
+msgstr "さようなら美しい世界!"
 
 msgid "beautiful"
 msgstr "美しい"
@@ -80,8 +102,11 @@ msgstr "美しい"
 msgid "world!"
 msgstr "世界!"
 
+msgid " world!"
+msgstr "世界!"
+
 msgid "Goodbye  world!"
-msgstr "さようなら  世界!"
+msgstr "さようなら世界!"
 
 msgid "world world world "
 msgstr "世界世界世界 "
@@ -108,19 +133,22 @@ msgid "Alan"
 msgstr "アラン"
 
 msgid "goodbye! Goodbye! GOODBYE! cruel world!"
-msgstr "さようなら! さようなら! さようなら! 残酷な 世界!"
+msgstr "さようなら! さようなら! さようなら! 残酷な世界!"
 
 msgid "goodbye cruel Alan! Goodbye cruel Alan! GOODBYE cruel Alan! "
-msgstr "さようなら 残酷な アラン! さようなら 残酷な アラン! さようなら 残酷な アラン! "
+msgstr "さようなら残酷なアラン! さようなら残酷なアラン! さようなら残酷なアラン! "
 
 msgid "Goodbye Alan! goodbye Alan! GOODBYE Alan! "
-msgstr "さようなら アラン! さようなら アラン! さようなら アラン! "
+msgstr "さようならアラン! さようならアラン! さようならアラン! "
+
+msgid "Goodbye アラン! goodbye アラン! GOODBYE アラン! "
+msgstr "さようならアラン! さようならアラン! さようならアラン! "
 
 msgid "Goodbye cruel OMG!"
-msgstr "さようなら 残酷な OMG!"
+msgstr "さようなら残酷なOMG!"
 
 msgid "GOODBYE! cruel world!"
-msgstr "さようなら! 残酷な 世界!"
+msgstr "さようなら! 残酷な世界!"
 
 msgid "Yehuda"
 msgstr "イェフダ"
@@ -140,6 +168,9 @@ msgstr "誰もいない"
 msgid "Dudes:"
 msgstr "男の人達:"
 
+msgid "Dudes: "
+msgstr "男の人達: "
+
 msgid "Dudes: Yehuda (http://yehuda) Alan (http://alan) "
 msgstr "男の人達: イェフダ (http://yehuda) アラン (http://alan) "
 
@@ -155,35 +186,38 @@ msgstr "世界"
 msgid "Message:"
 msgstr "メッセージ:"
 
+msgid "Message: "
+msgstr "メッセージ: "
+
 msgid "Goodbye cruel world"
-msgstr "さようなら 残酷な 世界"
+msgstr "さようなら残酷な世界"
 
 msgid "GOODBYE cruel WORLD"
-msgstr "さようなら 残酷な 世界"
+msgstr "さようなら残酷な世界"
 
 msgid "cruel WORLD"
-msgstr "残酷な 世界"
+msgstr "残酷な世界"
 
 msgid "Message: Goodbye cruel world"
-msgstr "メッセージ: さようなら 残酷な 世界"
+msgstr "メッセージ: さようなら残酷な世界"
 
 msgid "Message: Hello Alan's world"
-msgstr "メッセージ: こんにちは アランの 世界"
+msgstr "メッセージ: こんにちはアランの世界"
 
 msgid "Hello Alan's world"
-msgstr "こんにちは アランの 世界"
+msgstr "こんにちはアランの世界"
 
 msgid "Message: Hello world"
-msgstr "メッセージ: こんにちは 世界"
+msgstr "メッセージ: こんにちは世界"
 
-msgid "Message: Hello \\"world\\""
-msgstr "メッセージ: こんにちは \\"世界\\""
+msgid "Message: Hello \"world\""
+msgstr "メッセージ: こんにちは\"世界\""
 
 msgid "Hello world"
-msgstr "こんにちは 世界"
+msgstr "こんにちは世界"
 
-msgid "Hello \\"world\\""
-msgstr "こんにちは \\"世界\\""
+msgid "Hello \"world\""
+msgstr "こんにちは\"世界\""
 
 msgid "Jeepers"
 msgstr "ジーパーズ"
@@ -192,10 +226,10 @@ msgid "Creepers"
 msgstr "クリーパーズ"
 
 msgid "Dudes: Jeepers Creepers"
-msgstr "男の人達: ジーパーズ クリーパーズ"
+msgstr "男の人達: ジーパーズクリーパーズ"
 
 msgid "Hello <a>world</a>"
-msgstr "こんにちは <a>世界</a>"
+msgstr "こんにちは<a>世界</a>"
 
 msgid "<a>world</a>"
 msgstr "<a>世界</a>"

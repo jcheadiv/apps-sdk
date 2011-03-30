@@ -7,7 +7,7 @@
     while(e = textNodes.exec( string )){
       var m = e[0].replace(/^\s+|\s+$/g,"")
       if(m.length){ 
-        newstring += string.slice(nsindex, e.index)+e[0].replace(m, gt.gettext(m))
+        newstring += string.slice(nsindex, e.index)+gt.gettext(e[0])
         nsindex = e.index+e[0].length       
       }
     }
@@ -41,6 +41,8 @@
   }
   Handlebars.registerHelper = function(name, fn, inverse) {
     if(inverse) { fn.not = inverse; }
-    this.helpers[name] = fn;
+    Handlebars.helpers[name] = function(){
+      return gt.gettext(fn.apply(arguments));
+    }
   };
  })();

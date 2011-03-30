@@ -7,6 +7,7 @@ Handlebars.registerHelper('helperMissing', function(helper, context) {
 });
 
 var shouldCompileTo = function(string, hash, expected, message) {
+  var oe = expected;
   expected = gt.gettext(expected);
   var template = Handlebars.compile(string);
   if(Object.prototype.toString.call(hash) === "[object Array]") {
@@ -20,6 +21,7 @@ var shouldCompileTo = function(string, hash, expected, message) {
   }
 
   result = template.apply(this, hash)
+  if(oe) ok(oe, oe+" => "+expected)
   equal(result, expected, "'" + expected + "' should === '" + result + "': " + message);
 };
 
@@ -234,9 +236,9 @@ test("helper block with complex lookup expression", function() {
 		var out = "";
 		var byes = ["Goodbye", "goodbye", "GOODBYE"];
 		for (var i = 0,j = byes.length; i < j; i++) {
-			out += gt.gettext(byes[i]) + " " + fn(this) + "! ";
+			out += byes[i] + " " + fn(this) + "! ";
 		}
-    return out;
+    return gt.gettext(out);
   }};
   shouldCompileTo(string, [hash, fallback], "Goodbye Alan! goodbye Alan! GOODBYE Alan! ");
 });
@@ -366,10 +368,10 @@ test("block helper inverted sections", function() {
 module("fallback hash");
 
 test("providing a fallback hash", function() {
-  shouldCompileTo("Goodbye {{cruel}} {{world}}!", [{cruel: "cruel"}, {world: "world"}], "Goodbye cruel world!",
+  shouldCompileTo("Goodbye {{cruel}}{{world}}!", [{cruel: "cruel "}, {world: "world"}], "Goodbye cruel world!",
                   "Fallback hash is available");
 
-  shouldCompileTo("Goodbye {{#iter}}{{cruel}} {{world}}{{/iter}}!", [{iter: [{cruel: "cruel"}]}, {world: "world"}],
+  shouldCompileTo("Goodbye {{#iter}}{{cruel}}{{world}}{{/iter}}!", [{iter: [{cruel: "cruel "}]}, {world: "world"}],
                   "Goodbye cruel world!", "Fallback hash is available inside other blocks");
 });
 
@@ -415,7 +417,7 @@ test("rendering undefined partial throws an exception", function() {
 });
 
 test("GH-14: a partial preceding a selector", function() {
-   var string = "Dudes: {{>dude}} {{another_dude}}";
+   var string = "Dudes: {{>dude}}{{another_dude}}";
    var dude = "{{name}}";
    var hash = {name:"Jeepers", another_dude:"Creepers"};
    shouldCompileTo(string, [hash, {}, {dude:dude}], "Dudes: Jeepers Creepers", "Regular selectors can follow a partial");
@@ -461,10 +463,10 @@ test("simple multi-params work", function() {
 });
 
 test("block multi-params work", function() {
-  var string   = 'Message: {{#goodbye cruel world}}{{greeting}} {{adj}} {{noun}}{{/goodbye}}';
-  var hash     = {cruel: "cruel", world: "world"}
+  var string   = 'Message: {{#goodbye cruel world}}{{greeting}}{{adj}}{{noun}}{{/goodbye}}';
+  var hash     = {cruel: "cruel ", world: "world"}
   var fallback = {goodbye: function(cruel, world, fn) {
-    return fn({greeting: "Goodbye", adj: cruel, noun: world});
+    return fn({greeting: "Goodbye ", adj: cruel, noun: world});
   }}
   shouldCompileTo(string, [hash, fallback], "Message: Goodbye cruel world", "block helpers with multiple params");
 })
@@ -627,7 +629,7 @@ test("you can override inherited data when invoking a helper with depth", functi
 });
 
 test("helpers take precedence over same-named context properties", function() {
-  var template = Handlebars.compile("{{goodbye}} {{cruel world}}");
+  var template = Handlebars.compile("{{goodbye}}{{cruel world}}");
 
   var helpers = {
     goodbye: function() {
@@ -649,7 +651,7 @@ test("helpers take precedence over same-named context properties", function() {
 });
 
 test("helpers take precedence over same-named context properties", function() {
-  var template = Handlebars.compile("{{#goodbye}} {{cruel world}}{{/goodbye}}");
+  var template = Handlebars.compile("{{#goodbye}}{{cruel world}}{{/goodbye}}");
 
   var helpers = {
     goodbye: function(fn) {

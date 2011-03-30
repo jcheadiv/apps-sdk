@@ -1122,7 +1122,6 @@ Handlebars.JavaScriptCompiler = function() {};
 
       var fn = Function.apply(this, params);
       fn.displayName = "Handlebars.js";
-
       Handlebars.log(Handlebars.logger.DEBUG, fn.toString() + "\n\n");
 
       container.render = fn;

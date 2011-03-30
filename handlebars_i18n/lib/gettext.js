@@ -48,7 +48,7 @@ _.extend(bt, { Gettext: Class.extend({
   },
 
   gettext: function() {
-    if (!arguments || arguments.length < 1 || !RegExp) return;
+    if (_.isUndefined(arguments[0]) || !arguments || arguments.length < 1 || !RegExp) return;
     var str      = arguments[0];
     arguments[0] = null;
     arguments = Array.prototype.slice.call(arguments);
@@ -61,6 +61,7 @@ _.extend(bt, { Gettext: Class.extend({
     if (hasTokens && hasTokens.length != arguments.length) {
       return;
     }
+    //console.log(str);
     // Try to find translated string
     if (this.LCmessages[this.lang] && $.inArray(str, this.LCmessages[this.lang].msgid) != -1) {
       if(!this.fifo){
@@ -146,9 +147,9 @@ _.extend(bt, { Gettext: Class.extend({
 
     rgx_msg  = new RegExp(/(^#[\:\.,~|\s]\s?)+/gm);
     function clean(str) {
-      str = str.replace(rgx_msg,'').replace("msgid ", "").replace("msgstr ", "").replace(/\"/g,'');
+      str = str.replace(rgx_msg,'').replace("msgid ", "").replace("msgstr ", "").replace(/^\"|\"$/g, '');
       str = str.split("\\n").join("\n").split("\\r").join("\r");
-      //str = str.split('\\"').join("\"").split("\\'").join("\'");
+      str = str.split('\\"').join("\"").split("\\'").join("\'");
       return str;
     }
 

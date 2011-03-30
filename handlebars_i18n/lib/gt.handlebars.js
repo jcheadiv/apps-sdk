@@ -42,6 +42,8 @@
   Handlebars.registerHelper = function(name, fn, inverse) {
     if(inverse) { fn.not = inverse; }
     Handlebars.helpers[name] = function(){
+      var result = fn.apply(arguments);
+      console.log(result);
       return gt.gettext(fn.apply(arguments));
     }
   };

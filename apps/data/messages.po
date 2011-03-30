@@ -15,3 +15,12 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+% for msg in strings.keys():
+  % for o in strings[msg]:
+  ${o}
+  % endfor
+  msgid "${msg}"
+  msgstr ""
+  
+% endfor

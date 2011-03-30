@@ -1,7 +1,5 @@
 {
     "description": "Used to shim the browser to the client", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
-    "bt:publisher": "BitTorrent, Inc.", 
     "bt:libs": [
         {
             "url": "http://10.20.30.79/code/apps-sdk/dist/apps-sdk.pkg", 
@@ -11,16 +9,23 @@
             "url": "http://staging.apps.bittorrent.com/pkgs/parseuri.js", 
             "develop": false, 
             "name": "parseuri"
+        }, 
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/socket.io.js", 
+            "develop": false, 
+            "name": "socket.io"
         }
     ], 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "site": "http://apps-sdk.bittorrent.com", 
-    "bt:access": "list_restricted restricted", 
+    "name": "shim", 
     "bt:update_url": "http://apps-sdk.bittorrent.com", 
-    "version": "0.0.1", 
+    "bt:access": "list_restricted restricted", 
     "bt:description": "Used to shim the browser to the client", 
+    "version": "0.0.1", 
     "bt:border": "#000000", 
     "keywords": [], 
-    "bt:store": {}, 
     "bt:release_date": "03/23/011", 
-    "name": "shim"
+    "bt:store": {}
 }

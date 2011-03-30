@@ -28,7 +28,6 @@
       
   Handlebars.Utils.escapeExpression = function(string) {
     // don't escape SafeStrings, since they're already safe
-    // console.log("Escape", string);
     if(_.isString(string)) string = gt.gettext(string);
     if (string instanceof Handlebars.SafeString) {
       return gt.gettext(string.toString());
@@ -42,9 +41,11 @@
   Handlebars.registerHelper = function(name, fn, inverse) {
     if(inverse) { fn.not = inverse; }
     Handlebars.helpers[name] = function(){
-      var result = fn.apply(arguments);
-      console.log(result);
-      return gt.gettext(fn.apply(arguments));
+      var result = fn.apply(Handlebars, arguments);
+      if (result instanceof Handlebars.SafeString) {
+        result = result.toString();
+      }
+      return gt.gettext(result);
     }
   };
  })();

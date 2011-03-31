@@ -62,13 +62,18 @@ $(document).ready(function() {
     _default: function(msg) {
       return eval(shim._query(msg.call, msg.args));
     },
+    _event_handler: function(name) {
+      sock.send(JSON.stringify(
+        { event: name, args: _.toArray(arguments).slice(1) }));
+    },
     _connect: function() {
       var url = parseUri(bt.stash.get('dev_server'));
       if (url.port == "") url.port = "80";
       url.port = parseInt(url.port, 10);
       sock = new io.Socket(url.host, {
         port: url.port,
-        transports: [ 'xhr-multipart', 'xhr-polling', 'jsonp-polling' ]
+        transports: [ 'xhr-multipart', 'xhr-polling', 'jsonp-polling' ],
+        resource: 'worker'
       });
 
       sock.connect();
@@ -112,6 +117,11 @@ $(document).ready(function() {
     "peer.all": shim.all_subobj,
     "peer.get": shim.subobj
   };
+
+  // Setup all the local events to send messages
+  _.each(btapp.events.keys(), function(name) {
+    btapp.events.set(name, _.bind(shim._event_handler, this, name));
+  });
 
   $("form").submit(function() {
 

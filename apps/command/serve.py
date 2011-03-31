@@ -227,8 +227,8 @@ class RPCHandler(CacheHandler):
         logging.info('TASK ' + self.request.body)
 
         ComChannel.worker.send(self.request.body)
-        ComChannel.worker.on_message = functools.partial(
-            ComChannel.worker._on_message, self._complete)
+        ComChannel.worker._response = functools.partial(
+            ComChannel._response, ComChannel.worker, self._complete)
 
     def _complete(self, result):
         self.set_header('Content-Type', 'application/json')
@@ -239,17 +239,28 @@ class ComChannel(tornadio.SocketConnection):
 
     worker = None
 
-    def __init__(self, *args, **kwargs):
-        tornadio.SocketConnection.__init__(self, *args, **kwargs)
-        self._on_message = self.on_message
-
     def on_open(self, *args, **kwargs):
-        logging.info('connected')
+        logging.info('worker connection')
         ComChannel.worker = self
 
-    def on_message(self, cb, message):
+    def on_message(self, message):
+        parsed = json.loads(message)
+        if 'result' in parsed:
+            return self._response(message)
+
+        if 'event' in parsed:
+            return self._event(message)
+
+    def _response(self, cb, message):
         logging.info('complete %s' % (message,))
         cb(message)
+
+    def _event(self, message):
+        if not BrowserChannel.worker:
+            return
+
+        logging.info('event %s' % (message, ))
+        BrowserChannel.worker.send(message)
 
     def on_close(self):
         logging.info('close')
@@ -257,6 +268,18 @@ class ComChannel(tornadio.SocketConnection):
             self.worker = None
         except:
             pass
+
+class BrowserChannel(tornadio.SocketConnection):
+
+    worker = None
+
+    def on_open(self, *args, **kwargs):
+        logging.info("browser connection")
+        BrowserChannel.worker = self
+
+    def on_close(self):
+        logging.info('browser gone')
+        BrowserChannel.worker = None
 
 class serve(apps.command.base.Command):
 
@@ -296,7 +319,8 @@ class serve(apps.command.base.Command):
         logging.getLogger().setLevel(logging.INFO)
 
         application = tornado.web.Application([
-                tornadio.get_router(ComChannel).route(),
+                tornadio.get_router(ComChannel, resource='worker').route(),
+                tornadio.get_router(BrowserChannel, resource='browser').route(),
                 (r"/rpc", RPCHandler),
                 (r"/proxy", ProxyHandler),
                 (r"/.*", FileHandler),

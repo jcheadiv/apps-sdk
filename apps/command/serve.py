@@ -245,11 +245,10 @@ class ComChannel(tornadio.SocketConnection):
 
     def on_message(self, message):
         parsed = json.loads(message)
-        if 'result' in parsed:
-            return self._response(message)
-
         if 'event' in parsed:
             return self._event(message)
+
+        return self._response(message)
 
     def _response(self, cb, message):
         logging.info('complete %s' % (message,))
@@ -277,9 +276,9 @@ class BrowserChannel(tornadio.SocketConnection):
         logging.info("browser connection")
         BrowserChannel.worker = self
 
-    def on_close(self):
-        logging.info('browser gone')
-        BrowserChannel.worker = None
+    # def on_close(self):
+    #     logging.info('browser gone')
+    #     BrowserChannel.worker = None
 
 class serve(apps.command.base.Command):
 

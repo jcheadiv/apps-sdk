@@ -1,5 +1,13 @@
 {
     "name": "apps-sdk", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "directories": {
+        "test": "test", 
+        "src": "src", 
+        "lib": "lib", 
+        "doc": "doc"
+    }, 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/json2.js", 
@@ -38,16 +46,13 @@
             "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js", 
             "develop": false, 
             "name": "underscore-1.1.2"
+        }, 
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/socket.io.js", 
+            "develop": false, 
+            "name": "socket.io"
         }
     ], 
-    "bt:publisher": "BitTorrent, Inc.", 
-    "directories": {
-        "test": "test", 
-        "src": "src", 
-        "lib": "lib", 
-        "doc": "doc"
-    }, 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "repositories": [
         {
             "url": "git://github.com/bittorrent/apps-sdk.git", 

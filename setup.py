@@ -22,7 +22,7 @@ setup(
     author_email = __author_email__,
     description = "Build tool to develop, build and package apps.",
     install_requires = [ 'mako', 'boto', 'pydns', 'httplib2', 'bencode',
-                         'pyScss', 'PIL', 'GitPython', 'tornado', 'tornadio' ],
+                         'pyScss', 'PIL', 'GitPython', 'tornado', 'tornadio', 'pycurl' ],
     include_package_data = True,
     package_data = {
         "": ['data/*', 'data/.*'],

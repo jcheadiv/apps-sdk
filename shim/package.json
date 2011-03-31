@@ -9,12 +9,7 @@
             "url": "http://staging.apps.bittorrent.com/pkgs/parseuri.js", 
             "develop": false, 
             "name": "parseuri"
-        }, 
-        {
-            "url": "http://staging.apps.bittorrent.com/pkgs/socket.io.js", 
-            "develop": false, 
-            "name": "socket.io"
-        }
+        } 
     ], 
     "bt:publisher": "BitTorrent, Inc.", 
     "author": "Thomas Rampelberg <thomas@bittorrent.com>", 

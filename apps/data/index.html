@@ -11,7 +11,11 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <title>${title}</title>
   % for href in styles:
-    <link rel="stylesheet" type="text/css" href="${href}" />
+    <link rel="stylesheet" type="text/css" href="${href[0]}"
+          % if href[1] != None:
+          media="${href[1]}"
+          % endif
+          />
   % endfor
   % if firebug:
     <script src="/packages/firebug-lite.js"></script>

@@ -149,37 +149,26 @@ class generate(apps.command.base.Command):
     def _styles_list(self):
         styles = []
         for lib in self.project.metadata.get('bt:libs', []):
+            # XXX - This isn't going to handle being run anywhere else.
             path = os.path.join('packages', lib['name'], 'css')
             if os.path.exists(path):
-                pkg_styles = []
-                for stylesheet in  [x for x in os.listdir(path)
-                                    if os.path.splitext(x)[1] == '.css']:
-                    pkg_styles += [os.path.join(path, stylesheet)]
+                pkg_styles = self._dir_styles(path)
                 scss_path = os.path.join('build', path)
                 if os.path.exists(scss_path):
-                    for stylesheet in [x for x in os.listdir(
-                            os.path.join('build', path))
-                                       if os.path.splitext(x)[1] == '.css']:
-                        pkg_styles += [os.path.join(path, stylesheet)]
+                    pkg_styles += self._dir_styles(os.path.join('build', path),
+                                                   path)
                 styles += sorted(pkg_styles)
-        path = os.path.join(self.project.path, 'css');
+
+        # XXX - This isn't going to handle being run anywhere but in the root
+        # dir.
+        path = 'css'
 
         local_styles = []
         if os.path.exists(path):
-            local_styles += [
-                os.path.join('css', x).replace('\\', '/') for x
-                in os.listdir(path) if os.path.splitext(x)[1] == '.css']
+            local_styles += self._dir_styles(path)
 
-        for base, dirs, files in os.walk('build/css'):
-            # built_styles = []
-            files = [x for x in files
-                     if os.path.splitext(x)[1] == '.css']
-            for f in files:
-                # `base` has a / at the front, get rid of this so we can have
-                # relative paths instead of absolute.
-                local_styles.append(re.sub('^build', '',
-                                           os.path.join(base, f).replace(
-                            '\\', '/'))[1:])
+        local_styles += self._dir_styles('build/css')
+
         local_styles.sort()
         styles += local_styles
         return styles
@@ -242,12 +231,39 @@ class generate(apps.command.base.Command):
                         pkg['name'], 'lib')))])
         return pkg_scripts
 
+    def _dir_styles(self, basedir, subdir=None):
+        if not subdir:
+            subdir = basedir
+
+        styles = []
+        for base, dirs, files in os.walk(basedir):
+            files = [x for x in files if os.path.splitext(x)[1] == '.css']
+            for f in files:
+                pth = re.sub('^build', '',
+                             os.path.join(base, f).replace(
+                        '\\', '/'))
+                if pth[0] == '/': pth = pth[1:]
+                styles.append((pth, self._media_query(
+                            os.path.join(base, f))))
+        return styles
+
+    def _media_query(self, fpath):
+        css_content = open(fpath, 'rb').read()
+        logging.info(css_content[:100])
+        result = re.search('@media (.*?)\s*\{', css_content)
+        if result:
+            logging.info(result.group(1))
+            return result.group(1)
+        return None
+
     def _generate_scss(self):
+        generator = scss.Scss()
+
         for base, dirs, files in os.walk('.', followlinks=True):
             files = [x for x in files
                      if os.path.splitext(x)[1] == '.scss' and not x[0] == '_']
             for f in files:
-                compiled = scss.Scss().compile(
+                compiled = generator.compile(
                     open(os.path.join(base, f), 'rb').read())
                 # Try and create the build dirs, ignore if they're already
                 # there.

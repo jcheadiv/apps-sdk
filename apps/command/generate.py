@@ -223,6 +223,13 @@ class generate(apps.command.base.Command):
                         os.listdir(os.path.join(self.project.path, 'lib'))))])
             scripts.append(os.path.join('lib', 'index.js'))
         scripts = [x.replace('\\', '/') for x in scripts]
+
+        # Make sure socket.io doesn't go in when we're not in 'remote' mode (as
+        # it'll slow things down needlessly).
+        if not self.options.get('remote', False) and \
+                'packages/socket.io.js' in scripts:
+            scripts.remove('packages/socket.io.js')
+
         return scripts
 
     def _list_lib(self, lib):

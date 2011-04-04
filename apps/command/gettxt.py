@@ -24,8 +24,6 @@ class gettxt(apps.command.base.Command):
           start = m.start()
           lineno = input.count('\n', 0, start) + 1
           word = m.group(0).strip(remove)
-          print word
-          print len(re.sub(r'\s', '', word.strip()))
           if len(word) and len(re.sub(r'\s', '', word.strip())):
             if word in self.strings.keys():
               self.strings[word].append("#: %s:%s" % (infile, lineno))

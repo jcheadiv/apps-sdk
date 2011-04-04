@@ -17,10 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 % for msg in strings.keys():
-  % for o in strings[msg]:
-  ${o}
-  % endfor
-  msgid "${msg}"
-  msgstr ""
+% for o in strings[msg]:
+${o}
+% endfor
+msgid "${msg}"
+msgstr ""
   
 % endfor

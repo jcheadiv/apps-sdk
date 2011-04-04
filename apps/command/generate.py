@@ -249,10 +249,8 @@ class generate(apps.command.base.Command):
 
     def _media_query(self, fpath):
         css_content = open(fpath, 'rb').read()
-        logging.info(css_content[:100])
         result = re.search('@media (.*?)\s*\{', css_content)
         if result:
-            logging.info(result.group(1))
             return result.group(1)
         return None
 

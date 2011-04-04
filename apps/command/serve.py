@@ -300,6 +300,10 @@ class serve(apps.command.base.Command):
         cookie = cookielib.MozillaCookieJar(
             filename=options.cookie_path)
         if not os.path.exists(options.cookie_path):
+            try:
+                os.mkdir(os.path.split(options.cookie_path)[0])
+            except:
+                pass
             cookie.save()
 
         cookie.load()

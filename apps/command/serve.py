@@ -169,7 +169,9 @@ class ProxyHandler(tornado.web.RequestHandler):
 
         logging.info('PROXY ' + loc)
         client = tornado.simple_httpclient.SimpleAsyncHTTPClient()
+
         req = HTTPRequest(loc, method=self.request.method)
+
         self.alter_headers(self.request.headers, 'request', req.headers.add)
 
         if self.request.body:

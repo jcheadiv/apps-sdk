@@ -33,6 +33,9 @@ import zipfile
 import apps.command.base
 import apps.vanguard
 
+# httplib is missing some important responses, like 599
+tornado.web.httplib.responses[599] = 'Timeout'
+
 class HTTPRequest(tornado.httpclient.HTTPRequest):
 
     # This isn't hard coded by default ...
@@ -56,7 +59,9 @@ class HTTPResponse(tornado.httpclient.HTTPResponse):
         return self
 
     def getheaders(self, header):
-        return self.headers.get_list(header)
+        if hasattr(self.headers, 'get_list'):
+            return self.headers.get_list(header)
+        return []
 
 tornado.simple_httpclient.HTTPResponse = HTTPResponse
 
@@ -190,7 +195,7 @@ class ProxyHandler(tornado.web.RequestHandler):
                 os.path.splitext(urllib.splitquery(
                         resp.effective_url)[0])[-1], ''), lambda x: x)(resp)
 
-        self.write(resp.body)
+        self.write(resp.body or '')
         self.finish()
 
     def content_torrent(self, resp):

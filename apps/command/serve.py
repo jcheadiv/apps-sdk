@@ -224,6 +224,7 @@ class ProxyHandler(tornado.web.RequestHandler):
         self.set_header('Content-Length', len(resp.body))
 
     post = get
+    put = get
 
 class RPCHandler(CacheHandler):
 

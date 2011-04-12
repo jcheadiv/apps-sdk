@@ -225,6 +225,8 @@ class ProxyHandler(tornado.web.RequestHandler):
 
     post = get
     put = get
+    options = get
+    delete = get
 
 class RPCHandler(CacheHandler):
 

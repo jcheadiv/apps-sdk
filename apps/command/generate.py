@@ -143,7 +143,8 @@ class generate(apps.command.base.Command):
             'resources': json.dumps(self._resources(), indent=2,
                                     sort_keys=True) \
                 if self.compileresources else None,
-            'remote': self.options.get('remote', False)
+            'remote': self.options.get('remote', False),
+            'body': open('html/main.html').read() if os.path.exists('html/main.html') else ''
             }
 
     def _styles_list(self):

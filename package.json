@@ -18,7 +18,7 @@
             "name": "jquery"
         },
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js",
+            "url": "http://documentcloud.github.com/underscore/underscore.js",
             "name": "underscore"
         },
         {
@@ -41,11 +41,6 @@
             "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
             "develop": false,
             "name": "jquery.min"
-        },
-        {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore-1.1.2.js",
-            "develop": false,
-            "name": "underscore-1.1.2"
         }
     ],
     "repositories": [

@@ -8,7 +8,7 @@ import mako.template
 import os
 import pkg_resources
 import re
-import pyscss.scss
+import scss
 import shlex
 import subprocess
 import urlparse
@@ -256,7 +256,7 @@ class generate(apps.command.base.Command):
         return None
 
     def _generate_scss(self):
-        generator = pyscss.scss.Scss()
+        generator = scss.Scss()
 
         for base, dirs, files in os.walk('.', followlinks=True):
             files = [x for x in files

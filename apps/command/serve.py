@@ -163,6 +163,7 @@ class ProxyHandler(tornado.web.RequestHandler):
 
     @tornado.web.asynchronous
     def get(self):
+        logging.error('actually proxying')
         loc = self.request.headers.get('x-location', None)
         if not loc:
             raise tornado.web.HTTPError(404)

@@ -41,9 +41,9 @@ client under "Apps" in the left bar.
 
 ## Next Steps
 
-- [Tutorials](doc/tutorials)
-- [Examples](examples/)
-- [API](doc/api.html)
+- [Tutorials](http://btapps-sdk.bittorrent.com/doc/tutorials)
+- [Examples](http://btapps-sdk.bittorrent.com/examples/)
+- [API](http://btapps-sdk.bittorrent.com/doc/api.html)
 
 # Help
 

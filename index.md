@@ -47,7 +47,7 @@ client under "Apps" in the left bar.
 
 # Help
 
-- [Documentation](doc/)
+- [Documentation](http://btapps-sdk.bittorrent.com/doc/)
 - [Forums](http://forum.utorrent.com/viewforum.php?id=34)
 - [IRC](irc://irc.freenode.net#btapps-sdk): <span style="float:right">irc://irc.freenode.net#btapps-sdk</span>
 - [Feedback](mailto:btapps-sdk@bittorrent.com): <span style="float:right">btapps-sdk@bittorrent.com</span>

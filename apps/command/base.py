@@ -127,9 +127,10 @@ class Command(object):
                     if pkg['url'].find('apps-sdk') != -1:
                         pkg['url'] = 'http://staging.apps.bittorrent.com/pkgs/apps-sdk.2.pkg'
                         # pkg['url'] = pkg['url'].replace('10.20.30.79','127.0.0.1')
-            self.add(pkg['name'], pkg['url'], develop=pkg.get('develop', False))
+            self.add(pkg['name'], pkg['url'], develop=pkg.get('develop',
+                                                              False), pkg=pkg)
 
-    def add(self, name, url, update=True, develop=False):
+    def add(self, name, url, update=True, develop=False, pkg=None):
         if name in self.added:
             return
         self.added.append(name)
@@ -164,7 +165,7 @@ class Command(object):
           sys.exit(1)
         name = handlers[ext](fname,
                              os.path.split(urlparse.urlsplit(url).path)[-1],
-                             develop)
+                             develop, pkg)
         if not develop: os.remove(fname)
         if update:
             self.update_libs(name, url, develop)
@@ -181,7 +182,7 @@ class Command(object):
                              'something that\'s already been included. ' \
                              'Just igoring.' % name)
 
-    def _add_javascript(self, source, fname, develop=False):
+    def _add_javascript(self, source, fname, develop=False, pkg=None):
         dest = os.path.join(self.project.path, 'packages', fname)
         # For anything that's already been added, warn the user and ignore.
         if os.path.exists(dest):
@@ -193,24 +194,27 @@ class Command(object):
             shutil.copy(source, dest)
         return os.path.splitext(fname)[0]
 
-    def _add_repo(self, source, fname, develop=False):
+    def _add_repo(self, source, fname, develop=False, pkg=None):
         fname = fname.replace(".git", "")
         (pjpath, pjname) = os.path.split(self.project.path)
         if not os.path.exists(os.path.abspath("./git-packages")):
-          os.mkdir(os.path.abspath("./git-packages"))   
+          os.mkdir(os.path.abspath("./git-packages"))
         dest = os.path.join(os.path.abspath("./git-packages"), fname)
 
         def _link(self, dest):
             pkg_manifest = json.loads(
                 open(os.path.join(dest, 'package.json')).read())
             pkg_root = os.path.join(self.project.path, 'packages',
-                                pkg_manifest['name'])   
-            os.symlink(dest, pkg_root)
-            
+                                pkg_manifest['name'])
+            try:
+                os.symlink(dest, pkg_root)
+            except:
+                pass
+
             logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
             for pkg in pkg_manifest.get('bt:libs', []):
                 self.add(pkg['name'], pkg['url'], False,
-                    develop=pkg.get('develop', False))
+                    develop=pkg.get('develop', False), pkg=pkg)
             return pkg_manifest
 
         # For anything that's already been added, warn the user and ignore.
@@ -222,13 +226,14 @@ class Command(object):
         os.mkdir(dest)
         repo = git.Repo.init(dest)
         remote = git.Remote.add(repo, "origin", source)
-        remote.pull("master:origin")
+        remote.pull("refs/heads/%s:refs/heads/master" % (
+                pkg['rev'] if 'rev' in pkg else 'master'))
 
         pkg_manifest = _link(self, dest)
-        
+
         return pkg_manifest['name']
 
-    def _add_pkg(self, source, fname, develop=False):
+    def _add_pkg(self, source, fname, develop=False, pkg=None):
         if develop:
             pkg_manifest = json.loads(
                 open(os.path.join(source, 'package.json')).read())
@@ -258,7 +263,7 @@ class Command(object):
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest.get('bt:libs', []):
             self.add(pkg['name'], pkg['url'], False,
-                     develop=pkg.get('develop', False))
+                     develop=pkg.get('develop', False), pkg=pkg)
         return pkg_manifest['name']
 
     def _output_file(self, path='dist'):

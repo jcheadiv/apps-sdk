@@ -152,7 +152,7 @@ class generate(apps.command.base.Command):
         for lib in self.project.metadata.get('bt:libs', []):
             # XXX - This isn't going to handle being run anywhere else.
             path = os.path.join('packages', lib['name'], 'css')
-            if os.path.exists(path):
+            if os.path.exists(path) and not "disable-css" in lib:
                 pkg_styles = self._dir_styles(path)
                 scss_path = os.path.join('build', path)
                 if os.path.exists(scss_path):

@@ -332,11 +332,11 @@ class serve(apps.command.base.Command):
         logging.getLogger().setLevel(logging.INFO)
 
         application = tornado.web.Application([
-                tornadio.get_router(ComChannel, resource='worker').route(),
-                tornadio.get_router(BrowserChannel, resource='browser').route(),
                 (r"/rpc", RPCHandler),
                 (r"/proxy", ProxyHandler),
                 (r"/.*", FileHandler),
+                tornadio.get_router(ComChannel, resource='worker').route(),
+                tornadio.get_router(BrowserChannel, resource='browser').route(),
                 ], **{ "debug": options.debug,
                        "cookie": self.setup_cookie(),
                        "socket_io_port": int(self.options['port']) })

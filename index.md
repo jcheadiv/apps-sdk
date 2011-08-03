@@ -39,7 +39,7 @@ like to see this in the &micro;Torrent client, run:
 and, double click `dist/hello-world.btapp`. The app should now show up in your
 client under "Apps" in the left bar.
 
-## Next Steps
+# Next Steps
 
 - [Tutorials](http://btapps-sdk.bittorrent.com/doc/tutorials)
 - [Examples](http://btapps-sdk.bittorrent.com/examples/)

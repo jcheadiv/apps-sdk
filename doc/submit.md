@@ -1,3 +1,8 @@
+---
+layout: default
+title: Submission Checklist
+---
+
 # Submission Checklist 
 
 There are some things we need before you submit.  Please make sure that you have included the following:

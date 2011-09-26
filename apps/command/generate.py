@@ -77,7 +77,8 @@ class generate(apps.command.base.Command):
          None),
         ('compile', None, 'Compile/minify the javascript', None),
         ('remote', None, 'Use a remote utorrent client for all api calls.',
-         None)
+         None),
+        ('config=', None, 'Configuration to use', None),
         ]
     excludes = [ os.path.join('packages', 'firebug-lite.js'),
                  os.path.join('packages', 'firebug.js'),
@@ -201,6 +202,14 @@ class generate(apps.command.base.Command):
                      '': self._list_pkg
                      }
         scripts = []
+
+        # Config gets included first.
+        if os.path.exists('config'):
+            path = os.path.join('config', '%s.js' % (
+                    self.options.get('config', 'default'),))
+            if os.path.exists(path):
+                scripts.append(path)
+
         for lib in metadata.get('bt:libs', []):
             ext = os.path.splitext(urlparse.urlsplit(lib['url']).path)[-1]
             scripts += self.filter(scripts,

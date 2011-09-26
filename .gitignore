@@ -15,3 +15,4 @@ loader/installer/bin/
 loader/installer/obj/
 _site/
 testapp/meta
+.AppleDouble/

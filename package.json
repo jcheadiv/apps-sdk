@@ -36,11 +36,6 @@
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/sprintf.js",
             "name": "sprintf"
-        },
-        {
-            "url": "https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
-            "develop": false,
-            "name": "jquery.min"
         }
     ],
     "repositories": [

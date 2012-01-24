@@ -18,8 +18,8 @@
             "name": "jquery"
         },
         {
-            "url": "http://documentcloud.github.com/underscore/underscore.js",
-            "name": "underscore"
+          "url": "https://raw.github.com/documentcloud/underscore/master/underscore.js",
+          "name": "underscore"
         },
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/jquery.json.js",

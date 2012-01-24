@@ -18,7 +18,7 @@
             "name": "jquery"
         },
         {
-          "url": "https://raw.github.com/documentcloud/underscore/master/underscore.js",
+          "url": "https://raw.github.com/documentcloud/underscore/1.2.4/underscore.js",
           "name": "underscore"
         },
         {
